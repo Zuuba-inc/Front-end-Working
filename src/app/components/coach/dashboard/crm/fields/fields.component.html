@@ -1,0 +1,144 @@
+<div style="width: 100%;height: 100vh;overflow: scroll;" class="page-wrapper">
+  <div class="fields">
+    <div class="heading">
+      <h6>Showing all fields</h6>
+      <button data-toggle="modal" data-target="#newField" style="float: right;width: 130px">+ Add Custom Field</button>
+    </div>
+    <div style="margin-top: 30px;">
+      <h5>Primary Fields</h5>
+      <table>
+        <thead>
+          <tr style="background: #F6F6F6;border: 1px solid #E1E1E1;">
+            <th>FIELDS</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let primaryField of primaryFields; let i = index">
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">{{primaryField.name}}</div>
+            </td>
+            <td style="text-align: right;" (mouseleave)="closeEditEmailDropDown(i+'primaryDropdown')">
+              <span style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;" >Option</span>
+              <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;" 
+              (click)="openViewDropDown(i+'primaryDropdown')"  >
+                <img src="assets/icons/arrow-down.svg">
+                 <ul class="dropdown-content" id="{{i+'primaryDropdown'}}" style="display: none;width: max-content;background: white;">
+                  <li style="text-align: left;">
+                    <div class="container" style="padding-top: 10px;top: 0;">
+                      <span class="text" style="margin-left: 10px;">Make field public via API</span>
+                      <input type="checkbox" checked>
+                      <span class="checkmark" style="top: 10px;"></span>
+                    </div>
+                  </li>
+                  <li style="text-align: left;">
+                    <div class="container" style="padding-top: 10px;top: 0;">
+                      <span class="text" style="margin-left: 10px;">Allow person to edit</span>
+                      <input type="checkbox" checked>
+                      <span class="checkmark" style="top: 10px;"></span>
+                    </div>
+                  </li>
+                </ul>
+              
+              </span>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h5>Custom Fields</h5>
+      <table>
+        <thead>
+          <tr style="background: #F6F6F6;border: 1px solid #E1E1E1;">
+            <th>FIELDS</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customeField of customFields; let i = index">
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">{{customeField.name}}</div>
+            </td>
+            <td style="text-align: right;" (mouseleave)="closeEditEmailDropDown(i+'customeDropdown')">
+              <span data-toggle="modal" data-target="#editField" style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;" >Edit</span>
+              <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;" 
+              (click)="openViewDropDown(i+'customeDropdown')"  >
+                <img src="assets/icons/arrow-down.svg">
+                 <ul class="dropdown-content" id="{{i+'customeDropdown'}}" style="display: none;width: max-content;background: white;">
+                  <li style="text-align: left;">
+                    <div class="container" style="padding-top: 10px;top: 0;">
+                      <span class="text" style="margin-left: 10px;">Make field public via API</span>
+                      <input type="checkbox" checked>
+                      <span class="checkmark" style="top: 10px;"></span>
+                    </div>
+                  </li>
+                  <li style="text-align: left;">
+                    <div class="container" style="padding-top: 10px;top: 0;">
+                      <span class="text" style="margin-left: 10px;">Allow person to edit</span>
+                      <input type="checkbox" checked>
+                      <span class="checkmark" style="top: 10px;"></span>
+                    </div>
+                  </li>
+                  <li style="text-align: center;border-top: 1px solid #E1E1E1;">
+                    <div class="container" style="padding-top: 10px;top: 0;">
+                      Delete
+                    </div>
+                  </li>
+                </ul>
+              
+              </span>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal fade show" id="newField" tabindex="-1" role="dialog" aria-labelledby="addNewTag"   
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Account Field</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+         
+          <p style="font-size: 14px;
+          color: #707070;">Enter an identifier for your new field. Custom field identifiers must contain only letters, numbers, and underscores.</p>
+           <span style="font-size: 12px;font-weight: bold;">Field Identifer</span>
+          <input type="text" placeholder="Ex. shoes_size" style="margin-bottom: 20px;">
+          <button class="modalbtn cancelBtn" style="margin-left: 10px;">Cancel</button>
+          <button class="modalbtn" >Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade show" id="editField" tabindex="-1" role="dialog" aria-labelledby="addNewTag"   
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Field</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+         
+          <p style="font-size: 14px;
+          color: #707070;">Enter an identifier for your new field. Custom field identifiers must contain only letters, numbers, and underscores.</p>
+           <span style="font-size: 12px;font-weight: bold;">Field Identifer</span>
+          <input type="text" placeholder="Ex. shoes_size" style="margin-bottom: 20px;">
+          <button class="modalbtn cancelBtn" style="margin-left: 10px;">Cancel</button>
+          <button class="modalbtn" >Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,248 @@
+<div class="tab-content">
+  <div id="seoMetaData" class="tab-pane fade in active show">
+    <form class="setting">
+      <fieldset class="setting__title">
+        <label for="title">Meta Title</label>
+        <p>The meta title is the title seen by search engine users. Use keywords and phrases in the title that
+          will
+          help both the user and the search engine know what your page is about.</p>
+        <textarea placeholder="Type here" [(ngModel)]="quizConfiguration.quizSEOMetadata.seoMetaTitle" name="title"
+          id="title" rows="3" #seoMetaTitle="ngModel"></textarea>
+      </fieldset>
+      <fieldset class="setting__desc">
+        <label for="description">Meta Description</label>
+        <p>The meta description should summarise your page's content. Search engines show the meta description in
+          search results when the searched for phrase is included in the description. Keep your description around
+          150 characters.</p>
+        <textarea placeholder="Type here" [(ngModel)]="quizConfiguration.quizSEOMetadata.seoMetaDesc" name="description"
+          id="description" rows="3" #seoMetaDesc="ngModel"></textarea>
+      </fieldset>
+      <div class="setting__image">
+        <label id="drop_zone">Social Image</label>
+        <p>The image that you upload will appear on social media sites once you share your quiz.</p>
+
+        <div style="position: relative; bottom: 50px;">
+          <span class="setting__image--upload">
+
+            <!--TODO: ADD SUPPORT FOR MORE VID FORMATS -->
+            <!-- <video id="seoVideoPreview" [ngClass]="{'show configure-vid c-m': fileType == 'video', 
+                    'hide': fileType == 'image'}" width="320" height="240" #configureVideoPreview> -->
+            <!-- <source [src]="quizConfiguration.quizMediaAttached" type="video/mp4">
+                Your browser does not support the video tag. -->
+            <!-- </video> -->
+
+            <img [src]="quizConfiguration.quizSEOMetadata.seoImage"
+                *ngIf="!croppedImage && quizConfiguration.quizSEOMetadata != undefined && quizConfiguration.quizSEOMetadata.seoImage != null">
+
+            <!-- <img [src]="quizConfiguration.quizMediaAttached" alt="quiz-thumbnail"
+              *ngIf="!croppedImage && quizConfiguration != undefined && quizConfiguration.quizMediaAttached != null && (quizConfiguration.quizSEOMetadata == undefined || quizConfiguration.quizSEOMetadata.seoImage == null)"> -->
+
+            <div *ngIf="croppedImage"><img class="img-fluid" [src]="croppedImage" /></div>
+
+            <img class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg" alt="quiz-thumbnail"
+              id="quizImagePreview"
+              *ngIf="quizConfiguration != undefined && quizConfiguration.quizSEOMetadata && !quizConfiguration.quizSEOMetadata.seoImage && !croppedImage">
+              <!-- *ngIf="quizConfiguration != undefined && quizConfiguration.quizMediaAttached == null && !croppedImage" -->
+
+            <app-upload-file class="img-fluid" [module]="settings" (file)="onFileUpload($event)"></app-upload-file>
+
+          </span>
+        </div>
+
+      </div>
+
+      <button class="setting__save" style="height:30px" (click)="saveSeoData()">Save</button>
+    </form>
+  </div>
+  <div id="trackingCode" class="tab-pane fade">
+    <form class="setting">
+      <div class="setting__pixel">
+        <label for="conv-pixel">Conversion Pixel</label>
+        <br />
+        <small>Start typing in the name of your pixel.</small>
+        <fieldset>
+          <div class="setting__pixel--values">
+            <span>
+              Facebook pixel
+              <div class="icon cf-close"></div>
+            </span>
+            <span>
+              Adwords pixel
+              <div class="icon cf-close"></div>
+            </span>
+          </div>
+          <input type="text" name="conv-pixel" id="conv-pixel">
+        </fieldset>
+      </div>
+      <button class="setting__save" style="height: 30px">Save</button>
+    </form>
+  </div>
+  <div id="QuizDesign" class="tab-pane fade">
+    <form class="setting">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="setting__colors">
+            <div class="row no-gutters">
+              <div class="col-md-5">
+                <label>Color Scheme</label>
+              </div>
+              <div class="col-md-7">
+                <div class="setting__colors--variations">
+                  <div class="color" *ngFor="let color of quizConfiguration.quizColorScheme; let i = index">
+                    <!-- <span id="color{{color.id}}" class="swatch colorPicker" color-picker
+                              color-picker-model=color.backColor color-picker-position="bottom"
+                              ng-style="{background: color.backColor}" ng-click="changeColor(color,$index)"></span> -->
+                    <span *ngIf="color.quizArea" id="color{{color.quizArea.id}}" class="swatch colorPicker"
+                      [style.background]="color.backColor" [(colorPicker)]="color.backColor"
+                      (colorPickerOpen)="onEventLog('colorPickerOpen', color)"
+                      (colorPickerClose)="onEventLog('colorPickerClose', color)"
+                      (cpInputChange)="onEventLog('cpInputChange', color)"
+                      (cpSliderDragStart)="onEventLog('cpSliderDragStart', color)"
+                      (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', color)"></span>
+                    <span *ngIf="color.quizArea">{{color.quizArea.areaName}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="setting__typo">
+            <div class="row no-gutters">
+              <div class="col-md-5">
+                <label>Typography</label>
+              </div>
+              <div class="col-md-7">
+                <div class="setting__typo--editing">
+                  <select name="font" id="font" [(ngModel)]="quizConfiguration.fontName"
+                    (ngModelChange)="updateQuizFont()">
+                    <!-- <option value="Select" selected>Select</option> -->
+                    <option *ngFor="let font of fontList" [ngValue]=font [ngStyle]="{'font-family': font+!important}">
+                      {{font}}
+                    </option>
+
+                  </select>
+                  <div class="color">
+                    <!-- <span id="fontColorLight" class="swatch colorPicker" color-picker
+                              color-picker-model=lightFontColor color-picker-position="bottom"
+                              style="background: lightFontColor" (click)="changeLightColor()"></span> -->
+                    <span id="fontColorLight" class="swatch colorPicker" [style.background]="lightFontColor"
+                      [(colorPicker)]="lightFontColor" (colorPickerOpen)="onEventLog('light', $event)"
+                      (colorPickerClose)="onEventLog('light', $event)" (cpInputChange)="onEventLog('light', $event)"
+                      (cpSliderDragStart)="onEventLog('light', $event)"
+                      (cpSliderDragEnd)="onEventLog('light', $event)"></span>
+                    Font light
+                  </div>
+                  <div class="color">
+                    <!-- <span id="fontColorDark" class="swatch colorPicker" color-picker
+                              color-picker-model=darkFontColor color-picker-position="bottom"
+                              style="background: darkFontColor" (click)="changeDarkColor()"></span> -->
+                    <span id="fontColorDark" class="swatch colorPicker" [style.background]="darkFontColor"
+                      [(colorPicker)]="darkFontColor" (colorPickerOpen)="onEventLog('dark', $event)"
+                      (colorPickerClose)="onEventLog('dark', $event)" (cpInputChange)="onEventLog('dark', $event)"
+                      (cpSliderDragStart)="onEventLog('dark', $event)"
+                      (cpSliderDragEnd)="onEventLog('dark', $event)"></span>
+                    Font dark
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <button type="button" class="btn-clr btn-left" (click)="saveColors();">Save</button>
+            <button type="button" class=" btn-clr btn-right" (click)="resetColors();">Reset Colors</button>
+
+
+          </div>
+        </div>
+
+        <div class="col-lg-6 scroll-bar">
+
+          <div class="setting__preview">
+            <div class="component-view">
+
+              <header class="live-preview__headers">
+                <div class="live-preview__headers--name">
+                  <h4>firstName lastName</h4>
+                </div>
+                <div class="live-preview__headers--title">
+                  <h4>Quiz Title Number One</h4>
+                </div>
+              </header>
+            </div>
+
+            <div class="component-view">
+              <div class="live-preview__outcome styleOutcome">
+
+                <div class="live-preview__outcome--share styleOutcomeShare">
+                  Share Quiz
+                  <br />
+                  <a href="#"><span class="icon cf-share-fb"><span class="path1"></span><span
+                        class="path2"></span></span></a>
+                  <br />
+                  <a href="#"><span class="icon cf-share-tw"><span class="path1"></span><span
+                        class="path2"></span></span></a>
+                </div>
+
+                <div class="live-preview__outcome--img">
+                  <img src="assets/images/joel-filipe-196000-unsplash.jpg" alt="quiz-thumbnail">
+                </div>
+
+                <h5 class="live-preview__outcome--heading styleOutcomeHeadline">Outcome Number 1</h5>
+
+                <p class="live-preview__outcome--desc styleOutcomeDesc">Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Vero,
+                  sequi itaque aliquam, deleniti similique ipsum facere esse rerum dolorem</p>
+
+              </div>
+
+              <div class="live-preview__offer">
+                <h5>Dummy Offer Healine</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum excepturi iusto odio enim
+                  consectetur minima.</p><br>
+
+                <button class="live-preview__offer--btn">Get Offer</button>
+              </div>
+            </div>
+
+            <div class="component-view">
+              <div class="live-preview__question questionStyle">
+
+                <header>
+                  <span class="questionHeader">Question 1 of 4</span>
+                  <div class="progress-bar">
+                    <div class="completed"></div>
+                  </div>
+                </header>
+
+                <h5 class="live-preview__question--heading questionStyleHeadline">Why you need to learn?</h5>
+
+                <div class="live-preview__question--answers">
+                  <!-- Pass a class "isSelected" to the selected label -->
+                  <label for="learn-new" class="isSelected answerColor">
+                    <input type="radio" name="answers-radio" id="settin-learn-new" checked>
+                    <span class="icon cf-correct"></span>
+                    To learn something new
+                  </label>
+
+                  <label for="benefit-time" class="answerColor">
+                    <input type="radio" name="answers-radio" id="setting-benefit-time">
+                    <span class="icon cf-correct"></span>
+                    Benefit my time
+                  </label>
+
+                  <label for="use-time" class="answerColor">
+                    <input type="radio" name="answers-radio" id="setting-use-time">
+                    <span class="icon cf-correct"></span>
+                    Benefit my time
+                  </label>
+                </div>
+
+                <footer>Powered by Coachforce</footer>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

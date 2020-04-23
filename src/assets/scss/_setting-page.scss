@@ -1,0 +1,251 @@
+#setting {
+  @extend #configure;
+  padding: 20px;
+  .title {
+    @include text(18px, 700, left);
+    text-transform: uppercase;
+    color: $text-dark;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .nav {
+    @include media-breakpoint-down(md) {
+      &__item {
+        margin-right: 20px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .setting {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    p {
+      width: 45%; 
+      display: inline-block;
+    }
+
+    &__title, &__desc, &__image, &__pixel, &__colors, &__typo  {
+      @include media-breakpoint-down(md) {
+        padding-right: 30px;
+      }
+      border-bottom: $border;
+      padding-bottom: 20px;
+      margin-top: 20px;
+      padding-right: 40%;
+      overflow: hidden;
+      label {
+        width: auto;
+        font-size: 14px;
+        color: $text-dark;
+        vertical-align: top;
+        display: block;
+      }
+      textarea, &--upload, fieldset {
+        width: 325px;
+        float: right;
+        margin-top: -18px;
+        @include media-breakpoint-down(md) {
+          width: 100%;
+        }
+      }
+    }
+    
+    &__image {
+      border-bottom: none;    
+    &--upload {
+        background-color: #fff;
+        color: $text-neu;
+        label { font-size: 12px; display: inline-block;}
+      }
+    }
+
+    &__pixel {
+      border-bottom: none;
+      margin-bottom: 30px;
+      margin-top: 40px;
+      fieldset {
+        margin-top: -30px;
+        @include input-box;
+        background-color: #fff;
+      }
+      small {
+        @include text(12px, 400, left);
+        line-height: 18px;
+        color: $text-light;
+      }
+      &--values {
+        span {
+          background-color: $bg4;
+          padding-left: 12px;
+          border-radius: 555px;
+          color: #fff;
+          margin-right: 5px;
+          font-size: 14px;
+          .icon:before {
+            margin: 0 5px;
+            color: #fff;
+          }
+        }
+      }
+      input {
+        @include input-box;
+        width: 100%;
+        height: 30px;
+      }
+    }
+
+    &__save {
+      @include media-breakpoint-down(md) {
+        margin-right: 30px;
+      }
+      margin-right: calc(40% + 225px);
+    }
+
+    .color {
+      color: $text-dark;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .swatch {
+      display: inline-block;
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      box-shadow: $shadow;
+      vertical-align: middle;
+    }
+
+    &__colors {
+      padding-right: 0;
+    }
+
+    &__typo {
+      padding-right: 0;
+      border-bottom: none;
+      select {
+        @include input-box;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .colors-container {
+        background-color: #fff;
+        box-shadow: $shadow;
+        padding: 15px;
+
+        .swatches {
+          overflow: hidden;
+          border-bottom: $border;
+          padding: 5px;
+          .swatch {
+            margin-bottom: 10px;
+            float: left;
+          }
+        }
+
+        .insert-color {
+          margin: 10px 0;
+
+          input {
+            @include input-box;
+            width: calc(100% - 40px);
+          }
+        }
+
+        .color-picker {
+          width: calc(100% - 30px);
+          height: 132px;
+          margin-bottom: 30px;
+          position: relative;
+          background: linear-gradient(225deg, red, black);
+          cursor: crosshair;
+
+          .pick {
+            position: absolute;
+            top: 20px;
+            left: 60px;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            z-index: 55;
+            cursor: grab;
+          }
+
+          .slider-main {
+            background: linear-gradient(
+              180deg, 
+              #FF0000, #D800FF, 
+              #1100DF, #00F5FF,
+              #00AD28, #FFCE00,
+              #FF0000);
+            width: 10px;
+            height: 100%;
+            position: absolute;
+            right: -20px;
+
+            .pick {
+              left: -2px;
+              top: 40px;
+            }
+          }
+          .slider-opacity {
+            background: linear-gradient(
+              90deg,
+              black,
+              white
+            );
+            width: 100%;
+            height: 10px;
+            position: absolute;
+            bottom: -20px;
+
+            .pick {
+              left: 30px;
+              top: -2px;
+              width: 11px;
+              height: 14px !important;
+            }
+          }
+
+          .slider-main .pick, .slider-opacity .pick {
+            height: 11px;
+            box-shadow: $shadow;
+            border: none;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+
+    &__preview {
+      padding: 20px 0;
+      .component-view{
+        box-shadow: $shadow;
+        margin-bottom: 30px;
+      }
+      .live-preview__headers {
+        // padding: 0;
+        @include component_live-preview-headers;
+      }
+      .live-preview__outcome {
+        background-color: #fff;
+        @include component_live-preview-outcome;
+      }
+      .live-preview__offer {
+        @include component_live-preview-offer;
+      }
+      .live-preview__question {
+        @include component_live-preview-question;
+        width: 100%;
+        background-color: #fff;
+        label {
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

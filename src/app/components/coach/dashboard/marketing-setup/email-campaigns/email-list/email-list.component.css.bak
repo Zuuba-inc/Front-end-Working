@@ -1,0 +1,266 @@
+@font-face {
+  font-family: Open-Sans-Regular;
+  src: url(../../../../../../../assets/fonts/OpenSans-Regular.ttf);
+}
+
+.modal-open .modal {
+  padding-right: 0px !important;
+}
+
+.modal-dialog {
+  height: 100%;
+}
+
+.modal-backdrop {
+  opacity: 0 !important;
+}
+
+.btn-info.focus, .btn-info:focus {
+  box-shadow: none;
+}
+
+.btn-info:not(:disabled):not(.disabled).active:focus, .btn-info:not(:disabled):not(.disabled):active:focus, .show>.btn-info.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 4;
+}
+
+.dropdown-action {
+  top: -116px;
+  left: 54px;
+  width: 272px;
+  height: 212px;
+  ;
+  background: #828793 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+  display: none;
+  position: absolute;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-action a {
+  text-align: left;
+  font-size: 10px;
+  line-height: 14px;
+  font-family: 'Open-Sans-Regular';
+  letter-spacing: 0;
+  color: #FFFFFF;
+  opacity: 1;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-action a.customopcity {
+  opacity: 0.5;
+}
+
+.dropdown a:hover {
+  background-color: #828793;
+}
+
+.dropdown:hover .dropdown-action {
+  display: block;
+}
+
+.show {
+  display: block;
+}
+
+#build h4 {
+  font-size: 12px;
+  line-height: 17px;
+  font-family: 'Open-Sans-Regular';
+  color: #959595;
+  margin-bottom: 0px !important;
+}
+
+#build h3 {
+  font-size: 14px;
+  line-height: 19px;
+  font-family: 'Open-Sans-SemiBold';
+  color: #000000;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+#build button {
+  margin-top: -10px;
+  height: 51px;
+  border-right: 1px solid #E1E1E1;
+  background: #fff;
+  border-radius: unset;
+}
+
+#build .dropdown-menu {
+  width: 270px !important;
+  /* margin-top: 60px;
+    left: -7% !important; */
+  padding: 0px;
+  background: #f7f7f7;
+  padding-left: 0px !important;
+}
+
+#build .dropdown-menu li {
+  /* margin: 10px; */
+  padding: 10px;
+  background: #F7F7F7;
+}
+
+#build .help {
+  border-right: 1px solid;
+  padding-right: 4px;
+}
+
+#build .header {
+  font-size: 12px;
+  line-height: 17px;
+  font-family: 'Open-Sans-SemiBold';
+  width: 100%;
+  height: 45px;
+  border-bottom: 1px solid #dee2e6;
+  background: #fff !important;
+  padding: 10px !important;
+  margin: 0px !important;
+}
+
+#build label {
+  width: 100%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 5px #0000001A;
+  border-radius: 2px;
+  margin: 0px !important;
+  height: 67px;
+}
+
+#build label.active {
+  border: 1px solid #000;
+}
+
+#build label label {
+  width: 59px;
+  height: 47px;
+  background: #F7F7F7;
+  border: none;
+  text-align: center;
+  box-shadow: none;
+  margin-left: 15px !important;
+  padding: 8px;
+  margin-top: 10px !important;
+  margin-right: 5px !important;
+}
+
+#build label h2 {
+  font-size: 11px;
+  line-height: 15px;
+  font-family: 'Open-Sans-SemiBold';
+  display: inline;
+}
+
+#build label img {
+  width: 30px;
+  height: 30px;
+}
+
+#build .group-2 button {
+  height: 30px;
+  font-size: 12px;
+  line-height: 17px;
+  font-family: 'Open-Sans-SemiBold';
+  width: 130px;
+  background: #000;
+  color: #fff;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+#build .group-2 .dropdown-menu {
+  margin-top: 7px !important;
+  border: none !important;
+  border-radius: unset !important;
+  background: 0% 0% no-repeat padding-box padding-box rgb(255, 255, 255) !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px !important;
+  width: 155px !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
+  font-family: 'Open-Sans-Regular' !important;
+}
+
+button:focus {
+  outline: none;
+}
+
+.validationError {
+  text-align: left;
+  font-size: 12px;
+  color: red;
+}
+
+.center {
+  text-align: center;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.pagination li.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination li:hover:not(.active) {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination li.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination li:hover:not(.active) {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.el-btn {
+  width: 25px;
+  height: 30px;
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  padding-left: 10px;
+  height: 30px;
+  background: white;
+  position: relative;
+  border: 1px solid #000000;
+  font-size: 12px;
+  line-height: 19px;
+  font-family: 'Open-Sans-SemiBold';
+  color: #000000;
+  text-align: left;
+}

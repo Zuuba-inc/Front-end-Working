@@ -1,0 +1,990 @@
+<div class="page-wrapper">
+    <!-- start section header -->
+    <section class="header">
+        <div class="row">
+            <div id="back" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light rounded-0" (click)="goBack();" style="cursor: pointer;">
+                    <img src="./assets/icons/ic_back.svg">
+                    Back
+                </button>
+            </div>
+            <div id="build" class="d-inline col-lg-11 p-0 border-0 text-center" style=" max-width: 90%;">
+                <div style="padding-top:10px;">
+                    <div class="btn-group float-left" *ngIf="funnelFragments.length > 0">
+                        <button class="btn dropdown-toggle " type="button" (click)="openfunnelNavigationList()">
+                            <h4>Funnel navigation</h4>
+                            <h3>Webinar Emails <img src="./assets/icons/ic_back.svg"></h3>
+                        </button>
+                        <ul class="dropdown-menu" id="funnelNavigationList">
+                            <li class="header p-0">
+                                <div class="row m-0">
+                                    <div class="col-lg-10 col-sm-10 p-0">
+                                        Funnel Navigation
+                                    </div>
+                                    <div class="col-lg-2  col-sm-2 p-0">
+                                        <img src="./assets/icons/ic_help.svg" class="help">
+                                        <img src="./assets/icons/ic_close.svg" (click)="openfunnelNavigationList()"
+                                            style="padding-left: 5px !important;">
+                                    </div>
+                                </div>
+                            </li>
+                            <li *ngFor="let fragment of funnelFragments">
+                                <label (click)="navigateToFunnelComponent(fragment.stepName)">
+                                    <label><img *ngIf="fragment.imageType == 'Image'" src={{fragment.image}}>
+                                        <img *ngIf="fragment.imageType == 'ClassName'" src={{fragment.image}}>
+                                    </label>
+                                    <h2>{{fragment.name}}</h2>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <h2 class="d-inline">{{emailCampaign.emailCapaignTitle}}</h2>
+                    <!-- <button style="float: right; margin-top: 0px;background: black;border-radius: 2px;
+                                border: none;font: 12px Open Sans ;color: #FFFFFF;width: 13%;height: 30px;
+                                margin-right: 10px;" (click)="editEmail(null)"
+                                *ngIf="!emailCampaign.emailCampaignDtl || emailCampaign.emailCampaignDtl.length > 0">
+                                + New Email</button> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- end section header -->
+    <!-- start section content -->
+    <section class="content">
+        <div class="row" id="main">
+            <!-- start  main-content -->
+            <div class="main-sequence3">
+                <div class="header-tab">
+                    <ul class="sequence nav nav-tabs" style="padding: 0px;justify-content: center;">
+                        <li id="dashboardTab" class="img text-center active" style="padding: 16px 0px;">
+                            <a href="#dashboard" data-toggle="tab" [ngClass]="{ 'active':activeTab==='dashboard'}"
+                                (click)="emailTab('dashboard')">1. Dashboard
+                            </a>
+                        </li>
+                        <li id="subscriper" class="img text-center" style="margin-left: 7px;padding: 16px 0px;">
+                            <a href="#2a" data-toggle="tab" [ngClass]="{ 'active':activeTab==='2a'}"
+                                (click)="emailTab('2a')">2. Subscriber
+                            </a>
+                        </li>
+                        <li id="optInFormTab" class="img text-center" style="margin-left: 7px;padding: 16px 0px;">
+                            <a href="#optInForm" data-toggle="tab" [ngClass]="{ 'active':activeTab==='optInForm'}"
+                                (click)="emailTab('optInForm')">3. Opt-In Form
+                            </a>
+                        </li>
+                        <li id="email" class="img text-center active" style="padding: 16px 0px;">
+                            <a href="#1a" data-toggle="tab" [ngClass]="{ 'active':activeTab==='1a'}"
+                                (click)="emailTab('1a')">4. Email
+                            </a>
+                        </li>
+                        <li id="settingTab" class="img text-center" style="padding: 16px 0px;">
+                            <a href="#3a" data-toggle="tab" [ngClass]="{ 'active':activeTab==='3a'}"
+                                (click)="emailTab('3a')">5. Settings
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <div id="errorMessage" style="position: absolute;background: yellow;width: 50%; padding: 6px 10px;z-index: 2;
+                            text-align: center;width: 50%;margin-left: -25%;left:50%;display: none;">
+                            {{errorMessage}}
+                            <span style="float: right;color: #e2dede;cursor: pointer;" (click)="toggleErrorMessage('close')">x</span>
+                    </div>
+                </div>
+                <div class="tab-content scrollsection clearfix">
+                    <div class="tab-pane active" id="dashboard" [ngClass]="{ 'active':activeTab==='dashboard'}">
+                        <div id="content-body" style="width: 70%;margin: 20px auto;" *ngIf="emailCampaign.status == 'ACTIVE'">
+                            <div style="background: white;box-shadow: 0px 3px 6px #00000029;padding: 20px 0;">
+                                <canvas  id="barChart" style="width: 80%;margin: 0px auto;">{{barchart}}
+                                </canvas>
+                            </div>
+                            
+                            <div class="componant" style="padding: 0px;">
+                                <h1>Showing all emails in this Campaign</h1>
+                                <table class="table dashboardchrt">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40%;"></th>
+                                            <th>SENT</th>
+                                            <th>OPENS</th>
+                                            <th>CLICK</th>
+                                            <th>UNSUBSCRIBERS</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let email of emailCampaign.emailCampaignDtl">
+                                            <th style="text-align: left;">
+                                            <span tooltip={{email.emailTitle}} >{{email.shortName}}</span>
+                                            </th>
+                                            <th>0</th>
+                                            <th>{{email.emailOpenedCount}}</th>
+                                            <th>{{email.emailClickedCount}}</th>
+                                            <th>
+                                                <!-- {{email.emailUnsubscribedCount ? email.emailUnsubscribedCount : 0}} -->
+                                                {{email.emailUnsubCount ? email.emailUnsubCount : 0}}
+                                            </th>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="content-body" *ngIf="emailCampaign.status == 'DRAFT'">
+                                <div class="content text-center" style="padding: 0;
+                                width: 40%;
+                                margin: 10% auto">
+                                    <div class="componant">
+                                        <h4 >Almost there…</h4>
+                                        <p style="color: #707070;">You’re a few steps away from a complete Campaign!</p>
+                                        <div>
+                                            <button style="color: white;background-color: black;
+                                            width: auto;height: 40px;border: none;
+                                            font-size: 12px;border-radius: 2px;margin: 10px;" (click)="emailTab('1a')" >
+                                            Continue with setup</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="optInForm" [ngClass]="{ 'active':activeTab==='optInForm'}">
+                        <div id="content-body">
+                            <div class="content text-center" style="padding: 0;
+                            width: 40%;
+                            margin: 10% auto">
+                                <div class="componant">
+                                    <h4 >Connect an opt-in form</h4>
+                                    <p style="color: #707070;">Create a new form to funnel web leads directly into this campaign, or hook one of your existing forms to this campaign.</p>
+                                    <div>
+                                        <button style="color: white;background-color: black;
+                                        width: 102px;height: 40px;border: none;
+                                        font-size: 12px;border-radius: 2px;margin: 10px;">
+                                        Create a Form</button>
+                                        <button style="color: black;background-color: white;
+                                        width: 102px;height: 40px;border: 1px solid;
+                                        font-size: 12px;border-radius: 2px;margin: 10px;">
+                                        Manage Form</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="1a" [ngClass]="{ 'active':activeTab==='1a'}">
+                        <div id="content-body">
+                            <div class="row">
+                                <div class="content text-center" *ngIf="!emailCampaign.emailCampaignDtl || emailCampaign.emailCampaignDtl.length > 0 ;else emailNotAdded">
+                                    <!-- start  sequence-first -->
+                                    <div class="sequence-first" style="margin: 25px 0;">
+                                        <h1 style="display: inline;">Sequence email</h1>
+                                        <button style="float: right; margin-top: 0px;background: black;border-radius: 2px;
+                                        border: none;font: 12px Open Sans ;color: #FFFFFF;width: 13%;height: 30px;
+                                        margin-right: 10px;" (click)="editEmail(null)"
+                                        *ngIf="!emailCampaign.emailCampaignDtl || emailCampaign.emailCampaignDtl.length > 0">
+                                        + New Email</button>
+                                    </div>
+                                    <div class="sequence-first">
+                                        <h1>Actions</h1>
+                                    </div>
+                                    <!-- end  sequence-first -->
+                                    <!-- start  sequence-secand -->
+                                    <div class="sequence-secand">
+                                        <div class="contant">
+                                            <img src="./assets/icons/ic_plus.svg">
+                                            <h1>Subscribe <img id="imagesubscribeDiv" src="./assets/icons/ic_back.svg"
+                                                    (click)="toggleDivs('subscribeDiv')" alt=""></h1>
+                                            <div id="subscribeDiv">
+                                                <h1 class="text2" style="cursor: pointer;"
+                                                    *ngFor="let rule of subscriberArray" [innerHtml]="rule.text"
+                                                    (click)="editAutomationRule(rule)"></h1>
+
+                                                <img src="./assets/icons/ic_plus.svg" class="img-end">
+                                                <button type="button" class="text4 subsribe"
+                                                    style="background: transparent;border: none; font-size: 12px; margin-left: auto;"
+                                                    data-toggle="modal" data-target="#myModal"
+                                                    (click)="selectDefaultThenRule('Subscribe')"> Add Trigger </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- end  sequence-secand -->
+
+                                    <!-- start  sequence-secand -->
+                                    <div class="sequence-secand">
+                                        <div class="contant">
+                                            <img src="./assets/icons/ic_min.svg">
+                                            <h1>Unsubscribe <img id="imageunsubscribeDiv"
+                                                    src="./assets/icons/ic_back.svg" alt=""
+                                                    (click)="toggleDivs('unsubscribeDiv')"></h1>
+                                            <div id="unsubscribeDiv">
+                                                <h1 class="text2" style="cursor: pointer;"
+                                                    *ngFor="let rule of unsubscriberArray" [innerHtml]="rule.text"
+                                                    (click)="editAutomationRule(rule)"></h1>
+                                                <img src="./assets/icons/ic_min.svg" class="img-end">
+                                                <button type="button" class="text4"
+                                                    style="background: transparent;border: none; font-size: 12px; margin-left: auto;"
+                                                    data-toggle="modal" data-target="#myModal"
+                                                    (click)="selectDefaultThenRule('Unsubscribe')"> Add Trigger
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end  sequence-secand -->
+                                    <!-- start  sequence-secand2 -->
+                                    <ngx-sortable [items]="emailCampaign.emailCampaignDtl" [name]=""
+                                        (listSorted)="listSorted($event)" [listStyle]="listStyle">
+                                       
+                                        <ng-template let-email>
+                                            <div style="
+                                                height: 19px;
+                                                border-left: 3px solid #dcd9d9;
+                                                margin-left: 20px;
+                                                background: #f7f7f7;
+                                            "></div>
+                                            <div class="sequence-secand2" style="margin-bottom: 6px;
+                                            margin-top: 6px;">
+                                                
+                                                <div class="contant">
+                                                    <table style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th style="text-align: left;width: 30%;"></th>
+                                                                <th>Opened</th>
+                                                                <th>Clicks</th>
+                                                                <th>Unsubscribed</th>
+                                                                <th style="text-align: left;width: 14%;">Status</th>
+                                                                <th style="text-align: left;width: 14%;">Delay Between Email</th>
+                                                                <th style="width: 15%;"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th style="cursor: grab;"><img
+                                                                        src="./assets/icons/ic_drag.svg"></th>
+                                                                <th tooltip={{email.emailTitle}}
+                                                                    style="text-align: left;">{{email.shortName}}</th>
+                                                                <th>{{email.emailOpenedCount}}</th>
+                                                                <th>{{email.emailClickedCount}}</th>
+                                                                <th>
+                                                                    <!-- {{email.emailUnsubscribedCount ? email.emailUnsubscribedCount : 0}} -->
+                                                                    {{email.emailUnsubCount ? email.emailUnsubCount : 0}}
+                                                                </th>
+                                                                <th style="text-align: left;width: 15%;">
+                                                                    <div class="container" style="padding-right: 0px;padding-left: 0px;margin-right: 0px;margin-left: 0px;">
+                                                                        <div class="tutorial" style="margin: 0px !important;">
+                                                                            <select [(ngModel)]="email.status"
+                                                                                (change)="saveEmail(email)"
+                                                                                style="height: -webkit-fill-available;width: 100%;border: none;">
+                                                                                <option value="DRAFT">Draft</option>
+                                                                                <option value="PUBLISH">Publish</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </th>
+                                                                <th style="text-align: left;">
+                                                                    <div class="container" style="padding-right: 0px;padding-left: 0px;">
+                                                                        <div class="tutorial tutorial2" *ngIf="email.delayType != 'Immediately'; else delayTypeImmediately" style="margin:0px !important">
+                                                                            <input type="text" name="delay" id="delay"
+                                                                                (blur)="saveEmail(email)"
+                                                                                [(ngModel)]="email.delayBtnEmails"
+                                                                                style="height: 28px;border: none;border-right: 1px solid #E1E1E1;position: inherit;opacity: inherit;width: 30%;text-align: center;">
+                                                                            <select [(ngModel)]="email.delayType"
+                                                                                (change)="saveEmail(email)"
+                                                                                style="height: -webkit-fill-available;width: 70%;border: none;">
+                                                                                <option value="Days">Days</option>
+                                                                                <option value="Hours">Hours</option>
+                                                                                <option value="Minutes">Minutes</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    <ng-template #delayTypeImmediately>
+                                                                        <span style="color: #959595;">{{email.delayType}}</span>
+                                                                    </ng-template>
+                                                                    </div>
+                                                                </th>
+                                                                <th style="text-align: left;">
+                                                                    <span class="custom-dropdown ">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" data-toggle="dropdown"
+                                                                                class="btn el-btn edit dropdown-toggle"
+                                                                                (click)="editEmail(email)"
+                                                                                style="width: 15%;padding-right: 50px;">Edit
+                                                                                &nbsp;</button>
+                                                                            <button type="button"
+                                                                                class="btn el-btn edit dropdown-toggle"
+                                                                                style="width: 25px;"
+                                                                                (click)="showActions(emailCampaign.emailCampaignDtl.indexOf(email)+'sqdpdwn', emailCampaign.emailCampaignDtl.indexOf(email), 'sqdpdwn', $event)">
+                                                                                <img class="seq-edit-dd"
+                                                                                    style="height: 14px !important;transform: rotate(270deg);position: relative;left: 4px;bottom: 1px;"
+                                                                                    src="assets/icons/ic_back.svg"></button>
+                                                                            <ul role="menu"
+                                                                                class="dropdown-menu seq-edit"
+                                                                                id="{{emailCampaign.emailCampaignDtl.indexOf(email)+'sqdpdwn'}}"
+                                                                                style="display:none;width:75%;left: -44px;">
+                                                                                <li (click)="deleteEmail(email)"
+                                                                                    style="padding-top:0px; bottom: 5px;">
+                                                                                    Delete</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!-- </div>
+                                                                    </div> -->
+                                                                    </span>
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th style="text-align: left;padding-bottom: 5px;">
+                                                                    <h1>Actions
+                                                                        <div class="dropdown" *ngFor="let auto of email.emailAutomationRules">
+                                                                            <button class="btn btn-info btn-lg dropbtn" 
+                                                                            (click)="editAutomationRuleForEmail(auto,email)" data-toggle="modal"
+                                                                            data-target="#myModal" >
+                                                                                <img src={{auto.automationThenDtl.imagePath}} style="vertical-align: baseline;">
+                                                                            </button>
+                                                                                <div class="dropdown-action">
+
+                                                                                <a class="dropdown-item" href="#">
+                                                                                    AUTOMATION</a>
+                                                                                <a class="dropdown-item customopcity"
+                                                                                    href="#">
+                                                                                    WHEN</a>
+                                                                                <a class="dropdown-item" href="#">
+                                                                                    {{auto.automationWhenDtl.description}}:
+                                                                                    {{email.emailTitle}}</a>
+                                                                                <a class="dropdown-item customopcity"
+                                                                                    href="#">
+                                                                                    THEN</a>
+                                                                                <a class="dropdown-item" href="#">
+                                                                                    {{auto.automationThenDtl.description}}:
+                                                                                    <span *ngIf="auto.automationThenDtl.description == 'Add a Tag' || 
+                                                                                    auto.automationThenDtl.description == 'Remove a Tag'">{{auto.tag.tagName}}</span>
+                                                                                    <span *ngIf="auto.automationThenDtl.description == 'Subscriobe to an email sequence'
+                                                                                    || auto.automationThenDtl.description == 'Unsubscriobe to an email sequence'">
+                                                                                       {{auto.thenEmailCampTitle}} </span></a>
+
+                                                                            </div>
+                                                                        </div>
+                                                                       
+                                                                        <!-- <button><img
+                                                                                src="./assets/icons/ic_tagsred.svg"></button>
+                                                                        <button><img
+                                                                                src="./assets/icons/ic_reggreen.svg"></button> -->
+
+                                                                        <div class="dropdown">
+                                                                            <!-- openAlignmentMenu(null); -->
+
+                                                                            <button type="button"
+                                                                                class="btn btn-info btn-lg dropbtn"
+                                                                                id="actionIcon" data-toggle="modal"
+                                                                                data-target="#myModal" (click)="addAutomationRuleForEmail(email)">
+                                                                                <img
+                                                                                    src="./assets/icons/ic_addaction.svg" style="vertical-align: baseline;"></button>
+                                                                        </div>
+                                                                    </h1>
+                                                                </th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngx-sortable>
+
+                                    <!-- end  sequence-secand2 -->
+                                    <div class="sequence-secand2" style="background: none;">
+                                        <div class="contant">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="text-align: left;">
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="myModal" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">New Automation <img style="margin-left: 0px;" src="./assets/icons/ic_help.svg">
+                                                                            </h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Action to Apply</p>
+                                                                            <form *ngIf="editingEmailAutomationRule == false">
+                                                                                <div class="form-group">
+                                                                                    <label for="usr">When</label>
+                                                                                    <select class="form-control" name="whenSelectedValue" [(ngModel)]="selectedWhenRule"
+                                                                                    (change)="selectWhenRule($event)">
+                                                                                        <optgroup *ngFor="let when of whenRules" label="{{when.whenTitle}}">
+                                                                                            <option
+                                                                                                *ngFor="let aDWDesc of when.autoDtlDesc"
+                                                                                                value="{{aDWDesc.id}}">
+                                                                                                {{aDWDesc.description}}
+                                                                                            </option>
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                    <div id="whenRuleDropDown"
+                                                                                        style="display: none; margin-top: 10px;">
+                                                                                        <app-dropdown
+                                                                                            [dropdownData]="thenRuleData"
+                                                                                            (selectedRuleOP)="onSelectedRule($event)"
+                                                                                            [automationRule]="automationRule">
+                                                                                        </app-dropdown>
+                                                                                    </div>
+                                                                                    <div id="WhenRuleOtherDropDown"
+                                                                                        style="display: none; margin-top: 10px;">
+                                                                                        <ng-select name="whenOptions"
+                                                                                            [(ngModel)]="selectedWhenOption"
+                                                                                            [items]="dropdownData"
+                                                                                            placeholder="search"
+                                                                                            bindLabel="{{bindLabel}}"
+                                                                                            autofocus bindValue="id"
+                                                                                            (change)="onWhenDataChange($event)">
+                                                                                        </ng-select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="usr">Then</label>
+                                                                                    <select disabled
+                                                                                        name="thenSelectedValue"
+                                                                                        [(ngModel)]="defaultThenRule"
+                                                                                        class="form-control dropbtn">
+                                                                                        <!-- do not show header and options for default rules -->
+                                                                                        <optgroup
+                                                                                            *ngFor="let then of thenRules"
+                                                                                            label="{{then.whenTitle}}">
+                                                                                            <option
+                                                                                                *ngFor="let aDWDesc of then.autoDtlDesc"
+                                                                                                value="{{aDWDesc.description}}">
+                                                                                                {{aDWDesc.description}}
+                                                                                            </option>
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                    <input type="text" disabled
+                                                                                        class="form-control"
+                                                                                        name="whenValue"
+                                                                                        [(ngModel)]="emailCampaign.emailCapaignTitle">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <button class="condition">Add condition</button>
+                                                                                </div>
+                                                                                <div class="modal-footer" style="justify-content: left;">
+                                                                                    <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+                                                                                    <button type="button" class="btn btn-default save" (click)="saveAutomationRule();">
+                                                                                        Save Action
+                                                                                    </button>
+                                                                                    <button *ngIf="editingAutomationRule == true" type="button" class="btn btn-default save"
+                                                                                        (click)="deleteAutomationRule();">Delete
+                                                                                    </button>
+                                                                                </div>
+                                                                            </form>
+                                                                            <form *ngIf="editingEmailAutomationRule == true">
+                                                                                <div class="form-group">
+                                                                                    <label for="usr">When</label>
+                                                                                    <select class="form-control" name="whenSelectedValue" [(ngModel)]="selectedWhenRule" (change)="selectWhenRule(selectedWhenRule)">
+                                                                                        <optgroup *ngFor="let when of emailWhenRules" label="{{when.whenTitle}}">
+                                                                                            <option
+                                                                                                *ngFor="let aDWDesc of when.autoDtlDesc"
+                                                                                                value="{{aDWDesc.id}}">
+                                                                                                {{aDWDesc.description}}
+                                                                                            </option>
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                    <div style="margin-top: 10px;">
+                                                                                        <input type="text" disabled class="form-control" name="whenValue"
+                                                                                        [(ngModel)]="automationRuleEmail.emailTitle">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="usr">Then</label>
+                                                                                    <select [(ngModel)]="emailThenRule" name="thenSelectedValue"  class="form-control dropbtn" (change)="selectThenRule(emailThenRule)">
+                                                                                        <!-- do not show header and options for default rules -->
+                                                                                        <optgroup *ngFor="let then of emailThenRules" label="{{then.whenTitle}}">
+                                                                                            <option *ngFor="let aDWDesc of then.autoDtlDesc" value="{{aDWDesc.description}}">
+                                                                                                {{aDWDesc.description}}
+                                                                                            </option>
+                                                                                        </optgroup>
+                                                                                    </select>
+                                                                                    <div id="thenRuleDropDown" style="display: none; margin-top: 10px;">
+                                                                                        <app-dropdown
+                                                                                            [dropdownData]="thenRuleData"
+                                                                                            (selectedRuleOP)="onSelectedRule($event)"
+                                                                                            [automationRule]="automationRule">
+                                                                                        </app-dropdown>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <button class="condition">Add condition</button>
+                                                                                </div>
+                                                                                <div class="modal-footer" style="justify-content: left;">
+                                                                                    <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+                                                                                    <button type="button" class="btn btn-default save" (click)="saveAutomationRule();">
+                                                                                        Save Action
+                                                                                    </button>
+                                                                                    <button *ngIf="editingAutomationRule == true" type="button" class="btn btn-default save"
+                                                                                        (click)="deleteAutomationRule();">Delete
+                                                                                    </button>
+
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <ng-template #emailNotAdded>
+                                    <div class="content text-center" style="width: 54%;margin: 5% auto;">
+                                        <h5 style="font-weight: bold;">This Campaign has not email yet</h5>
+                                        <p style="color:  #959595;margin-top: 20px;">
+                                            Choose one of the options below for creating a new email sequence
+                                        </p>
+                                        <table class="chooseFromBlueprint">
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="2">
+                                                        <img  style="max-width: 100px !important; width: 100px;height: 61px !important;" src="./assets/icons/ic_blueprint.svg">
+                                                    </td>
+                                                    <td style="text-align: left;">
+                                                        <ul style="list-style-type: none; width: 95%; padding: 3px;">
+                                                            <li style="font-weight: bold; cursor: pointer;">Choose a Blue Print</li>
+                                                            <li style="color: #959595;font-size: 12px;">Campaign blur prints are a great way to get started
+                                                                .Just click on blueprint, fill in the placeholders and have a fully functional
+                                                                Campaign in a minutes</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        <table class="chooseFromBlueprint">
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="2">
+                                                        <img  style="max-width: 100px !important; width: 100px;height: 61px !important;" src="./assets/icons/ic_blueprint.svg">
+                                                    </td>
+                                                    <td style="text-align: left;">
+                                                        <ul style="list-style-type: none; width: 95%; padding: 3px;">
+                                                            <li style="font-weight: bold; cursor: pointer;" (click)="editEmail(null)">Start from Scratch</li>
+                                                            <li style="color: #959595;font-size: 12px;">Already have your emails planned out or know
+                                                            exactly what content you need ? then you're ready to start building out your own Campaign</li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="2a" [ngClass]="{ 'active':activeTab==='2a'}">
+                        <div id="content-body">
+                            <div class="content text-center">
+                                <div class="componant" *ngIf="emailCampaign.subscribers.length > 0 ">
+                                    <h1 *ngIf="emailCampaign.subscribers">{{emailCampaign.subscribers.length}}
+                                        Subscribers</h1>
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                <th>NAME</th>
+                                                <th>EMAIL ADDRESS</th>
+                                                <th>ADDED ON</th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let subscriber of emailCampaign.subscribers;let i = index">
+                                                <td style="width: 40%;">{{subscriber.user.name}}</td>
+                                                <td style="width: 40%;">{{subscriber.user.email}}</td>
+                                                <td style="width: auto;">{{subscriber.addedOn | date: 'dd/MM/yyyy'}}</td>
+                                                <td >
+                                                    <div class="btn-group" style="margin-left: 18px;" (mouseleave)="closeEditEmailDropDown(i+'subscriberdwn')">
+                                                        <button type="button" class="btn edit dropdown-toggle"style="width: 30%;">View &nbsp;</button>
+                                                        <button type="button" class="btn edit dropdown-toggle" style="width: 25px;"
+                                                          (click)="showSubscriberActions(i+'subscriberdwn')"> 
+                                                          <img class="seq-edit-dd"
+                                                            src="assets/icons/ic_back.svg"></button>
+                                                        <ul role="menu" class="dropdown-menu seq-edit" id="{{i+'subscriberdwn'}}" style="display: none;">
+                                                          <li><a href="#"><span>Emails</span></a></li>
+                                                          <li ><a href="#"><span>Subscribers</span></a></li>
+                                                          <li ><a href="#"><span>Settings</span></a></li>
+                                                          <!-- <li (click)="duplicateEmail(email, $event)"><a href="#"><span>Duplicate</span></a></li> -->
+                                                          <li><a href="#"><span>Settings</span></a></li>
+                                                          <li><a href="#"><span>Settings</span></a></li>
+                                                         
+                                                        </ul>
+                                                      </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <div class="center">
+                                        <ul class="pagination">
+                                            <li [ngClass]="{'disabled': isFirstPage}"
+                                                (click)="emailTab('2a',currentPage-1)">&laquo;</li>
+                                            <li *ngFor="let page of totalSubscriberPages"
+                                                [ngClass]="{'active': currentPage == page}"
+                                                (click)="emailTab('2a',page)">
+                                                {{page+1}}</li>
+                                            <li [ngClass]="{'disabled': isLastPage}"
+                                                (click)="emailTab('2a',currentPage+1)">&raquo;</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="componant" *ngIf="emailCampaign.subscribers.length == 0" style="padding: 0;
+                                width: 40%;
+                                margin: 10% auto;">
+                                    <img src="assets/icons/ic_addpeople.svg" style="width: 185px;height: 122px !important;
+                                    max-width: 185px !important;">
+                                    <h1 style="text-align: center;">Let’s add some people!</h1>
+                                    <p style="color: #707070;">
+                                      Drip makes it easy to add people and nurture leads! Get started by <u style="color: black;">importing people here.</u> 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane tab-panesection" id="3a" [ngClass]="{ 'active':activeTab==='3a'}" style="height: 77vh;">
+                        <div id="content-body" style="padding-bottom: 30px;">
+                            <div class="content text-center w-75 p-0 Setting">
+                                <div class="three">
+                                    <div class="row m-0">
+                                        <div class="first col-lg-12 text-left p-0">
+                                            <h1>Identity Setting</h1>
+                                            <hr>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group ">
+                                                            <label>Public Name</label>
+                                                            <input type="text" class="form-control w-100"
+                                                                value="Email One" name="publicName" required
+                                                                [(ngModel)]="updatedEmailCampaign.emailCapaignTitle"
+                                                                required #publicName="ngModel">
+                                                            <div class="validationError"
+                                                                *ngIf="publicName.invalid && (publicName.dirty || publicName.touched)">
+                                                                Please Enter Campaign Name
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+                                                        <div class="form-group">
+                                                            <label>“From” Name</label>
+                                                            <input placeholder="Your Name"
+                                                                type="text" required class="form-control w-100"
+                                                                name="fromName"
+                                                                [(ngModel)]="updatedEmailCampaign.fromName" required
+                                                                #fromName="ngModel">
+                                                            <div class="validationError"
+                                                                *ngIf="fromName.invalid && (fromName.dirty || fromName.touched)">
+                                                                Please Enter From Name
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group ">
+                                                            <label>“From” Email</label>
+                                                            <input placeholder="Your email" type="email"
+                                                                class="form-control w-100" required name="fromEmail"
+                                                                [(ngModel)]="updatedEmailCampaign.fromEmail" required
+                                                                #fromEmail="ngModel"  (ngModelChange)="checkEmailAddressDMARC()"  >
+                                                            <div class="validationError" *ngIf="dmarkRule == false">
+                                                                {{fromEmailErrorMesage}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+                                                        <div class="form-group">
+                                                            <label>BCC (Optional)</label>
+                                                            <input type="text" class="form-control w-100"
+                                                                placeholder="Business" name="bcc" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                                                [(ngModel)]="updatedEmailCampaign.bcc" required
+                                                                #bcc="ngModel" >
+                                                                <div class="validationError"
+                                                                *ngIf="bcc.invalid && (bcc.dirty || bcc.touched)">
+                                                                Please Enter From email
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group ">
+                                                            <label for="postal">Postal Address</label>
+                                                            <input type="text" id="postal" class="form-control w-100"
+                                                                required
+                                                                placeholder=" Postal address test one two three"
+                                                                name="postalAddress"
+                                                                [(ngModel)]="updatedEmailCampaign.postalAddress"
+                                                                required #postalAddress="ngModel">
+                                                            <div class="validationError"
+                                                                *ngIf="postalAddress.invalid && (postalAddress.dirty || postalAddress.touched)">
+                                                                Please Enter From email
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6"></div>
+                                                </div>
+
+
+                                            </form>
+
+                                        </div>
+                                        <div class="secand col-lg-12 text-left p-0">
+                                            <h1>Timing Setting</h1>
+                                            <hr>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>What time of day should we send email?</label>
+                                                            <div class="bs-example">
+                                                                <select name="hours" [(ngModel)]="hours" class="timeOfDay"
+                                                                (change)="changeTime($event.target.value)">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                            </select>
+                                                            <select name="minutes" [(ngModel)]="selectedMint" class="timeOfDay"
+                                                                (change)="changeTime($event.target.value)">
+                                                                <option *ngFor="let m of minutes" value={{m}}>{{m}}</option>
+                                                            </select>
+                                                            <select name="am_pm" [(ngModel)]="am_pm" class="timeOfDay"
+                                                                (change)="changeTime($event.target.value)">
+                                                                <option value="AM">AM</option>
+                                                                <option value="PM">PM</option>
+    
+                                                            </select>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+                                                        <div class="form-group">
+                                                            <label>What days of the week can we send emails?</label>
+                                                            <div class="day-text">
+                                                                <label class="container">
+                                                                    <span class="text">Su</span>
+                                                                    <input type="checkbox" id="dayCheckBox1"
+                                                                        (click)="selectWeekDay($event,'1')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container">
+                                                                    <span class="text">Mo</span>
+                                                                    <input type="checkbox" id="dayCheckBox2"
+                                                                        (click)="selectWeekDay($event,'2')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container">
+                                                                    <span class="text">Tu</span>
+                                                                    <input type="checkbox" id="dayCheckBox3"
+                                                                        (click)="selectWeekDay($event,'3')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container">
+                                                                    <span class="text">We</span>
+                                                                    <input type="checkbox" id="dayCheckBox4"
+                                                                        (click)="selectWeekDay($event,'4')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container">
+                                                                    <span class="text">Th</span>
+                                                                    <input type="checkbox" id="dayCheckBox5"
+                                                                        (click)="selectWeekDay($event,'5')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container">
+                                                                    <span class="text">Fr</span>
+                                                                    <input type="checkbox" id="dayCheckBox6"
+                                                                        (click)="selectWeekDay($event,'6')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="container container-end">
+                                                                    <span class="text">Sa</span>
+                                                                    <input type="checkbox" id="dayCheckBox7"
+                                                                        (click)="selectWeekDay($event,'7')">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="validationError"
+                                                                *ngIf="this.updatedEmailCampaign.daysOfWeek == null || this.updatedEmailCampaign.daysOfWeek == '' ">
+                                                                Days of the week mask must allow at least one day
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="subscribe">
+                                                                <select name="timeZone"
+                                                                [(ngModel)]="updatedEmailCampaign.timezone">
+                                                                <option value="recipient's timezone">client</option>
+                                                                <option value="Eastern timezone">America/New_York</option>
+                                                                <option value="UTC timezone">UTC</option>
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 ">
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="three2 col-lg-12 text-left p-0">
+                                            <h1>Subscribe/Unsubscribe Notifications</h1>
+                                            <hr>
+                                            <form>
+                                                <p>We will send you a quick notification email when the following events
+                                                    occur.
+                                                    If you’d rather not receive notifications, just leave them
+                                                    blank.<br>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group ">
+                                                                <label>Notify when someone subscribes:</label>
+                                                                <input type="text" class="form-control w-100"
+                                                                    [(ngModel)]="updatedEmailCampaign.subscribeNotifyEmail"
+                                                                    name="subscribe-email"
+                                                                    placeholder="user@gmail.com">
+                                                                <label style="float: right;">Example:
+                                                                    you@example.com</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 ">
+                                                            <div class="form-group ">
+                                                                <label>Notify when someone unsubscribes:</label>
+                                                                <input type="text" class="form-control w-100"
+                                                                    [(ngModel)]="updatedEmailCampaign.unsubscribeNotifyEmail"
+                                                                    name="unsubscribe-email"
+                                                                    placeholder="unsubscribe@gmail.com">
+                                                                <label style="float: right;">Example:
+                                                                    you@example.com</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="first col-lg-12 text-left p-0">
+                                            <h1>Primary Purpose</h1>
+                                            <hr>
+                                            <form>
+                                                <div class="form-group">
+                                                    <label>What is the primary purpose of this Broadcast?</label>
+                                                    <div class="dropdown form-control" style="width: 66%; padding: 0px;display: block;">
+                                                        <button class="btn  dropdown-toggle w-100 text-left p-0" type="button" (click)="openSettingsDropDownMenu()" style="height: 35px">
+                                                            {{updatedEmailCampaign.campaignPrimaryPurpose}} <img src="./assets/icons/arrow-down.svg" >
+                                                        </button>
+                                                        <div style="width:100% !important;background: white;border: 1px solid #d4d0d0;display: none;position: absolute;
+                                                        z-index: 2;" 
+                                                              id="settingsDropDownMenu">
+                                                          <span class="primaryPurpose" (click)="selectPrimaryPurpose('Commercial')">
+                                                            <img src="assets/icons/correct.svg" *ngIf="updatedEmailCampaign.campaignPrimaryPurpose == 'Commercial'"> Commercial
+                                                            <p style="padding-bottom: 0px; margin-bottom: 0px;">Content that advertises or promotes a commercial product or service, including content on a website operated for commercial purpose</p>
+                                                          </span>
+                                                          <span class="primaryPurpose" (click)="selectPrimaryPurpose('Transactional/ relationship')">
+                                                            <img src="assets/icons/correct.svg" *ngIf="updatedEmailCampaign.campaignPrimaryPurpose == 'Transactional/ relationship'"> 
+                                                            Transactional/ relationship
+                                                           <p style="padding-bottom: 0px; margin-bottom: 0px;">Content which facilitates an already agreed-upon transaction or updates a customer about an ongoing transaction</p>
+                                                          </span>
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                            </form>
+                                            <div class="form-group" style="padding-left: 26px;padding-right: 20px;">
+                                                <hr>
+                                                <p style="width: 72.3%;">The primary purpose governs what is required in
+                                                    your emails to remain compliant with the CAN-SPAM Act.
+                                                    For more information about the difference between “commercial” and
+                                                    “transactional” email,
+                                                    check out the CAN-SPAM Compliance Guide.</p>
+                                            </div>
+                                        </div>
+                                        <div class="first col-lg-12 text-left p-0">
+                                            <h1>Signup Settings</h1>
+                                            <hr>
+                                            <form>
+                                                <div class="form-group" style="padding-right: 20px;">
+                                                    <p style="width: 72.3%;">If you have a custom page where we should
+                                                        send people after clicking the confirmation link, enter the URL
+                                                        below. Leave this blank to use the default page..</p>
+                                                    <div class="form-group w-75" style="margin-bottom: 30px;">
+
+                                                        <label>Custom Post-Confirmation Page</label>
+                                                        <input type="text" class="form-control w-100"
+                                                                [(ngModel)]="updatedEmailCampaign.postConfirmationPageURL"
+                                                                name="unsubscribe-email" 
+                                                                placeholder="user@gmail.com">
+                                                        <span style="float:right;">Example:
+                                                            http://www.example.com/thank-you</span>
+                                                    </div>
+                                                    <p style="width: 72.3%;">Turn this setting on to send double opt-in
+                                                        confirmation emails by default. Note, this will be overridden by
+                                                        the settings on form or automation rules.</p>
+
+                                                </div>
+                                            </form>
+
+                                            <div class="list2 ">
+                                                <div class="onoffswitch">
+                                                    <input type="checkbox" name="onoffswitch"
+                                                        class="onoffswitch-checkbox" id="myonoffswitch">
+                                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                    <h3>Send double opt-in confirmation email by default</h3>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end  main-content -->
+        </div>
+    </section>
+    <section class="header">
+        <div style="text-align: center;">
+            <button style="margin-top: 6px;
+            background: black;
+            border-radius: 2px;
+            border: none;
+            font: 12px Open Sans;
+            color: #FFFFFF;
+            width: 7%;
+            height: 30px;" (click)="saveSettings()">Save</button>
+        </div>
+    </section>
+    <app-message-popup *ngIf="showPopUpMessage" [popUpMessage]="message">
+    </app-message-popup>
+    <ngx-ui-loader></ngx-ui-loader>
+    <!-- end section content -->
+</div>

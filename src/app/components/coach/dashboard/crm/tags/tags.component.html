@@ -1,0 +1,75 @@
+<div style="width: 100%;height: 100vh;overflow: scroll;" class="page-wrapper">
+  <div class="tags">
+    <div class="heading">
+      <h6>Showing all tags</h6>
+      <button data-toggle="modal" data-target="#addNewTag" style="float: right;width: 130px"> + Add Tag</button>
+    </div>
+    <div style="margin-top: 30px;">
+      <table>
+        <thead>
+          <tr style="background: #F6F6F6;border: 1px solid #E1E1E1;">
+            <th>TAGS</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tag of tags; let i = index">
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">{{tag.name}}</div>
+            </td>
+            <td (mouseleave)="closeEditEmailDropDown(i+'dropdown')" style="text-align: right;">
+              <span style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;" >Edit</span>
+              <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;" 
+              (click)="openViewDropDown(i+'dropdown')" >
+                <img src="assets/icons/arrow-down.svg">
+                <ul class="dropdown-content" id="{{i+'dropdown'}}" style="display: none;">
+                  <li>Edit</li>
+                  <li>Delete</li>
+                  <li>View</li>
+                </ul>
+              
+              </span>
+              
+            </td>
+          </tr>
+          <!-- <tr>
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">Complete Program</div>
+            </td>
+            <td style="text-align: right;">
+              <button class="editBtn">Edit</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">Quiz</div>
+            </td>
+            <td style="text-align: right;">
+              <button class="editBtn">Edit</button>
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+    <div class="modal fade show" id="addNewTag" tabindex="-1" role="dialog" aria-labelledby="addNewTag"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Tags</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+          <!-- <textarea id="tagText" rows="1" cols="50" placeholder="Add a tag">
+          </textarea> -->
+          <input type="text" placeholder="Add a tag" style="height: 60px;">
+          <button (click)="changeStatus('exportCsvFile')" style="width: 80px;
+          height: 35px;float: right">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

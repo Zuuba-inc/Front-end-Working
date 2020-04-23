@@ -1,0 +1,290 @@
+<ngx-ui-loader></ngx-ui-loader>
+<nav class="navbar fixed-top navbar-expand-lg " id="sectionsNav">
+
+  <div class="container-fluid px-5">
+      
+    <div class="navbar-translate">
+        
+      <a class="navbar-brand" href="./index.html">
+        Naincy Jain
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="javascript">
+            7 day challenge
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript">
+            Webinars
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript">
+            Quiz
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript">
+            About
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="bg-dark-green section-padding innr-header-pad ">
+  <div class="container">
+    
+    <div class="row align-items-center flex-row-reverse">
+      <div class="col-md-6 order-last">
+        <div class="com-content text-white">
+          <h5 class="sec-title lh-1">{{webinarInfo.webinarTitle}}</h5>
+          <!-- <h4 class="subTitle fw-400">Webinar registration sub heading</h4> -->
+          <h3 class="subTitle text-success fw-400 mb-3" [innerHTML]="webinarInfo.webinarDesc"></h3>
+
+          <!-- <p class="normal-text">Descrption</p> -->
+        </div>
+      </div>
+      <div class="col-md-6 order-first">
+        <div class="singinBox">
+          <div class="content-box">
+            <div class="text-center">
+              <div class="fs-18 fw-400">
+                  <div class="fs-18 fw-600" *ngIf="webinarInfo.webinarType != 'live'">Starting soon</div>
+                <div *ngIf="webinarInfo.webinarType == 'live'"><span class="liveDot">Live</span> starting soon</div>
+              </div>
+              <br />
+              <div class="time-to black-text" id="timer">
+                <div id="myTimer">
+                  <div class="timerBox">
+                    <div id="daysLeft">0</div>
+                    <span>DAYS</span>
+                  </div>
+                  <div class="timerBox">
+                    <div id="hoursLeft">0</div>
+                    <span>HOURS</span>
+                  </div>
+                  <div class="timerBox">
+                    <div id="minLeft">0</div>
+                    <span>MINUTES</span>
+                  </div>
+                  <div class="timerBox">
+                    <div id="secLeft">0</div>
+                    <span>SECONDS</span>
+                  </div>
+                </div>
+              </div>
+              <div class="time-to black-text" id="webinarEnded" style="display: none">
+                 You cannot register for this webinar timeSlot
+              </div>
+            </div>
+
+            <!-- When webinar is auto -->
+            <div *ngIf="webinarInfo.webinarType != 'live'">
+              <p class="fs-12 text-muted">Prefered time</p>
+              <div class="form-group">
+                  <select class="custom-select" (change)="selectTime($event)" [(ngModel)]="webinarSelectedTime">
+                      <option  *ngFor="let webinarTime of webinarInfo.webinarAutoDtl.webinarAutoDtlTimeList" value={{webinarTime.eventTime}}>{{webinarTime.eventTime | date: 'dd MMMM yyyy'}} at {{webinarTime.time}}</option>
+                  </select>
+              </div>
+          </div> 
+
+            <!-- When webinar is live -->
+
+            <div class="flex-center py-3 border-y" *ngIf="webinarInfo.webinarType == 'live'">
+              <div class="dateRedbx mb-3  mr-3">
+                <div class="monthType" id="month">
+                  Aug
+                </div>
+                <div class="dateType" id="date">
+                  24
+                </div>
+              </div>
+ 
+              <div class="fs-14 fw-600" id="dTime">{{webinarInfo.webinarLiveDtl.webinarLiveDate | date: 'dd MMMM yyyy'}} at {{webinarInfo.webinarLiveDtl.webinarLiveTime}}</div>
+            </div>
+
+            <br />
+            <div class="registerButtons">
+              <button class="register-fb" [disabled]="disableRegistration == false" (click)="socialLogin('Facebook')">
+                <span class="icon cf-facebook"></span>
+                Continue with Facebook
+              </button>
+
+              <button class="register-gl" [disabled]="disableRegistration == false" (click)="socialLogin('Google')">
+                <span class="icon cf-google">
+                  <span class="path1"></span><span class="path2"></span
+                  ><span class="path3"></span><span class="path4"></span>
+                </span>
+                Continue with Google
+              </button>
+            </div>
+            <div class="OR my-4">
+              OR
+            </div>
+
+            <div class="form-group cstm-input mb-4">
+              <label class="mb-3">Email address</label>
+              <input [(ngModel)] = "email"
+                type="email"
+                required=""
+                id="userEmailId"
+                name="email"
+                class="form-control"
+              />
+              <!-- <span ><font color="red" >Please Enter email</font></span> -->
+            </div>
+
+            <div class="text-center registerButtons">
+              <button class="btn btn-success" [disabled]="disableRegistration == false" (click)="singupForWebinar()">
+                Email Me Auto the Recording
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- *************** start my story **************** -->
+
+<div class="section-padding bg-light-green">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h3 class="sec-title">About the Hosts</h3>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="abt-host">
+          <div class="usrDetail text-right">
+            <div class="fs-20 fw-700 mb-2">Host 1</div>
+            <div class="fs-16 mb-2">host 1</div>
+            <p class="normal-text fw-400 fs-14">host 1 description</p>
+          </div>
+          <div class="avatar">
+            <img
+              src="../../assets/images/pexels-photo-614810.jpg"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="abt-host">
+          <div class="avatar">
+            <img
+              src="../../assets/images/pexels-photo-614810.jpg"
+              class="img-fluid"
+            />
+          </div>
+          <div class="usrDetail text-left">
+            <div class="fs-20 fw-700 mb-2">host 2 Name</div>
+            <div class="fs-16 mb-2">host 2</div>
+            <p class="normal-text fw-400 fs-14">hostn</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-
+
+<!-- *************** close  my story **************** -->
+
+<!-- *************** start bg-dark-green **************** -->
+
+<div class="section-padding">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h3 class="sec-title">What People said about Previous Webinars</h3>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md">
+        <div class="xd-pw-team text-center">
+          <div class="avatar mb-3 mx-auto">
+            <img
+              src="../../assets/images/pexels-photo-614810.jpg"
+              class="img-fluid"
+              style="height: 150px; width: 200px;"
+            />
+          </div>
+          <div class="fs-20 fw-600 mb-3">Mike</div>
+          <p class="normal-text text-muted fw-400 wekitBoxSecond">Descrption</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *************** close bg-dark-green **************** -->
+
+<!-- **************** discover start************* -->
+<div class="bg-dark-blue section-padding">
+  <div class="container">
+    <div class="text-center">
+      <h3 class="sec-title wow fadeInDown white-text" data-wow-delay="1s">
+        Webinar Call Lable
+      </h3>
+      <br />
+      <a
+        href="javascript://"
+        class="btn btn-success wow fadeInDown"
+        data-wow-delay="1.5s"
+        >Webinar Call Lable</a
+      >
+    </div>
+  </div>
+</div>
+<!-- **************** discover close************* -->
+
+<!-- *************** start footer section **************** -->
+<footer class="section-padding pb-3">
+  <div class="container">
+    <div class="row ft-02 justify-content-between">
+      <div class="col-md text-md-left text-center">
+        <P class="normal-text bold">Naincy Jain</P>
+        <p class="normal-text ft-link">
+          <a href="#" class="link"><i class="fa fa-instagram"></i></a>
+          <a href="#" class="link"><i class="fa fa-facebook-square"></i></a>
+          <a href="#" class="link"><i class="fa fa-twitter"></i></a>
+        </p>
+      </div>
+      <div class="col-md text-md-right text-center">
+        <p class="normal-text ft-link">
+          <a href="javascript://" class="link ml-auto mr-4">Terms</a>
+          <a href="javascript://" class="link mr-0">Privacy</a>
+        </p>
+        <p class="normal-text">
+          Powered by Coachforce
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="clearfix"></div>
+
+<div class="footer-btm">
+  <div class="container text-center">
+    <p class="normal-text">© Zuuba Copyright</p>
+  </div>
+</div>
+<!-- *************** close footer section **************** -->

@@ -1,0 +1,330 @@
+<div class="page-wrapper">
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+      <!-- MAIN CONTENT-->
+      <div class="main-content">
+        <div class="section__content section__content--p30" style="height: 95vh;overflow: scroll;padding-bottom: 5%;">
+          <div class="container-fluid">
+            <div id="swapp" >
+              <ul class="nav nav-tabs">
+                <li id="sequences" class="active">
+                  <a href="#1a" data-toggle="tab" id="sequenceTab" [ngClass]="{ 'active':activeTab==='1a'}" (click)="sequences('1a')">Email
+                    Sequences</a>
+                </li>
+                <li id="broadcasts">
+                  <a href="#2a" data-toggle="tab" id="broadcastTab" [ngClass]="{ 'active':activeTab==='2a'}"
+                    (click)="broadcasts('2a')">Email Broadcasts</a>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <!-- <li  style="margin-left: 44%;"> -->
+                <li class="new" style="width: 19.5%;">
+                  <button data-toggle="modal" data-target="#m_modal_2">+ New Email Campaign</button>
+                </li>
+              </ul>
+              <div class="tab-content clearfix scroll">
+                <div class="tab-pane active" id="1a" [ngClass]="{ 'active':activeTab==='1a'}">
+                  <div class="content-body">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th style="width: 35%;padding-left: 25px;">EMAIL</th>
+                          <th style="text-align: center;width: 10%;">OPEN</th>
+                          <th style="text-align: center;width: 10%;">CLICK</th>
+                          <th style="text-align: center;width: 10%;">UNSUBSCRIBE</th>
+                          <th style="padding-left: 3%;">STATUS</th>
+                        </tr>
+                      </thead>
+                      <tbody style="font-size: 14px;">
+                        <tr *ngFor="let email of emailCampaignSequence; let i = index"
+                            (mouseenter) ="ecOnHover(email)"  
+                            (mouseleave) ="ecOnMOut()" style="border-bottom: 1px solid #E1E1E1;">
+                          <td style="padding-left: 25px;vertical-align: bottom;">
+                            <h3>{{email.emailCapaignTitle}}</h3>
+                            <!-- <h5>Funnel One</h5>-->
+                            <h6>{{email.emailCampaignDtl.length}} Emails</h6>
+                          </td>
+                          <!-- TODO: CLEAN THIS UP -->
+                          <td style="text-align: center;">{{hovered.id && email.id == hovered.id ? esMetrics[i].totalOpenCount : (esMetrics[i].totalEmailSent ? (math.floor(esMetrics[i].totalOpenCount/esMetrics[i].totalEmailSent*100)) : 0)+'%'}}</td>
+                          <td style="text-align: center;">{{hovered.id && email.id == hovered.id ? esMetrics[i].totalClickedCount : (esMetrics[i].totalEmailSent ? (math.floor(esMetrics[i].totalClickedCount/esMetrics[i].totalEmailSent*100)) : 0)+'%'}}</td>
+                          <td style="text-align: center;">{{hovered.id && email.id == hovered.id ? esMetrics[i].totalUnsubscribedCount : (esMetrics[i].totalEmailSent ? (math.floor(esMetrics[i].totalUnsubscribedCount/esMetrics[i].totalEmailSent*100)) : 0)+'%'}}</td><!-- <td style="padding-left: 2%;">3</td>
+                          <td style="padding-left: 2%;">2</td>
+                          <td style="padding-left: 5%;">2</td> -->
+                          <td style="padding-left: 3%;padding-right: 0px;">
+  
+                            <span class="custom-dropdown ">
+  
+                              <div class="btn-group">
+                                <!-- <button type="button" data-toggle="dropdown" class="btn draf dropdown-toggle">Draft &nbsp;
+                                  <span> <img src="assets/icons/ic_back.svg"></span></button>
+                                <ul role="menu" class="dropdown-menu">
+                                  <li><a href="#">Draft</a></li>
+                                  <li><a href="#">Draft</a></li>
+                                  <li><a href="#">Draft</a></li>
+                                </ul> -->
+                                <select class="btn draf dropdown-toggle dropDownIcon" (change)="changeEmSeq($event, email)" name="seqStatus" style="width: 50%;">
+                                  <option value="DRAFT" [selected]="email.status == 'DRAFT'">Draft</option>
+                                  <option value="ACTIVE" [selected]="email.status == 'ACTIVE'">Active</option>
+                               </select>
+                              </div>
+  
+                              <div class="btn-group" style="margin-left: 18px;" (mouseleave)="closeEditEmailDropDown(email)">
+                                <button type="button" data-toggle="dropdown" *ngIf="email.status == 'DRAFT'" class="btn edit dropdown-toggle"
+                                (click)="emailSeqEdit(email)" style="width: 30%;">Edit &nbsp;</button>
+                                <button type="button" data-toggle="dropdown" *ngIf="email.status == 'ACTIVE'" class="btn edit dropdown-toggle"
+                                (click)="openEmails(email, null, 'dashboard', $event)" style="width: 30%;">Dashboard &nbsp;</button>
+                                <button type="button" class="btn edit dropdown-toggle" style="width: 25px;"
+                                  (click)="showActions(i+'sqdpdwn', i, 'sqdpdwn', $event)"> 
+                                  <img class="seq-edit-dd"
+                                    src="assets/icons/ic_back.svg"></button>
+                                <ul role="menu" class="dropdown-menu seq-edit" id="{{i+'sqdpdwn'}}" style="display: none;">
+                                  <li (click)="openEmails(email, null, '1a', $event)"><a href="#"><span>Emails</span></a></li>
+                                  <li (click)="openEmails(email, null, '2a', $event)"><a href="#"><span>Subscribers</span></a></li>
+                                  <li (click)="openEmails(email, null, '3a', $event)"><a href="#"><span>Settings</span></a></li>
+                                  <!-- <li (click)="duplicateEmail(email, $event)"><a href="#"><span>Duplicate</span></a></li> -->
+                                  <li (click)="duplicateCampaign(email, $event)">
+                                    <button style="padding: 5px;
+                                            font-size: 14px;
+                                            line-height: 19px;" data-toggle="modal" data-target="#duplicatedEmailModel">Duplicate</button>
+                                  </li>
+                                  <li (click)="selectCampaignForDeleting(email)">
+                                    <button style="padding: 5px;
+                                            font-size: 14px;
+                                            line-height: 19px;" data-toggle="modal" data-target="#deleteEmailModel">Delete</button>
+                                            <!-- <a href="#"><span>Delete</span></a></li> -->
+                                 
+                                </ul>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+  
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="center">
+                    <ul class="pagination">
+                        <li [ngClass]="{'disabled': sequencePageObject.isFirstPage}"
+                            (click)="getEmailSequence(broadcastPageObject.currentPage-1)">&laquo;</li>
+                        <li *ngFor="let page of emailSequencePageNumber"
+                            [ngClass]="{'active': sequencePageObject.currentPage == page}"
+                            (click)="getEmailSequence(page)">
+                            {{page+1}}</li>
+                        <li [ngClass]="{'disabled': sequencePageObject.isLastPage}"
+                            (click)="getEmailSequence(sequencePageObject.currentPage+1)">&raquo;</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="tab-pane" id="2a" [ngClass]="{ 'active':activeTab==='2a'}">
+                  <div class="content-body">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th style="width: 27.2%;padding-left: 25px;">EMAIL</th>
+                          <th class="th2">DATE AND TIME</th>
+                          <th>OPEN</th>
+                          <th>CLICK</th>
+                          <!-- <th>CONVERSIONS</th> -->
+                          <th>UNSUBSCRIBE</th>
+                          <th>STATUS</th>
+                          <th style="padding-right: 25px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody style="font-size: 14px;text-align: center;">
+                        <tr *ngFor="let email of emailCampaignBroadcast; let i = index"
+                            (mouseenter) ="ecOnHover(email)"  
+                            (mouseleave) ="ecOnMOut()"
+                        >
+                          <td style="padding-left: 25px; text-align: left;vertical-align: bottom;">
+                            <h3>{{email.emailCapaignTitle}}</h3>
+                            <h6>{{email.subscriberCount}} people</h6>
+                            <!-- <h5>Funnel One</h5>
+                                                      <h6>3 Subscriber</h6> -->
+                          </td>
+                          <td style="padding: 0.75rem 0 !important;" [ngStyle]="{'text-align': email.emailBroadcastDate != null && email.emailBroadcastTime != null ? 'left' : 'center'}">{{getModifiedDate(email)}}</td>
+                          <td>{{hovered.id && email.id == hovered.id ? bcMterics[i].totalOpenCount : (bcMterics[i].totalEmailSent ? (math.floor(bcMterics[i].totalOpenCount/bcMterics[i].totalEmailSent*100)) : 0)+'%'}}</td>
+                          <td>{{hovered.id && email.id == hovered.id ? bcMterics[i].totalClickedCount : (bcMterics[i].totalEmailSent ? (math.floor(bcMterics[i].totalClickedCount/bcMterics[i].totalEmailSent*100)) : 0)+'%'}}</td>
+                          <!-- <td>{{hovered.id && email.id == hovered.id ? 2 : (bcMterics[i].totalOpenCount ? (math.floor(2/bcMterics[i].totalEmailSent*100))+'%' : 0)}}</td> -->
+                          <!-- <td>{{hovered.id && email.id == hovered.id ? bcMterics[i].totalUnsubscribedCount : (bcMterics[i].totalEmailSent ? (math.floor(bcMterics[i].totalUnsubscribedCount/bcMterics[i].totalEmailSent*100)) : 0)+'%'}}</td> -->
+                          <td>{{hovered.id && email.id == hovered.id ? bcMterics[i].totalUnsubscribedCount : (bcMterics[i].totalUnsubscribedCount ? (math.floor(bcMterics[i].totalUnsubscribedCount/bcMterics[i].totalEmailSent*100)) : 0)+'%'}}</td>
+                          <!--td>{{hovered.id && email.id == hovered.id ? email.emailUnsubscribedCount : (bcMterics[i].totalEmailSent ? (math.floor(email.emailUnsubscribedCount/bcMterics[i].totalEmailSent*100)) : 0)+'%' }}</td-->
+                          <td>{{email.status.charAt(0).toUpperCase() + email.status.slice(1).toLowerCase()}}</td>
+                          <td>
+                            <span class="custom-dropdown ">
+  
+                              <div class="btn-group mr-92" (mouseleave)="closeEditEmailDropDown(i+'dpdwn')">
+                                <button type="button" style="border: 1px solid;font-size: 12px;padding-left: 9px;width: 70%;" class="btn edit dropdown-toggle"
+                                  >
+                                  <span *ngIf="email.status == 'SENT'" (click)="openEmails(email, 'broadcast', 'dashboard', $event)">Dashboard</span>
+                                  <span *ngIf="email.status == 'DRAFT' || email.status == 'SCHEDULED'" (click)="openEmails(email, 'broadcast', 'recipients', $event)" >Edit</span>
+                                  &nbsp;
+                                  <!-- <span> <img src="assets/icons/ic_back.svg" style="transform: rotate(270deg)"></span> -->
+                                </button>
+                                  <button type="button" class="btn edit dropdown-toggle" style="width: 25px;"
+                                  (click)="showActions(i+'dpdwn', i, 'dpdwn')"> 
+                                  <img class="seq-edit-dd"
+                                    src="assets/icons/ic_back.svg"></button>
+                                  <ul role="menu" class="dropdown-menu" id="{{i+'dpdwn'}}" style="display: none;">
+                                  <!-- <li (click)="openEmails(email, 'broadcast',null, $event)"><a href="#">Stats</a></li> -->
+                                  <li (click)="openEmails(email, 'broadcast', 'recipients', $event)"><a href="#">Recipients</a></li>
+                                  <li (click)="openEmails(email, 'broadcast', 'email', $event)"><a href="#">Email</a></li>
+                                  <li (click)="openEmails(email, 'broadcast', 'settings', $event)"><a href="#">Settings</a></li>
+                                  <li (click)="duplicateCampaign(email, $event)">
+                                    <button style="padding: 5px;
+                                            font-size: 14px;
+                                            line-height: 19px;" data-toggle="modal" data-target="#duplicatedEmailModel">Duplicate</button>
+                                  </li>
+                                  <li (click)="selectCampaignForDeleting(email)">
+                                    <button style="padding: 5px;
+                                            font-size: 14px;
+                                            line-height: 19px;" data-toggle="modal" data-target="#deleteEmailModel">Delete</button>
+                                </ul>
+                              </div>
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="center">
+                    <ul class="pagination">
+                        <li [ngClass]="{'disabled': broadcastPageObject.isFirstPage}"
+                            (click)="getEmailBroadCast(broadcastPageObject.currentPage-1)">&laquo;</li>
+                        <li *ngFor="let page of emailBroadPageNumber"
+                            [ngClass]="{'active': broadcastPageObject.currentPage == page}"
+                            (click)="getEmailBroadCast(page)">
+                            {{page+1}}</li>
+                        <li [ngClass]="{'disabled': broadcastPageObject.isLastPage}"
+                            (click)="getEmailBroadCast(broadcastPageObject.currentPage+1)">&raquo;</li>
+                    </ul>
+                </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      <!-- END MAIN CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+    <div class="modal fade show" id="m_modal_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Email Campaign</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <button class="seqBorder" id="emailSequence" style="margin-right: 8%;"
+                (click)="selectEmailCampaignType('1','emailSequence')">
+                <div><img src="assets/icons/ic_emailsequence.svg"></div>
+                <div class="sequence">
+                  <h2>Email Sequence</h2>
+                </div>
+              </button>
+              <button class="seqBorder" id="emailBroadcast" (click)="selectEmailCampaignType('2','emailBroadcast')">
+                <div style="    padding-top: 8px;"><img src="assets/icons/ic_emailbroadcast.svg"> </div>
+                <div class="broadcast">
+                  <h2>Email Broadcast</h2>
+                </div>
+              </button>
+              <div class="validationError" *ngIf="emailTypeSelected == false">
+                 Please select email type
+              </div>
+            </div>
+            <div class="text-center" style="margin-bottom: 33px;">
+              <h3>Internal Title</h3>
+              <input value="Email Sequence One" required name="emailCapaignTitle" style="margin-bottom: 0px;height: 30px;font-size: 14px;"
+                [(ngModel)]="newEmailCampaign.emailCapaignTitle" #emailCapaignTitle="ngModel">
+                <div class="validationError" *ngIf="emailCapaignTitle.invalid && (emailCapaignTitle.dirty || emailCapaignTitle.touched)">
+                  Please enter Campaign title
+                </div>
+                <div class="validationError" *ngIf="approvedName == false">
+                    You already have a email Campaign with this name
+                  </div>
+            </div>
+            <div class="text-center">
+              <button class="cancel" data-dismiss="modal" aria-label="Close">Cancel</button>
+              <button class="create" [disabled]="newEmailCampaign.emailCapaignTitle == null"
+                (click)="createCampaign()" style="margin-left: 8px;">Create Campaign</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade show" id="duplicatedEmailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="margin-right: 15%;">
+      <div class="modal-content" style="width: 78%">
+        <div class="modal-header">
+          <h5 class="modal-title" >What should we call the copy of your {{newEmailCampaign.emailCampaignType.type}}?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 15px;">
+          <div class="text-center" style="margin-bottom: 33px;">
+            <h3>Name</h3>
+            <input value="Email Sequence One" required name="emailCapaignTitle" style="margin-bottom: 0px; font-size: 14px;
+            height: 32px;"
+              [(ngModel)]="newEmailCampaign.emailCapaignTitle" #emailCapaignTitle="ngModel">
+              <div class="validationError" *ngIf="emailCapaignTitle.invalid && (emailCapaignTitle.dirty || emailCapaignTitle.touched)">
+                Please enter {{newEmailCampaign.emailCampaignType.type}} title
+              </div>
+              <div class="validationError" *ngIf="approvedName == false">
+                  You already have a email Campaign with this name
+                </div>
+          </div>
+          <div class="text-center">
+            <button class="cancel" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button class="create" [disabled]="newEmailCampaign.emailCapaignTitle == null" style="margin-left: 5px;"
+              (click)="duplicateCampaign()">Duplicate Email</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade show" id="deleteEmailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="margin-right: 10%;">
+    <div class="modal-content" style="width: 72%">
+      <div class="modal-header">
+        <h5 class="modal-title" >Delete form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 15px;">
+        <div class="text-center" style="margin-bottom: 20px;text-align: left !important;margin-left: 6px;
+        font-size: 14px;
+        font-weight: 600;">
+          <p>
+            This Campaign <b>{{emailCampaign.emailCapaignTitle}}</b>, will be permanently deleted. Are you sure?
+          </p>
+        </div>
+        <div class="text-center">
+          <button class="create" (click)="deleteCampaign()" style="width: auto;
+          padding: 5px;
+          height: 31px;
+          margin-right: 5px;
+          background: #D56556;">I am sure, delete this Campaign</button>
+          <button class="cancel" data-dismiss="modal" aria-label="Close">Cancel</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+  <ngx-ui-loader></ngx-ui-loader>
+  
+  <!-- <script src="../../../../../../../assets/vendor/jquery-3.2.1.min.js"></script>
+         <script src="../../../../../../../assets/vendor/bootstrap-4.1/popper.min.js"></script>
+          <script src="../../../../../../../assets/vendor/bootstrap-4.1/bootstrap.min.js"></script> -->

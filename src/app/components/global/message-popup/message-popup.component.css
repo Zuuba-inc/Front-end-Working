@@ -1,0 +1,51 @@
+/* The snackbar - position it at the bottom and in the middle of the screen */
+.snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 390px;
+    background-color:red;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    padding: 12px;
+    position: absolute;
+    z-index: 1;
+  }
+  #errorMessage{
+    left: 2%;
+    top: 3.5pc;
+  }
+  #messageAlert {
+    border-radius: 10px;
+    left: 70%;
+    bottom: 30px;
+    position: fixed;
+  }
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  .snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+     opacity: 1; 
+    transition: opacity 3s; 
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

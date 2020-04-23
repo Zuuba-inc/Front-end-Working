@@ -1,0 +1,33 @@
+@import '../../../../assets/vendor/bootstrap-4.1/bootstrap.min.css';
+@import '../../../../assets/css/panel.css';
+@import '../../../../assets/css/crm.css';
+
+.filters {
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border: 1px solid #E1E1E1;
+    padding: 20px;
+}
+
+.filters .addMore {
+    background: #E9E9E9 0% 0% no-repeat padding-box;
+    border: 1px solid #E2E2E2;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.segmentationDiv{
+    display: inline;
+}
+
+.addMore{
+    cursor: pointer;
+}
+
+.segmentationDiv input{
+    display: inherit;
+    height: 30px;
+}
+.segmentationDiv select{
+    height: 30px;
+}

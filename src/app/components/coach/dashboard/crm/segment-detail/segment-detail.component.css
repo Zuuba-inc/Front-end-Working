@@ -1,0 +1,165 @@
+@import '../../../../../../assets/vendor/bootstrap-4.1/bootstrap.min.css';
+@import '../../../../../../assets/css/crm.css';
+.mainContainer{
+    width: 100%; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 5%;
+    height: 95vh;
+    overflow: scroll;
+}
+.page-wrapper .uploadlist{
+    width: 80%; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.page-wrapper .uploadlist a{
+    font-size: 12px;
+    font-weight: bold;
+    color: #0B8B8C;
+}
+.page-wrapper .uploadlist h6{
+    font-size: 16px; 
+    font-weight: bold;
+    margin-top: 20px;
+}
+.page-wrapper .uploadlist p{
+    font-size: 12px; 
+    color: #707070;
+}
+.page-wrapper .uploadlist .uploadFileBox{
+    background: #F6F6F6;
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    height: 162px;
+    width: 100%;
+}
+.column .searchBox{
+    background-size: 4%;
+}
+.dot {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 10px;
+    text-align: center;
+    
+  }
+
+  /* Style the tab */
+.tab {
+    overflow: hidden;
+   border-bottom: 1px solid #E1E1E1;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    color: #707070;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0px 16px;
+    transition: 0.3s;
+    font-size: 14px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    border-bottom: 2px solid black;
+    color: black;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 2px;
+    border-top: none;
+  }
+
+
+  /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 15%; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 35%;
+  height: 220px;
+  border-radius: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: #707070;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 10px 16px;
+  color: white;
+}
+
+.modal-body {padding: 25px 40px;}
+.modal-body p {
+  color: #707070;
+  font-size: 14px;;
+}
+

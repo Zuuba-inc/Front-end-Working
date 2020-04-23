@@ -1,0 +1,300 @@
+<h1>{{title}}</h1>
+<!-- <div *ngIf="session">
+  <app-publisher [session]="session"></app-publisher>
+  <app-subscriber *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
+</div> -->
+<div id="publisher-screen">
+
+</div>
+
+<div id="consumer-screen">
+
+</div>
+<div id="subscriber-sharing">
+
+</div>
+<div id="textchat">
+  <p id="history" *ngFor="let msg of messageHistory" [ngClass]="{'mine': user.id == msg.userId, 'theirs': user.id != msg.userId }" >
+    {{msg.message}} by {{msg.user}}
+  </p>
+  <form (ngSubmit)="register()">
+       <input type="text" placeholder="Input your text here" id="msgTxt" name="message" [(ngModel)]="message"/>
+       <input type="submit" value="Send">
+  </form>
+</div>
+<!-- <div>
+  <label>PDF src</label>
+  <input type="text" placeholder="PDF src" [(ngModel)]="pdfSrc">
+</div> -->
+
+<div *ngIf="user.uRole.role == 'MAIN_USER'">
+<div id="pdf-container">
+  <pdf-viewer id="pdf-canvas" [src]="pdfSrc"
+    [render-text]="true" [show-all]="false" [(page)]="pageVariable"
+    style="display: block;"
+    ></pdf-viewer>
+  <button (click)="nextPage()">next</button>
+
+</div>
+
+<button (click)="sharePdf()">Share PDF</button>
+<button (click)="screenshare()">Share Screen</button>
+<button (click)="startShareVideo()">Share Video</button>
+<button (click)="testAudio()">Test Audio Video</button>
+</div>
+
+ <!-- zu-content -->
+ 
+
+  <!-- Main Content -->
+  <section id="video-test" class="content" style="display: none">
+
+    <div class="row no-gutters justify-content-center">
+      <div class="col-md-8">
+
+        <div class="popup">
+
+          <div class="head">
+            <h2 class="head__title">Audio & Video Test</h2>
+            <button class="head__button" type="button"  (click)="testAudio()">Save & Close</button>
+          </div>
+
+          <div class="body">
+            <div class="row">
+              <div class="col-md-6">
+                
+                <!-- Test cam -->
+                <div class="test">
+                  <div class="row">
+                    <div class="col-md-5">
+
+                      <div class="test__view test__view--cam">
+                        <video width="100%" playsinline autoplay id="videoElement">
+
+                        </video>
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-md-7">
+
+                      <h4 class="test__heading">
+                        Webcam
+                      </h4>
+
+                      <p class="test__desc">
+                          Zuuba has permissions to use your webcam
+                      </p>
+
+                      <form>
+                        <select class="test__action" name="SelectCamera" (change)="camerasListChange()" [(ngModel)]="selectedCamera">
+                          <option *ngFor="let camera of camerasList" value={{camera.value}}>
+                              {{camera.label}}
+                          </option>
+                        </select>
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-md-6">
+                
+                <!-- TEST MICROPHONE -->
+                <div class="test">
+                  <div class="row">
+                    <div class="col-md-5">
+ <canvas id="meter" width="370" height="50"></canvas>
+                      <div class="test__view test__view--mic">
+                         
+                        <div class="test__view--column">
+                          
+                            <span class="test__step test__step--inactive dot1"></span>
+                            <span class="test__step test__step--inactive dot2"></span>
+                            <span class="test__step test__step--inactive dot3"></span>
+                            <span class="test__step test__step--inactive dot4"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot7"></span>
+                        </div>
+                        <div class="test__view--column">
+                            <span class="test__step test__step--inactive dot1"></span>
+                            <span class="test__step test__step--inactive dot2"></span>
+                            <span class="test__step test__step--inactive dot3"></span>
+                            <span class="test__step test__step--inactive dot4"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot7"></span>
+                        </div>
+                        <div class="test__view--column">
+                            <span class="test__step test__step--inactive dot1"></span>
+                            <span class="test__step test__step--inactive dot2"></span>
+                            <span class="test__step test__step--inactive dot3"></span>
+                            <span class="test__step test__step--inactive dot4"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot7"></span>
+                        </div>
+                         <div class="test__view--column">
+                            <span class="test__step test__step--inactive dot1"></span>
+                            <span class="test__step test__step--inactive dot2"></span>
+                            <span class="test__step test__step--inactive dot3"></span>
+                            <span class="test__step test__step--inactive dot4"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot5"></span>
+                            <span class="test__step test__step--inactive dot7"></span>
+                        </div> 
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-md-7">
+
+                      <h4 class="test__heading">
+                          Microphone
+                      </h4>
+
+                      <p class="test__desc">
+                          Zuuba has permissions to use your microphone
+                      </p>
+
+                      <form>
+                        <select class="test__action" name="SelectMicrophne" (change)="camerasListChange()" [(ngModel)]="selectedAudioInput">
+                          <option *ngFor="let microphone of audioInputList" value={{microphone.value}}>
+                              {{microphone.label}}
+                          </option>
+                        </select>
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-md-6">
+                
+                <!-- Test audio -->
+                <div class="test">
+                  <div class="row">
+                    <div class="col-md-5">
+
+                      <div class="test__view test__view--icon">
+                        <span class="icon cf-audio"></span>
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-md-7">
+
+                      <h4 class="test__heading">
+                          Audio Output
+                      </h4>
+                      <audio id="myAudio">
+                        <source src="../../assets/images/demoSound.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                      <p class="test__desc">
+                          Zuuba has permissions to use your Audio Output
+                      </p>
+
+                      <form>
+                          <select class="test__action" id="speaker" name="SelectedOutput" [(ngModel)]="selectedAudioOutput" (change)="audioOutputDeviceListChange()">
+                              <option *ngFor="let speaker of audioOutputList" value={{speaker.value}}>{{speaker.label}}</option>
+                          </select>
+                      </form>
+
+                      <a class="test__try test__try--audio" href="javascript:void(0)" (click)="playAudio()">
+                        <span class="cf-icon cf-play" ></span>
+                        Play Sound
+                      </a>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-md-6">
+                
+                <!-- Test Speed -->
+                <div class="test">
+                  <div class="row">
+                    <div class="col-md-5">
+
+                      <div class="test__view test__view--icon">
+                        <span class="icon cf-speed"></span>
+                      </div>
+                      
+                    </div>
+
+                    <div class="col-md-7">
+
+                      <h4 class="test__heading">
+                          Speed Test
+                      </h4>
+
+                      <p class="test__desc">
+                          Testing your connection speed…
+                      </p>
+
+                      <div class="test__try test__try--speed">
+                        <div class="download">
+                          <span  id="dwnIcon" class="icon cf-correct"></span>
+                          <div>
+                            <h5>download</h5>
+                            <span  id="Demo-1-dl-result" class="count">55</span>
+                          </div>
+                        </div>
+                        <div class="download">
+                          <span id="upIcon" class="icon cf-correct"></span>
+                          <div>
+                            <h5>upload</h5>
+                            <span id="Demo-1-ul-result" class="count">55</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="footer__view footer__view--icon">
+                    <span class="icon cf-share-screen">
+                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                    </span>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <h4 class="footer__heading">Screen Share</h4>
+                
+                <p class="footer__desc">If you are planning to present your screen, make sure you download our Screen Sharing plugin.</p>
+              </div>
+              <div class="col-md-3">
+                <button  class=" footer__button">Get Plugin</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  <!-- /Main Content -->
+
+
+<!-- end/zu-content -->
+
+<!-- <canvas id="pdf-canvas" width="600">
+ 
+
+</canvas> -->
+

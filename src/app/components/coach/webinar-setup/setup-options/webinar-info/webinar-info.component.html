@@ -1,0 +1,217 @@
+<section id="webinar-sec" class="content">
+<form id="webinar-nav" name="webinar-config" method="post" enctype="multipart/form-data" class="form signup_form"
+  accept-charset="UTF-8" ng-submit="submitSalesPage()">
+    <div class="container-fluid px-md-5 px-3">
+      <div class="collapse show xdWebinarInfo" data-parent="#pageAccordion">
+        <!-- AHMED - Add the new header -->
+        <header class="inner-header">
+          <h2 class="configureSetupForm">Webinar info</h2>
+          <button style="display:none" type="button" class="resetPreviewBtn backButton"
+            (click)="backPreview('configureSetupForm','configure','configurePreview');"><span
+              class="icon cf-arrow-right"></span> Back</button>
+        </header>
+
+        <div class="row" style="padding-top: 3% !important; padding-left: 7% !important;">
+          <!-- row start-->
+          <!-- page content start-->
+          <!-- AHMED col-xl-5 -->
+          <div class="col-xl-5 cstm-input scrollOverflow">
+            <!-- col-xl-4 start-->
+            <!-- Ahmed remove webinar info text <div class="text-left">
+          <div class="normal-title">WEBINAR INFO</div>
+        </div> -->
+
+            <p class="fs-14 mb-0">
+              <strong style="font-weight: 600; font-size: 12px; color:#363636;">Marketplace</strong>
+              <a href="javascript://" class="text-success" title="Please use marketplace for public webinar ">
+                <i class="material-icons" style="font-size: 16px;position: relative;top: 4px;left: 7%;">error_outline</i>
+              </a>
+            </p>
+            <!-- <span class="fs-10 text-muted">Loren ipsum dolor text</span> -->
+            <br>
+
+            <!-- <div class="btn-group">
+              <a href="javascript://" class="pp-Btn" (click)="setWebinarSecurity('Public','Private');" id="Public">
+                <span class="bxIcn">
+                  <i class="material-icons">public</i>
+                </span>
+                <span style="position: relative;top: 3px;">Public</span>
+              </a>
+              <a href="javascript://" class="pp-Btn active" (click)="setWebinarSecurity('Private','Public');"
+                id="Private">
+                <span class="bxIcn">
+                  <i class="material-icons">lock</i>
+                </span>
+                <span style="position: relative;top: 3px;">Private</span>
+              </a>
+              
+            </div> -->
+
+            <hr>
+
+            <br>
+
+            <!-- <div class="form-group" *ngIf="webinarMst.isPrivatePublic == 'Public'">
+              <label class="label-text">Category</label> -->
+              <!-- ng-model="webinarMst.webinarCategoryId"  -->
+
+              <!-- <select class="custom-select" name="webinar_category_select"
+                ng-options="cat.id as cat.name for cat in categoryList" id="categoryListIds">
+                <option value="">---SELECT---</option> </select>-->
+
+                <!-- <select class="custom-select"  [(ngModel)]="webinarMst.webinarCategoryId" required name="webinar_category_select" id="categoryListIds" 
+                #webinarCategoryId="ngModel" (ngModelChange)='getSubCategoryList();'
+                [value]="select">
+                  <option value="select">Select Category</option>
+                  <option *ngFor="let category of webinarCategoryList" [value]="category.id">{{category.displayName}}</option>
+                </select>
+            </div> -->
+
+
+            <!-- <div class="form-group" *ngIf="webinarMst.isPrivatePublic == 'Public'">
+              <label class="label-text">Sub-Category</label> -->
+              <!--select class="custom-select" name="webinar_sub_category_select" ng-model="webinarMst.webinarSubCategoryId" ng-options="cat.id as cat.name for cat in subCategoryList" id="subCategoryListIds" multiple rows="5">
+           </select-->
+
+              <!-- <p>Maximum allowed is 4 Sub-Category</p> -->
+              <!-- <fieldset>
+                  <div class="chips chips-initial"></div>
+                  <div class="chips">
+                      <input class="custom-class" required name="subCategory" [(ngModel)]="subCategoryChips">
+                  </div>
+              </fieldset> -->
+              <!-- [onlyFromAutocomplete]="true" -->
+              <!-- <fieldset>
+                  <tag-input [(ngModel)]="itemsList" 
+                    placeholder="enter sub-category" name="itemsList" [maxItems]='4'>
+                  <tag-input-dropdown
+                    [autocompleteItems]="items"
+                    [showDropdownIfEmpty]="true"
+                    [dynamicUpdate]="false"
+                  >
+                  </tag-input-dropdown>
+                </tag-input>
+              </fieldset>
+            </div> -->
+
+            <div class="form-group">
+              <label class="label-text">Webinar title</label>
+              <span class="chars-count" id="webinarTitleCharCount">0/50</span>
+              <!-- ng-model="webinarMst.webinarTitle" -->
+              <input type="text" id="webinarTitle" name="webinarTitle" class="form-control"
+                [(ngModel)]="webinarMst.webinarTitle" (ngModelChange)="keyupFunction('webinarTitleCharCount', webinarMst.webinarTitle, 'webinarTitleView');" maxlength="50"
+                placeholder="Catchy Webinar Title" #webinarTitle="ngModel" required>
+
+                <div *ngIf="webinarTitle.invalid && (webinarTitle.dirty || webinarTitle.touched)"
+                      class="validationError">
+
+                    <div *ngIf="webinarTitle.errors.required">
+                      *Webinar Title is required.
+                    </div>
+                  </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="label-text">Webinar description</label>
+              <span class="chars-count" style="position: relative; bottom: 25px;" id="webinarDescriptionCharCount">0/200</span>
+              <br />
+              <textarea rows="4" cols="50" name="webinar-desc" class="webinar-desc-ta" #webinarDesc="ngModel" 
+                        [(ngModel)]="webinarMst.webinarDesc"
+                        (ngModelChange)="keyupFunction('webinarDescriptionCharCount', webinarMst.webinarDesc, 'webinarDescView');"></textarea>
+              <div *ngIf="webinarDesc.invalid && (webinarDesc.dirty || webinarDesc.touched)"
+                      class="validationError">
+
+                <div *ngIf="webinarDesc.errors.required">
+                  *Webinar Description is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- <p class="col-sm-offset-3 help-block error"
+              ng-if="cat.selected.length == 0 && webinarMst.isPrivatePublic == 'Public'">please select at least one sub
+              category</p>
+            <p class="col-sm-offset-3 help-block error"
+              ng-if="cat.selected.length > 4 && webinarMst.isPrivatePublic == 'Public'">Not more than 4 sub categories
+              allowed to be added</p> -->
+
+            <p class="label-text text-muted">Webinar Card Image</p>
+
+            <!-- <div class="uploadBx162 dragUploadBx text-center mb-2">
+          <span class="cf-icon cf-image"></span>
+      <span class="text">Drag Image to Upload or <a href="#" onclick="$('#webinarimg').click();">Click Here</a></span>
+        </div>
+  
+    <div class="form-group">
+           <div class="custom-file">
+                <div class="input-group">
+                      <div class="custom-file">
+                           <input type="file" class="custom-file-input" name="webinar_image" id="webinarimg" accept="image/x-png,image/gif,image/jpeg" onchange="loadWebinarFile(event);"  demo-file-model="webinarImageFile" style="display:none">
+                       </div>
+                 </div>
+           </div>
+       </div> -->
+            
+            <app-upload-file [module]="webinarInfo" (file)="onFileUpload($event)"></app-upload-file>
+
+            <br>
+
+            <div class="clearfix"></div>
+          </div><!-- col-xl-4 start-->
+          <!-- page content close-->
+
+          <!-- col-xl-8 start-->
+          <!-- AHMED col-xl-7 -->
+          <div class="col-xl-7">
+            <div class="livePreviewbox">
+              <!-- livePreviewbox start-->
+              <!-- AHMED remove live preview bar -->
+              <!-- <a href="javascript://" class="btn-block btn btn-dark-blue mt-0 btn-livepreview"><i class="material-icons fs-14 mr-2">remove_red_eye</i> Live preview</a> -->
+              <div class="live-box">
+                <!-- live-box start --->
+                <div class="liveHtmlFullPage viewzoom-2">
+                  <!-- liveHtmlFullPage start --->
+                  <div class="stack-section stack-blue section-padding pb-0 ng-scope">
+                    <div class="container">
+                      <div class="row">
+                        <!-- AHMED col-md-5 -->
+                        <div class="col-md-5 mx-auto">
+                          <div class="stack">
+                            <div class="stackImg">
+                              <!-- <img src="" class="img-fluid" id="webinarImageView"> -->
+                              <!-- {{webinarMst.webinarCardImgUploadPath}} -->
+                              <div *ngIf="croppedImage"><img [src]="croppedImage" /></div>
+                              <div *ngIf="!croppedImage"><img class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg" alt="webinar-thumbnail" id="quizImagePreview"></div>
+                            </div>
+                            <div class="color-text">
+                              <!-- AHMED add class text-uppercase -->
+                              <span class="subtitle text-uppercase">Webinar</span>
+                              <span class="share">
+                                Share
+                              </span>
+                            </div>
+                            <h4 class="stack-title" id="webinarTitleView"></h4>
+                            <div [innerHTML]="webinarMst.webinarDesc | safeHtml" class="normal-text" id="webinarDescView"></div>
+                            <a href="javascript//" class="btn btn-success">TAKE NOW</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- liveHtmlFullPage close --->
+              </div><!-- live-box close --->
+            </div>
+          </div>
+
+          <!-- col-xl-8 close-->
+        </div> <!-- row close-->
+      </div>
+    </div>
+</form>
+</section>
+<div style="position: relative; z-index: 99999;">
+    <div class="save-btn">
+      <a href="javascript" data-toggle="collapse" class="btn btn-success btn-sm float-left"
+        (click)="saveWebinarInfo();">Save & Next</a>
+    </div>
+  </div>

@@ -1,0 +1,70 @@
+.zu-image, .zu-share-fb, .zu-share-tw, .zu-coaching-white, .zu-coaching, 
+.zu-searching-magnifying-glass, .zu-help, .zu-home-white, .zu-home, .zu-action-plans, 
+.zu-analysis-white, .zu-analysis, .zu-contact-white, .zu-contact, .zu-facebook, 
+.zu-google, .zu-marketing-white, .zu-markting, .zu-website-white, .zu-website, 
+.zu-setting-white, .zu-add, .zu-link, .zu-preview, .zu-move-arrows, 
+.zu-public, .zu-split, .zu-correct-dark, .zu-correct, .zu-info, 
+.zu-private, .zu-public-white, .zu-arrow-down, .zu-trash-green, .zu-trash, 
+.zu-private-white, .zu-close-dark, .zu-close, .zu-arrow-right-white
+{ vertical-align: middle;display: inline-block; background: url('../assets/icons/sprite.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+ 
+.zu-image { background-position: -10px -0px; width: 58px; height: 46px; }
+.zu-share-fb { background-position: -10px -56px; width: 30px; height: 30px; }
+.zu-share-tw { background-position: -10px -96px; width: 30px; height: 30px; }
+.zu-coaching-white { background-position: -10px -136px; width: 21px; height: 22px; }
+.zu-coaching { background-position: -10px -168px; width: 21px; height: 22px; }
+.zu-searching-magnifying-glass { background-position: -10px -200px; width: 20px; height: 20px; }
+.zu-help { background-position: -10px -230px; width: 19px; height: 19px; }
+.zu-home-white { background-position: -39px -230px; width: 19px; height: 16px; }
+.zu-home { background-position: -39px -256px; width: 19px; height: 16px; }
+.zu-action-plans { background-position: -40px -200px; width: 18px; height: 18px; }
+.zu-analysis-white { background-position: -10px -259px; width: 18px; height: 18px; }
+.zu-analysis { background-position: -38px -282px; width: 18px; height: 18px; }
+.zu-contact-white { background-position: -10px -287px; width: 18px; height: 12px; }
+.zu-contact { background-position: -10px -309px; width: 18px; height: 12px; }
+.zu-facebook { background-position: -38px -310px; width: 18px; height: 18px; }
+.zu-google { background-position: -10px -331px; width: 18px; height: 18px; }
+.zu-marketing-white { background-position: -38px -338px; width: 18px; height: 18px; }
+.zu-markting { background-position: -10px -359px; width: 18px; height: 18px; }
+.zu-website-white { background-position: -38px -366px; width: 18px; height: 16px; }
+.zu-website { background-position: -10px -387px; width: 18px; height: 16px; }
+.zu-setting-white { background: url(../assets/icons/pic.svg); width: 16px; height: 16px; }
+.zu-add { background-position: -41px -162px; width: 15px; height: 15px; }
+.zu-link { background-position: -41px -187px; width: 15px; height: 9px; }
+.zu-preview { background-position: -38px -392px; width: 14px; height: 9px; }
+.zu-move-arrows { background-position: -38px -411px; width: 13px; height: 13px; }
+.zu-public { background-position: -10px -413px; width: 13px; height: 13px; }
+.zu-split { background-position: -33px -434px; width: 13px; height: 13px; }
+.zu-correct-dark { background-position: -10px -436px; width: 12px; height: 9px; }
+.zu-correct { background-position: -10px -455px; width: 12px; height: 9px; }
+.zu-info { background-position: -32px -457px; width: 11px; height: 11px; }
+.zu-private { background-position: -10px -474px; width: 11px; height: 14px; }
+.zu-public-white { background-position: -31px -478px; width: 11px; height: 11px; }
+.zu-arrow-down { background-position: -10px -498px; width: 10px; height: 7px; }
+.zu-trash-green { background-position: -30px -499px; width: 10px; height: 13px; }
+.zu-trash { background-position: -10px -515px; width: 10px; height: 13px; }
+.zu-private-white { background-position: -30px -522px; width: 9px; height: 12px; }
+.zu-close-dark { background-position: -50px -56px; width: 8px; height: 8px; }
+.zu-close { background-position: -50px -74px; width: 8px; height: 8px; }
+.zu-arrow-right-white { background-position: -50px -92px; width: 6px; height: 9px; }
+
+.zu-test {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  position: relative;
+  vertical-align: bottom;
+  margin-right: 10px;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    border-left: 4px solid #fff;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+}

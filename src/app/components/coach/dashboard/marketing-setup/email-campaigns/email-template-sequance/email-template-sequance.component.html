@@ -1,0 +1,139 @@
+
+    <div class="page-wrapper">
+      <!-- start section header -->
+      <section class="header" *ngIf="campaignType == 1">
+          <div class="row">
+              <div id="back" class="d-inline col-lg-1 p-0" >
+                  <button type="button" class="btn btn-light rounded-0">
+                          <img src="./assets/icons/ic_back.svg" >
+                      Back
+                  </button>
+              </div>
+              <div id="build" class="d-inline col-lg-10 p-0 border-0 text-center" style=" max-width: 90%;">
+                  <div style="padding-top:10px;">
+                      <h2 class="d-inline">Email Sequence One</h2>
+                  </div>
+              </div>
+            
+          </div>  
+      </section>
+      <!-- end section header -->
+      <!-- start section content -->
+      <section class="content">
+              <div class="row" id="main">
+                 
+                  <!-- start  main-content -->
+                  <div class="main-sequence2 main-sequence22" >
+                          <div class="content text-center">
+                              <!-- start  header -->
+                                  <div class="header row" *ngIf="campaignType == 1">
+                                   
+                                      <button type="button" class="btn btn-light rounded-0">
+                                          <img src="./assets/icons/ic_back.svg" > Back
+                                      </button>  
+                                  </div>
+                              <!-- end  header -->
+                              
+                              <!-- start  secand -->
+                              <table style="width: 100%;">
+                                  <thead>
+                                      <tr>
+                                          <th style="text-align: left;padding-left: 10px;">Email Template</th>
+                                          <th></th>
+                                          <th></th>
+                                          <th></th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td colspan="3" style="text-align: left;padding-bottom: 10px;padding-left: 10px;color: #bfb9b9;
+                                          font-size: 14px;">Promote a collection, announce a special offer, send a newsletter and more. </td>
+                                          <td colspan="2" style="padding-bottom: 20px; text-align: right;padding-right: 13px;"> <button class="startFronScrarch" (click)="editEmail(null)" style="width: 40%;">Strat from scratch</button></td>
+                                       </tr>
+                                       <tr>
+                                           <td *ngFor="let template of allEmailTemplate;index as i" (click)="editEmail(template)" style="width: 20%;"
+                                           >
+                                            <div style="cursor: pointer;display: inline-block;text-align: center;" class="img">
+                                                <img src={{template.imagePath}} class="i" style="width: 100%;
+                                                height: 180px !important;
+                                                max-width: 100% !important;box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);">
+                                                <p style="padding-top: 10px;font-size: 14px;">{{template.emailTitle}}</p>
+                                              </div>
+                                           </td>
+                                       </tr>
+                                  </tbody>
+                              </table>
+                              <!-- <div class="secand">
+                                  <h1>Email Templates</h1>
+                                  <div class="row col-lg-12 p-0 m-0 ">
+                                      <div class="col-lg-9 p-0" style="max-width: 70.7%;text-align: left;">
+                                          <p>Promote a collection, announce a special offer, send a newsletter and more. </p>
+                                      </div>
+                                      <div class="col-lg-4 p-0" style="text-align: right;max-width: 29.3% !important;border-right: none;">
+                                          <button (click)="editEmail(null)">Strat from scratch</button>
+                                      </div>
+                                  </div>
+                                  <div>
+                                    <div style="cursor: pointer;display: inline-block" class="img">
+                                        <img src={{template.imagePath}} class="i" >
+                                        <p >{{template.emailTitle}}</p>
+                                      </div>
+                                    
+                                  </div>
+                              </div> -->
+                              <!-- end secand -->
+                              <!-- start  last -->
+                              <div class="last" style="padding-left: 10px; padding-right: 10px;">
+                                  <h1>Recently Edited Emails</h1>
+                                  <div class="row col-lg-12 p-0 m-0 mt-4">
+                                      <div class="col-lg-6" *ngFor="let email of recentlyEditedEmail" style="padding-top: 10px !important;" (click)="useEmailTemplate(email)"
+                                      [ngClass]="{'recentlyEditedEmailLeft': email.direction == 'Left', 'recentlyEditedEmailRight': email.direction == 'Right'} ">
+                                          <div class="alboum shadow rounded" style="width: 100%;">
+                                              <img src={{email.templateImage}}> 
+                                              <div  class="d-inline-block">
+                                                  <h3 *ngIf="campaignType == 1">{{email.emailTitle}}</h3>
+                                                  <h3 *ngIf="campaignType == 2">{{email.emailBroadcastTitle}}</h3>
+                                                  <h5>{{email.lastUpdate | date: 'MMM d, y, h:mm a' }}</h5>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- <div class="col-lg-6 col-sm-6 p-0">
+                                          <div class="alboum float-right shadow rounded">
+                                              <img src="./assets/icons/avatar-01.jpg"> 
+                                              <div  class="d-inline-block">
+                                                  <h3>Email Broadcast Two</h3>
+                                                  <h5>Aug 6, 2018 2:55 PM</h5>
+                                              </div>
+                                          </div>
+                                      </div> -->
+                                  </div>
+                                  <!-- <div class="row col-lg-12 p-0 m-0 mt-4">
+                                      <div class="col-lg-6 col-sm-6 p-0">
+                                          <div class="alboum shadow rounded">
+                                              <img src="./assets/icons/avatar-01.jpg"> 
+                                              <div  class="d-inline-block">
+                                                  <h3>Email Broadcast Two</h3>
+                                                  <h5>Aug 6, 2018 2:55 PM</h5>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-6 col-sm-6 p-0">
+                                          <div class="alboum float-right shadow rounded">
+                                              <img src="./assets/icons/avatar-01.jpg"> 
+                                              <div  class="d-inline-block">
+                                                  <h3>Email Broadcast Two</h3>
+                                                  <h5>Aug 6, 2018 2:55 PM</h5>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div> -->
+                              </div>
+                              <!-- end last -->
+                          </div>
+                  </div>
+                  <!-- end  main-content -->
+              </div>  
+      </section>
+      <!-- end section content -->
+  </div>

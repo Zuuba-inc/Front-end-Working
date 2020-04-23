@@ -1,0 +1,109 @@
+#mapping {
+  @extend #questions;
+
+  .setting {
+    height: 100vh !important;
+  }
+
+  .live-preview {
+    height: 100vh !important;
+    box-shadow: none;
+    margin: 0;
+    background-color: #fff;
+
+    &__headers {
+      padding-top: 0;
+
+      &--title {
+        text-align: center;
+        background-color: #fff;
+        text-transform: uppercase;
+      }
+    }
+
+    &__maps {
+      @include component_mapping-branching;
+      padding: 15px;
+      
+      &--outcomes {
+        margin: 24px 0;
+        z-index: 555;
+        position: relative;
+
+        .outcome {
+          border: $border;
+          border-radius: 2px;
+          padding: 12px 20px;
+          @include text(12px, 600, left);
+          color: $text-neu;
+          position: relative;
+          min-height: 62px;
+          margin-bottom: 20px;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+
+          &:not(.connected) {
+            line-height: 31px;
+          }
+
+          .answer-mark {
+            position: static;
+          }
+
+          @include component_drag-drop;
+        }
+      }
+    }
+
+    .answer {
+      @include media-breakpoint-down(lg) {
+        .icon {
+          left: 0;
+        }
+      }
+    }
+
+    .connections {
+      position: relative;
+
+      @include media-breakpoint-down(lg) {
+        position: absolute;
+        height: 100Vh;
+        width: 100%;
+        margin-top: -210px;
+      }
+
+      .connect {
+        width: 100%;
+        height: 1px;
+        position: absolute;
+
+        @include media-breakpoint-down(lg) {
+
+          transform: rotateZ(0deg) !important;
+          width: 1px !important;
+          height: 100%;
+          left: -20px;
+          top: 0;
+
+          &::after,
+          &::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 1px;
+            background-color: inherit;
+          }
+
+          &::after {
+            top: 0;
+          }
+
+          &::before {
+            bottom: 0;
+          }
+
+        }
+      }
+    }
+  }
+}

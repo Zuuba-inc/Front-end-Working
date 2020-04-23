@@ -1,0 +1,231 @@
+<div class="row funnel-step webinar" id="{{data.steps.stepDetailTitle}}" style="margin-top: 70px !important;">
+  <!-- <span class="funnel-add"></span> -->
+  <div class="col-12 d-flex card-head">
+    <p class="funnel-step__side-info">{{data.steps.stepNo}}</p>
+    <h6 class="funnel-step__title">{{data.steps.stepDetailTitle}}</h6>
+    <div class="menu">
+      <button class="menu-btn" (mouseover)="clazz='showOptions'" (mouseout)="clazz='hideOptions'">
+        <span class="zu-dotted-menu"></span>
+      </button>
+
+      <ul class="dropdown-menu" (mouseover)="clazz='showOptions'" (mouseout)="clazz='hideOptions'" [ngClass]="clazz">
+        <li class="item" (click)="navigateToWebinarSetup()">Edit</li>
+        <!-- <li class="item">start a/b testing</li> -->
+        <li class="item"> Delete</li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="col-md-5">
+    <!-- <div class="card-img">
+                  <img src="assets/images/joel-filipe-196000-unsplash.jpg" alt="img" class="img-fluid"/>
+                </div> -->
+    <!-- <span class="card-icon zu-multimedia" style="display: block;height: 32vh;"></span> -->
+    <span *ngIf="webinar.webinarCardImgUploadPath == null; else webinarImage" class="{{data.steps.stepDetailImage}}"
+      style="display: block;height: 18vh;"></span>
+    <ng-template #webinarImage>
+      <div class="funnel__img">
+        <img src="{{webinar.webinarCardImgUploadPath}}" alt="funnel Thumbnail" style="display: block;height: 18vh;">
+      </div>
+    </ng-template>
+  </div>
+  <div class="col-md-7">
+    <div class="card-content">
+      <ul class="funnel__status--info">
+        <li *ngIf="webinar.isPrivatePublic == 'Public' || webinar.isPrivatePublic == null ">
+          <span class="icon zu-public"></span>
+          public
+        </li>
+        <li *ngIf="webinar.isPrivatePublic == 'Private'">
+          <span class="icon zu-private"></span>
+          private
+        </li>
+        <li>
+          <span class="dropdown-btn" (click)="toggleQuickLinks()">
+            <span class="icon zu-attached"></span>
+            Quick Links
+          </span>
+
+          <ul class="dropdown-menu links-dropdown"
+            [ngClass]="{'showOptions': showQuickLinks, 'hideOptions': !showQuickLinks}">
+            <li class="item" (click)="showPage('Registration')">Registration page
+              <span class="icon zu-document"></span>
+              <span class="icon zu-forward"></span>
+            </li>
+            <li class="item" (click)="showPage('Thankyou')">Thank you page
+              <span class="icon zu-document"></span>
+              <span class="icon zu-forward"></span>
+            </li>
+            <li class="item" (click)="showPage('Webinar')">Webinar page
+              <span class="icon zu-document"></span>
+              <span class="icon zu-forward"></span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <strong *ngIf="webinar.webinarTitle == null || webinar.webinarTitle == '' ; else webinarTitle">Test Your Webinar
+        Title More</strong>
+      <ng-template #webinarTitle>
+        <strong>{{webinar.webinarTitle}}</strong>
+      </ng-template>
+
+      <div class="actions-container">
+        <span class="{{'icon ' + aIcon.automationThenDtl.className}}" *ngFor="let aIcon of actionIcons">
+          <span class="paths" *ngIf="aIcon.automationThenDtl.className && !aIcon.automationThenDtl.className.includes('video'); else vidSpan" >
+            <span class="path1" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path2" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path3" (click)="editAutomationRule(aIcon)"></span>
+          </span>
+          <ng-template #vidSpan>
+            <span class="path1" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path2" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path3" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path4" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path5" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path6" style="color: #f7f7f7" (click)="editAutomationRule(aIcon)"></span>
+            <span class="path7" (click)="editAutomationRule(aIcon)"></span>
+          </ng-template>
+        </span>
+
+        <button class="add" (click)="openModel()">+</button>
+      </div>
+      <div class="quiz-btns on-bottom" style="margin-bottom: -1.5pc">
+        <button class="primary-btn" (click)="navigateToWebinarSetup()">
+          <span *ngIf="editFunnel == false; else editWebinar">Create Webinar</span>
+          <ng-template #editWebinar>
+            Edit Webinar
+          </ng-template>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 text-center">
+    <ul class="funnel__info--analytics">
+      <li class="funnel__info--analytics item">
+        <span class="num">{{webinar.noOfRegisteredUser}}</span>
+        Registred
+      </li>
+      <li class="funnel__info--analytics item">
+        <span class="num">{{webinar.noOfJoinee}}</span>
+        Showed
+      </li>
+      <li class="funnel__info--analytics item">
+        <span class="num">{{webinar.noOfWatchedUsers}}</span>
+        Watched
+      </li>
+      <li class="funnel__info--analytics item">
+        <span class="num">{{webinar.noOfWatchReplayUser}}</span>
+        Watched Replay
+      </li>
+      <li class="funnel__info--analytics item">
+        <span class="num">{{webinar.noOfActionUsers}}</span>
+        action
+      </li>
+    </ul>
+  </div>
+  <div class="seperatorLine"></div>
+</div>
+
+<!-- The Modal -->
+<!-- <div id="autoMationRulesWebinar" class="modal"> -->
+
+  <!-- Modal content -->
+  <!-- <div class="modal-content">
+    <div class="modal-header">
+      <p style="font-size: larger;">New Automation</p>
+      <app-message-popup
+                [popUpMessage]="message" >
+      </app-message-popup>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group">
+          <label class="label-text">When</label>
+          <div class="dropdown">
+            <input [disabled]="this.automationRule.automationWhenDtl.description != null" (focus)="showWhenDropDown()" (blur)="showWhenDropDown()"
+              class="form-control dropbtn" type="text" name="whenRule" [(ngModel)]="this.automationRule.automationWhenDtl.description">
+            <div id="whenDropDownWebinar" style="display: none" class="dropdown-content">
+              <dl *ngFor="let when of whenRules">
+                <dt>{{when.whenTitle}}</dt>
+                <dd *ngFor="let aDWDesc of when.autoDtlDesc"> {{aDWDesc.description}}</dd>
+              </dl>
+            </div>
+            <br />
+            <div class="dropdown">
+              <input [disabled]="webinar != null" class="form-control dropbtn" type="text" name="whenRuleFor" [(ngModel)]="webinar.webinarTitle">
+            </div>
+          </div>
+        </div>
+          <div class="form-group">
+            <label class="label-text">Then</label>
+            <div class="dropdown">
+              <input  (focus)="showThenDropDown()"
+                class="form-control dropbtn" type="text" name="thenRule" [(ngModel)]="automationRule.automationThenDtl.description">
+              <div id="thenDropDownWebinar" class="dropdown-content" style="display: none">
+                <dl *ngFor="let then of thenRules">
+                  <dt>{{then.whenTitle}}</dt>
+                  <dd *ngFor="let aDWDesc of then.autoDtlDesc" (click)="selectThenRun(aDWDesc)"> {{aDWDesc.description}}</dd>
+                </dl>
+
+              </div>
+            </div>
+            <br /> -->
+            <!-- <div class="dropdown" id="thenRuleForDiv" style="display: none"> -->
+              <!-- <input class="form-control dropbtn" type="text" name="whenRule1" (focus)="getWebinarList()" value="Form is submitted" [(ngModel)]="thenRuleFor">
+              <div class="dropdown-content" id="thenRuleWebinarList" style="display: none">
+                  <span *ngFor="let webinar of webinarListForThenRule" (click)="selectWebinar(webinar)">{{webinar.webinarTitle}}</span>
+                 
+              </div> -->
+              <!-- <ng-select [items]="webinarListForThenRule"
+                      bindLabel="webinarTitle"
+                      autofocus
+                      bindValue="id"
+                      [(ngModel)]="thenRuleFor">
+              </ng-select>
+            </div> -->
+            <!-- <ng-select [items]="webinarListForThenRule"
+                    bindLabel="webinarTitle"
+                    bindValue="id"
+                    [(ngModel)]="thenRuleFor.webinarTitle">
+              </ng-select> -->
+              <!-- <div class="dropdown" id="thenRuleForDiv" *ngIf="automationRule.automationThenDtl.description">
+                <ng-select 
+                      [(ngModel)]="selectedRule"
+                      [items]="thenRuleDataTags"
+                      placeholder="{{automationRule.automationThenDtl.description}}"
+                      bindLabel="tagName"
+                      autofocus
+                      bindValue="id"
+                      [addTag]="onAddThenDataTagRef"
+                      addTagText="Create"
+                      (change)="onThenDataChange()">
+                </ng-select>
+              </div>
+              <app-dropdown
+                [dropdownData]="thenRuleData" 
+                (selectedRuleOP)="onSelectedRule($event)">
+              </app-dropdown>
+            </div>
+          </div>
+
+        </div>
+
+      <div class="modal-footer">
+        <button class="modelButton" align="middle" type="button" (click)="saveAutoMationRule()">
+          Save
+        </button>
+        <button  class="modelButton" align="right" type="button" (click) = "openModel(funnel)">
+            Cancel
+          </button>
+      </div>
+    </div>
+
+  </div> -->
+  <!-- The Modal -->
+  <app-message-popup *ngIf="showPopUpMessage" [popUpMessage]="message">
+    </app-message-popup>
+  <app-automation-rules 
+    *ngIf="showAutomationRulesModal"
+    [data]="automationRuleData" (savedRules)="onSavedRules($event)"></app-automation-rules>

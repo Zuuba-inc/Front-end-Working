@@ -1,0 +1,494 @@
+<div class="page-wrapper">
+    <!-- start section header -->
+    <section class="header" style="z-index: 1;position: fixed;width: 100vw;">
+        <div class="row" style="border-bottom: 1px solid #E1E1E1;">
+            <div id="back" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light rounded-0" style="cursor: pointer;">
+                    <img src="assets/icons/ic_back.svg">
+                    Back
+                </button>
+            </div>
+            <div id="build" class="d-inline col-lg-10 p-0 border-0 text-center">
+                <div style="padding-top:10px;">
+                    <span tooltip="Click to rename email name" id="emailTitle"
+                        style="display: inline-block;width: 30%;border-bottom: none;text-align: left;">
+                        <h2 class="d-inline" id="templateTitleText" contenteditable="true">
+                            Email Number one</h2>
+
+                        <button id="emailTitleEditButton" class="pencil"
+                            style="background: none;border: none;margin: 0;padding: 0;width: 30px;float:right;display: none; ">
+                            <img id="editTitleImage" style="max-width: 16px !important;
+                    max-height: 16px !important;" src="assets/icons/pencil-edit-button (1).svg">
+
+                        </button>
+                    </span>
+
+                </div>
+            </div>
+
+            <div id="preview" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light" style="cursor: pointer;">Preview</button>
+            </div>
+        </div>
+    </section>
+    <!-- end section header -->
+
+
+    <section class="content" style="position: relative !important; top: 50px !important;">
+        <div class="row" id="main">
+            <!-- start  sidepar -->
+            <div class="col-lg-3 sidepar" style="position: fixed;left: 0 !important;z-index: 1;">
+                <div class="row">
+                    <div class=" col-lg-4 d-inline" style="cursor: pointer;">
+                        <img id="addTabImage" alt="" src="assets/icons/ic_addelements_on.svg">
+                        <h3>Add</h3>
+                    </div>
+                    <div class=" col-lg-4 d-inline" style="cursor: pointer;">
+                        <img id="themesTabImage" alt="" src="assets/icons/ic_themes_off.svg">
+                        <h3>Themes</h3>
+                    </div>
+                    <div style="cursor: pointer;" class=" col-lg-4 d-inline border border-0">
+                        <img id="backgroundTabImage" alt="" src="assets/icons/ic_background_off.svg">
+                        <h3>Background</h3>
+                    </div>
+                </div>
+
+                <div class="list">
+                    <h2>ADD ELEMENTS</h2>
+                    <ul>
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_elements_text.svg">
+                            <h5 class="d-inline">Text</h5>
+                        </li>
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_elements_logo.svg">
+                            <h5 class="d-inline">Logo</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddImage']" -->
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_elements_image.svg">
+                            <h5 class="d-inline">Image</h5>
+                        </li>
+                        <!-- (click)="setActiveSB('AddButton')" [routerLink]="['/AddButton']"  -->
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_element_button.svg">
+                            <h5 class="d-inline">Button</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddColumn']" -->
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_element_column.svg">
+                            <h5 class="d-inline">Column</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddSpacer']" -->
+                        <li>
+                            <img class="d-inline" src="assets/icons/ic_element_spacer.svg">
+                            <h5 class="d-inline">Spacer</h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end  sidepar -->
+
+            <!-- start  main-content theme1 -->
+            <div class="col-lg-9 main-content theme1" style=" display: none;position: relative;overflow: scroll;max-height: 95vh;left: 25.5%">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderEmailFrom"><b>Add Subject</b></span>
+                            <img id="openPreheaderDiv" style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content text-center">
+                    <!-- start  first -->
+                    <div class="first">
+                        <h1>FOOD & DRINKS</h1>
+                       
+                    </div>
+                    <div class="join">
+                        <p style="margin-top: 0px;color: black;font-weight: bold;"> 
+                            GOOD TO START NOW
+                        </p>
+                    </div>
+                    <div class="main-img">
+                        <img alt="" src="assets/images/emailTemplateImages/template1img1.png">
+                    </div>
+                    <div class="join">
+                        <p>
+                            "Have a fun or inspirational quote? Encourage people to join your 
+                            event with catchy text that gets people clicking"
+                        </p>
+                    </div>
+                    <div>
+                         <button type="button" class="btn btn-warning">
+                            <h5>JOIN NOW</h5>
+                        </button>
+                    </div>
+                    
+                    <!-- end  first -->
+                    <!-- start  secand -->
+                    <div class="secand">
+                        <div class="join">
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="col-lg-6 d-inline m-0 p-0 " style="max-width: 50% !important">
+                                    <img src="assets/images/emailTemplateImages/template1img2.png">
+                                </div>
+                                <div class="col-lg-6 d-inline m-0 p-0" style="
+                                      padding-left: 16px !important;max-width: 50%;">
+                                     <img src="assets/images/emailTemplateImages/template1img3.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="join">
+                        <p>
+                            Tell your audience what you want them to know, how to take action and where 
+                            to teach you. Use a catchy text and lively images that get people clicking.
+                        </p>
+                    </div>
+                    <div class="spacer-item">
+                        <!-- contenteditable="true" -->
+                    </div>
+                    <!-- end  secand -->
+                    <!-- start  last -->
+                    <div class="last">
+                        <div class="row">
+                            <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important">
+                                <span>Your street Address</span>
+                                <span>Your Phone Number</span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;">
+                                <span>
+                                    <a href=#>Check out my website</a>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;">
+                                <span class="share">Share</span>
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/pinterest.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-fb.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-tw.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  last -->
+                </div>
+            </div>
+            <!-- end  main-content theme1-->
+
+            <!-- start  main-content theme2 -->
+            <div class="col-lg-9 main-content theme2"  detect-scroll (onScroll)="handleScroll($event)" style="position: relative;overflow: scroll;max-height: 95vh;left: 25.5%">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderEmailFrom"><b>Add Subject</b></span>
+                            <img id="openPreheaderDiv" style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content text-center">
+                    <!-- start  first -->
+                    <div class="first">
+                        <h1>SPECIAL OFFER</h1>
+                       
+                    </div>
+                    <div class="main-img">
+                        <img alt="" src="https://coachforceprod.s3.amazonaws.com/Default_Images/template2img1.png">
+                    </div>
+                    <div class="join">
+                        <p>
+                            Every Email has a main message. Tell your audience what you want them to know.
+                            How to take action and where to reach you
+                        </p>
+                    </div>
+                    <div>
+                         <button type="button" class="btn btn-warning">
+                            <h5>JOIN NOW</h5>
+                        </button>
+                    </div>
+                    <div class="join">
+                        <p style="font-size: 24px">
+                            "Engage your audience. Use lively images and catchy text"
+                        </p>
+                    </div>
+                    <!-- end  first -->
+                    <div class="main-img">
+                        <img style="height: 50% !important;" alt="" src="https://coachforceprod.s3.amazonaws.com/Default_Images/template2img2.png">
+                    </div>
+                    <div class="spacer-item">
+                        <!-- contenteditable="true" -->
+                    </div>
+                    <!-- end  secand -->
+                    <!-- start  last -->
+                    <div class="last">
+                        <div class="row">
+                            <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important">
+                                <span>Your street Address</span>
+                                <span>Your Phone Number</span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;">
+                                <span>
+                                    <a href=#>Check out my website</a>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;">
+                                <span class="share" style="display: inline-flex">Share</span>
+                                <div class="shareIcons"><img src="https://coachforceprod.s3.amazonaws.com/Default_Images/ic_facebook.png"></div>
+                                <div class="shareIcons"><img src="https://coachforceprod.s3.amazonaws.com/Default_Images/ic_facebook.png"></div>
+                                <div class="shareIcons"><img src="https://coachforceprod.s3.amazonaws.com/Default_Images/ic_facebook.png"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  last -->
+                </div>
+            </div>
+            <!-- end  main-content theme2-->
+
+             <!-- start  main-content theme3 -->
+             <div class="col-lg-9 main-content theme3" style="display: none; position: relative;overflow: scroll;max-height: 95vh;left: 25.5%">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderEmailFrom"><b>Add Subject</b></span>
+                            <img id="openPreheaderDiv" style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content text-center">
+                    <!-- start  first -->
+                    <div class="first">
+                        <h1>Daily Special</h1>
+                        <div class="spacer-item-title"></div>
+                    </div>
+                    <div class="main-img">
+                        <img alt="" src="assets/images/emailTemplateImages/template3img1.png">
+                    </div>
+                    <div class="join">
+                        <p>
+                            Every Email has a main message. Tell your audience what you want them to know.
+                            How to take action and where to reach you
+                        </p>
+                    </div>
+                    <div>
+                         <button type="button" class="btn btn-warning">
+                            <h5>ORDER NOW</h5>
+                        </button>
+                    </div>
+                    <!-- start  secand -->
+                    <div class="secand">
+                        <div class="join">
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="col-lg-6 d-inline m-0 p-0 " style="max-width: 50% !important">
+                                    <img src="assets/images/emailTemplateImages/template3img2.png">
+                                </div>
+                                <div class="col-lg-6 d-inline m-0 p-0" style="
+                                      padding-left: 16px !important;max-width: 50%;">
+                                      <p>
+                                        This is a great place to engage your audience. Use lively images
+                                        and catchy text to grab people's attention and get them clicking
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  secand -->
+                    <!-- start  last -->
+                    <div class="last">
+                        <div class="row">
+                            <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important">
+                                <span>Your street Address</span>
+                                <span>Your Phone Number</span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;">
+                                <span>
+                                    <a href=#>Check out my website</a>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;">
+                                <span class="share">Share</span>
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/pinterest.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-fb.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-tw.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  last -->
+                </div>
+            </div>
+            <!-- end  main-content theme3-->
+
+            <!-- start  main-content theme4 -->
+            <div class="col-lg-9 main-content theme4" style="display: none; position: relative;overflow: scroll;max-height: 95vh;left: 25.5%">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderEmailFrom"><b>Add Subject</b></span>
+                            <img id="openPreheaderDiv" style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content text-center">
+                    <!-- start  first -->
+                    <div class="first">
+                        <h1>DON'T MISS OUT</h1>     
+                    </div>
+                    <div class="join">
+                        <p style="font-size: 44px;color: #cc4444;font-weight: bold;">20% Off</p>     
+                    </div>
+                    <div class="main-img">
+                        <img alt="" src="assets/images/emailTemplateImages/template4img1.png">
+                    </div>
+                    <div class="join">
+                        <p>
+                            Celebrate the season be promoting a new collection. Choose a layout you 
+                            love. then add lively images, catchy text and a call to action button to make 
+                            it your own. 
+                        </p>
+                    </div>
+                    <div>
+                         <button type="button" class="btn btn-warning">
+                            <h5>ORDER NOW</h5>
+                        </button>
+                    </div>
+                    <!-- start  secand -->
+                    <div class="secand">
+                        <div class="join">
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="col-lg-6 d-inline m-0 p-0 " style="max-width: 50% !important">
+                                    <img src="assets/images/emailTemplateImages/template4img2.png">
+                                </div>
+                                <div class="col-lg-6 d-inline m-0 p-0" style="
+                                      padding-left: 16px !important;max-width: 50%;">
+                                      <img style="height: 50% !important; max-height: 100%;" src="assets/images/emailTemplateImages/template4img3.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  secand -->
+                    <div class="join">
+                        <p style="font-size: 24px">
+                            "Tell your customers about your amazing new arrivals"
+                        </p>
+                    </div>
+
+                    <div class="spacer-item">
+                        <!-- contenteditable="true" -->
+                    </div>
+                    <!-- start  last -->
+                    <div class="last">
+                        <div class="row">
+                            <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important">
+                                <span>Your street Address</span>
+                                <span>Your Phone Number</span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;">
+                                <span>
+                                    <a href=#>Check out my website</a>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;">
+                                <span class="share">Share</span>
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/pinterest.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-fb.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-tw.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  last -->
+                </div>
+            </div>
+            <!-- end  main-content theme4-->
+
+             <!-- start  main-content theme5 -->
+             <div class="col-lg-9 main-content theme5" style="display: none; position: relative;overflow: scroll;max-height: 95vh;left: 25.5%">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderEmailFrom"><b>Add Subject</b></span>
+                            <img id="openPreheaderDiv" style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content text-center">
+                    <!-- start  first -->
+                    <div class="first">
+                        <h1>OUR NEW COLLECTION IS HERE</h1>     
+                    </div>
+                    <div class="main-img">
+                        <img alt="" src="assets/images/emailTemplateImages/template5img1.png">
+                    </div>
+                    <div class="join">
+                        <p>
+                            Celebrate the season be promoting a new collection. Choose a layout you 
+                            love. then add lively images, catchy text and a call to action button to make 
+                            it your own. 
+                        </p>
+                    </div>
+                    <div>
+                         <button type="button" class="btn btn-warning">
+                            <h5>JOIN NOW</h5>
+                        </button>
+                    </div>
+                    
+                    <div class="spacer-item">
+                        <!-- contenteditable="true" -->
+                    </div>
+                    <!-- start  secand -->
+                    <div class="secand">
+                        <div class="join">
+                            <div class="row" style="margin-bottom: 0px;">
+                                <div class="col-lg-6 d-inline m-0 p-0 " style="max-width: 50% !important">
+                                    <img src="assets/images/emailTemplateImages/template5img2.png">
+                                </div>
+                                <div class="col-lg-6 d-inline m-0 p-0" style="
+                                      padding-left: 16px !important;max-width: 50%;">
+                                    <p>
+                                        This is a great place to tell your customers about your amazing new arrivals and get them excited to buy.
+                                        You can tell them more about what makes your product amazing like the way it's made. Limited time only
+                                        or anything else that will make it stand out.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  secand -->
+                    <div class="spacer-item">
+                        <!-- contenteditable="true" -->
+                    </div>
+                    <!-- start  last -->
+                    <div class="last">
+                        <div class="row">
+                            <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important">
+                                <span>Your street Address</span>
+                                <span>Your Phone Number</span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;">
+                                <span>
+                                    <a href=#>Check out my website</a>
+                                </span>
+                            </div>
+                            <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;">
+                                <span class="share">Share</span>
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/pinterest.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-fb.svg">
+                                <img src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-tw.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end  last -->
+                </div>
+            </div>
+            <!-- end  main-content theme5-->
+        </div>
+    </section>
+
+</div>

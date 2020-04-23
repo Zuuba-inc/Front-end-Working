@@ -1,0 +1,24 @@
+<div class="split left">
+  <div class="centered">
+    <img src="assets/icons/ic_unsubcribe.svg" alt="Envolope">
+  </div>
+</div>
+
+<div class="split right">
+
+  <div class="centered" id="sorryToSeeYouGo">
+    <img style="width: 21px;
+    padding-right: 3px;
+    padding-bottom: 3px;" src="assets/icons/correct.svg"><a href="#">Successfully unsubscribed</a>
+    <h2>Sorry To see you go</h2>
+    <p><b>{{userData.email}}</b> has been unsubscribed from all mailings.</p>
+    <p style="font-size: 14px;">if this email is SPAM, <span style="color: #FF0000; font-weight: bold;cursor: pointer;" (click)="clickToReport()">click here to report it.</span></p>
+  </div>
+  <div class="centered" id="clickToReport" style="display: none;">
+   
+    <h2>Thanks For Your Report</h2>
+    <p><b>{{userData.email}}</b> has been unsubscribed from all mailings.</p>
+    <button class="manageSubscribeBtn" [routerLink]="['/subscribeToEmail']">
+      Manage Subscription</button>
+  </div>
+</div>

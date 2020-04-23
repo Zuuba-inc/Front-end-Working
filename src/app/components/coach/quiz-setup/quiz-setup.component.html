@@ -1,0 +1,103 @@
+<main>
+    <aside class="side-bar create-quiz" id="quizSideBar">
+
+        <!-- Hamburger menu -->
+        <!-- <div class="side-bar__hamb"><span></span></div> -->
+
+        <!-- Logo -->
+        <!-- <header class="side-bar__logo-area">
+    <a href="/" class="side-bar__logo-area--logo"></a>
+  </header> -->
+        <!-- /Logo -->
+
+        <!-- Actions -->
+        <div class="create-quiz__actions">
+            <div class="create-quiz__actions--back" (click)="goBackToDashBoard();">
+                <span class="icon cf-arrow-right"></span> Back
+            </div>
+            <!-- New nav element -->
+            <div class="cross-navigation">
+                <p>
+                    Funnel navigation
+                    <br/>
+                    <strong>Webinar Setup</strong>
+                </p>
+                <span class="icon cf-arrow-right"></span>
+            </div>
+            
+        </div>
+
+        <!-- Setup Title -->
+        <div class="create-quiz__setup-title">
+            Quiz Setup
+            <div class="create-quiz__setup-title--status">
+                <span id="draft" *ngIf="quizConfiguration == undefined || quizConfiguration.status != 'Published' "><span class="quiz-status draft"></span>
+                Draft</span>
+                <span id="published" *ngIf="quizConfiguration != undefined && quizConfiguration.status == 'Published' "><span class="quiz-status" style="background-color:#1dcb9a;"></span>
+                Active</span>
+            </div>
+        </div>
+
+        <!-- Menu -->
+        <!-- <ul class="create-quiz__menu">
+    <li class="create-quiz__menu--item active"><span class="icon cf-correct"></span>Configure</li>
+    <li class="create-quiz__menu--item"><span class="icon cf-correct"></span>outcomes</li>
+    <li class="create-quiz__menu--item"><span class="icon cf-correct"></span>questions</li>
+    <li class="create-quiz__menu--item"><span class="icon cf-correct"></span>lead capture</li>
+    <li class="create-quiz__menu--item"><span class="icon cf-test"></span>test quiz</li>
+    <li class="create-quiz__menu--item"><span class="icon cf-setting"></span> Settings</li>
+  </ul> 
+[class.active]="navLink.name == selectedNavLink.name" 
+(click)="onSelect(navLink)" -->
+
+<!-- navLink.name == formData.module && -->
+
+        <ul class="create-quiz__menu">
+            <li class="create-quiz__menu--item" [ngClass]="{
+                'not-completed': navLink.status == 'INVALID',
+                'done': navLink.status == 'VALID',
+                'active':  navLink.name == selectedNavLink.name }"
+               *ngFor="let navLink of moduleStatus">
+                <!--a href="javascript:void(0)" style="display: block; color: inherit" [routerLink]="[navLink.route]" -->
+                <a href="javascript:void(0)" style="display: block; color: inherit" (click)="onSelect(navLink)">
+                    <!-- <span class="{{navLink.class}}" [ngClass]="{
+                        'cf-alert':  navLink.status == 'INVALID'
+                      }"></span> -->
+                    <span class="icon zu-correct" *ngIf="!navLink.status"></span>
+                    <span class="icon zu-correct-g" *ngIf="navLink.status == 'VALID'"></span>
+                    <i class="fa fa-exclamation-circle" style="font-size:18px;color:red;margin-right: 10px;" *ngIf="navLink.status == 'INVALID'"></i>
+                    {{navLink.name}}
+                </a>
+            </li>
+        </ul>
+        <!-- /Menu -->
+
+        <button class="create-quiz__save" (click)="publishQuiz()">
+    Publish
+  </button>
+        <br/>
+        <button class="create-quiz__save" (click)="logoutUser();">
+    Logout
+  </button>
+
+    </aside>
+    <!-- /Side Bar -->
+    <div class="container" id="messageBox" style="display:none">
+        <div class="panel panel-default">
+
+            <div class="panel-body" ng-click="hideMessageBox()">
+                <button class="closebtn">X</button>
+                {{message}}</div>
+
+        </div>
+    </div>
+    <ngx-ui-loader></ngx-ui-loader>
+
+    <!-- <div class="col-md-6"> -->
+        <button type="button" class="inline-block btn btn-sm btn-default btn-pre"
+            (click)="onPreview()">
+          <span>Preview</span></button>
+      <!-- </div> -->
+
+    <!-- Add this router outlet for quiz-setup-options (activate)="onActivate($event)" -->
+    <router-outlet (activate)="onSetNavValidation($event)"></router-outlet>

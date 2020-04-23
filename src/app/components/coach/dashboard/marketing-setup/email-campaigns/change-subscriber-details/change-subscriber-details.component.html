@@ -1,0 +1,25 @@
+<div class="split left">
+  <div class="centered">
+    <img src="assets/icons/ic_emailsmile.png" alt="Envolope">
+  </div>
+</div>
+
+<div class="split right">
+ 
+  <div class="centered" >
+   
+    <h2>Update subscription details</h2>
+    <p>Use the fields below to modify your personal information for this subscription.</p>
+    <div class="form-group ">
+      <label style="font-size: 12px; font-weight: bold;">Email Address</label>
+      <input type="text" class="form-control" name="email" [(ngModel)]="userEmail"
+         placeholder="t.younes@zuuba.com">
+  </div>
+  <div>
+    <button class="unsubscribeBtn" (click)="saveMyDetails();">
+    Save My Details</button>
+    <button class="cancel"  [routerLink]="['/subscribeToEmail']" [queryParams]="{subscribeToken: subscribeToken}">
+    Cancel</button>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,305 @@
+	.navbar-nav {
+		display: block;
+	}
+	div#publisher {
+    height: 80vh;
+}
+.stopSH {
+    padding: 21px;
+    background: #676767;
+}
+.btns {
+    background-color: #1dcb9a !important;
+    border-color: #1dcb9a !important;
+    padding: 0.40625rem 2rem !important;
+    font-size: 11px !important;
+    border-radius: 0.2rem !important;
+}
+.btns:hover {
+ background-color: #1dcb9a !important;
+}
+.live-box-avtar {
+    margin: 7px 0 0;
+}
+.col8c {
+padding:0;
+background: #EBEBEB;
+padding-top: 0%;
+}
+
+span.text-right {
+	    float: right;
+	}
+.popupHeader h3 {
+    text-align: center;
+    color: #1dcb9a;
+    margin-top: 0;
+}
+	section.popupVoice {
+	    width: 70%;
+	    background: #fff;
+	    margin: 0 auto;
+	    padding: 15px;
+	    border-radius: 6px;
+	    box-shadow: 0px 2px 15px #505050;
+	}
+	.mainM {
+		background: #00000087;
+		position: fixed;
+		width: 100%;
+		top: 0;
+		bottom: 0;
+		padding-top: 7%;
+		overflow-y: scroll;
+		padding-bottom: 2%;
+	}
+	.contentL {
+	    padding: 8% 0;
+	}
+	.popupHeader span.text-right {
+		cursor: pointer;
+	}
+	.padiTB {
+		padding-bottom: 6%;
+		width: 60%;
+		margin: 0 auto;
+	}
+	.boderPd {
+	    border-bottom: 1px solid #dedede;
+	    padding-top: 1%;
+	    padding-bottom: 0%;
+	}
+	.brnSC {
+		 padding-top: 2%;
+	    padding-bottom: 2%;
+	}
+	.btnSty, .btnSty:hover  {
+		background-color: #1dcb9a !important;
+		border-color: transparent !important;
+		cursor: pointer;
+	}
+	.icoen {
+	    float: left;
+	    padding: 11px 8px 0px 0;
+	}
+	.downlos span {
+		display: block;
+		font-size: 13px;
+	}
+	.downlos p {
+		 color: #898989 !important;
+	}
+	.pGrw p {
+		margin-top: 6px;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+	.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+	}
+	.square {
+	height: 20px;
+	width: 20px;
+	background-color: #555;
+	border-radius: 3px;
+	 display: inline-block;
+	}
+	.icoen span i {
+		color: #1dcb9a;
+	}
+	.playbtn {
+		border: transparent;
+		background: transparent;
+		color: #1dcb9a;
+		outline: none !important;
+		cursor: pointer;
+		transition: 400ms ease;
+	}
+	.playbtn:hover {
+		color: #28a745;
+	}
+    .padiTB .webcam-live {
+		height: 150px !important;
+	}
+	.contentL h4 {
+    font-size: 18px;
+}
+.contentL p {
+    font-size: 13px;
+    width: 200px;
+    color: #898989;
+}
+.fontd {
+    font-size: 12px;
+    color: #7a7878;
+    padding: 0 12px;
+    background-image: none !important;
+}
+.btmfont p {
+    font-size: 13px;
+    color: #898989;
+}
+.donbtm {
+	font-size: 14px;
+    text-align: center;
+    color: #898989;
+}
+.donbtm span {
+	color: #1dcb9a !important;
+}
+.startWebn p, #liveCountdown {
+    font-weight: bold;
+    font-size: 16px;
+}
+.startWebn button, .startime button {
+    background: #1DCB9A;
+    border: navajowhite;
+    padding: 5px 13px;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.startime button {
+	border: 1px solid #fff;
+}
+.startime {
+	 padding: 31px 60px !important;
+	 background: #1dcb9a !important;
+	 color: #fff;
+}
+.startWebn, .startime {
+    padding: 35px 60px;
+    background: #fff;
+    width: 33%;
+    text-align: center;
+    margin: 12% auto;
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+}
+.pdDown {
+    padding: 2px 16px;
+}
+div#all_slides_warpper {
+    transform: scale(0.9) !important;
+}
+.slides-toolbar {
+	margin: 0 auto !important;
+}
+#upload-button {
+                    width: 150px;
+                    display: block;
+                    margin: 20px auto;
+                }
+
+                #file-to-upload {
+                    display: none;
+                }
+
+                #pdf-main-container {
+                    width: 400px;
+                    margin: 20px auto;
+                }
+
+                #pdf-loader {
+                    display: none;
+                    text-align: center;
+                    color: #999999;
+                    font-size: 13px;
+                    line-height: 100px;
+                    height: 100px;
+                }
+
+                #pdf-contents {
+                    display: none;
+                }
+
+                #pdf-meta {
+                    overflow: hidden;
+                    margin: 0 0 20px 0;
+                }
+
+                #pdf-buttons {
+                    float: left;
+                }
+
+                #page-count-container {
+                    float: right;
+                }
+
+                #pdf-current-page {
+                    display: inline;
+                }
+
+                #pdf-total-pages {
+                    display: inline;
+                }
+
+                #pdf-canvas {
+                    border: 1px solid rgba(0,0,0,0.2);
+                    box-sizing: border-box;
+                }
+
+                #page-loader {
+                    height: 100px;
+                    line-height: 100px;
+                    text-align: center;
+                    display: none;
+                    color: #999999;
+                    font-size: 13px;
+                }
+#pdf-buttons {
+    position: absolute;
+    width: 98%;
+    left: 1%;
+    top: 49%;
+}
+div#pdf-buttons button {
+    border: 0;
+    background: #fff;
+    border-radius: 25px;
+    height: 40px;
+    width: 40px;
+    padding: 7px 9px;
+    box-shadow: 0 0 17px 4px #ccc;
+}
+button#pdf-next {
+    float: right;
+}
+#pdf-canvas {
+    height: 500px;
+    width: 952px;
+    margin-left: -274px;
+}
+
+// CSS for Attendee List dropdown
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 177px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

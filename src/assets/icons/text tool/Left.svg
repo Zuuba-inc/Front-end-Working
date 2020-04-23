@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42" height="114" viewBox="0 0 42 114">
+  <defs>
+    <filter id="Rectangle_2856" x="0" y="0" width="42" height="114" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Left" transform="translate(1849 2753)">
+    <g transform="matrix(1, 0, 0, 1, -1849, -2753)" filter="url(#Rectangle_2856)">
+      <rect id="Rectangle_2856-2" data-name="Rectangle 2856" width="24" height="96" rx="4" transform="translate(9 9)" fill="#fff"/>
+    </g>
+    <path id="Rectangle_2858" data-name="Rectangle 2858" d="M4,0H20a4,4,0,0,1,4,4V24a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(-1840 -2744)" fill="#e1e1e1"/>
+    <g id="Group_2169" data-name="Group 2169" transform="translate(179 -21)">
+      <g id="Group_2100" data-name="Group 2100">
+        <rect id="Rectangle_2788" data-name="Rectangle 2788" width="24" height="24" transform="translate(-2019 -2723)" fill="none"/>
+        <rect id="Rectangle_2756" data-name="Rectangle 2756" width="16" height="2" transform="translate(-2015 -2718)" fill="#363636"/>
+        <rect id="Rectangle_2759" data-name="Rectangle 2759" width="16" height="2" transform="translate(-2015 -2712)" fill="#363636"/>
+        <rect id="Rectangle_2760" data-name="Rectangle 2760" width="16" height="2" transform="translate(-2015 -2706)" fill="#363636"/>
+        <rect id="Rectangle_2757" data-name="Rectangle 2757" width="10" height="2" transform="translate(-2015 -2715)" fill="#363636"/>
+        <rect id="Rectangle_2758" data-name="Rectangle 2758" width="10" height="2" transform="translate(-2015 -2709)" fill="#363636"/>
+      </g>
+    </g>
+    <g id="Group_2170" data-name="Group 2170" transform="translate(179 3)">
+      <rect id="Rectangle_2756-2" data-name="Rectangle 2756" width="16" height="2" transform="translate(-2015 -2718)" fill="#363636"/>
+      <rect id="Rectangle_2759-2" data-name="Rectangle 2759" width="16" height="2" transform="translate(-2015 -2712)" fill="#363636"/>
+      <rect id="Rectangle_2760-2" data-name="Rectangle 2760" width="16" height="2" transform="translate(-2015 -2706)" fill="#363636"/>
+      <rect id="Rectangle_2757-2" data-name="Rectangle 2757" width="10" height="2" transform="translate(-2012 -2715)" fill="#363636"/>
+      <rect id="Rectangle_2758-2" data-name="Rectangle 2758" width="10" height="2" transform="translate(-2012 -2709)" fill="#363636"/>
+    </g>
+    <g id="Group_2171" data-name="Group 2171" transform="translate(179 27)">
+      <path id="Rectangle_2788-2" data-name="Rectangle 2788" d="M0,0H24a0,0,0,0,1,0,0V20a4,4,0,0,1-4,4H4a4,4,0,0,1-4-4V0A0,0,0,0,1,0,0Z" transform="translate(-2019 -2723)" fill="#fff"/>
+      <rect id="Rectangle_2756-3" data-name="Rectangle 2756" width="16" height="2" transform="translate(-2015 -2718)" fill="#363636"/>
+      <rect id="Rectangle_2759-3" data-name="Rectangle 2759" width="16" height="2" transform="translate(-2015 -2712)" fill="#363636"/>
+      <rect id="Rectangle_2760-3" data-name="Rectangle 2760" width="16" height="2" transform="translate(-2015 -2706)" fill="#363636"/>
+      <rect id="Rectangle_2757-3" data-name="Rectangle 2757" width="10" height="2" transform="translate(-2009 -2715)" fill="#363636"/>
+      <rect id="Rectangle_2758-3" data-name="Rectangle 2758" width="10" height="2" transform="translate(-2009 -2709)" fill="#363636"/>
+    </g>
+  </g>
+</svg>

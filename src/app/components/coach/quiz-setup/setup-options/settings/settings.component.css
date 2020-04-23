@@ -1,0 +1,411 @@
+input[color-picker]{
+    margin-bottom: 10px;
+    width: 182px;
+}
+.color-picker {
+    border: 1px solid #cacacaab !important;
+    box-shadow: 0 0 12px #cacacadb !important;
+    border-radius: 8px;
+}
+
+.scroll-bar{
+ height: calc(100vh - 50px) !important;
+overflow-y: auto;
+}
+.btn-clr
+{
+background-color: #1DCB9A;
+color: #fff;
+font-size: 12px;
+font-weight: 700;
+text-align: center;
+border: none;
+width: 180px;
+height: 30px;
+border-radius: 4px;
+/* -webkit-transition: 0.25s ease-in; */
+-moz-transition: 0.25s ease-in;
+-o-transition: 0.25s ease-in;
+transition: 0.25s ease-in;
+float: right;
+margin-bottom: 20px;
+width: 100px;
+}
+.btn-left {
+margin-left: 20px;
+
+}
+a.top-clr {
+color: #000;
+}
+span.setting__image--upload img {
+    width: 100%;
+    /* height: 430px; */
+}
+
+span.setting__image--upload {
+    width: 100%;
+    height: 430px;
+}
+
+input#setting-image-upload {
+height: 346px;
+}
+#setting .setting__save {
+margin-bottom: 6%;
+}
+
+/* new nav styles */
+    .cross-navigation {
+      font-size: 12px;
+      border-right: 1px solid #e1e1e1;
+      padding: 8px 15px;
+      background-color: #fff;
+      color: #363636;
+      height: 50px;
+      width: 70%;
+      text-align: left;
+      position: relative;
+      cursor: pointer;
+    }
+    .cross-navigation p {
+      margin: 0;
+    }
+    .cross-navigation .cf-arrow-right {
+      position: absolute;
+      right: 10px;
+      top: 20px;
+      transform: rotateZ(-90deg);
+      -webkit-transform: rotateZ(-90deg);
+      -moz-transform: rotateZ(-90deg);
+    }
+    .cross-navigation .cf-arrow-right::before {
+      color: #363636 !important;
+    }
+    .create-quiz__actions--back {
+      float: none !important;
+      margin-top: 0 !important;
+      width: 35%;
+      padding-left: 10px;
+      align-self: center;
+    }
+    .create-quiz__actions {
+      display: flex !important;
+      padding: 0 !important;
+    }
+    .create-quiz__setup-title {
+      background-color: transparent !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      margin: 0 15px;
+    }
+		/* Styling the chip */
+		.chips input:focus {
+		  outline: none;
+		  border-bottom: 1px solid #1DCB9A !important;
+		}
+		.chip {
+		  background-color: #e1e1e1;
+		  padding: 5px 10px;
+		  display: inline-block;
+		  border-radius: 49px;
+		  margin-right: 5px;
+		  margin-bottom: 5px;
+		}
+		.chip .material-icons.close {
+		  font-size: 19px;
+		}
+		.setting__marketplace--btns .cf-public:before {
+		  color: #fff;
+		}
+		.cropArea {
+          background: #E4E4E4;
+          overflow: hidden;
+          position: relative;
+          width:500px;
+          height:350px;
+        }
+         .ng-isolate-scope canvas {
+                margin: 0 !important;
+            }
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 541px;
+        }
+        img-crop {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .modal{
+            left:100px;
+                z-index: 99 !important;
+        }
+        .live-preview__quiz--img video {
+            width: 100%;
+        }
+        span.icon.cf-trash.del {
+            margin-top: 3px !important;
+        }
+        .shareLink{
+         cursor: pointer;
+        }
+        .imageAnswer {
+            padding: 6px 10px;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: left;
+            line-height: 30px;
+            border: 1px solid #E1E1E1;
+            border-radius: 2px;
+            -webkit-transition: 0.25s ease-in;
+            -moz-transition: 0.25s ease-in;
+            -o-transition: 0.25s ease-in;
+            transition: 0.25s ease-in;
+            width: 90%;
+        }
+        .outcomeMappingLine{
+            position:absolute;
+            height:1px;
+        }
+        .content-mapping .live-preview__maps--outcomes .outcome {
+            line-height: 20px !important;
+            height: 66px;
+        }
+        .colorForAnswerA{
+            background-color: #1DCB9A;
+        }
+        .colorForAnswerB{
+            background-color: #F0C22A;
+        }
+        .colorForAnswerC{
+            background-color: #2ac5f0;
+        }
+        .colorForAnswerD{
+            background-color: #ca1e1e;
+        }
+        .colorForAnswerE{
+            background-color: #180fc7;
+        }
+        .colorForAnswerF{
+            background-color: #c70faa;
+        }
+        .disableNextQuestion{
+            opacity: 0.5;
+            cursor:not-allowed;
+        }
+        input.ng-invalid.ng-touched {
+           border: 1px solid red !important;
+           background: #ffe5e5;
+           box-shadow: 0 0 3px #CC0000;
+        }
+        textarea.ng-invalid.ng-touched {
+           border: 1px solid red !important;
+           background: #ffe5e5;
+           box-shadow: 0 0 3px #CC0000;
+        }
+        select.ng-invalid.ng-touched {
+           border: 1px solid red !important;
+           background: #ffe5e5;
+           box-shadow: 0 0 3px #CC0000;
+        }
+        .validationError{
+            color: red;
+            font-size: 11px;
+        }
+       input#setting-image-upload {
+    background: #ccc;
+    width: 26%;
+    height: 161px;
+    position: absolute;
+    left: 33%;
+    opacity: 0;
+    clip: auto;
+    cursor:  pointer;
+}
+
+
+    #questions .actions .icon-hover:hover {
+        background: #fff !important;
+        color: blueviolet;
+        cursor: not-allowed;
+   }
+    #questions .actions .icon-hover:hover:before{
+        color :#959595 !important;
+    }
+    .resetPreviewBtn {
+    background: transparent;
+    width: 70px;
+    border: 0;
+    float: right;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 14px;
+    margin-right: 20px;
+    color: #1DCB9A;
+    border: 1px solid #1DCB9A;
+    border-radius: 5px;
+    }
+    .displayNone {
+     display: none;
+    }
+    .anserType{
+    width: 92%;
+    height: 35px;
+    padding: 10px;
+    }
+    button.border-btn.live-preview__quiz--btn {
+        background: #ccc;
+        color: #fff;
+    }
+    .addNewOutcome{
+        font-size: 14px;
+        font-weight: 600;
+        color: #363636;
+        cursor: pointer;
+        border-bottom: 1px solid #E1E1E1;
+        border-top: 1px solid #E1E1E1;
+        padding: 15px 0;
+    }
+    span.setting__image--upload {
+    margin-bottom: 0px !important;
+}
+    .setting__offer input {
+        color: #959595;
+    }
+    div#Imagetext p {
+        font-size: 12px;
+        color:#707070;
+    }
+    .panel-default {
+        border-color: #ddd;
+    }
+    .panel {
+       margin-bottom: 20px;
+    background-color: #f5d64d;
+    border: 1px solid #15070742;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    margin-left: 28%;
+    width: 50%;
+    height: 35px;
+    font-size: 14px;
+}
+
+    .panel-body {
+        padding: 6px;
+        text-align: center;
+    }
+    .closebtn{
+    float: right;
+    background: transparent;
+    border: navajowhite;
+    margin-top: -1px;
+    }
+   .qText {
+    display: inline-block;
+    width: 305px;
+}
+
+span.answerPreview {
+    width: 400px;
+}
+    #questions .actions, #lead .actions, #mapping .actions, #branching .actions, .content-mapping .actions {
+    margin-top: auto;
+    float: right;
+}
+.number-list li, .imgAns{
+    position: relative;
+}
+.number-list li span, .imgAns span.del {
+   position: absolute;
+   right: 6px;
+   top: 0;
+}
+ul.number-list li p, p.leftAlign.ng-binding {
+    padding: 0 22px 0 0;
+}
+ol.number-list {
+    list-style: upper-latin;
+}
+p.leftAlign.ng-binding {
+    width: 70%;
+    margin: 0;
+    font-size: 14px;
+}
+.leftAlign {
+    display: inline-block;
+}
+.imgDiv, .mapOutImg {
+    float: left;
+    margin-right: 5px;
+    width: 80px;
+}
+.imgDivText {
+    min-height: 70px;
+}
+.newAnsList li {
+   display: inline-block;
+}
+.content-mapping .live-preview__maps--answers .answer {
+  padding: 2px 0;
+}
+.content-mapping .live-preview__maps .row {
+   margin-top: 2px !important;
+}
+
+.crop-modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+.heading {
+    color: #707070;
+    position: relative !important;
+    bottom: 40px !important;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    left: 17%;
+}
+
+.n-i {
+    margin: 0 2%;
+}
+
+.nav-tabs {
+    position: inherit !important;
+    justify-content: center !important;
+    left: 0 !important;
+}

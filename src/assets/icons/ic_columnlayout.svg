@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52" height="52" viewBox="0 0 42 42">
+  <defs>
+    <filter id="Rectangle_2166" x="0" y="0" width="42" height="42" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_2185" data-name="Group 2185" transform="translate(-857 -479)">
+    <g transform="matrix(1, 0, 0, 1, 857, 479)" filter="url(#Rectangle_2166)">
+      <rect id="Rectangle_2166-2" data-name="Rectangle 2166" width="24" height="24" rx="4" transform="translate(9 7)" fill="#fff"/>
+    </g>
+    <g id="Group_2186" data-name="Group 2186" transform="translate(870.8 494)">
+      <g id="duplicate-square">
+        <rect id="Rectangle_2104" data-name="Rectangle 2104" width="6.4" height="8" transform="translate(0 0)" fill="none" stroke="#959595" stroke-width="1"/>
+      </g>
+      <g id="duplicate-square-2" data-name="duplicate-square" transform="translate(8)">
+        <rect id="Rectangle_2104-2" data-name="Rectangle 2104" width="6.4" height="3.2" transform="translate(0 4.8)" fill="none" stroke="#959595" stroke-width="1"/>
+        <rect id="Rectangle_2860" data-name="Rectangle 2860" width="6.4" height="3.2" transform="translate(0 0)" fill="none" stroke="#959595" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

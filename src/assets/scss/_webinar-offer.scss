@@ -1,0 +1,123 @@
+#webinar-offer {
+  margin: 0;
+  margin-left: 225px;
+  padding: 0;
+  .inner-header {
+    border-bottom: none;
+  }
+  .setting {
+    margin-left: 5px;
+
+    &__colors {
+      
+      padding: 10px 0;
+      span {
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        background-color: transparent;
+        padding: 2px;
+        position: absolute;
+        left: -3px;
+        top: -3px;
+        box-sizing: content-box;
+      }
+      input[type="radio"] {
+        opacity: 0;
+        position: absolute;
+        &:checked {
+          ~ span {
+            border: 1px solid $primary-dark;
+          }
+        }
+      }
+      p {
+        @include text(12px, 600, left);
+        color: $text-dark;
+        text-transform: capitalize;
+        margin-bottom: 0.5rem;
+      }
+      label {
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+        margin-right: 5px;
+      }
+    }
+
+    &__timeShow {
+      input {
+        @include input-box;
+        width: 40px;
+      }
+    }
+  }
+  .live-preview {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .hint {
+    background-color: $bg1;
+    padding: 12px 30px;
+    position: relative;
+    width: 320px;
+    @include text(12px, 400, left);
+    margin-left: auto;
+    margin-right: auto;
+    p {
+      margin-bottom: 0;
+    }
+    .icon {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+  }
+  .offer {
+    display: flex;
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    box-shadow: $shadow;
+    margin-top: 20px;
+    padding: 36px 25px;
+    text-align: center;
+
+    &__title {
+      @include text(18px, 700, center);
+      color: $primary-dark;
+      margin-bottom: 30px;
+    }
+
+    &__desc {
+      @include text(12px, 400, center);
+      color: $text-neu;
+      margin-bottom: 30px;
+    }
+    &__btn {
+      @include mid-btn;
+      margin: auto;
+    }
+  }
+  footer {
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    border-top: $border;
+    width: 100%;
+    background-color: #fff;
+    margin-left: 5px;
+
+    .btn {
+      @include mid-btn;
+      background-color: $primary-dark;
+    }
+  }
+}

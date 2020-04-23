@@ -1,0 +1,36 @@
+<div class="row funnel-step registration" id="{{data.stepDetailTitle}}" style="margin-top: 70px !important;">
+  <!-- <span class="funnel-add"></span> -->
+  <div class="col-12 d-flex card-head">
+    <p class="funnel-step__side-info">{{data.stepNo}}</p>
+    <h6 class="funnel-step__title">{{data.stepDetailTitle}}</h6>
+    <div class="menu">
+      <button class="menu-btn" (mouseover)="clazz='showOptions'" (mouseout)="clazz='hideOptions'">
+        <span class="zu-dotted-menu"></span>
+      </button>
+
+      <ul class="dropdown-menu" (mouseover)="clazz='showOptions'" 
+      (mouseout)="clazz='hideOptions'"  [ngClass]="clazz">
+        <li class="item">Edit</li>
+        <!-- <li class="item"> Change Template </li>
+        <li class="item">Reorder</li> -->
+        <li class="item"> Delete</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card-img">
+      <img src="assets/images/joel-filipe-196000-unsplash.jpg" alt="img" class="img-fluid" />
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card-content">
+      <ul class="funnel__info--analytics on-bottom m-0 border-0">
+        <li class="funnel__info--analytics item">
+          <span class="num">0</span>
+          views
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="seperatorLine"></div>
+</div>

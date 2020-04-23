@@ -1,0 +1,105 @@
+<main>
+  <!-- <aside class="side-bar">
+      <header class="side-bar__logo-area">
+        <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+      </header>
+    </aside> -->
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+
+  <div class="page-wrapper">
+    <div class="mainContainer">
+      <div class="addPruningOperation" style="width: 80%;">
+        <a [routerLink]="['/crm/pruningOperation']">
+          < Back to pruning operation</a>
+            <div>
+              <div style="margin-top: 30px;">
+                <p style="display: inline;font-size: 14px;">This Pruning Operation is Count-Based. The people below have not opened or clicked any of their last
+                <input type="text" value="5" style="width: 30px;height: 30px;text-align: center;"> emails.</p>
+                
+                <span style="display: block;font-size: 12px;
+                      font-weight: bold;margin-top: 10px;">Showing all active people</span>
+              </div>
+              <div style="height: auto;background: #EFEFEF;border: 1px solid #E1E1E1;">
+                <div style="text-align: right;font-size: 12px;
+                      font-weight: bold;float: right;" (click)="changeShowFilter()">Show Filter
+                      <img style="margin: 10px;width: 10px;" src="assets/icons/arrow-down.svg">
+                </div>
+                <div *ngIf="showFilter == false"  style="text-align: center;width: 70%;margin: 2% auto;">
+                  People who have not received the “Test Broadcast” broadcast
+                </div>
+                <div *ngIf="showFilter == true">
+                  <app-segmentation-rule></app-segmentation-rule>
+                </div>
+              </div>
+              <div class="column" style="width: 100%;padding: 0;margin-top: 20px;">
+                <h6 style="display: inline;font-size: 14px;">Showing 8 people</h6>
+                <select>
+                  <option>Export to CSV</option>
+                  <option>Perform a Bulk Operation</option>
+                </select>
+                <div style="float: right;padding: 0;
+                      margin-right: 10px;
+                      width: 35%;">
+                  <input class="searchBox" placeholder="Search here" style="border: none;background-size: 4%;">
+                  <!-- <button><img src="./assets/icons/search.svg" style="width: 24px;height: 15px;"></button> -->
+                </div>
+
+                <table>
+                  <thead>
+                    <tr style="border-top: 1px solid #E1E1E1;">
+                      <th style="padding-left: 15px;">
+                        NAME
+                      </th>
+                      <th>EMAIL</th>
+                      <th>PHONE NUMBER</th>
+                      <th>COMPANY</th>
+                      <th>LAST ACTIVITY</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let contact of segmentContacts; let i = index">
+                      <td style="padding-left: 15px;text-align: left;font-weight: bold;">
+                        <a style="font-size: 14px;color: #0B8B8C;">{{contact.name}}</a></td>
+                      <td>{{contact.email}}</td>
+                      <td>{{contact.phnNumber}}</td>
+                      <td>{{contact.location}}</td>
+                      <td>{{contact.date}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <div style="border: none;">
+                  <button data-toggle="modal" data-target="#unsubscribeContact" class="prunContactbtn">Prune Contact</button>
+                </div>
+              </div>
+             
+            </div>
+
+      </div>
+    </div>
+    <div class="modal fade show" id="unsubscribeContact" tabindex="-1" role="dialog" aria-labelledby="unsubscribeContact"   
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+         
+          <p style="font-size: 14px;
+          color: #707070;">These people will be unsubscribed from all mailings.</p>
+          
+          <button class="modalbtn" style="margin-left: 10px;" >I’m sure unsubscribe these contact</button>
+          <button class="modalbtn cancelBtn" data-dismiss="modal" aria-label="Close" >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  </main>

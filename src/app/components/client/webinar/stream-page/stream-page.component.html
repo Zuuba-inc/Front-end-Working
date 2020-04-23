@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:url" content="https://@util.Constants.HOST_NAME" /> <!--Paste URL Here-->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Coachforce" /><!--TITLE of this page-->
+	<meta property="og:description" content="Coachforce is a live streaming platform that connects you with certified coaches from all around the world that help you build a plan to achieve your goals." /><!--DESC of this page-->
+	<meta property="og:image" content="https://@util.Constants.HOST_NAME/assets/images/Coachforce_TH3_Logo.png" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>Coach Force</title>
+</head>
+<body onload="show();" id="fullScreen">
+
+<div id="camera"></div>
+
+<nav class="navbar fixed-top navbar-expand-lg " style="position: fixed;">
+	<div class="container-fluid px-5">
+		<div class="row" style="width:100%;">
+			<div class="col-md-3">
+				<div class="live-box-avtar">
+					<div class="avtar mr-2">
+						<img src="/assets/new_js_css_img_updated/img/bg.jpg" class="img-fluid">
+					</div>
+					<div class="content pdDown">
+						<p class="fs-16 bold mb-0">@webinarMst.webinarTitle</p>
+						<p class="fs-12 mb-0">By @webinarMst.coach.firstName @webinarMst.coach.lastName</p>
+					</div>
+				</div>
+			</div>
+
+			<!--<span id="offerTime" hidden>@offer.videoHour : @offer.videoMins : @offer.videoSecs</span>-->
+			<span id="offerTime" hidden>@webinarOfferDate</span>
+			<span id = "userRole" hidden>@LoginController.getLoggedInUserRole()</span>
+			<div class="col-md-3">
+				<div class="recordTime">
+					<span id="time"></span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="collapse navbar-collapse pull-right">
+
+					<ul class="navbar-nav ml-auto webinar4menu">
+						<li class="nav-item">
+							<a class="nav-link btnshare-new" href="javascript://" onclick="shareScreen();">
+								<i class="material-icons icon">filter_none</i>
+								<span>SHARE SCREEN</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript://">
+								<i class="material-icons icon">desktop_mac <i class="material-icons">keyboard_arrow_down</i></i>
+								<span>PRESENTATION </span>
+							</a>
+							<ul class="submenu">
+								<li class="nav-item sub-active">
+									<a class="nav-link" href="javascript://" data-toggle="collapse" data-target=".ClpsClientSlide">
+										Show Presentation Slides
+									</a>
+								</li>
+								
+								<li class="nav-item">
+									<a class="nav-link" href="javascript://" onclick="showPPT(@pre.id)">
+										@pre.fileName
+									</a>
+								</li>
+							
+								<li class="nav-item">
+									<a class="nav-link" href="javascript://">
+										Play Video
+									</a>
+								</li>
+								
+								<li class="nav-item">
+                    <!-- onclick="showPPT(@pre.id)" -->
+									<a class="nav-link" href="javascript://" >
+										@pre.fileName
+									</a>
+								</li>
+								
+								<li class="nav-item">
+									<a class="nav-link" href="javascript://" data-toggle="modal" data-target=".popupCountdown">
+										Countdown
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item active" id="microPhoneList">
+							<a class="nav-link" href="javascript://">
+								<i class="material-icons icon" onclick="onOffMicroPhone()">mic</i>
+								<span id="microPhnOnOff">On</span>
+							</a>
+						</li>
+						<li class="nav-item active"  id="cameraList">
+							<a class="nav-link" href="javascript://">
+								<i class="material-icons icon" onclick="onOfCamera()">adjust</i>
+								<span id="cameraPhnOnOff">ON</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="javascript://">
+								<i class="material-icons icon" onclick="startCamera()">settings</i>
+								<span>SETTINGS</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<button id="closeBut" class="btn btn-danger btn-sm">
+								End Webinar
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid innr-header-pad">
+    <div class="row">
+      <div class="col-md-8 middle_section col8c">
+        <div class="video-img-new">
+          <div class="">
+            <div id="publisher-screen">
+              <div class="startWebn" id="webinarStart">
+                <p>Attendees Are Currently On Hold</p>
+                <button onclick="startWebinarTimer('Start')">Start The Webinar</button>
+  
+              </div>
+              <div class="startime" id="webinarTimer" style="display:none">
+                <p>Going Live In</p>
+                <p id="liveCountdown">5</p>
+                <button onclick="startWebinarTimer('Stop')">Cancel</button>
+              </div>
+  
+            </div>
+            <!--<div  id="result"></div>-->
+            <div id="pdf-main-container" style="display:none">
+              <div id="pdf-loader">Loading document ...</div>
+              <div id="pdf-contents">
+                <div id="pdf-meta">
+                  <div id="page-count-container" style="display:none;">Page <div id="pdf-current-page"></div> of <div id="pdf-total-pages"></div></div>
+                  <div id="pdf-buttons">
+                    <button id="pdf-prev"><i class="material-icons md-36">keyboard_arrow_left</i></button>
+                    <button id="pdf-next"><i class="material-icons md-36">keyboard_arrow_right</i></button>
+                  </div>
+                </div>
+                <canvas id="pdf-canvas" width="600"></canvas>
+                <div id="page-loader">Loading page ...</div>
+              </div>
+              <button id="butnFullScreen" onclick="goFullscreen('fullScreen')"><i class="material-icons">crop_free</i></button>
+            </div>
+            <div class="stopSH text-center hidden" id="stopSharing" >
+              <button href="javascript://" onclick="stopScreenSharing(event)">Stop Sharing</button>
+            </div>
+            <div class="stopSH text-center hidden" id="stopVideoSharing" >
+              <button href="javascript://" onclick="stopVideoSharing(event)">Stop Sharing</button>
+            </div>
+            <div class="stopSH text-center hidden" id="closePresentation" >
+              <button href="javascript://" onclick="stopPdfSharing(event)">Close</button>
+            </div>
+            <div class="">
+              <div id="consumer-screen">
+  
+              </div>
+              <div id="subscriber-sharing" class="vedio_full row video-img">
+  
+              </div>
+              <div id="subscriber-sharing-video" class="vedio_full row video-img">
+  
+              </div>
+              <div id="sharing-pdf" class="vedio_full row video-img">
+  
+              </div>
+            </div>
+  
+            <div class="col-md-10 col-md-offset-1 viewers text-right" hidden>
+              <div class="col-md-12 viewers text-right" hidden>
+                
+                <p class="view-para"><a  class="color-white fz-14">Leave &nbsp;<i class="fa fa-home fz-18"></i></a></p>
+              </div>
+  
+              <div class="col-md-10 col-md-offset-1 col-xs-12 likes-videos" hidden>
+                <div class="col-md-12 likes-videos" hidden>
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 sidebar2 video-img2 paddingleft0 paddingright0" hidden>
+                  
+                  <div class="col-md-12 likes-videos" hidden>
+                    <div class="all_chat_messages_new first_chat">
+                      <div class="chat_msg">
+                        <!--<ul class="client-chat" id="msgContainer">-->
+  
+                        <!--@**for(lschat<-liveStream.getLiveStreamChat()){-->
+  
+                        <!--}**@-->
+                        <!--</ul>-->
+                      </div>
+  
+  
+                    </div>
+  
+                    <!-- @if(!LoginController.isLoggedIn()){coach-desc second_chat} -->
+
+                    <div class="add-cmt ">
+                      <div class="customform-group">
+                        <!--<input type="text" class="form-control @if(!LoginController.isLoggedIn()){coach-desc second_chat}" id="add_chat" placeholder="Enter message...">-->
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+  
+              </div>
+              <div class="col-md-4 sidebar" style="padding:0;">
+                <div id="offerDiv" class="text-center mb-3 p-3 w-75 m-auto" style="display:none">
+                  <p class="fs-18 bold">@offer.title</p>
+                  <p class="fs-12 text-muted fw-600">@offer.description</p>
+                  <!--<a href="javascript://" class="btn btn-success btn-sm btns" onclick="">@offer.callToActionLabel</a>-->
+                  <!-- onclick="action(@webinarMst.id)" -->
+                  <!-- style="background-color: @offer.offerBtnColor" -->
+                  <button class="btn btn-success btn-sm btns"  >@offer.callToActionLabel</button>
+                </div>
+  
+                <div class="messageArea webinarChat4">
+                  <div class="p-3 border-y flex-center justify-content-between">
+                    <span class="fs-14 bold">Webinar Chat</span>
+                    <div class="dropdown">
+                      <a href="javascript://" class="fs-14 bold text-default" data-toggle="collapse" data-target=".ClspAttendes" ><span id="joinCount">0</span> Attendees</a>
+                      <div class="dropdown-content" id="watchList">
+                        <!--<a href="#">Nancy Jain</a>-->
+                        <!--<a href="#">Suman Bajpai</a>-->
+                        <!--<a href="#">Suman Bajpai</a>-->
+                      </div>
+                    </div>
+  
+                  </div>
+  
+  
+  
+                  <div class="msgViewBody">
+  
+                    <div class="all_chat_messages_new first_chat">
+                      <div class="chat_msg">
+                        <ul class="client-chat" id="msgContainer"  style="list-style: none">
+  
+                        </ul>
+                      </div>
+  
+  
+                    </div>
+                  </div>
+  
+                  <div>
+                    <div class="w-100 mb-3">
+                      <textarea class="form-control" cols="3" id="add_chat" placeholder="Write your message..."></textarea>
+                      <span id="coachMessageId" hidden></span>
+                    </div>
+                    <div class="text-right">
+                      <button class="btn btn-success btn-sm mb-0" onclick="sendChatMessage()">Send</button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+        <div class="mainM" id="testScreen" style="display:block">
+          <section class="popupVoice">
+            <div class="container-fluid">
+              <div class="row boderPd">
+                <div class="col-md-12">
+                  <div class="popupHeader">
+                    <h3><span style="font-size: 22px;">Audio & Video Test</span> <span onclick="stopCamera()" class="text-right">x</span></h3>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row" style="border-bottom: 1px solid #dedede;">
+                <div class="col-md-6" style="border-right: 1px solid #dedede;">
+                  <div class="contentL">
+                    <h4>Webcam</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <select class="form-control fontd" id="webcam">
+  
+                    </select>
+                  </div>
+                  <div class="padiTB" >
+                    <!-- <div class="alert alert-error ng-scope" ng-show="webcamError" style="">
+                                          <span>Webcam could not be started. Did you give access to it?</span>
+                                      </div>-->
+                    <!--<webcam channel="channel"-->
+                    <!--on-streaming="onSuccess()"-->
+                    <!--on-error="onError(err)"-->
+                    <!--on-stream="onStream(stream)">-->
+                    <!--</webcam>-->
+                    <video width="100%" playsinline autoplay id="videoElement">
+  
+                    </video>
+                    <!-- <button ng-click="makeSnapshot()" class="btn btn-success">take picture</button> -->
+                    <!--  <canvas id="snapshot" width="300" height="300"></canvas> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="contentL">
+                    <h4>Microphone</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <select class="form-control fontd" id="microphone">
+  
+                    </select>
+                  </div>
+                  <div class="padiTB">
+                    <canvas id="meter" width="370" height="50"></canvas>
+                    <span class="square " id="dot1"></span>
+                    <span class="square" id="dot2"></span>
+                    <span class="square" id="dot3"></span>
+                    <span class="square" id="dot4"></span>
+                    <span class="square" id="dot5"></span>
+                    <span class="square" id="dot6"></span>
+                    <span class="square" id="dot7"></span>
+                    <span class="square" id="dot8"></span>
+                    <span class="square" id="dot9"></span>
+                    <span class="square" id="dot10"></span>
+                    <span class="square" id="dot11"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row boderPd pGrw">
+                <div class="col-md-3">
+                  <p>Audio Output</p>
+                </div>
+                <div class="col-md-6">
+                  <audio id="myAudio">
+                    <source src="@routes.Assets.versioned("new_js_css_img_updated/js/audio_video_test/demoSound.mp3")" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                  <select class="form-control fontd" id="speaker">
+  
+                  </select>
+                </div>
+                <div class="col-md-3">
+  
+                  <button id="playIcon" class="playbtn" onclick="playAudio()" type="button"><p><i class="fa fa-play-circle" aria-hidden="true"></i> Play Audio</p></button>
+                  <button id="pauseIcon" class="playbtn" onclick="pauseAudio()" type="button" style="display:none"><p><i  class="fa fa-pause-circle" aria-hidden="true"></i> Pause Audio</p></button>
+                </div>
+              </div>
+              <div class="row boderPd">
+                <div class="col-md-6 btmfont">
+                  <b>Speed Test</b>
+                  <p>If you are planning to present your screen</p>
+                </div>
+                <div class="col-md-3">
+                  <div class="icoen"><span><i id="dwnIcon" class="fa fa-check-circle" aria-hidden="true"></i></span></div>
+                  <div class="downlos">
+                    <span>Download</span>
+                    <p id="Demo-1-dl-result">not tested</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="icoen"><span><i id="upIcon" class="fa fa-check-circle" aria-hidden="true"></i></span></div>
+                  <div class="downlos">
+                    <span>Upload</span>
+                    <p id="Demo-1-ul-result">not tested</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row boderPd">
+                <div class="col-md-12">
+                  <p class="donbtm">If you are planning to present your screen, go to chrome://flags and select the "Enable Experimental Web Platform Features" flag</p>
+                </div>
+              </div>
+              <div class="row brnSC text-center">
+                <div class="col-md-12">
+                  <button class="btn btn-success btnSty" onclick="stopCamera()">Save & Close</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        </div>
+        </div>
+        </div>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic_txtcolor_hover" transform="translate(2086 2723)">
+    <rect id="Rectangle_2783" data-name="Rectangle 2783" width="24" height="24" rx="4" transform="translate(-2086 -2723)" fill="#e3e3e3"/>
+    <g id="Group_2082" data-name="Group 2082" transform="translate(-71 -1)">
+      <path id="Path_1676" data-name="Path 1676" d="M7.636-.752l-.75-2.371H3.114L2.364-.752H0l3.652-10H6.334L10-.752ZM6.362-4.894Q5.322-8.116,5.191-8.538T5-9.206q-.234.872-1.338,4.312Z" transform="translate(-2008 -2705.248)" fill="#363636"/>
+      <g id="Rectangle_2787" data-name="Rectangle 2787" transform="translate(-2002 -2710)" fill="#fff" stroke="#363636" stroke-width="1">
+        <rect width="6" height="6" rx="2" stroke="none"/>
+        <rect x="-0.5" y="-0.5" width="7" height="7" rx="2.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,638 @@
+<div class="two-scrollers">
+	<header class="webinar-header">
+
+		<div class="row justify-content-between align-items-center">
+
+			<div class="col-3">
+				<!-- User Controls -->
+				<div class="user">
+					<div class="user__img ">
+						<!-- User Image -->
+						<!-- <img class="img-fluid" alt="Profile picture" src="assets/images/user@2x.jpg"> -->
+						{{webinarInfo.mainUser && webinarInfo.mainUser.userName && webinarInfo.mainUser.userName[0]}}
+						<!-- </span> -->
+					</div>
+					<div class="user__info">
+						<h5>{{webinarInfo && webinarInfo.webinarTitle}}</h5>
+						<span>By {{webinarInfo && webinarInfo.mainUser && webinarInfo.mainUser.userName}}</span>
+					</div>
+				</div>
+				<!-- /User Controls -->
+			</div>
+
+			<div class="col-2">
+				<!-- webinar timer -->
+				<!-- <div class="timer">
+					<span class="timer--recording"> -->
+				<!-- add class  timer--idle  for not recording state -->
+				<!-- </span>
+					<span class="timer__hours">01</span>:
+					<span class="timer__mins">45</span>:
+					<span class="timer__secs">32</span>
+				</div> -->
+				<!-- /webinar timer -->
+				<div class="recordTime">
+					<span id="time"></span>
+				</div>
+			</div>
+
+			<div class="col-auto" *ngIf="user.uRole.role == 'CLIENT'">
+				<ul class="actions">
+					<li class="actions__item" *ngIf="!fullScreen">
+						<span class="icon cf-fullscreen" (click)="goFullscreen()"></span>
+						FULLSCREEN
+					</li>
+					<li class="actions__item" *ngIf="fullScreen">
+						<span class="icon cf-fullscreen-exit" (click)="closeFullscreen()"></span>
+						EXIT FULLSCREEN
+					</li>
+				</ul>
+			</div>
+
+			<div class="col-auto" *ngIf="user.uRole.role == 'MAIN_USER'">
+				<!-- Webinar actions -->
+				<ul class="actions">
+					<li class="actions__item" (click)="screenshare()">
+						<!-- <a href="#">Home</a> -->
+						<span class="icon cf-screens"></span>
+						SHARE SCREEN
+					</li>
+					<li class="actions__item presentation-drop-down" id="presentation-drop-down">
+						<span class="icon cf-monitor"></span>
+						PRESENTATION
+						<span class="icon cf-arrow-right down"></span>
+
+						<!-- <div class="dropdown d-none">
+							<div>Show Presentation Slides</div>
+							<div *ngFor="let pdf of pdfLinks">
+								<!-- <a href="{{pdf.filePath}}">{{pdf.fileName}}</a> 
+								<div (click)="setPdfSrc(pdf)">{{pdf.fileName}}</div>
+							</div>
+
+
+							<div>Play Video</div>
+							<div *ngFor="let video of videoLinks">
+								<!-- <a href="{{video.filePath}}">{{video.fileName}}</a>
+								<div (click)="startShareVideo(video)">{{video.fileName}}</div>
+							</div>
+
+						</div> -->
+
+						<!-- ahmed dropdown menu -->
+						<ul class="dropdown-menu">
+							<li class="read_only">Show Presentation Slides</li>
+							<li class="dropdown-link" 
+							*ngFor="let pdf of pdfLinks">
+								<span (click)="setPdfSrc(pdf)">{{pdf.fileName}}</span>
+							</li>
+							<li class="read_only">Play Video</li>
+							<li class="dropdown-link" 
+							*ngFor="let video of videoLinks">
+								<span (click)="startShareVideo(video)">{{video.fileName}}</span>
+							</li>
+						</ul>
+
+					</li>
+					<li class="actions__item" (click)="onOffMicroPhone()">
+						<span class="icon cf-mic"></span>
+						<span id="microPhnOnOff">On </span>
+					</li>
+					<li class="actions__item active" (click)="onOfCamera()">
+						<span class="icon cf-cam"></span>
+						<span id="cameraPhnOnOff"> ON </span>
+					</li>
+					<li class="actions__item" id="settings" (click)="settingsClick()">
+						<span class="icon cf-setting"></span>
+						SETTINGS
+					</li>
+					<li class="actions__item" *ngIf="!fullScreen">
+						<span class="icon cf-fullscreen" (click)="goFullscreen()"></span>
+						FULLSCREEN
+					</li>
+					<li class="actions__item" *ngIf="fullScreen">
+						<span class="icon cf-fullscreen-exit" (click)="closeFullscreen()"></span>
+						EXIT FULLSCREEN
+					</li>
+					<li class="actions__item">
+						<button type="button" class="actions__end-btn" (click)="endWebinar();">End Webinar</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</header>
+
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<!-- <span class="close">&times;</span> -->
+			<!-- <p>Some text in the Modal..</p> -->
+			<section id="video-test" class="content">
+
+				<div class="row no-gutters justify-content-center">
+					<div class="col-md-8">
+
+						<div class="popup">
+
+							<div class="head">
+								<h2 class="head__title">Audio & Video Test</h2>
+								<button class="head__button" type="button" (click)="testAudio(true)">Save &
+									Close</button>
+							</div>
+
+							<div class="body">
+								<div class="row">
+									<div class="col-md-6">
+
+										<!-- Test cam -->
+										<div class="test">
+											<div class="row">
+												<div class="col-md-5">
+
+													<div class="test__view test__view--cam">
+														<video width="100%" playsinline autoplay id="videoElement">
+
+														</video>
+													</div>
+
+												</div>
+
+												<div class="col-md-7">
+
+													<h4 class="test__heading">
+														Webcam
+													</h4>
+
+													<p class="test__desc">
+														Zuuba has permissions to use your webcam
+													</p>
+
+													<form>
+														<select class="test__action" name="SelectCamera"
+															(change)="camerasListChange()" [(ngModel)]="selectedCamera">
+															<option *ngFor="let camera of camerasList"
+																value={{camera.value}}>
+																{{camera.label}}
+															</option>
+														</select>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+
+										<!-- TEST MICROPHONE -->
+										<div class="test">
+											<div class="row">
+												<div class="col-md-5">
+													<canvas id="meter" width="370" height="50"></canvas>
+													<div class="test__view test__view--mic">
+
+														<div class="test__view--column">
+
+															<span class="test__step test__step--inactive dot1"></span>
+															<span class="test__step test__step--inactive dot2"></span>
+															<span class="test__step test__step--inactive dot3"></span>
+															<span class="test__step test__step--inactive dot4"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot7"></span>
+														</div>
+														<div class="test__view--column">
+															<span class="test__step test__step--inactive dot1"></span>
+															<span class="test__step test__step--inactive dot2"></span>
+															<span class="test__step test__step--inactive dot3"></span>
+															<span class="test__step test__step--inactive dot4"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot7"></span>
+														</div>
+														<div class="test__view--column">
+															<span class="test__step test__step--inactive dot1"></span>
+															<span class="test__step test__step--inactive dot2"></span>
+															<span class="test__step test__step--inactive dot3"></span>
+															<span class="test__step test__step--inactive dot4"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot7"></span>
+														</div>
+														<div class="test__view--column">
+															<span class="test__step test__step--inactive dot1"></span>
+															<span class="test__step test__step--inactive dot2"></span>
+															<span class="test__step test__step--inactive dot3"></span>
+															<span class="test__step test__step--inactive dot4"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot5"></span>
+															<span class="test__step test__step--inactive dot7"></span>
+														</div>
+													</div>
+
+												</div>
+
+												<div class="col-md-7">
+
+													<h4 class="test__heading">
+														Microphone
+													</h4>
+
+													<p class="test__desc">
+														Zuuba has permissions to use your microphone
+													</p>
+
+													<form>
+														<select class="test__action" name="SelectMicrophne"
+															(change)="camerasListChange()"
+															[(ngModel)]="selectedAudioInput">
+															<option *ngFor="let microphone of audioInputList"
+																value={{microphone.value}}>
+																{{microphone.label}}
+															</option>
+														</select>
+													</form>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+
+										<!-- Test audio -->
+										<div class="test">
+											<div class="row">
+												<div class="col-md-5">
+
+													<div class="test__view test__view--icon">
+														<span class="icon cf-audio"></span>
+													</div>
+
+												</div>
+
+												<div class="col-md-7">
+
+													<h4 class="test__heading">
+														Audio Output
+													</h4>
+													<audio id="myAudio">
+														<source src="../../assets/images/demoSound.mp3"
+															type="audio/mpeg">
+														Your browser does not support the audio element.
+													</audio>
+													<p class="test__desc">
+														Zuuba has permissions to use your Audio Output
+													</p>
+
+													<form>
+														<select class="test__action" id="speaker" name="SelectedOutput"
+															[(ngModel)]="selectedAudioOutput"
+															(change)="audioOutputDeviceListChange()">
+															<option *ngFor="let speaker of audioOutputList"
+																value={{speaker.value}}>{{speaker.label}}</option>
+														</select>
+													</form>
+
+													<a [ngClass]="{'show': showPlayOpt, 'hide': !showPlayOpt, 'test__try test__try--audio': true}"
+														class="test__try test__try--audio" href="javascript:void(0)"
+														(click)="playAudio()">
+														<span class="cf-icon cf-play"></span>
+														Play Sound
+													</a>
+
+													<a [ngClass]="{'show': !showPlayOpt, 'hide': showPlayOpt, 'test__try test__try--audio': true}"
+														class="test__try test__try--audio" href="javascript:void(0)"
+														(click)="pauseAudio()">
+														<span class="cf-icon cf-play"></span>
+														Pause Sound
+													</a>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-6">
+
+										<!-- Test Speed -->
+										<div class="test">
+											<div class="row">
+												<div class="col-md-5">
+
+													<div class="test__view test__view--icon">
+														<span class="icon cf-speed"></span>
+													</div>
+
+												</div>
+
+												<div class="col-md-7">
+
+													<h4 class="test__heading">
+														Speed Test
+													</h4>
+
+													<p class="test__desc">
+														Testing your connection speed…
+													</p>
+
+													<div class="test__try test__try--speed">
+														<div class="download">
+															<span id="dwnIcon" class="icon cf-correct"></span>
+															<div>
+																<h5>download</h5>
+																<span id="Demo-1-dl-result"
+																	class="count">{{downloadSpeed}}</span>
+															</div>
+														</div>
+														<div class="download">
+															<span id="upIcon" class="icon cf-correct"></span>
+															<div>
+																<h5>upload</h5>
+																<span id="Demo-1-ul-result" class="count">55</span>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="footer">
+								<!-- <div class="row">
+				  <div class="col-md-2">
+					<div class="footer__view footer__view--icon">
+						<span class="icon cf-share-screen">
+						<span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+						</span>
+					</div>
+				  </div>
+				  <div class="col-md-7">
+					<h4 class="footer__heading">Screen Share</h4>
+					
+					<p class="footer__desc">If you are planning to present your screen, make sure you download our Screen Sharing plugin.</p>
+				  </div>
+				  <div class="col-md-3">
+					<button  class=" footer__button">Get Plugin</button>
+				  </div>
+				</div> -->
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+			</section>
+		</div>
+
+	</div>
+
+	<!-- Main Content -->
+	<section id="webinar-live" class="content"
+	[ngClass]="{'side-closed': !sidePanelOpened}">
+
+		<div class="row no-gutters">
+			<div class="col-9 transition" [ngClass]="{'col-lg-12': !sidePanelOpened}" id="centerDiv">
+
+				<div class="opentok-setup" [ngClass]="{'show': showPubScrn, 'hide': !showPubScrn}">
+					<!-- show share screen template when pdfsrc is empty, meaning presentation dropdown for pdf is not clicked -->
+					<!-- <div *ngIf="!pdfSrc"> -->
+				     <div>
+					<div id="publisher-screen"></div>
+					<div *ngIf="videoShared == true">
+						<div class="stopSH text-center">
+							<button (click)="stopVideoSharing()">Stop Video sharing</button>
+						</div>
+					</div>
+					</div>
+					
+					<div id="consumer-screen"></div>
+					<div id="clinetLoader" style="display: none;">
+					<img src="assets/images/loaderImage/videoLoader.gif">
+				    </div>
+					
+					<div >
+						<div id="hideScreenSharing" *ngIf="screenShared == true" style="background-color: green;width: auto;height: 100vh;"></div>
+					   <div id="subscriber-sharing" style="position: fixed"></div>
+					   <div *ngIf="screenShared == true">
+							<div class="stopSH text-center hidden" id="closePresentation">
+								<button (click)="stopScreenSharing()">Stop Screen sharing</button>
+							</div>
+						</div>
+					</div>
+				   
+					<!-- </div> -->
+					<div *ngIf="user.uRole.role == 'MAIN_USER'">
+						<div id="pdf-container">
+							<div *ngIf="pdfSrc">
+								<pdf-viewer id="pdf-canvas" [src]="pdfSrc" [render-text]="true" [show-all]="false"
+								[(page)]="pageVariable" style="display: block;" 
+								(page-rendered)="onPdfLoad($event)"></pdf-viewer>
+								<span class="icon zu-arrow-left" (click)="prevPage()"></span>
+								<!-- slides container -->
+								<!-- <div class="live-preview__slides"> -->
+
+									<!-- foot action -->
+									<!-- <div class="live-preview__action">
+										<button type="button" class="live-preview__stop-share">
+											Stop Share Screen
+										</button>
+									</div> -->
+									<!-- /foot action -->
+								<!-- </div> -->
+								<!--/ slides container -->
+								<span class="icon zu-arrow-right" (click)="nextPage()"></span>
+								<!-- <button (click)="nextPage()">next</button>
+								<button (click)="prevPage()">previous</button> -->
+
+								<div class="stopSH text-center hidden" id="closePresentation">
+									<button (click)="stopPdfSharing()">Stop pdf sharing</button>
+								</div>
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="start-live-setup" id="start-count-down" *ngIf="user.uRole.role == 'MAIN_USER'">
+					<div class="live-preview" [ngClass]="{'show': !showCntDwn, 'hide': showCntDwn}">
+						<!-- counter container -->
+						<div class="counting" id="start-screen">
+							<h5>Attendees are curently on hold</h5>
+
+							<button class="start-screen-btn" (click)="showCountDown();">Start The Webinar</button>
+						</div>
+
+					</div>
+
+					<!-- preview -->
+					<div class="live-preview" id="start-live" [ngClass]="{'show': showCntDwn, 'hide': !showCntDwn}">
+						<!-- counter container -->
+						<div class="counting">
+							<h5>Going live to attendees in</h5>
+
+							<div>
+								<span class="counter active">5</span>
+								<span class="counter">4</span>
+								<span class="counter">3</span>
+								<span class="counter">2</span>
+								<span class="counter">1</span>
+							</div>
+
+							<button>Cancel</button>
+
+							<span class="icon cf-clock"></span>
+						</div>
+					</div>
+
+
+				</div>
+
+				<div class="live-preview" id="stop-webinar" style="display: none">
+					<!-- counter container -->
+					<div class="counting">
+						<h5>Are you sure you want to close the webinar</h5>
+						<button class="start-screen-btn" (click)="closeWebinar();">Yes</button>
+						<button class="start-screen-btn" (click)="continueWebinar();">No</button>
+					</div>
+				</div>
+				<div class="live-preview" id="count-down" *ngIf="user.uRole.role == 'CLIENT'">
+					<!-- counter container -->
+					<div class="counting">
+						<h5>Starting Soon</h5>
+
+						<div id="webinarTimer" class="countdown">
+							<div class='countdown-container days'>
+								<span class='countdown-heading days-top'>Days</span>
+								<span class='countdown-value days-bottom' id="daysLeft">0</span>
+							</div>
+							<div class='countdown-container hours'>
+								<span class='countdown-heading hours-top'>Hours</span>
+								<span class='countdown-value hours-bottom' id="hoursLeft">0</span>
+							</div>
+							<div class='countdown-container minutes'>
+								<span class='countdown-heading minutes-top'>Minutes</span>
+								<span class='countdown-value minutes-bottom' id="minLeft">0</span>
+							</div>
+							<div class='countdown-container seconds'>
+								<span class='countdown-heading seconds-top'>Seconds</span>
+								<span class='countdown-value seconds-bottom' id="secLeft">0</span>
+							</div>
+						</div>
+
+						<span class="icon cf-clock"></span>
+					</div>
+				</div>
+				<div class="live-preview" id="webinar-starting-soon" style="display: none">
+					<!-- counter container -->
+					<div class="counting">
+						<h5>Webinar is going to start soon</h5>
+
+						<span class="icon cf-clock"></span>
+					</div>
+				</div>
+
+				<!-- /preview -->
+
+			</div>
+			<div class="col-3 side-panel" id="sideDiv" *ngIf="webinarHasStarted == true || user.uRole.role == 'MAIN_USER'">
+				<button id="side-togglers" class="side-togglers" (click)="sidePanelOpened = !sidePanelOpened" style="z-index: 999;">
+					<span  
+					class="icon"
+					[ngClass]="sidePanelOpened ? 'zu-arrow-right': 'zu-arrow-left'"></span>
+				</button>
+				
+				<div id="tabs" class="tabs">
+						<div class="invite" id="offerDive" style="display: none; margin-top: 0px;box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16);">
+								<h4 class="invite__title">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.title}}</h4>
+								<p class="invite__desc">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.description}}</p>
+			
+								<button class="invite__btn" id="offerButton" (click)="countActionUser()">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.callToActionLabel}}</button>
+							</div>
+					<div class="tabs__togglers">
+						<div class="tabs__tab tabs__tab--chat active" (click)="showChatBox()">Webinar Chat</div>
+						<div class="tabs__tab tabs__tab--attds" (click)="showJoineList()">{{joiniArray.length}}
+							Attendees</div>
+					</div>
+
+					<!-- chat -->
+					<div class="tabs__tab-body" id="webinarChatBox">
+						<!-- message body -->
+						<div class="message" *ngFor="let msg of messageHistory">
+							<div class="message__img" *ngIf="msg.picture != null;else noImage">
+								<img class="img-fluid" src={{msg.picture}}>
+							</div>
+							<ng-template #noImage>
+								<div class="message__img">
+									<!-- <img class="img-fluid" src={{msg.picture}}> -->
+									<p>{{msg.initials}}</p>
+								</div>
+							</ng-template>
+							<div class="message__info">
+								<h6>{{msg.user}}</h6>
+
+								<p>{{msg.message}}</p>
+								<div class="message__interact">
+									<button (click)="likeMessage(msg.messageId)">
+										<span class="icon zu-thumbs-up"></span>
+										<span class="likes" >{{msg.likeCount}}</span>
+										like
+									</button>
+									<button (click)="reply(msg)">
+									
+										reply
+									
+									</button>
+								</div>
+							</div>
+						</div>
+						<!-- /message body -->
+
+						<form class="chat-box" (ngSubmit)="sendMessage()">
+							<textarea class="chat-box__input" placeholder="Write your message. . ." name="message"
+								[(ngModel)]="message"></textarea>
+							<button [disabled]="disableMessageSendButton == false" class="chat-box__send" type="submit">Send</button>
+						</form>
+
+					</div>
+					<!-- /chat -->
+
+					<!-- attendees -->
+					<div class="tabs__tab-body" id="webinarJoineList">
+						<div class="message" *ngFor="let list of joiniArray">
+							<div class="message__img" *ngIf="list.photo != null;else noImage">
+								<img class="img-fluid" src={{list.photo}}>
+							</div>
+							<ng-template #noImage>
+								<div class="message__img">
+									<!-- <img class="img-fluid" src={{msg.picture}}> -->
+									<p>{{list.initial}}</p>
+								</div>
+							</ng-template>
+							<div class="message__info">
+								<h6>{{list.userName}}</h6>
+							</div>
+						</div>
+					</div>
+					<!-- /attendees -->
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-- <footer>
+			<button type="button" class="btn">Save & Continue</button>
+		</footer> -->
+
+	</section>
+</div>
+<ngx-ui-loader></ngx-ui-loader>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+  <g id="close-button" transform="translate(-11 -4)">
+    <g id="close">
+      <g id="close-button-2" data-name="close-button" transform="translate(11 4)">
+        <g id="close-2" data-name="close">
+          <path id="Path_9" data-name="Path 9" d="M10,1,9,0,5,4,1,0,0,1,4,5,0,9l1,1L5,6l4,4,1-1L6,5Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,104 @@
+<div id="autoMationRulesWebinar" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header" id="header">
+      <p style="font-size: larger;">New Automation</p>
+      <app-message-popup *ngIf="showPopUpMessage" [popUpMessage]="message">
+      </app-message-popup>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group">
+        <label class="label-text">When</label>
+        <div class="dropdown">
+          <!-- <input [disabled]="this.automationRule.automationWhenDtl.description != null" (focus)="showWhenDropDown()" (blur)="showWhenDropDown()"
+              class="form-control dropbtn" type="text" name="whenRule" [(ngModel)]="this.automationRule.automationWhenDtl.description">
+            <div id="whenDropDownWebinar" class="dropdown-content">
+              <dl *ngFor="let when of whenRules">
+                <dt>{{when.whenTitle}}</dt>
+                <dd *ngFor="let aDWDesc of when.autoDtlDesc"> {{aDWDesc.description}}</dd>
+              </dl>
+            </div> -->
+          <select disabled class="form-control dropbtn">
+            <optgroup *ngFor="let when of whenRules" label="{{when.whenTitle}}">
+              <option *ngFor="let aDWDesc of when.autoDtlDesc" value="{{aDWDesc.description}}"
+                [attr.selected]="aDWDesc.description == whenRuleTitle">{{aDWDesc.description}}</option>
+            </optgroup>
+          </select>
+          <br />
+          <!-- <div class="dropdown">
+              <input [disabled]="webinar != null" class="form-control dropbtn" type="text" name="whenRuleFor" [(ngModel)]="webinar.webinarTitle">
+            </div> -->
+
+          <div class="dropdown">
+            <input style="width: 100%; height: auto;" [disabled]="whenInputType == 'quiz' || 'webinar'" class="form-control dropbtn" type="text"
+              name="whenRuleFor" [(ngModel)]="whenRuleDescription">
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label-text">Then</label>
+        <div class="dropdown">
+          <!-- <input  (focus)="showThenDropDown()"
+                class="form-control dropbtn" type="text" name="thenRule" [(ngModel)]="automationRule.automationThenDtl.description">
+              <div id="thenDropDownWebinar" class="dropdown-content" style="display: none">
+                <dl *ngFor="let then of thenRules">
+                  <dt>{{then.whenTitle}}</dt>
+                  <dd *ngFor="let aDWDesc of then.autoDtlDesc" (click)="selectThenRun(aDWDesc)"> {{aDWDesc.description}}</dd>
+                </dl>
+
+              </div> -->
+          
+              <!-- [attr.selected]="data.edit ? thenRuleTitle : aDWDesc.description" -->
+              <select [(ngModel)]="thenRuleTitle" [disabled]="disableThenInputs"  class="form-control dropbtn" (change)="selectThenRun(thenRuleTitle)">
+                <!-- do not show header and options for default rules -->
+                <optgroup *ngFor="let then of data.edit == true ? thenRules : updatedThenRules" label="{{then ? then.whenTitle : ''}}">
+                  <option *ngFor="let aDWDesc of then ? then.autoDtlDesc : []"
+                          value="{{aDWDesc.description}}">{{aDWDesc.description}}</option>
+                </optgroup>
+              </select>
+              
+              <!-- <div class="dropdown">
+                <input [disabled]="whenInputType == 'quiz' || 'webinar'" class="form-control dropbtn" type="text" name="whenRuleFor" [(ngModel)]="whenRuleTitle">
+              </div> -->
+          <!-- <select [(ngModel)]="thenRuleTitle" (change)="selectThenRun(thenRuleTitle)">
+            <optgroup *ngFor="let then of thenRules" label="{{then.whenTitle}}">
+              <option *ngFor="let aDWDesc of then.autoDtlDesc">{{aDWDesc.description}}</option>
+            </optgroup>
+          </select> -->
+
+          <!-- <div class="dropdown">
+                <input [disabled]="whenInputType == 'quiz' || 'webinar'" class="form-control dropbtn" type="text" name="whenRuleFor" [(ngModel)]="whenRuleTitle">
+              </div> -->
+
+        </div>
+        <br />
+        <div class="dropdown" id="thenRuleTextBox" style="display: none">
+          <input [disabled]="disableThenInputs" class="form-control dropbtn" type="text" name="thenRule" [(ngModel)]="thenRuleDescription">
+        </div>
+        <div  id="thenRuleDropDown" style="display: none">
+          <app-dropdown 
+                        [dropdownData]="thenRuleData" 
+                        (selectedRuleOP)="onSelectedRule($event)"
+                        [automationRule]="automationRule">
+          </app-dropdown>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer" *ngIf="!disableThenInputs">
+      <button class="modelButton" align="middle" type="button" (click)="saveAutoMationRule()">
+        Save
+      </button>
+      <button *ngIf="deleteAutoRule == true && !disableThenInputs" class="modelButton" align="middle" type="button" (click)="deleteAutomationRule()">
+         Delete
+        </button>
+      <!-- <button class="modelButton" align="right" type="button" (click)="openModel(funnel)">
+        Cancel
+      </button> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,573 @@
+.funnel-create-page {
+  .main-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50px;
+    padding: 0;
+    padding-right: 10px;
+    position: relative;
+    &__back {
+      background-color: $bg1;
+      align-self: flex-start;
+      color: $text-dark;
+      border: none;
+      height: 100%;
+      flex-basis: 80px;
+      @include text(12px, 600, center);
+      @include transition;
+      .icon {
+        font-size: 11px;
+        @include transition;
+      }
+      &:hover {
+        .icon {
+          transform: translateX(-5px);
+        }
+      }
+    }
+
+    &__heading {
+      justify-self: center;
+      flex-grow: 1;
+      @include text(16px, 600, center);
+      margin-bottom: 0;
+    }
+
+    &__actions {
+      button {
+        height: 30px;
+      }
+      .btn-secondary {
+        @include btn-rev;
+        margin: 0;
+        width: 85px;
+        border-color: $primary-dark;
+        color: $primary-dark;
+      }
+      .btn-primary {
+        @include mid-btn;
+        margin: 0 20px;
+      }
+    }
+  }
+
+  .nav {
+    background-color: #fff;
+    width: 100%;
+    padding: 0 25px;
+    justify-content: center;
+    &-link {
+      @include text(13px, 600, left);
+      color: $text-dark;
+      opacity: 0.5;
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      @include transition;
+
+      &.active {
+        opacity: 1;
+        color: $text-dark;
+        position: relative;
+        border-bottom: 2px solid $primary-dark;
+      }
+
+      &:hover {
+        color: $text-dark;
+        opacity: 1;
+      }
+    }
+  }
+
+  #funnelCreate {
+    padding: 40px 25px;
+    margin: 0;
+    background: url('../assets/images/funnel-pattern.svg') repeat;
+    background-position: 20px 20px;
+
+    .funnel-checklist {
+      border: $border;
+      background-color: #fff;
+      padding: 20px 15px;
+      &__title {
+        @include text(16px, 600, center);
+        border-bottom: $border;
+        margin: 0;
+        padding-bottom: 20px;
+      }
+      &__progress {
+        margin: 10px 0;
+        .steps-done {
+          font-size: 11px;
+          color: $primary-dark;
+        }
+        .bar {
+          background-color: #e1e1e1;
+          height: 8px;
+          border-radius: 8px;
+          position: relative;
+
+          .done {
+            height: 8px;
+            background-color: $action;
+            border-radius: 8px;
+            width: 60%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 55;
+            display: inline-block;
+          }
+        }
+      }
+      &__steps {
+        flex-direction: column;
+        padding: 0;
+        .nav-link {
+          padding: 15px 0;
+          opacity: 1;
+          .icon {
+            margin-right: 10px;
+            &::before { color: #E1E1E1; }
+          }
+
+          &.active {
+            border: none;
+            .icon {
+              &::before { color: $action; }
+            }
+          }
+        }
+      }
+    }
+
+    .funnel-stats {
+      background-color: #fff;
+      margin: auto;
+      position: relative;
+      max-width: 500px;
+      padding: 10px 0;
+      border: $border;
+
+      &__title {
+        color: $primary-dark;
+        @include text(14px, 600, center);
+        padding-bottom: 20px;
+        margin-bottom: 0;
+        border-bottom: $border;
+      }
+
+      .stats {
+        @include reset-ul;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        color: $text-neu;
+        @include text(14px, 600, center);
+
+        &__num {
+          font-size: 24px;
+          color: $primary-dark;
+          display: block;
+        }
+        &__item {
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    .funnel-step {
+      box-shadow: $shadow;
+      border-radius: 4px;
+      background-color: #fff;
+      margin: auto;
+      position: relative;
+      max-width: 500px;
+      min-height: 220px;
+      &:not(:first-child) {
+        margin-top: 70px;
+      }
+      &:not(:last-child):after {
+        content: '';
+        position: absolute;
+        bottom: -70px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 2px;
+        height: 70px;
+        background-color: $text-light;
+      }
+      .funnel-add {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        bottom: -42px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        &::before {
+          content: '+';
+          position: absolute;
+          background-color: $text-light;
+          border-radius: 100%;
+          color: #fff;
+          z-index: 55;
+          text-align: center;
+          line-height: 0.9;
+          cursor: pointer;
+          width: 15px;
+          height: 15px;
+        }
+      }
+      
+      .card-head {
+        border-bottom: $border;
+        padding: 10px 15px;
+        color: $text-dark;
+        align-items: center;
+        max-height: 45px;
+      }
+      &__side-info {
+        @include text(12px, 600, left);
+        margin: 0;
+      }
+      &__title {
+        font-weight: 600;
+        text-align: center;
+        flex-grow: 1;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .menu {
+        position: relative;
+        width: 79px;
+        .menu-btn {
+          float: right;
+          background-color: transparent;
+          border: none;
+          padding: 0;
+          width: 30px;
+          &:hover .zu-dotted-menu {
+            background-color: $action;
+          }
+        }
+        .zu-dotted-menu {
+          width: 4px;
+          height: 4px;
+          background-color: $text-light;
+          border-radius: 100%;
+          position: relative;
+          @include transition;
+
+          &::after {
+            @extend .zu-dotted-menu;
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: 0;
+          }
+          &:before {
+            @extend .zu-dotted-menu, ::after;
+            right: auto;
+            left: -8px;
+          }
+        }
+        .dropdown-menu {
+          right: 0;
+          left: auto;
+          top: 20px;
+          text-transform: capitalize;
+          @include dropdown;
+        }
+      }
+
+      .card-img {
+        margin: 20px 0 40px 0;
+        box-shadow: $shadow;
+        background-color: $bg2;
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+        .svg-icon {
+          height: 80px;
+          width: 100%;
+        }
+      }
+      .card-content {
+        padding: 20px 0;
+        height: 100%;
+        position: relative;
+        .icon {
+          font-size: 30px;
+          cursor: pointer;
+          margin-right: 20px;
+          .path1:before {
+            color: #E6BA73 !important;
+          }
+        }
+        .add {
+          background-color: #fff;
+          border: 1px dotted $text-neu;
+          border-spacing: 2px;
+          color: $text-neu;
+          width: 30px;
+          height: 30px;
+          border-radius: 100%;
+          font-size: 20px;
+          line-height: initial;
+        }
+        p {
+          font-size: 12px;
+          color: $text-dark;
+          margin-bottom: 10px;
+        }
+        .views {
+          position: absolute;
+          bottom: 20px;
+          left: 0;
+          display: inline-block;
+          @include text(12px, 400, left);
+          color: $text-light;
+
+          .num {
+            @include text(14px, 600, center);
+            display: block;
+            color: $text-dark;
+          }
+        }
+        .funnel__status {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          color: $text-light;
+          font-size: 12px;
+          .icon {
+            font-size: 14px;
+            &::before {
+              color: $text-light;
+            }
+          }
+          li {
+            display: inline-flex;
+            &:not(:first-child) {
+              padding-left: 20px;
+              margin-left: 20px;
+              border-left: $border;
+            }
+          }
+          .status {
+            width: 10px;
+            height: 10px;
+            margin-right: 10px;
+            margin-top: 3px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+
+            &.active {
+              background-color: $action;
+            }
+
+            &.draft {
+              background-color: $text-light;
+            }
+
+            &.archived {
+              background-color: $alert;
+            }
+          }
+        }
+      }
+      .funnel__info--analytics  {
+        overflow: hidden;
+        width: max-content;
+        margin: 10px auto;
+        &:not(.item) {
+          padding-top: 10px;
+          border-top: $border;
+        }
+        .item {
+          color: $text-neu;
+          text-transform: capitalize;
+        }
+      }
+      .quiz-btns {
+        .primary-btn {
+          @include sm-btn;
+          display: block;
+          width: 150px;
+          font-weight: 400;
+          background-color: $primary-dark;
+          &.reversed {
+            @include secondary-btn;
+            margin: 10px 0;
+            font-weight: 400;
+            border-color: $primary-dark;
+            color: $primary-dark;
+          }
+        }
+      }
+      .funnel__status {
+        float: unset;
+      }
+      &.emails {
+        &::before {
+          content: none;
+        }
+        .funnel-step__side-info {
+          opacity: 0;
+        }
+        .card-content {
+          padding: 0;
+        }
+        .emails__analytics {
+          margin: 0;
+          li {
+            font-size: 12px;
+            display: block;
+            color: $text-neu;
+            border-right: none;
+            padding: 5px 0;
+            margin: 0;
+            border-left: none;
+            &:last-child {
+              border: none;
+            }
+            strong {
+              color: $text-dark;
+              font-weight: 600;
+            }
+          }
+        }
+        .card-img {
+          box-shadow: unset;
+          .zu-envlope-stack {
+            display: block;
+            text-align: center;
+            font-size: 60px;
+          }
+        }
+      }
+      &.webinar {
+        strong {
+          font-size: 12px;
+        }
+        .funnel__status--info {
+          margin: 0;
+          li:not(.item){
+            overflow: unset;
+            border-top: none;
+            text-transform: capitalize;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 0;
+            margin-right: 10px;
+          }
+          .icon {
+            font-size: 10px;
+            margin-right: 10px;
+          }
+        }
+      }
+      .on-bottom {
+        position: absolute;
+        bottom: 20px;
+      }
+    }
+    .funnel-separated {
+      position: relative;
+      .funnel-add {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        bottom: -20px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        &::before {
+          content: '+';
+          position: absolute;
+          background-color: $text-light;
+          border-radius: 100%;
+          color: #fff;
+          z-index: 55;
+          text-align: center;
+          line-height: 0.9;
+          cursor: pointer;
+          width: 15px;
+          height: 15px;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          top: -32px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          width: 2px;
+          height: 80px;
+          background-color: $text-neu;
+        }
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: 70px;
+        border: 2px solid $text-neu;
+        width: 50%;
+        height: 442px;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 2px;
+        height: 70px;
+        background-color: $text-neu;
+      }
+      .funnel-step {
+        margin: 70px 0;
+        margin-top: 140px;
+      }
+    }
+    .funnel-end {
+      margin: auto;
+      margin-top: 70px;
+      background-color: #E1E1E1;
+      color: $text-dark;
+      @include text(14px, 600, center);
+      padding: 15px 0;
+      position: relative;
+      text-transform: capitalize;
+      width: 500px;
+      &::after {
+        content: '';
+        position: absolute;
+        top: -70px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 2px;
+        height: 70px;
+        background-color: $text-neu;
+      }
+    }
+  }
+}
+.dropdown-btn {
+  display: inline-block;
+  cursor: pointer;
+}

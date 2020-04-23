@@ -1,0 +1,88 @@
+<ngx-ui-loader></ngx-ui-loader>
+<!-- zu-content -->
+<main class="funnel-create-page">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <button class="main-header__back" (click)="onBack()">
+      <span class="icon zu-arrow-left"></span>
+      Back
+    </button>
+
+    <h2 class="main-header__heading" (mouseover)="showEditIcon=true" (mouseout)="showEditIcon=false">
+      {{funnel.funnelName}}
+      <span [hidden]="!showEditIcon" (click)="showUpdateFunnelTitleModal()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+    </h2>
+   
+    <div class="main-header__actions">
+      <!-- <button class="btn-secondary">Stats</button> -->
+      <button class="btn-secondary" (click)="copyUrl()">Copy link</button>
+    </div>
+
+  </header>
+  <!-- /Main Header -->
+
+  <nav class="nav">
+    <a class="nav-link active">Funnel Pages</a>
+    <a class="nav-link">Funnel Workflow</a>
+  </nav>
+
+  <!-- Main Content -->
+  <section id="funnelCreate" class="content">
+
+    <div class="row justify-content-center edit-ft-modal"  [hidden]="!showEditFunnelTitleModal">
+      <div class="col-md-10 type-card edit-ft-modal-content" style="padding: 15px 15px" >
+          <span class="close" (click)="closeEditFunnelTitleModal()">&times;</span>
+          <label class="label-text">Enter your Funnel Name</label>
+         
+          <input type="text" id="funnelName" name="funnelName" class="form-control"
+           
+            placeholder="Funnel Name" [(ngModel)]="funnel.funnelName" required>
+            <!-- <div *ngIf="funnelName.invalid && (funnelName.dirty || funnelName.touched)"
+            class="alert alert-danger">
+                <div *ngIf="funnelName.errors.required">
+                  Funnel Name is required.
+                </div>
+            </div> -->
+            <div class="save-btn" style="padding: 20px 0px;">
+                <a href="javascript" data-toggle="collapse" class="btn btn-success btn-sm float-right"
+                  (click)="updateFunnelTitle();">Update Funnel Title</a>
+            </div>
+
+        </div>
+      </div>
+
+    <div class="row">
+      <div class="col-sm-3 position-absolute" [ngStyle]="{'z-index': !showEditFunnelTitleModal ? 9999 : 0}">
+        <aside class="funnel-checklist">
+          <h4 class="funnel-checklist__title">Funnel Checklist</h4>
+
+          <div class="funnel-checklist__progress">
+            <span class="steps-done">Step {{validSteps}} of {{statusKeys.length}}</span>
+            <div class="bar">
+            <span class="done" [ngStyle]="completionWidth"></span>
+            </div>
+          </div>
+
+          <nav class="funnel-checklist__steps nav">
+            <a *ngFor="let step of funnelSteps" class="nav-link active" (click)="scrollToView(step.stepDetailTitle)"> 
+              <span class="icon zu-correct" *ngIf="!moduleStatus[step.stepDetailTitle.toUpperCase()]"></span>
+              <span class="icon zu-correct-g" *ngIf="moduleStatus[step.stepDetailTitle.toUpperCase()] == 'VALID'"></span>
+              <i class="fa fa-exclamation-circle" style="font-size:18px;color:red;margin-right: 10px;" *ngIf="moduleStatus[step.stepDetailTitle.toUpperCase()] == 'INVALID'"></i>
+              {{step.stepDetailTitle}}
+            </a>
+          </nav>
+        </aside>
+      </div>
+      <div class="col-sm-12 row justify-content-center">
+        <div class="container" >
+          <app-funnel-fragments  [fragments]="fragments" ></app-funnel-fragments>
+        </div>
+      </div>
+      <div class="row funnel-end justify-content-center" style="margin-top: 70px !important;">
+        End of funnel
+      </div>
+    </div>
+  </section>
+</main>

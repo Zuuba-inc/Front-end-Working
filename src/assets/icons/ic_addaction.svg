@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="30" height="30" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Symbol_7_4" data-name="Symbol 7 – 4" clip-path="url(#clip-path)">
+    <g id="Ellipse_218" data-name="Ellipse 218" fill="none" stroke="#b0b5c3" stroke-width="1" stroke-dasharray="4">
+      <circle cx="15" cy="15" r="15" stroke="none"/>
+      <circle cx="15" cy="15" r="14.5" fill="none"/>
+    </g>
+    <g id="Group_1284" data-name="Group 1284" transform="translate(-506.56 -300.06)">
+      <path id="Path_237" data-name="Path 237" d="M5.186-1.765H.656v-2h4.53V-8.333H7.234V-3.76h4.541v2H7.234V2.786H5.186Z" transform="translate(515.344 318.333)"/>
+    </g>
+  </g>
+</svg>

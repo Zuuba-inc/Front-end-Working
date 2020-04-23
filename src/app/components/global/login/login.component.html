@@ -1,0 +1,52 @@
+<section id="lead" width="100%">
+    <div>
+
+      <div>
+        
+        <div class="login">
+
+          <div class="login__body">
+            
+            <div class="login__body--register">
+            
+              
+              <div *ngIf="message != null || message != ''" [innerHTML]="message" class="validationError"></div>    
+              <br/>
+              <button class="register-fb" (click)="socialLogin('Facebook')">
+                <span class="icon cf-facebook"></span>
+                Continue with Facebook
+              </button>
+
+              <button class="register-gl" (click)="socialLogin('Google')">
+                <span class="icon cf-google">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span
+                    class="path4"></span>
+                </span>
+                Continue with Google
+              </button>
+              <!--<div class="g-signin2" data-width="315" data-onsuccess="onSignIn" data-text="text" id="googleDiv"></div>-->
+              <span class="or">OR</span>
+
+              <fieldset class="email-input">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email" [(ngModel)]="login.username">
+              </fieldset>
+
+              <fieldset class="email-input">
+                <label for="email">Password</label>
+                <input type="password" name="email" id="email" [(ngModel)]="login.password">
+              </fieldset>
+
+
+              <button type="submit" class="signup" (click)='onloginButtonclick();'>Login</button>
+            </div>
+            <small style="float: left;">Privacy Policy</small>
+            <small style="float: right;">Powered by <strong>Coachforce</strong></small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</section>
+
+<ngx-ui-loader></ngx-ui-loader>

@@ -1,0 +1,374 @@
+.start-screen-btn {
+    background-color: #0B8B8C !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    border: none !important;
+    width: 40% !important;
+    height: 40% !important;
+    border-radius: 4px !important;
+    -webkit-transition: all 0.25s ease-in !important;
+    -moz-transition: all 0.25s ease-in !important;
+    -o-transition: all 0.25s ease-in !important;
+    transition: all 0.25s ease-in !important;
+    /* width: 130px !important;
+    height: 30px !important;
+    width: 70px !important; */
+    margin-right: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.hide {
+    display: none; 
+}
+
+.show {
+    display: block; 
+}
+
+/* .OT_publisher, .OT_subscriber {
+    position: relative;
+    min-width: 48px;
+    min-height: 48px;
+    width: 100% !important;
+    height: 100% !important;
+} */
+
+.message__img p{
+    margin-top: 3px;
+    margin-bottom: 1rem;
+    margin-left: 5px;
+    font-size: 12px;
+}
+/* ul{
+    padding: 0;
+    list-style: none;
+    background: #f2f2f2;
+}
+ul li{
+    display: inline-block;
+    position: relative;
+    line-height: 21px;
+    text-align: left;
+}
+ul li a{
+    display: block;
+    padding: 8px 25px;
+    color: #333;
+    text-decoration: none;
+}
+ul li a:hover{
+    color: #fff;
+    background: #939393;
+} */
+ul li div.dropdown{
+    min-width: 100%; /* Set width of the dropdown */
+    background: #f2f2f2;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+}
+ul li:hover div.dropdown{
+    display: block;	/* Display the dropdown */
+}
+ul li div.dropdown div{
+    display: block;
+}
+
+li.actions__item.presentation-drop-down:hover + .dropdown-menu {
+  display: block !important;
+}
+
+.webinar-header {
+    z-index: 9999 !important;
+}
+
+/* <style> */
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* </style> */
+
+/* start of opentok css examples */
+app-publisher, app-subscriber {
+    display: block;
+    float: left;
+  }
+  
+   /* new nav styles */
+   .cross-navigation {
+    font-size: 12px;
+    border-right: 1px solid #e1e1e1;
+    padding: 8px 15px;
+    background-color: #fff;
+    color: #363636;
+    height: 50px;
+    width: 70%;
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+  }
+  .cross-navigation p {
+    margin: 0;
+  }
+  .cross-navigation .cf-arrow-right {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    transform: rotateZ(-90deg);
+    -webkit-transform: rotateZ(-90deg);
+    -moz-transform: rotateZ(-90deg);
+  }
+  .cross-navigation .cf-arrow-right::before {
+    color: #363636 !important;
+  }
+  .create-quiz__actions--back {
+    float: none !important;
+    margin-top: 0 !important;
+    width: 35%;
+    padding-left: 10px;
+    align-self: center;
+  }
+  .create-quiz__actions {
+    display: flex !important;
+    padding: 0 !important;
+  }
+  .create-quiz__setup-title {
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 0 15px;
+  }
+  .content .inner-header {
+    text-align: center !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
+#textchat {
+    position: relative;
+    width: 20%;
+    float: right;
+    right: 0;
+    height: 100%;
+}
+#history {
+     width: 100%;
+     height: calc(100% - 40px);
+     overflow: auto;
+     position: relative;
+}
+input#msgTxt {
+            height: 40px;
+            bottom: 0;
+            width: 100%;
+}
+
+/* end of css form opentok demo component */
+
+/* toggle side chat */
+#webinar-live .tabs {
+  width: inherit;
+  -webkit-transition: display 2s; /* For Safari 3.1 to 6.0 */
+  transition: display 2s;
+}
+
+
+.countdown {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.countdown > div { display: inline-block; }
+
+.countdown > div > span {
+  display: block;
+  text-align: center;
+}
+
+.countdown-container { margin: 0 3px; }
+
+/*.countdown-container .countdown-heading {
+  font-size: 8px;
+  margin: 3px;
+  color: #666
+}*/
+.countdown-container .countdown-heading {
+    font-size: 14px;
+    margin: 3px;
+    color: #666;
+    width: 55px;
+}
+.countdown-container .countdown-value {
+  font-size: 30px;
+  background: #333;
+  padding: 10px;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+  border-radius:5px;
+}
+
+#webinar-live .side-togglers {
+  left: -30px;
+  top: 10px;
+}
+#clinetLoader{
+  width:100%;
+  height:100%;
+  text-align: center;
+  padding-top: 100px;
+  background-color: white;
+}
+.zu-arrow-right, .zu-arrow-left {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  font-size: 15px;
+  line-height: 50px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in;
+  -moz-transition: all 0.25s ease-in;
+  -o-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+  z-index: 55;
+}
+
+.zu-arrow-right::before, .zu-arrow-left::before {
+  color: #959595;
+}
+
+.zu-arrow-right:hover, .zu-arrow-left:hover {
+  transform: translateX(15px);
+}
+
+.zu-arrow-left {
+  left: 30px;
+  right: unset;
+}
+
+.zu-arrow-left:hover {
+  transform: translateX(-15px);
+}
+
+.zu-arrow-right {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  transform: rotateZ(-90deg);
+  -webkit-transform: rotateZ(-90deg);
+  -moz-transform: rotateZ(-90deg);
+}
+
+.zu-arrow-right {
+  /* transform: rotateZ(180deg); */
+  font-size: 10px;
+}
+
+.zu-arrow-down:before {
+  content: "\e9a5";
+  color: #692db7;
+}
+.zu-arrow-left:before {
+  content: "\e9a6";
+  color: #692db7;
+}
+.zu-arrow-right:before {
+  content: "\e9a7";
+  color: #692db7;
+}
+.zu-arrow-top:before {
+  content: "\e9a8";
+  color: #692db7;
+}
+
+/* .zu-arrow-right::before {
+  color: #363636 !important;
+} */
+
+/* .zu-arrow-right, .zu-arrow-left {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.16);
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  font-size: 15px;
+  line-height: 50px;
+  cursor: pointer;
+  @include transition;
+  z-index: 55; */
+  /* &::before {
+    color: $text-light;
+  }
+  &:hover {
+    transform: translateX(15px);
+  } */
+/* } */
+/* .zu-arrow-left {
+  left: 30px;
+  right: unset; */
+  /* &:hover {
+    transform: translateX(-15px);
+  } */
+/* } */
+
+@media all and (max-width: 768px) {
+  #webinar-live .side-panel {
+    right: 0 !important;
+    min-width: 240px;
+  }
+  #webinar-live.side-closed .side-panel {
+    right: -240px !important;
+  }
+  #webinar-live .tabs .chat-box {
+    width: 240px;
+  }
+}

@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+  }
+
+  .skipText {
+    display: inline-block;
+    margin-left: 45%;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue !important;
+    text-decoration: underline !important;
+}

@@ -1,0 +1,96 @@
+#funnelType {
+  
+  margin-top: 61px;
+  .header {
+    text-align: center;
+    .title {
+      @include text(20px, 700, center);
+      color: $text-dark;
+      margin-bottom: 24px;
+    }
+    .desc {
+      color: $text-light;
+    }
+  }
+
+  .type-card {
+    margin: 8px 0;
+    padding: 15px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    @include transition;
+    &:hover {
+      box-shadow: $shadow;
+    }
+    .card-icon {
+      display: block;
+      height: 100%;
+      &::before {content: none;}
+      &.zu-multimedia {
+        background: url('../assets/icons/webinar-cam.svg') no-repeat center;
+      }
+      &.zu-webinar-plan {
+        background: url('../assets/icons/webinar-quiz.svg') no-repeat center;
+      }
+      &.zu-action-plan {
+        background: url('../assets/icons/action-plan.svg') no-repeat center;
+      }
+      &.zu-multiple-plans {
+        background: url('../assets/icons/quiz-action-plan.svg') no-repeat center;
+      }
+      &.zu-sales-page {
+        background: url('../assets/icons/sales.svg') no-repeat center;
+      }
+      &.zu-open-book {
+        background: url('../assets/icons/e-book.svg') no-repeat center;
+      }
+      &.zu-blank-funnel {
+        background: url('../assets/icons/blank-webinar.svg') no-repeat center;
+      }
+    }
+
+    &__title {
+      @include text(20px, 700, left);
+      color: $text-dark;
+    }
+    &__text {
+      font-size: 12px;
+      color: $text-light;
+      max-width: 80%;
+    }
+
+    &__steps {
+      @include reset-ul;
+      display: flex;
+      flex-wrap: wrap;     
+      padding-right: 20px;
+      
+      .step {
+        font-size: 10px;
+        text-align: center;
+        text-transform: capitalize;
+        color: $primary-dark;
+        position: relative;
+        width: 60px;
+        margin-top: 10px;
+        margin-right: 10px;
+
+        &:not(:last-child)::before {
+          content: "\e9a7";
+          position: absolute;
+          right: -7px;
+          top: 5px;
+          color: $bg3;
+          font-family: 'zuuba' !important;
+          font-size: 8px;
+        }
+
+        .icon {
+          font-size: 18px;
+          display: block;
+        }
+      }
+    }
+  }
+}

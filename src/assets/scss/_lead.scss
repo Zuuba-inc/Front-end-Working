@@ -1,0 +1,45 @@
+#lead {
+  @extend #questions;
+
+  .chars-count { color: $text-light; }
+
+  .setting {
+
+    textarea {
+      height: 60px;
+    }
+    
+    &__action {
+      input {
+        @include input-box;
+        width: 100%;
+        height: 30px;
+      }
+      padding-bottom: 20px;
+    }
+  }
+
+  .live-preview {
+
+    &__header {
+      width: calc(100% - 150px - 33.333%);
+    }
+
+    &__headers {
+      @include component_live-preview-headers;
+    }
+  }
+  .login {
+    @include component_login;
+    padding-bottom: 40px;
+
+    &__headers {
+      @include component_live-preview-headers;
+      padding-top: 0;
+    }
+
+    &__body {
+      width: 380px;
+    }
+  }
+}

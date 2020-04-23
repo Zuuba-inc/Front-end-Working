@@ -1,0 +1,72 @@
+
+<label>
+  <input type="file" id="file" (change)="handleFileInput($event)" style="display: none">
+<br />
+<p class="validationError" id="ImageOnlyWarning">
+  <span *ngIf="showImageMessage">*Only Images are allowed</span>
+  <span *ngIf="showPdfMessage">*Only Pdfs are allowed</span>
+  <span *ngIf="videoAllowed">*Video should be of max {{allowedVideoSize}}MB</span>
+  <span *ngIf="showFileErrorMessage">You can only select docs and zip file</span>
+</p>
+<span [ngClass]="{'settings-upload': settings, 'setting__image--upload': !settings}">
+
+    <!-- class="setting__image--upload" -->
+
+  <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+
+    <span class="heading">
+
+      <span class="icon cf-image"></span>
+      <span class="upload-text">
+        <br />
+        <span *ngIf="!showFile && !showImage">Drag Image / Video to Upload</span>
+        <span *ngIf="showFile">Drag File to Upload</span>
+        <span *ngIf="showImage">Drag Image to upload</span>
+        <br />
+        or <strong>Click Here</strong></span>
+    </span>
+  </file-drop>
+</span>
+</label>
+
+<div *ngIf="cropImage" id="outcomeImageModal" class="crop-modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+      <p *ngIf="!sizeInLimit" class="validationError" id="outcomeImageSizeWarning">
+        <span *ngIf="imageAllowed">*Image should be of max {{allowedImageSize}}MB</span>
+        <span *ngIf="videoAllowed">*Video should be of max 5MB</span>
+        
+      </p>
+      
+      <div class="cropArea" style="width: 500px; height:300px;">
+
+          <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 3"
+              [resizeToWidth]="800"
+              [cropperMinWidth]="128"
+              [onlyScaleDown]="true"
+              [roundCropper]="false"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+              style="width: inherit; height: inherit;"
+          ></image-cropper>
+
+      </div>
+      <div class="row" style="border-bottom: none;">
+        <div class="col-sm-6" style="text-align: center;">
+          <button class="border-btn live-preview__quiz--btn" (click)="closeModel('Close')" style="background: white;
+          color: black;
+          border: 1px solid;">Cancel</button>
+        </div>
+        <div class="col-sm-6" [ngStyle]="{'display': displaySet}" style="text-align: center;">
+          <button class="live-preview__quiz--btn" (click)="closeModel('OK')"
+          [disabled]="!sizeInLimit" [ngClass]="{'display': displaySet, 'disableModalSelect' : !sizeInLimit, 'live-preview__quiz--btn': sizeInLimit}">Select</button>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+main {
+  font-family: $font;
+  overflow: hidden;
+  // background-color: $bg2;
+  min-height: 100vh;
+  position: relative;
+
+  .content {
+    margin-left: 255px;
+    margin-top: 61px;
+    margin-right: 8%;
+    padding: 30px 0;
+  }
+}
+
+input::placeholder, textarea::placeholder {
+  font-size: 12px;
+}
+body {
+  background-color: #f6f6f6;
+}
+
+.transition {
+  @include transition;
+}

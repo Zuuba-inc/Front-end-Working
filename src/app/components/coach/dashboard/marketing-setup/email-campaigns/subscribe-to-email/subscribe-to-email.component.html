@@ -1,0 +1,70 @@
+<div class="split left">
+  <div class="centered">
+    <img src="assets/icons/ic_emailsmile.png" alt="Envolope">
+  </div>
+</div>
+
+<div class="split right">
+  <div class="centered">
+    <h2>All Subscription for {{userData.email}}</h2>
+    <p style="font-weight: 600;">Use the button below to unsubscribe from individual campaigns or from all mailings.</p>
+    <p style="font-size: 12px;">Your <b>{{userData.name}}</b> subscriptions</p>
+  
+    <div style="font-size: 14px; border: 1px solid  #e0d9d9; padding: 5px;margin-bottom: 10px;" id="subscribedSuccessfully">
+      <b>{{emailCampaign.emailCapaignTitle}}</b>
+      <span  *ngIf="reactivateCampaign == false">
+      <button class="cancel"  style="height: 20%;float: right;
+        margin-top: 0px;" (click)="unsubscribeFromEmail(emailCampaign);">
+        Unsubscribe</button>
+        <button style="height: 20%;
+        background-color: #0B8B8C;    float: right;
+        margin-top: 0px;min-width: 20%;" class="unsubscribeBtn">
+        Active</button>
+      </span>
+      <span *ngIf="reactivateCampaign == true">
+        <button class="cancel"  style="height: 20%;float: right;margin-top: 0px;" (click)="unsubscribeFromEmail(emailCampaign,'Reactivate');">
+          Re-Activate</button>
+        <button style="height: 20%;background-color: #e0d9d9;float: right;color:black;
+        margin-top: 0px;min-width: 20%;" class="unsubscribeBtn">
+        Unsubscribed</button>
+      </span>
+        
+    </div>
+    <div id="unSubscribedSuccessfully">
+      <div style="font-size: 14px; border: 1px solid  #e0d9d9; padding: 5px;margin-bottom: 10px;" 
+           *ngFor="let email of unsubscribedEmailCampaigns">
+        <b>{{email.emailCampaignMst.emailCapaignTitle}}</b>
+        <span  *ngIf="email.subscribed == true">
+        <button class="cancel"  style="height: 20%;float: right;
+          margin-top: 0px;" (click)="unsubscribeFromEmail(email);">
+          Unsubscribe</button>
+          <button style="height: 20%;
+          background-color: #0B8B8C;    float: right;
+          margin-top: 0px;min-width: 20%;" class="unsubscribeBtn">
+          Active</button>
+        </span>
+        <span *ngIf="email.subscribed == false">
+          <button class="cancel"  style="height: 20%;float: right;margin-top: 0px;" (click)="unsubscribeFromEmail(email,'Reactivate');">
+            Re-Activate</button>
+          <button style="height: 20%;background-color: #e0d9d9;float: right;color:black;
+          margin-top: 0px;min-width: 20%;" class="unsubscribeBtn">
+          Unsubscribed</button>
+        </span>
+          
+      </div>
+    </div>
+   
+    <!-- <div style="font-size: 14px; border: 1px solid  #e0d9d9; padding: 5px;margin-bottom: 10px;" >
+      <b>{{emailCampaign.emailCapaignTitle}}</b>
+      
+    </div> -->
+    <div>
+      <button class="unsubscribeBtn" (click)="unsubscribeFromEmail(null,'UnsubscribeFromALl');">
+      Unsubscribe From all Mallings</button>
+      <button class="cancel" [routerLink]="['/changeSubscriberDetails']">
+      Update my details</button>
+    </div>
+  </div>
+ 
+</div>
+<ngx-ui-loader></ngx-ui-loader>

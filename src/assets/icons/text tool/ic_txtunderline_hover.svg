@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic_txtunderline_hover" transform="translate(2115 2723)">
+    <rect id="Rectangle_2782" data-name="Rectangle 2782" width="24" height="24" rx="4" transform="translate(-2115 -2723)" fill="#e1e1e1"/>
+    <g id="Group_2081" data-name="Group 2081" transform="translate(-93 40.528)">
+      <path id="Path_1673" data-name="Path 1673" d="M7.274-10.708V-6.24A2.466,2.466,0,0,1,6.912-4.9a2.319,2.319,0,0,1-1.047.883,3.935,3.935,0,0,1-1.62.307,3.218,3.218,0,0,1-2.19-.683,2.354,2.354,0,0,1-.78-1.868v-4.449H2.819v4.227a1.7,1.7,0,0,0,.34,1.171,1.461,1.461,0,0,0,1.125.373,1.428,1.428,0,0,0,1.1-.376A1.71,1.71,0,0,0,5.729-6.49v-4.218Z" transform="translate(-2014.274 -2745.82)" fill="#363636"/>
+      <g id="Rectangle_2754" data-name="Rectangle 2754" transform="translate(-2014 -2747.528)" fill="#363636" stroke="#363636" stroke-width="1">
+        <rect width="8" height="1" stroke="none"/>
+        <rect x="0.5" y="0.5" width="7" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

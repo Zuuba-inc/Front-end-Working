@@ -1,0 +1,1208 @@
+<div class="outcomeMappingLine" id="branchingMappingLineA"></div>
+<div class="outcomeMappingLine" id="branchingMappingLineB"></div>
+<div class="outcomeMappingLine" id="branchingMappingLineC"></div>
+<div class="outcomeMappingLine" id="branchingMappingLineD"></div>
+<div class="outcomeMappingLine" id="branchingMappingLineE"></div>
+<div class="outcomeMappingLine" id="branchingMappingLineF"></div>
+
+<div class="outcomeMappingLine" id="outcomeMappingLineA"></div>
+<div class="outcomeMappingLine" id="outcomeMappingLineB"></div>
+<div class="outcomeMappingLine" id="outcomeMappingLineC"></div>
+<div class="outcomeMappingLine" id="outcomeMappingLineD"></div>
+<div class="outcomeMappingLine" id="outcomeMappingLineE"></div>
+<div class="outcomeMappingLine" id="outcomeMappingLineF"></div>
+
+<section id="questions" style="height: 40pc" class="content content-mapping">
+    <header class="inner-header">
+        <h2 class="questionSetupForm">questions</h2>
+        <button style="display:none" type="button" class="resetPreviewBtn backButton" (click)="backPreview('questionSetupForm','questions','previewQuestion');"><span class="icon cf-arrow-right"></span> Back</button>
+        <!-- <button class="preview-btn questionSetupForm" (click)="preview('questionSetupForm','questions','previewQuestion')">Preview</button> -->
+    </header>
+
+    <div class="row no-gutters">
+        <div class="col-lg-5 questionSetupForm">
+
+            <form class="setting" style="padding: 10px !important" #questionForm="ngForm">
+                <div (click)="changeMultivariationNumber('Change')">Change Multi-Variation</div>
+                <div class="setting__quiz-variation pad-quiz-e" *ngIf = "showMultiVariationDropDown == true">
+                    <span>How many question variation path do you want in your quiz?</span>
+                    <label for="quiz-variation">Multi-Variation Quiz Path
+                      <span class="cf-info"
+                        title="Create multiple quiz paths to segment your audience into buckets. (ie. Create 2 quiz paths for Males & Females with  variation questions for each path)">i
+                      </span>
+                    </label>
+                    <br />
+                    <select class="setting__quiz-variation--select" [(ngModel)]="quizConfiguration.multiVariationNo"
+                      name="quiz-variation" id="quiz-variation" (ngModelChange)="updateQuizVarationArray()">
+                      <option value="1">One Path(Default)</option>
+                      <option *ngFor="let variation of quizVariationList" value="{{variation.number}}">{{variation.words}}
+                      </option>
+                    </select>
+
+                    <button *ngIf="showQuestionCreateButton == true" type="button" class="setting__save" (click)="changeMultivariationNumber('Create')">Create</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="setting__save" (click)="changeMultivariationNumber('Cancel')">Cancel</button>
+                  </div>
+               
+                <div *ngIf = "showMultiVariationDropDown == false">
+                <span class="setting__info">{{questionArray.length}} questions has been created</span>
+                <!-- <div *ngFor="let color of colors" [(dragDropList)]="colors">
+                    {{color}}
+                </div> -->
+                <div cdkDropList (cdkDropListDropped)="drop($event)" class="setting__created-questions question-group">
+                        <div *ngIf="!isMultiVaritionQuiz">
+                    <div *ngFor="let ques of questionArray;index as i" cdkDrag class="setting__created-questions--question grabbable">
+                      
+                        <div id="questionHeading{{i}}" (click)="editQuestion(ques,i,-1,'Edit')">
+                            <div class="qText cursorCss">
+                                <span class="q-num">Question {{ques.questionNo}} <span *ngIf="ques.variation"> -
+                                        {{ques.variation}}</span></span><br>
+                                <span class="asked-q">{{ques.questionDescription}}</span>
+                            </div>
+                            <div class="actions">
+                                <!-- <span class="icon cf-map branchingIcon" (click)="editQuestion(ques,i,-1,'Outcome')"></span>
+                                <span *ngIf="quizConfiguration.multiVariationNo != 1 && ques.questionNo > 1" class="icon cf-branch branchingIcon" (click)="editQuestion(ques,i,-1,'Branching')"></span>
+                                <span *ngIf="quizConfiguration.multiVariationNo == 1" class="icon cf-branch branchingIcon" (click)="editQuestion(ques,i,-1,'Branching')"></span> -->
+                                <span *ngIf="quizConfiguration.multiVariationNo != 1 && ques.variation == 'A' && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(ques)"></span>
+                                <span *ngIf="quizConfiguration.multiVariationNo == 1 && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(ques)"></span>
+                            </div>
+                        </div>
+                        <div class="new-question" id="editQuestion{{i}}" style="display:none">
+
+                            <div class="question-header dark-action">
+                                <span class="q-num">Question {{ques.questionNo}} {{ques.variation}}</span>
+                                <br />
+                                <!-- <span class="asked-q">why you need to learn?</span> -->
+                                <div class="actions">
+                                        <!-- <span *ngIf="quizConfiguration.multiVariationNo != 1 && ques.variation == 'A' && ques.questionNo > 2" class="icon cf-trash" (click)="deleteQuestion(ques)"></span>
+                                        <span *ngIf="quizConfiguration.multiVariationNo == 1 && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(ques)"></span> -->
+                                    <!-- <span class="icon cf-map" (click)="openMapping('Outcome','Old');"></span>
+                                    <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo != 1 && ques.questionNo > 1" (click)="openMapping('Branching','Old');"></span>
+                                    <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo == 1" (click)="openMapping('Branching','Old');"></span> -->
+                                    <span class="icon cf-trash"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="setting__title">
+                                <label for="quiz-title">Question</label>
+                                <span class="chars-count" id="editQuestionCharCount{{i}}">0/150</span>
+                                <br />
+                                <fieldset>
+                                    <textarea placeholder="Type here" required maxlength="150" name="questionDescription{{i}}" id="quiz-title-{{i}}" [(ngModel)]="ques.questionDescription" rows="3" (keyup)="keyupFunction('editQuestionCharCount'+i,ques.questionDescription,'questionDescPreview')">
+                                    </textarea >
+                                    <div *ngIf="ques.questionDescription == ''" class="validationError">
+                                            *Question description is required.
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="setting__answer">
+                                <label for="answer-type">Answer type</label>
+                                <br />
+                                <select class="setting__answer--select" name="answer-type" id="answer-type" [(ngModel)]="ques.answerTypeId" (change)="editChangeAnswerType(i, ques)">
+                                    <option value="1">Text answer</option>
+                                    <option value="2">Image & text answer</option>
+                                </select>
+
+                                <div class="setting__answer--preview">
+                                    <label for="answer">Answer</label>
+                                    <span class="chars-count" id="editAnswerCharCount{{i}}">0/200</span>
+                                    <div *ngIf="question.answerTypeId == '1' && question.quizAnswers.length > 0" class="created-answer">
+                                            <table>
+                                                    <tbody>
+                                                        <tr *ngFor="let answer of question.quizAnswers;index as j">
+                                                            <td>{{answer.answerNo}}</td>
+                                                            <td (click)="showAnswer(answer, j, i);"  style="cursor: pointer;"> {{answer.answerDescription}}</td>
+                                                            <td><span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                        <!-- <ol class="number-list">
+                                            <li *ngFor="let answer of question.quizAnswers;index as j">
+                                                <p (click)="showAnswer(answer, j, i);" style="cursor: pointer;">
+                                                    {{answer.answerDescription}}</p>
+                                                <span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span>
+                                                <hr>
+                                            </li>
+                                        </ol> -->
+                                    </div>
+
+                                    <div *ngIf="question.answerTypeId == '2' && question.quizAnswers.length > 0" class="created-answer imgAns">
+                                       
+                                        <div style="position: relative" *ngFor="let ans of question.quizAnswers; index as j">
+                                            <div id="imageAnswerSetupPreview{{j}}">
+                                                <strong style="float: left;">{{ans.answerNo}}.</strong>
+                                                <div class="imgDiv">
+                                                    <img src="{{ans.answerMediaAttached}}" style="width:80px">
+                                                </div>
+                                                <div class="imgDivText">
+                                                    <p style="cursor: pointer;" (click)="editAnswerImage(ans,j,i);">
+                                                        {{ans.answerDescription}}</p>
+                                                </div>
+                                                <span class="icon cf-trash del" (click)="deleteAnswer(ans,j)"></span>
+                                            </div>
+                                            <div class="setting__answer--preview" id="Imagetext{{j}}" style="display:none">
+                                                <div class="created-answer" id="addAnswerImageText{{j}}">
+                                                    <input type="text" class="imageAnswer" name="answerDescription" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'imageText'+answerIndex)"
+                                                    >
+                                                    <!-- <p class="validationError" ng-show="quizPage3.answerDescription.$invalid && quizPage3.answerDescription.$touched">Answer Description Is Required.</p> -->
+                                                    <span class="icon cf-trash"></span>
+                                                    <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                            *Answer description is required.
+                                                    </div>
+                                                </div>
+                                                <div class="setting__image">
+                                                    <div>
+
+                                                        <!-- file is output emitted from child component app-upload-file -->
+                                                        <app-upload-file [module]="questions" (file)="onFileUpload($event)"></app-upload-file>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <p class="validationError" ng-show="quizPage3.answerImageUpload.$invalid && quizPage3.answerImageUpload.$touched">Image Is required</p> -->
+
+                                                <button (click)="saveEditedAnswer()" class="setting__answer--new" id="addImageAnswer{{j}}">
+                                                    Save Answer
+                                                    <span class="icon cf-add"></span>
+                                                </button>
+                                                <button class="setting__answer--new" (click)="editAnswerImage(answer,j,i)">
+                                                    Cancel
+                                                    <span class="icon cf-add"></span>
+                                                </button>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setting__answer--preview answerType" id="text{{i}}" *ngIf="question.answerTypeId == 1">
+                                    <div class="created-answer">
+                                        <input type="text" class="anserType" name="newAnswerDescriptionText{{i}}" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" id="answer{{i}}" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'textAnswer'+answerIndex)"
+                                            >
+                                        <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                        <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                *Answer description is required.
+                                        </div>
+                                    </div>
+                                    <button (click)="addAnswer(i)" class="setting__answer--new">
+                                        Add answer
+                                        <span class="icon cf-add"></span>
+                                    </button>
+                                </div>
+                                <div class="setting__answer--preview answerType" id="AddNewImagetext{{i}}" *ngIf="question.answerTypeId == 2">
+                                    <div class="created-answer">
+                                        <input type="text" class="imageAnswer" name="newAnswerDescriptionText" required [(ngModel)]="answer.answerDescription" maxlength="200" id="answerImageText{{i}}" placeholder="Enter an answer" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'imageText'+answerIndex)"
+                                          >
+                                        <!-- <p class="validationError" ng-show="quizPage3.newAnswerDescriptionText.$invalid && quizPage3.newAnswerDescriptionText.$touched">Answer Description Is Required.</p> -->
+                                        <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                        <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                *Answer description is required.
+                                        </div>
+                                    </div>
+                                    <div class="setting__image">
+                                        <div>
+
+                                            <app-upload-file (file)="onFileUpload($event)">
+                                            </app-upload-file>
+                                        </div>
+                                    </div>
+                                    <p>*Image should be of max 2MB</p>
+                                    <!-- <p class="validationError" *ngIf="questionForm.quizImage.$invalid && quizPage1.quizImage.$touched">*Image Is required</p> -->
+
+                                    <button (click)="addAnswer(i)" class="setting__answer--new">
+                                        Add Image answer
+                                        <span class="icon cf-add"></span>
+                                    </button>
+                                </div>
+
+                                <!-- <div class="setting__answer--new">
+                            Add answer
+                            <span class="icon cf-add"></span>
+                        </div> -->
+
+                                <br />
+
+                                <button class="setting__save" [disabled]="ques.questionDescription == '' || question.quizAnswers.length == 0" (click)="saveQuestion()">Save Question</button>
+                                <button class="setting__back" (click)="cancelQuestionEditing(i,-1)">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    <!--Added by Vaishali-->
+                    
+                    <div *ngIf="questionOne" class="setting__created-questions--question">
+                            <div id="questionHeading1" (click)="editQuestion(questionOne,1,-1,'Edit')">
+                                    <div class="qText">
+                                        <span class="q-num">Question {{questionOne.questionNo}} <span *ngIf="ques.variation"> -
+                                                {{ques.variation}}</span></span><br>
+                                        <span class="asked-q">{{questionOne.questionDescription}}</span>
+                                    </div>
+                                    <div class="actions">
+                                        <!-- <span class="icon cf-map branchingIcon" (click)="editQuestion(questionOne,1,-1,'Outcome')"></span>
+                                        <span *ngIf="quizConfiguration.multiVariationNo != 1 && questionOne.questionNo > 1" class="icon cf-branch branchingIcon" (click)="editQuestion(questionOne,1,-1,'Branching')"></span>
+                                        <span *ngIf="quizConfiguration.multiVariationNo == 1" class="icon cf-branch branchingIcon" (click)="editQuestion(questionOne,i,j,'Branching')"></span> -->
+                                        <span *ngIf="quizConfiguration.multiVariationNo != 1 && questionOne.variation == 'A' && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(questionOne)"></span>
+                                        <span *ngIf="quizConfiguration.multiVariationNo == 1 && questionOne.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(questionOne)"></span>
+                                    </div>
+                                </div>
+                    
+                                <div class="new-question" id="editQuestion1" style="display:none">
+    
+                                        <div class="question-header dark-action">
+                                            <span class="q-num">Question {{questionOne.questionNo}} {{questionOne.variation}}</span>
+                                            <br />
+                                            <!-- <span class="asked-q">why you need to learn?</span> -->
+                                            <div class="actions">
+                                                <span class="icon cf-map" (click)="openMapping('Outcome','Old');"></span>
+                                                <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo != 1 && questionOne.questionNo > 1" (click)="openMapping('Branching','Old');"></span>
+                                                <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo == 1" (click)="openMapping('Branching','Old');"></span>
+                                                <!-- <span class="icon cf-trash"></span> -->
+                                            </div>
+            
+                                        </div>
+            
+                                        <div class="setting__title">
+                                            <label for="quiz-title">Question</label>
+                                            <span class="chars-count" id="editQuestionCharCount1">0/150</span>
+                                            <br />
+                                            <fieldset>
+                                                <textarea placeholder="Type here" required maxlength="150" name="questionOnetionDescription1" id="quiz-title-1" [(ngModel)]="questionOne.questionDescription" rows="3" (keyup)="keyupFunction('editQuestionCharCount1',questionOne.questionDescription,'questionDescPreview')">
+                                                </textarea >
+                                                <div *ngIf="questionOne.questionDescription == ''" class="validationError">
+                                                        *Question description is required.
+                                                </div>
+                                            </fieldset>
+                                        </div>
+            
+                                        <div class="setting__answer">
+                                            <label for="answer-type">Answer type</label>
+                                            <br />
+                                            <select class="setting__answer--select" name="answer-type" id="answer-type" [(ngModel)]="questionOne.answerTypeId" (change)="editChangeAnswerType(1, questionOne)">
+                                                <option value="1">Text answer</option>
+                                                <option value="2">Image & text answer</option>
+                                            </select>
+            
+                                            <div class="setting__answer--preview">
+                                                <label for="answer">Answer</label>
+                                                <span class="chars-count" id="editAnswerCharCount{{i}}">0/200</span>
+                                                <div *ngIf="question.answerTypeId == '1' && question.quizAnswers.length > 0" class="created-answer">
+                                                        <table>
+                                                                <tbody>
+                                                                    <tr *ngFor="let answer of question.quizAnswers;index as j">
+                                                                        <td>{{answer.answerNo}}</td>
+                                                                        <td (click)="showAnswer(answer, j, i);"  style="cursor: pointer;"> {{answer.answerDescription}}</td>
+                                                                        <td><span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                    <!-- <ol class="number-list">
+                                                        <li *ngFor="let answer of question.quizAnswers;index as j">
+                                                            <p (click)="showAnswer(answer, j, i);" style="cursor: pointer;">
+                                                                {{answer.answerDescription}}</p>
+                                                            <span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span>
+                                                            <hr>
+                                                        </li>
+                                                    </ol> -->
+                                                </div>
+            
+                                                <div *ngIf="question.answerTypeId == '2' && question.quizAnswers.length > 0" class="created-answer imgAns">
+                                                    <div style="position: relative" *ngFor="let ans of question.quizAnswers; index as j">
+                                                        <div id="imageAnswerSetupPreview{{j}}">
+                                                            <strong style="float: left;">{{ans.answerNo}}.</strong>
+                                                            <div class="imgDiv">
+                                                                <img src="{{ans.answerMediaAttached}}" style="width:80px">
+                                                            </div>
+                                                            <div class="imgDivText">
+                                                                <p style="cursor: pointer;" (click)="editAnswerImage(ans,j,1);">
+                                                                    {{ans.answerDescription}}</p>
+                                                            </div>
+                                                            <span class="icon cf-trash del" (click)="deleteAnswer(ans,j)"></span>
+                                                        </div>
+                                                        <div class="setting__answer--preview" id="Imagetext{{j}}" style="display:none">
+                                                            <div class="created-answer" id="addAnswerImageText{{j}}">
+                                                                <input type="text" class="imageAnswer" name="answerDescription" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" (keyup)="keyupFunction('editAnswerCharCount1',answer.answerDescription,'imageText'+answerIndex)"
+                                                                >
+                                                                <!-- <p class="validationError" ng-show="quizPage3.answerDescription.$invalid && quizPage3.answerDescription.$touched">Answer Description Is Required.</p> -->
+                                                                <span class="icon cf-trash"></span>
+                                                                <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                                        *Answer description is required.
+                                                                </div>
+                                                            </div>
+                                                            <div class="setting__image">
+                                                                <div>
+            
+                                                                    <!-- file is output emitted from child component app-upload-file -->
+                                                                    <app-upload-file [module]="questions" (file)="onFileUpload($event)"></app-upload-file>
+                                                                </div>
+                                                            </div>
+            
+                                                            <!-- <p class="validationError" ng-show="quizPage3.answerImageUpload.$invalid && quizPage3.answerImageUpload.$touched">Image Is required</p> -->
+            
+                                                            <button (click)="saveEditedAnswer()" class="setting__answer--new" id="addImageAnswer{{j}}">
+                                                                Save Answer
+                                                                <span class="icon cf-add"></span>
+                                                            </button>
+                                                            <button class="setting__answer--new" (click)="editAnswerImage(answer,j,1)">
+                                                                Cancel
+                                                                <span class="icon cf-add"></span>
+                                                            </button>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="setting__answer--preview answerType" id="text1" *ngIf="question.answerTypeId == 1">
+                                                <div class="created-answer">
+                                                    <input type="text" class="anserType" name="newAnswerDescriptionText1" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" id="answer1" (keyup)="keyupFunction('editAnswerCharCount1',answer.answerDescription,'textAnswer'+answerIndex)"
+                                                        >
+                                                    <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                                    <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                            *Answer description is required.
+                                                    </div>
+                                                </div>
+                                                <button (click)="addAnswer(i)" class="setting__answer--new">
+                                                    Add answer
+                                                    <span class="icon cf-add"></span>
+                                                </button>
+                                            </div>
+                                            <div class="setting__answer--preview answerType" id="AddNewImagetext1" *ngIf="question.answerTypeId == 2">
+                                                <div class="created-answer">
+                                                    <input type="text" class="imageAnswer" name="newAnswerDescriptionText" required [(ngModel)]="answer.answerDescription" maxlength="200" id="answerImageText1" placeholder="Enter an answer" (keyup)="keyupFunction('editAnswerCharCount1',answer.answerDescription,'imageText'+answerIndex)"
+                                                      >
+                                                    <!-- <p class="validationError" ng-show="quizPage3.newAnswerDescriptionText.$invalid && quizPage3.newAnswerDescriptionText.$touched">Answer Description Is Required.</p> -->
+                                                    <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                                    <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                            *Answer description is required.
+                                                    </div>
+                                                </div>
+                                                <div class="setting__image">
+                                                    <div>
+            
+                                                        <app-upload-file (file)="onFileUpload($event)">
+                                                        </app-upload-file>
+                                                    </div>
+                                                </div>
+                                                <p>*Image should be of max 2MB</p>
+                                                <!-- <p class="validationError" *ngIf="questionForm.quizImage.$invalid && quizPage1.quizImage.$touched">*Image Is required</p> -->
+            
+                                                <button (click)="addAnswer(i)" class="setting__answer--new">
+                                                    Add Image answer
+                                                    <span class="icon cf-add"></span>
+                                                </button>
+                                            </div>
+            
+                                            <!-- <div class="setting__answer--new">
+                                        Add answer
+                                        <span class="icon cf-add"></span>
+                                    </div> -->
+            
+                                            <br />
+            
+                                            <button class="setting__save" [disabled]="questionOne.questionDescription == '' || question.quizAnswers.length == 0" (click)="saveQuestion()">Save Question</button>
+                                            <button class="setting__back" (click)="cancelQuestionEditing(1,-1)">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                    <div *ngFor="let quest of questionArrayMulti;index as j" cdkDrag class="setting__created-questions--question grabbable">
+                       
+                                <div *ngFor="let ques of quest;index as i" >
+                            <div id="questionHeading{{i}}{{j}}">
+                                <div class="qText cursorCss" (click)="editQuestion(ques,i,j,'Edit')">
+                                    <span class="q-num">Question {{ques.questionNo}} <span *ngIf="ques.variation"> -
+                                            {{ques.variation}}</span></span><br>
+                                    <span class="asked-q">{{ques.questionDescription}}</span>
+                                </div>
+                                <div class="actions">
+                                    <!-- <span class="icon cf-map branchingIcon" (click)="editQuestion(ques,i,j,'Outcome')"></span>
+                                    <span *ngIf="quizConfiguration.multiVariationNo != 1 && ques.questionNo > 1" class="icon cf-branch branchingIcon" (click)="editQuestion(ques,i,j,'Branching')"></span>
+                                    <span *ngIf="quizConfiguration.multiVariationNo == 1" class="icon cf-branch branchingIcon" (click)="editQuestion(ques,i,j,'Branching')"></span> -->
+                                    <span *ngIf="quizConfiguration.multiVariationNo != 1 && ques.variation == 'A' && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(ques)"></span>
+                                    <span *ngIf="quizConfiguration.multiVariationNo == 1 && ques.questionNo > 1" class="icon cf-trash" (click)="deleteQuestion(ques)"></span>
+                                </div>
+                            </div>
+                            <div class="new-question" id="editQuestion{{i}}{{j}}" style="display:none">
+    
+                                <div class="question-header dark-action">
+                                    <span class="q-num">Question {{ques.questionNo}} {{ques.variation}}</span>
+                                    <br />
+                                    <!-- <span class="asked-q">why you need to learn?</span> -->
+                                    <div class="actions">
+                                        <!-- <span class="icon cf-map" (click)="openMapping('Outcome','Old');"></span>
+                                        <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo != 1 && ques.questionNo > 1" (click)="openMapping('Branching','Old');"></span>
+                                        <span class="icon cf-branch" *ngIf="quizConfiguration.multiVariationNo == 1" (click)="openMapping('Branching','Old');"></span> -->
+                                        <!-- <span class="icon cf-trash"></span> -->
+                                    </div>
+    
+                                </div>
+    
+                                <div class="setting__title">
+                                    <label for="quiz-title">Question</label>
+                                    <span class="chars-count" id="editQuestionCharCount{{i}}">0/150</span>
+                                    <br />
+                                    <fieldset>
+                                        <textarea placeholder="Type here" required maxlength="150" name="questionDescription{{i}}{{j}}" id="quiz-title-{{i}}{{j}}" [(ngModel)]="ques.questionDescription" rows="3" (keyup)="keyupFunction('editQuestionCharCount'+i,ques.questionDescription,'questionDescPreview')">
+                                        </textarea >
+                                        <div *ngIf="ques.questionDescription == ''" class="validationError">
+                                                *Question description is required.
+                                        </div>
+                                    </fieldset>
+                                </div>
+    
+                                <div class="setting__answer">
+                                    <label for="answer-type">Answer type</label>
+                                    <br />
+                                    <select class="setting__answer--select" name="answer-type" id="answer-type" [(ngModel)]="ques.answerTypeId" (change)="editChangeAnswerType(i, ques)">
+                                        <option value="1">Text answer</option>
+                                        <option value="2">Image & text answer</option>
+                                    </select>
+    
+                                    <div class="setting__answer--preview">
+                                        <label for="answer">Answer</label>
+                                        <span class="chars-count" id="editAnswerCharCount{{i}}">0/200</span>
+                                        <div *ngIf="question.answerTypeId == '1' && question.quizAnswers.length > 0" class="created-answer">
+                                                <table>
+                                                        <tbody>
+                                                            <tr *ngFor="let answer of question.quizAnswers;index as j">
+                                                                <td>{{answer.answerNo}}</td>
+                                                                <td (click)="showAnswer(answer, j, i);"  style="cursor: pointer;"> {{answer.answerDescription}}</td>
+                                                                <td><span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            <!-- <ol class="number-list">
+                                                <li *ngFor="let answer of question.quizAnswers;index as j">
+                                                    <p (click)="showAnswer(answer, j, i);" style="cursor: pointer;">
+                                                        {{answer.answerDescription}}</p>
+                                                    <span class="icon cf-trash del" (click)="deleteAnswer(answer,j)"></span>
+                                                    <hr>
+                                                </li>
+                                            </ol> -->
+                                        </div>
+    
+                                        <div *ngIf="question.answerTypeId == '2' && question.quizAnswers.length > 0" class="created-answer imgAns">
+                                            <div style="position: relative" *ngFor="let ans of question.quizAnswers; index as j">
+                                                <div id="imageAnswerSetupPreview{{j}}">
+                                                    <strong style="float: left;">{{ans.answerNo}}.</strong>
+                                                    <div class="imgDiv">
+                                                        <img src="{{ans.answerMediaAttached}}" style="width:80px">
+                                                    </div>
+                                                    <div class="imgDivText">
+                                                        <p style="cursor: pointer;" (click)="editAnswerImage(ans,j,i);">
+                                                            {{ans.answerDescription}}</p>
+                                                    </div>
+                                                    <span class="icon cf-trash del" (click)="deleteAnswer(ans,j)"></span>
+                                                </div>
+                                                <div class="setting__answer--preview" id="Imagetext{{j}}" style="display:none">
+                                                    <div class="created-answer" id="addAnswerImageText{{j}}">
+                                                        <input type="text" class="imageAnswer" name="answerDescription" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'imageText'+answerIndex)"
+                                                        >
+                                                        <!-- <p class="validationError" ng-show="quizPage3.answerDescription.$invalid && quizPage3.answerDescription.$touched">Answer Description Is Required.</p> -->
+                                                        <span class="icon cf-trash"></span>
+                                                        <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                                *Answer description is required.
+                                                        </div>
+                                                    </div>
+                                                    <div class="setting__image">
+                                                        <div>
+    
+                                                            <!-- file is output emitted from child component app-upload-file -->
+                                                            <app-upload-file [module]="questions" (file)="onFileUpload($event)"></app-upload-file>
+                                                        </div>
+                                                    </div>
+    
+                                                    <!-- <p class="validationError" ng-show="quizPage3.answerImageUpload.$invalid && quizPage3.answerImageUpload.$touched">Image Is required</p> -->
+    
+                                                    <button (click)="saveEditedAnswer()" class="setting__answer--new" id="addImageAnswer{{j}}">
+                                                        Save Answer
+                                                        <span class="icon cf-add"></span>
+                                                    </button>
+                                                    <button class="setting__answer--new" (click)="editAnswerImage(answer,j,i)">
+                                                        Cancel
+                                                        <span class="icon cf-add"></span>
+                                                    </button>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="setting__answer--preview answerType" id="text{{i}}" *ngIf="question.answerTypeId == 1">
+                                        <div class="created-answer">
+                                            <input type="text" class="anserType" name="newAnswerDescriptionText{{i}}" required [(ngModel)]="answer.answerDescription" placeholder="Enter an answer" maxlength="200" id="answer{{i}}" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'textAnswer'+answerIndex)"
+                                                >
+                                            <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                            <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                    *Answer description is required.
+                                            </div>
+                                        </div>
+                                        <button (click)="addAnswer(i)" class="setting__answer--new">
+                                            Add answer
+                                            <span class="icon cf-add"></span>
+                                        </button>
+                                    </div>
+                                    <div class="setting__answer--preview answerType" id="AddNewImagetext{{i}}" *ngIf="question.answerTypeId == 2">
+                                        <div class="created-answer">
+                                            <input type="text" class="imageAnswer" name="newAnswerDescriptionText" required [(ngModel)]="answer.answerDescription" maxlength="200" id="answerImageText{{i}}" placeholder="Enter an answer" (keyup)="keyupFunction('editAnswerCharCount'+i,answer.answerDescription,'imageText'+answerIndex)"
+                                              >
+                                            <!-- <p class="validationError" ng-show="quizPage3.newAnswerDescriptionText.$invalid && quizPage3.newAnswerDescriptionText.$touched">Answer Description Is Required.</p> -->
+                                            <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                            <div *ngIf="answer.answerDescription == ''" class="validationError">
+                                                    *Answer description is required.
+                                            </div>
+                                        </div>
+                                        <div class="setting__image">
+                                            <div>
+    
+                                                <app-upload-file (file)="onFileUpload($event)">
+                                                </app-upload-file>
+                                            </div>
+                                        </div>
+                                        <p>*Image should be of max 2MB</p>
+                                        <!-- <p class="validationError" *ngIf="questionForm.quizImage.$invalid && quizPage1.quizImage.$touched">*Image Is required</p> -->
+    
+                                        <button (click)="addAnswer(i)" class="setting__answer--new">
+                                            Add Image answer
+                                            <span class="icon cf-add"></span>
+                                        </button>
+                                    </div>
+    
+                                    <!-- <div class="setting__answer--new">
+                                Add answer
+                                <span class="icon cf-add"></span>
+                            </div> -->
+    
+                                    <br />
+    
+                                    <button class="setting__save" [disabled]="ques.questionDescription == '' || question.quizAnswers.length == 0" (click)="saveQuestion()">Save Question</button>
+                                    <button class="setting__back" (click)="cancelQuestionEditing(i,j)">Cancel</button>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                            
+                        
+                    <!--Ended by Vaishali-->
+
+                </div>
+                <div class="new-question" id="newQuestion">
+
+                    <div class="question-header  dark-action">
+                        <span class="q-num">Question {{newQuestion.questionNo}} {{newQuestion.variation}}</span>
+                        <br />
+                        <!-- <span class="asked-q">why you need to learn?</span> -->
+                        <!-- <div class="actions">
+                            <span class="icon cf-map" (click)="openMapping('Outcome','New');"></span>
+                            <span class="icon cf-branch" (click)="openMapping('Branching','New');"></span>
+                           <span class="icon cf-trash"></span> 
+                        </div> -->
+
+                    </div>
+
+                    <div class="setting__title">
+                        <label for="quiz-title">Question</label>
+                        <span class="chars-count" id="questionCharCount">0/150</span>
+                        <br />
+                        <!-- <fieldset>{{newQuestion.questionDescription}} -->
+                        <textarea placeholder="Type here" required maxlength="150" name="newQuestion" [(ngModel)]="newQuestion.questionDescription" rows="3" (keyup)="keyupFunction('questionCharCount',newQuestion.questionDescription,'questionDescPreview')">
+                            </textarea>
+                                    <div *ngIf="newQuestion.questionDescription == ''" class="validationError">
+                                        *Question description is required.
+                                    </div>
+                                    <!-- </fieldset> -->
+                            </div>
+
+                            <div class="setting__answer">
+                                <label for="answer-type">Answer type</label>
+                                <br />
+                                <select class="setting__answer--select" name="answer-type" id="answer-type" [(ngModel)]="newQuestion.answerTypeId" (change)="changeAnswerType()">
+                            <option value="1">Text answer</option>
+                            <option value="2">Image & text answer</option>
+                        </select>
+
+                                <div class="setting__answer--preview">
+                                    <label for="answer">Answer</label>
+                                    <span class="chars-count" id="editAnswerCharCount">0/200</span>
+                                    <div *ngIf="newQuestion.answerTypeId == '1' && newQuestion.quizAnswers.length > 0" class="created-answer">
+                                        <table>
+                                            <tbody>
+                                                <tr *ngFor="let answer of newQuestion.quizAnswers;index as i">
+                                                    <td>{{answer.answerNo}}</td>
+                                                    <td (click)="editnewAnswer(answer, i)" style="cursor: pointer;"> {{answer.answerDescription}}</td>
+                                                    <td><span class="icon cf-trash del" (click)="deleteAnswer(answer,i)"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div *ngIf="newQuestion.answerTypeId == '2' && newQuestion.quizAnswers.length > 0" class="created-answer imgAns">
+                                        <div style="position: relative" *ngFor="let answer of newQuestion.quizAnswers;index as i">
+                                            <strong style="float: left;">{{answer.answerNo}}.</strong>
+                                            <div class="imgDiv">
+                                                <img src="{{answer.answerMediaAttached}}" style="width:80px">
+                                            </div>
+                                            <div class="imgDivText">
+                                                <p (click)="editnewAnswer(answer, i)" style="cursor: pointer;">
+                                                    {{answer.answerDescription}}</p>
+                                            </div>
+                                            <span class="icon cf-trash del" (click)="deleteAnswer(answer,i)"></span>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="setting__answer--preview answerType" id="text" *ngIf="newQuestion.answerTypeId == 1">
+                                    <div class="created-answer">
+                                        <input type="text" name="newAnswerDescriptionText" required [(ngModel)]="newAnswer.answerDescription" placeholder="Enter an answer" maxlength="200" id="answer" (keyup)="keyupFunction('editAnswerCharCount',newAnswer.answerDescription,'textAnswer'+answerIndex)">
+                                        <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                        <div *ngIf="newAnswer.answerDescription == ''" class="validationError">
+                                            *Answer description is required.
+                                        </div>
+                                    </div>
+                                    <button (click)="addNewAnswer()" class="setting__answer--new" id="addAnswer">
+                                Add answer
+                                <span class="icon cf-add"></span>
+                            </button>
+                                </div>
+
+                                <div class="setting__answer--preview answerType" id="image-text" *ngIf="newQuestion.answerTypeId == 2">
+                                    <div class="created-answer">
+                                        <input type="text" class="imageAnswer" name="newAnswerDescriptionText" required [(ngModel)]="newAnswer.answerDescription" maxlength="200" id="answerImageText" placeholder="Enter an answer" (keyup)="keyupFunction('editAnswerCharCount',newAnswer.answerDescription,'imageText'+answerIndex)">
+                                        <!-- <p class="validationError" ng-show="quizPage3.newAnswerDescriptionText.$invalid && quizPage3.newAnswerDescriptionText.$touched">Answer Description Is Required.</p> -->
+                                        <span class="icon cf-trash" (click)="clearAnswer()"></span>
+                                        <div *ngIf="newAnswer.answerDescription == ''" class="validationError">
+
+                                            <div>
+                                                *Answer description is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="setting__image">
+                                        <div>
+
+                                            <app-upload-file (file)="onFileUpload($event)">
+                                            </app-upload-file>
+                                        </div>
+                                    </div>
+                                    <!-- <p class="validationError" *ngIf="questionForm.quizImage.$invalid && quizPage1.quizImage.$touched">*Image Is required</p> -->
+
+                                    <button (click)="addNewAnswer()" class="setting__answer--new" id="addImageAnswer">
+                                Add Image answer
+                                <span class="icon cf-add"></span>
+                            </button>
+                                </div>
+
+                                <!-- <div class="setting__answer--new">
+                            Add answer
+                            <span class="icon cf-add"></span>
+                        </div> -->
+
+                                <br />
+
+                                <button class="setting__save" [disabled]="newQuestion.questionDescription == '' || newQuestion.quizAnswers.length == 0" (click)="saveQuestion()">Save
+                            Question</button>
+                                <button class="setting__back" (click)="cancelEditingVariation()">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="setting__created-questions question-group">
+
+                            
+                            <div *ngFor="let variation of variationArray; index as i" class="setting__created-questions--question build-btn">
+                                <span>Question {{variation}}</span>
+                                <div class="actions">
+                                    <span *ngIf="showDeleteVariationButton == true"  class="icon cf-trash" (click)="deleteVariation()" style="left: -15px;top: -8px;"></span>
+                                </div>
+                                <div *ngIf="quizConfiguration.multiVariationNo != 1" (click)="createVariation(variation, i)">
+                                    Create Variation</div>
+                                <div *ngIf="quizConfiguration.multiVariationNo == 1" (click)="createVariation(variation, i)">
+                                    Create Question</div>
+                            </div>
+                        </div>
+                        <div class="setting__answer--new" (click)="addQuestion()" [hidden]="hideOutcomeButtons">
+                            <span class="icon cf-add"></span> Add Question
+
+                        </div>
+
+                        <button type="button" class="setting__save" [disabled]="questionArray.length == 0" (click)="this.router.navigate(['/quizSetup/LeadCapture/']);" [hidden]="hideOutcomeButtons">Save &amp;
+                    Next</button>
+                        <button type="button" class="setting__back" (click)="this.router.navigate(['/quizSetup/Outcomes/']);" [hidden]="hideOutcomeButtons">Back</button>
+                </div>
+            </form>
+
+            </div>
+            <div class="col-lg-7 answerLinking">
+          
+            <div class="tab">
+                <button class="tablinks" (click)="openMappingTabs($event,'previewQuestion');"> <i class="icon cf-map branchingIcon"></i> &nbsp;&nbsp;Preview</button>
+                <button class="tablinks" (click)="openMappingTabs($event,'outcomeMapping');"><i class="icon cf-map branchingIcon"></i> &nbsp;&nbsp;Map Outcome</button>
+                <button class="tablinks" (click)="openMappingTabs($event,'branchingMapping');"> <i class="icon cf-branch branchingIcon"></i> &nbsp;&nbsp;Logic Branching</button>
+                <button class="tablinks" (click)="openMappingTabs($event,'scoreCard');">  <i class="icon cf-branch branchingIcon"></i> &nbsp;&nbsp;Answer Score</button>  
+            </div>
+              
+              
+                <div id="previewQuestion" class="tabcontent" >
+                
+                    <div class="live-preview" style="padding: 66px;">
+                        <header class="live-preview__headers">
+                            <div class="live-preview__headers--name img-hdr-prvw">
+                                <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+                            </div>
+                            <!-- <div class="live-preview__headers--name">
+                                <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                            </div> -->
+                            <div class="live-preview__headers--title questionTitle" style="background-color:#f6f6f6;">
+                                <h4>{{quizConfiguration.quizTitle}}</h4>
+                            </div>
+                        </header>
+    
+                        <div class="live-preview__quiz quizDesign" style="width: 100%;min-height: 70%;">
+    
+                            <header>
+                                <span *ngIf="question.index == undefined && quizConfiguration.multiVariationNo == 1">Question {{questionArray.length + 1}} of
+                                {{questionArray.length + 1}}</span>
+                                <span *ngIf="question.index != undefined  && quizConfiguration.multiVariationNo == 1">Question {{question.questionNo}} of
+                                {{questionArray.length}}</span>
+                                <span *ngIf="question.index == undefined && quizConfiguration.multiVariationNo > 1">Question {{totalMultiVariationQuestion + 1}} of
+                                    {{totalMultiVariationQuestion + 1}}</span>
+                                <span *ngIf="question.index != undefined  && quizConfiguration.multiVariationNo > 1">Question {{question.questionNo}} of
+                                    {{totalMultiVariationQuestion}}</span>
+                                <div class="progress-bar">
+                                    <div class="completed" id="previewBar"></div>
+                                </div>
+                            </header>
+    
+                            <h5 class="live-preview__quiz--heading" id="questionDescPreview"></h5>
+    
+                            <div class="live-preview__quiz--answers" id="textAnswerPreview" *ngIf="newQuestion.answerTypeId == 1 || question.answerTypeId == 1">
+                                <!-- Pass a class "isSelected" to the selected label -->
+                                <table>
+                                    <tbody>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 0 || newQuestion.quizAnswers.length >= 0) ">
+                                            <td><span class="icon cf-correct"></span></td>
+                                            <td><span class="textareaS" id="textAnswer0"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 1 || newQuestion.quizAnswers.length >= 1)">
+                                                <td><span class="icon cf-correct"></span></td>
+                                                <td><span id="textAnswer1"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 2 || newQuestion.quizAnswers.length >= 2) && quizConfiguration.multiVariationNo != 2">
+                                                <td><span class="icon cf-correct"></span></td>
+                                                <td><span id="textAnswer2"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 3 || newQuestion.quizAnswers.length >= 3) && quizConfiguration.multiVariationNo != 3">
+                                                <td><span class="icon cf-correct"></span></td>
+                                                <td><span id="textAnswer2"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 4 || newQuestion.quizAnswers.length >= 4) && quizConfiguration.multiVariationNo != 4">
+                                                <td><span class="icon cf-correct"></span></td>
+                                                <td><span id="textAnswer4"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                        <tr class="previewAnswerTable" *ngIf="(question.quizAnswers.length >= 5 || newQuestion.quizAnswers.length >= 5) && quizConfiguration.multiVariationNo != 5">
+                                                <td><span class="icon cf-correct"></span></td>
+                                                <td><span id="textAnswer5"></span></td>
+                                        </tr>
+                                        <tr class="previewAnswerTableSpace"></tr>
+                                    </tbody>
+                                </table>    
+                            </div>
+    
+                            <div class="live-preview__quiz--answers images" id="imageAnswerPreview" *ngIf="newQuestion.answerTypeId == 2 || question.answerTypeId == 2">
+                                <label *ngIf="question.quizAnswers.length >= 0 || newQuestion.quizAnswers.length >= 0">
+                                <input type="radio" name="answers-radio" checked>
+                                <figure>
+                                    <img id="imageAnswer0" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText0">Picture one</figcaption>
+                                </figure>
+                            </label>
+    
+    
+                                <label *ngIf="question.quizAnswers.length >= 1 || newQuestion.quizAnswers.length >= 1">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img id="imageAnswer1" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText1">Picture Two</figcaption>
+                                </figure>
+                            </label>
+    
+    
+                                <label *ngIf="(question.quizAnswers.length >= 2 || newQuestion.quizAnswers.length >= 2) && quizConfiguration.multiVariationNo != 2">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img id="imageAnswer2" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText2">Picture Three</figcaption>
+                                </figure>
+                            </label>
+    
+    
+                                <label *ngIf="(question.quizAnswers.length >= 3 || newQuestion.quizAnswers.length >= 3) && quizConfiguration.multiVariationNo != 3">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img id="imageAnswer3" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText3">Picture four</figcaption>
+                                </figure>
+                            </label>
+    
+    
+                                <label *ngIf="(question.quizAnswers.length >= 4 || newQuestion.quizAnswers.length >= 4) && quizConfiguration.multiVariationNo != 4">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img id="imageAnswer4" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText4">Picture five</figcaption>
+                                </figure>
+                            </label>
+    
+                                <label *ngIf="(question.quizAnswers.length >= 5 || newQuestion.quizAnswers.length >= 5) && quizConfiguration.multiVariationNo != 5">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img id="imageAnswer5" src="assets/images/pexels-photo-175718.jpg" alt="">
+    
+                                    <figcaption id="imageText5">Picture Six</figcaption>
+                                </figure>
+                            </label>
+                            </div>
+    
+                            <footer class="footerClass">Powered by Coachforce</footer>
+    
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="outcomeMapping"  class="tabcontent"  detect-scroll (onScroll)="handleOutcomeScroll($event)">
+
+                    <div class="live-preview">
+    
+                        <!-- <header class="live-preview__headers">
+                            <div class="live-preview__headers--title">
+                                <h4>mapped outcomes</h4>
+                            </div>
+                        </header> -->
+    
+                        <div class="live-preview__maps">
+                            <p class="tabHeading">Mapped Outcomes</p>
+                            <!-- <h5 class="live-preview__maps--heading"><span>Q{{question.questionNo}}</span> {{question.questionDescription}}
+                            </h5> -->
+    
+                            <div class="row no-gutters">
+                                <div class="col-lg-5">
+                                    <h6>Answers</h6>
+                                    <div class="live-preview__maps--answers images" id="outcomeAnswerImage" *ngIf="newQuestion.answerTypeId == 2">
+                                            <table>
+                                                    <tbody>
+                                                        <tr class="answer" *ngFor="let answer of question.quizAnswers; index as i"  [ngClass]="{'connected' : answer.outcome}">
+                                                            <td style="padding: 0px"> <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                             'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                              'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span></td>
+                                                              <td style="padding: 0px"> <img src={{answer.answerMediaAttached}}></td>
+                                                              <td style="padding: 0px">{{answer.answerDescription}}</td>
+                                                             <td style="padding: 0px"><span class="icon" id="outcomeAnswerImage{{answer.id}}" (mousedown)="onAnswerSelect($event,answer,i)"></span></td>
+                                                         </tr>
+                                                    </tbody>
+                                                </table>    
+                                    </div>
+    
+                                    <div class="live-preview__maps--answers" id="outcomeAnswerText" *ngIf="newQuestion.answerTypeId == 1 || question.answerTypeId == 1">
+                                       <table>
+                                           <tbody>
+                                               <tr class="answer" *ngFor="let answer of question.quizAnswers; index as i" [ngClass]="{'connected' : answer.outcome}">
+                                                   <td> <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                    'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                     'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span> {{answer.answerDescription}}</td>
+                                                    <td><span class="icon" id="outcomeAnswerText{{answer.id}}" (mousedown)="onAnswerSelect($event,answer,i)"></span></td>
+
+                                                </tr>
+                                           </tbody>
+                                       </table>
+    
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="connections">
+    
+    
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <h6>Outcomes</h6>
+    
+                                    <div class="live-preview__maps--outcomes">
+    
+                                        <div class="outcome" *ngFor="let outcome of question.outcomeAnswerMapped; index as i ">
+                                            <span class="icon" id="outcomeMapping{{outcome.id}}" (mousedown)="onOutcomeSelect($event,outcome,i)"></span> {{outcome.outcomeTitle}}
+                                            <br />
+                                            <span *ngFor="let answerno of outcome.answerNo" class="answer-mark" [ngClass]="{'colorForAnswerA': answerno == 'A' , 'colorForAnswerB': answerno == 'B',
+                                                'colorForAnswerC': answerno == 'C', 'colorForAnswerD': answerno == 'D',
+                                                 'colorForAnswerE': answerno == 'E', 'colorForAnswerF': answerno == 'F'} ">{{answerno}}</span>
+                                            <!--<span class="answer-mark" style="background-color: #F0C22A;">B</span>-->
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="branchingMapping"  class="tabcontent"  detect-scroll (onScroll)="handleBranchingScroll($event)">
+
+                    <div class="live-preview" >
+    
+                        <!-- <header class="live-preview__headers">
+                            <div class="live-preview__headers--title">
+                                <h4>Logic branching</h4>
+                            </div>
+                        </header> -->
+    
+                        <div class="live-preview__branching">
+                                <p class="tabHeading">Logic branching</p>
+                            <!-- <h5 class="live-preview__branching--heading"><span>Q{{question.questionNo}}</span> {{question.questionDescription}}
+                            </h5> -->
+    
+                            <div class="row no-gutters">
+                                <div class="col-lg-5">
+                                    <h6>Answers</h6>
+    
+                                    <div class="live-preview__maps--answers images" id="branchingAnswerImage" *ngIf="newQuestion.answerTypeId == 2">
+                                            <table>
+                                                    <tbody>
+                                                        <tr class="answer"  *ngFor="let answer of question.quizAnswers; index as i" [ngClass]="{'connected' : answer.logicBranch == null}">
+                                                            <td style="padding: 0px"> <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                             'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                              'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span></td>
+                                                              <td style="padding: 0px"> <img src={{answer.answerMediaAttached}}></td>
+                                                              <td style="padding: 0px">{{answer.answerDescription}}</td>
+                                                             <td style="padding: 0px" (mousedown)="onBranchingAnswerSelect($event,answer,i)"><span id="branchingImageAnswer{{answer.id}}" class="icon"></span></td>
+                                                         </tr>
+                                                    </tbody>
+                                                </table> 
+                                        <!-- <div class="answer connected" *ngFor="let answer of question.quizAnswers; index as i">
+                                            <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                        'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                        'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'}">{{answer.answerNo}}</span>
+                                            <div class="mapOutImg" style="width: auto;">
+                                                <img src={{answer.answerMediaAttached}} />
+                                            </div>
+                                            <div class="mapOutText">
+                                                <p>{{answer.answerDescription}}</p>
+                                            </div>
+                                            <span id="branchingImageAnswer{{answer.id}}" class="icon" (mousedown)="onBranchingAnswerSelect($event,answer,i)" class="icon"></span>
+                                        </div> -->
+    
+                                    </div>
+                                    <div class="live-preview__maps--answers" id="branchingAnswerText" *ngIf="newQuestion.answerTypeId == 1">
+                                            <table>
+                                                    <tbody>
+                                                        <tr class="answer" *ngFor="let answer of question.quizAnswers; index as i" [ngClass]="{'connected' : answer.logicBranch}">
+                                                            <td> <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                             'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                              'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span> {{answer.answerDescription}}</td>
+                                                             <td>  <span id="branchingTextAnswer{{answer.id}}" class="icon" (mousedown)="onBranchingAnswerSelect($event,answer,i)"></span></td>
+                                                         </tr>
+                                                    </tbody>
+                                                </table>
+                                        <!-- <div class="answer" *ngFor="let answer of question.quizAnswers; index as i">
+                                            <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                 'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span> {{answer.answerDescription}}
+                                            <span id="branchingTextAnswer{{answer.id}}" class="icon" (mousedown)="onBranchingAnswerSelect($event,answer,i)"></span>
+                                        </div> -->
+    
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="connections">
+    
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <h6>Actions</h6>
+    
+                                    <div class="live-preview__branching--actions">
+    
+                                        <div class="action-group">
+                                            <div *ngFor="let branch of defaultActions">
+                                                <div class="action" *ngIf="branch.id == 2 || branch.id == 4">
+                                                    <div id="connectedClass{{branch.id}}">
+                                                        <span id="logicBranching{{branch.id}}" class="icon" (mousedown)="onLogicBranchingSelect($event,branch)"></span> {{branch.logicBranchingAction}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let branch of defaultActions">
+                                            <div class="action-group" *ngIf="branch.id == 1" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0}">
+    
+                                                <h6>{{branch.logicBranchingAction}}</h6>
+    
+                                                <div class="action next-question branching">
+                                                    <span id="logicBranching1" class="icon" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0}" (mousedown)="onLogicBranchingSelect($event,branch)"></span>
+                                                    <span>Q{{nextQuestion.questionNo}}</span>
+                                                    <strong>{{nextQuestion.variation}}</strong> {{nextQuestion.questionDescription}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let branch of defaultActions">
+                                            <div class="action-group" *ngIf="branch.id == 3" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0 }">
+                                                <h6>{{branch.logicBranchingAction}}</h6>
+    
+                                                <div class="action specific-question branching">
+                                                    <span id="logicBranching3" class="icon" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0 }" (mousedown)="onLogicBranchingSelect($event,branch)"></span>
+                                                    <select name="logicBranchQuestionNo" [(ngModel)]="logicBranchQuestionNo" (change)="selectSkipToQuestion(logicBranchQuestionNo)">
+                                                    <option value="">Select question number</option>
+                                                    <option *ngFor="let skipTo of skipToSpecificQues" [ngValue]=skipTo.id>
+                                                        Q{{skipTo.questionNo}} {{skipTo.variation}}
+                                                        {{skipTo.questionDescription}}
+                                                    </option>
+                                                </select>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- <div class="live-preview__branching--actions">
+    
+                                    <div class="action-group">
+    
+                                        <div class="action connected" *ngFor="let branch of logicBranch">
+                                            <div *ngIf="branch.id == 2 || branch.id == 4">
+                                            <span id="logicBranching{{branch.id}}" class="icon" ng-mousedown="onLogicBranchingSelect($event,branch)"></span>
+                                            {{branch.logicBranchingAction}}
+                                        </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="action-group" *ngFor="let branch of logicBranch" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0}">
+    
+                                        <div *ngIf="branch.id == 1">
+    
+                                        <h6>{{branch.logicBranchingAction}}</h6>
+    
+                                        <div class="action next-question branching">
+                                            <span id="logicBranching1" class="icon" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0}" ng-mousedown="onLogicBranchingSelect($event,branch)"></span>
+                                            <span>Q{{nextQuestion.questionNo}}</span>
+                                            <strong>{{nextQuestion.variation}}</strong> {{nextQuestion.questionDescription}}
+                                        </div>
+                                        </div>
+                                    </div>
+    
+                                    <div *ngFor="let branch of logicBranch" class="action-group " [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0 || skipToQuesDisabled == false}">
+                                        <div *ngIf="branch.id == 3">
+    
+                                        <h6>{{branch.logicBranchingAction}}</h6>
+    
+                                        <div class="action specific-question branching">
+                                            <span  id="logicBranching3" [ngClass]="{'disableNextQuestion': nextQuestion.questionNo == 0}"   class="icon" ng-mousedown="onLogicBranchingSelect($event,branch)"></span>
+                                            <select name="logicBranchQuestionNo" [(ngModel)]="logicBranchQuestionNo"  ng-change="selectSkipToQuestion(logicBranchQuestionNo)" >
+                                                <option value="">Select question number</option>
+                                                <option *ngFor="let skipTo of skipToSpecificQues" value={{skipTo.id}}>Q{{skipTo.questionNo}} {{skipTo.variation}} {{skipTo.questionDescription}}</option>
+                                            </select>
+                                        </div>
+    
+                                        </div>
+    
+                                    </div>
+    
+                                </div> -->
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                </div>
+                <div id="scoreCard" class="tabcontent">
+    
+                    <div class="live-preview">
+    
+                        <!-- <header class="live-preview__headers">
+                            <div class="live-preview__headers--title">
+                                <h4>Answer Score</h4>
+                            </div>
+                        </header> -->
+    
+                        <div class="live-preview__maps">
+                            <p class="tabHeading">Answer Score</p>
+
+                            <!-- <h5 class="live-preview__maps--heading"><span>Q{{question.questionNo}}</span> {{question.questionDescription}}
+                            </h5> -->
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 80%;" class="scoreHeading">Answers</td>
+                                        <td style="text-align: right;"  class="scoreHeading"> Score</td>
+                                    </tr>
+                                    <tr *ngFor="let answer of question.quizAnswers; index as i">
+                                        <td style="width: 80%">
+                                            <!-- <div class="live-preview__maps--answers images" id="outcomeAnswerImage" *ngIf="newQuestion.answerTypeId == 2">
+     -->
+                                                <div style="min-height: 71px;" id="outcomeAnswerImage" *ngIf="newQuestion.answerTypeId == 2" class="scoreAnswer">
+                                                    <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                        'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                         'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span>
+                                                    <div class="mapOutImg">
+                                                        <img style="width: 100%" src={{answer.answerMediaAttached}}>
+                                                    </div>
+                                                    <div class="mapOutText">
+                                                        <p>{{answer.answerDescription}}</p>
+                                                    </div>
+                                                  
+                                                </div>
+            
+            
+                                            <!-- </div> -->
+                                            <!-- <div class="live-preview__maps--answers" id="outcomeAnswerText" *ngIf="newQuestion.answerTypeId == 1 || question.answerTypeId == 1">
+     -->
+    
+                                                <div class="scoreAnswer" id="outcomeAnswerText" *ngIf="newQuestion.answerTypeId == 1 || question.answerTypeId == 1">
+                                                    <span class="answer-mark" [ngClass]="{'colorForAnswerA': answer.answerNo == 'A' , 'colorForAnswerB': answer.answerNo == 'B',
+                                                        'colorForAnswerC': answer.answerNo == 'C', 'colorForAnswerD': answer.answerNo == 'D',
+                                                         'colorForAnswerE': answer.answerNo == 'E', 'colorForAnswerF': answer.answerNo == 'F'} ">{{answer.answerNo}}</span> {{answer.answerDescription}}
+                                                   
+                                                </div> 
+                                            <!-- </div> -->
+                                        </td>
+                                        <td>
+        
+                                                        <div class="scoreCard">
+                                                        Score &nbsp;&nbsp;<select [(ngModel)]="answer.score">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10  </option>
+                                                        </select>
+                                                        </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+    
+                </div>
+              
+              
+            <br/><br/>
+        </div>
+           
+            </div>
+
+</section>

@@ -1,0 +1,194 @@
+#devices {
+  @extend #outcomes;
+  margin-left: 0 !important;
+  
+  header {
+    text-align: center;
+
+    button {
+      width: auto;
+    }
+
+    .back-btn {
+      @include btn-rev;
+
+      .icon{
+        vertical-align: unset;
+        &:before {
+          color: $action;
+          font-size: 8px;
+        }
+      }
+    }
+
+    .viewport-toggle {
+      margin-top: 10px;
+      display: inline-block;
+
+      button {
+        height: 30px;
+        background-color: transparent;
+        border: none;
+        margin-right: 10px;
+        padding: 0 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: $text-light;
+
+        span {
+          margin-right: 5px !important;
+        }
+
+        &.active {
+          border-bottom: 2px solid $action;
+          padding-bottom: 28px;
+          color: $action;
+
+          span,
+          span::after,
+          span::before {
+            border-color: $action;
+          }
+        }
+
+        .zu-desktop {
+          width: 18px;
+          height: 12px;
+          vertical-align: top;
+          @extend .zu-test;
+          border-color: $bg4;
+          overflow: inherit;
+
+          &:after {
+            content: '';
+            border-left: none;
+            border-top: none;
+            border-bottom: 2px solid $text-light;
+            width: 4px;
+            bottom: -6px;
+            left: 5px;
+          }
+
+          &:before {
+            @extend .zu-desktop:after;
+            width: 11px;
+            bottom: -9px;
+            left: 2px;
+          }
+        }
+
+        .zu-mobile,
+        .zu-tablet {
+          width: 11px;
+          height: 19px;
+          border-color: $text-light;
+          border-bottom-width: 3px;
+          vertical-align: bottom;
+          @extend .zu-test;
+
+          &:after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+
+  .zu-device {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 60px);
+    border: $border;
+    border-radius: 10px;
+    &::after, &::before {
+      content: '';
+      background-color: #e1e1e1;
+      position: absolute;
+    } 
+  }
+
+  .live-preview {
+    margin: 60px auto;
+    box-shadow: none;
+    border: $border;
+    position: relative;
+
+    &#desktop {
+      width: 1024px;
+
+      .zu-device {
+
+        &::after {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          top: 9px;
+          left: 0;
+          right: 0;
+          margin: auto;
+        } 
+
+        &::before {
+          width: 100%;
+          height: 20px;
+          bottom: -20px;
+          border-radius: 3px;
+        }
+      }
+    }
+
+    &#tablet {
+      width: 768px;
+
+      .zu-device {
+
+        &::after {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          top: 9px;
+          right: 40%;
+        } 
+
+        &::before {
+          width: 30px;
+          height: 3px;
+          border-radius: 33px;
+          top: 13px;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+      }
+    }
+
+    &#mobile {
+      width: 412px;
+
+      .zu-device {
+        width: calc(100% + 20px);
+        left: -10px;
+
+        &::after {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          top: 9px;
+          right: 40%;
+        } 
+
+        &::before {
+          width: 30px;
+          height: 3px;
+          border-radius: 33px;
+          top: 13px;
+          left: 0;
+          right: 0;
+          margin: auto;
+        }
+      }
+    }
+  }
+}

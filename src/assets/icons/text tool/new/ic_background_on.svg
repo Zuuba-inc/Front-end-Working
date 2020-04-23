@@ -1,0 +1,19 @@
+<svg id="Group_1971" data-name="Group 1971" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_1969" data-name="Group 1969">
+    <g id="Group_1951" data-name="Group 1951">
+      <g id="Rectangle_2619" data-name="Rectangle 2619" fill="#fff" stroke="#0b8b8c" stroke-width="1.5">
+        <rect width="17.6" height="24" rx="2" stroke="none"/>
+        <rect x="0.75" y="0.75" width="16.1" height="22.5" rx="1.25" fill="none"/>
+      </g>
+      <circle id="Ellipse_228" data-name="Ellipse 228" cx="2.8" cy="2.8" r="2.8" transform="translate(13.6 12.8)" fill="#fff"/>
+      <g id="XMLID_476_" transform="translate(8.8 8.714)">
+        <path id="XMLID_503_" d="M162.561,5.914a.512.512,0,0,0,0-.725l-.769-.769a.513.513,0,0,0-.65-.061l-1.617,1.1,1.092-1.628a.512.512,0,0,0-.063-.648l-1.668-1.668a.512.512,0,0,0-.585-.1l-.288.139.138-.306a.512.512,0,0,0-.1-.573L157.521.15a.513.513,0,0,0-.725,0l-4.068,4.068,5.764,5.764Z" transform="translate(-147.511 0)" fill="#0b8b8c"/>
+        <path id="XMLID_1199_" d="M4.46,145.622,3.283,146.8a.512.512,0,0,0,0,.725L4.4,148.641a1,1,0,0,1-.17,1.548,29.424,29.424,0,0,0-3.689,2.5,1.851,1.851,0,0,0,2.617,2.617,29.422,29.422,0,0,0,2.5-3.689,1,1,0,0,1,1.548-.17l1.117,1.117a.513.513,0,0,0,.725,0l1.178-1.178Zm-2.067,8.856a.724.724,0,1,1,0-1.024A.724.724,0,0,1,2.393,154.478Z" transform="translate(0 -140.647)" fill="#0b8b8c"/>
+      </g>
+    </g>
+  </g>
+  <g id="Group_1970" data-name="Group 1970" transform="translate(3.2 4.8)">
+    <rect id="Rectangle_2620" data-name="Rectangle 2620" width="11.2" height="4" fill="#0b8b8c"/>
+    <rect id="Rectangle_2621" data-name="Rectangle 2621" width="6.4" height="4" transform="translate(0 5.6)" fill="#0b8b8c"/>
+  </g>
+</svg>

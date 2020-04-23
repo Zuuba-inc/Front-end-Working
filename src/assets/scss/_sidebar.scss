@@ -1,0 +1,262 @@
+main {
+  
+
+  /* new nav styles */
+  .cross-navigation {
+    font-size: 12px;
+    padding: 8px 15px;
+    background-color: #fff;
+    color: $primary-dark;
+    height: 50px;
+    width: 70%;
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+  }
+  .cross-navigation p {
+    margin: 0;
+  }
+  .cross-navigation .zu-arrow-right {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    transform: rotateZ(-90deg);
+    -webkit-transform: rotateZ(-90deg);
+    -moz-transform: rotateZ(-90deg);
+  }
+  .cross-navigation .zu-arrow-right::before {
+    color: #363636 !important;
+  }
+  .create-quiz__actions--back {
+    float: none !important;
+    margin-top: 0 !important;
+    width: 35%;
+    padding-left: 10px;
+    align-self: center;
+  }
+  .create-quiz__actions {
+    display: flex !important;
+    padding: 0 !important;
+    background-color: $bg1;
+    color: $text-dark;
+    .icon::before{
+      color: $text-dark;
+    }
+  }
+  .create-quiz__setup-title {
+    background-color: transparent !important;
+    border-bottom: $border;
+    margin: 0 15px;
+    color: $primary-dark;
+  }
+  .content .inner-header {
+    text-align: center !important;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .side-bar {
+    float: left;
+    background-color: #fff !important;
+    min-width: 225px;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    z-index: 999;
+
+    &__logo-area {
+      padding: 17px 22px;
+      border-bottom: 1px solid #104E60;
+      background-color: $primary-dark;
+      max-height: 60px;
+      box-shadow: 0 3px 8px rgba($color: #000000, $alpha: 0.08);
+
+      &--logo {
+        // background: url('../assets/images/logo.svg') no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 136px;
+        height: 25px;
+        display: block;
+        color: $primary-dark;
+        font-weight: 700;
+        font-size: 30px;
+        height: 60px;
+        line-height: 2;
+      }
+    }
+
+    &__menu {
+      list-style: none;
+      text-transform: capitalize;
+      padding: 25px 0 0 0;
+      margin: 0;
+      position: relative;
+      height: calc(100% - 135px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      &--item {
+        @include text(13px, 600, left);
+        color: $primary-dark;
+        border-radius: 2px;
+        margin: 0;
+        padding: 13px 15px;
+        vertical-align: middle;
+        cursor: pointer;
+        letter-spacing: 1px;
+        @include transition;
+
+        .zu-arrow-right {
+          float: right;
+          font-size: 8px;
+          opacity: 0;
+          margin-top: 7px;
+          @include transition;
+        }
+
+        &:hover {
+          background-color: $bg2;
+
+          .zu-arrow-right {
+            opacity: 1;
+            transform: translateX(5px);
+          }
+        }
+
+        .svg-icon {
+          margin-right: 15px;
+          vertical-align: bottom;
+          width: 20px;
+          height: 20px;
+        }
+        &:not(.active) .icon{
+          color: $bg3;
+        } 
+        // &.active {
+        //   color: $primary-dark;
+        //   background-color: $bg2;
+        // }
+
+        &.footer {
+          margin-top: auto;
+          width: 100%;
+        }
+
+        .submenu {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          height: calc(100% + 160px);
+          width: 100%;
+          background-color: #fff;
+          @include transition;
+          @include reset-ul;
+
+          &--opened {
+            left: 0;
+          }
+
+          &__item {
+            @include text(14px, 600, left);
+            color: $text-neu;
+            padding: 13px 15px;
+            vertical-align: middle;
+            cursor: pointer;
+            letter-spacing: 1px;
+            border-left: 1px solid transparent;
+            @include transition;
+
+            &:hover {
+              background-color: $bg2; 
+            }
+            &.active {
+              color: $primary-dark;
+              border-left: 2px solid $primary-dark;
+              background-color: $bg2; 
+            }
+          }
+
+          &__back {
+            @include text(12px, 600, left);
+            color: $primary-dark;
+            button {
+              text-align: left;
+              background-color: $bg1;
+              border: none;
+              width: 100%;
+              padding: 12px 15px;
+
+              .icon {
+                font-size: 11px;
+                margin-right: 6px;
+              }
+            }
+          }
+
+          &__main-title {
+            @include text(12px, 700, left);
+            color: $primary-dark;
+            padding: 10px 15px;
+            cursor: default;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    &__edit {
+      position: absolute;
+      bottom: 0;
+      border-top: $border;
+      width: 100%;
+      padding: 20px;
+      button {
+        @include btn-rev;
+        width: 100%;
+        height: 35px;
+        color: $primary-dark;
+        border-color: $primary-dark;
+        margin: 0;
+      }
+    }
+  }
+
+  .sidebar-is-hidden {
+    height: auto;
+    background-color: #fff !important;
+    min-height: 82px;
+    border-bottom: $border;
+
+    .side-bar__logo-area {
+      margin-left: 45px;
+      border-bottom: none;
+      background-color: #fff !important;
+
+      &--logo {
+        background-image: url('../assets/images/logo-invert.svg');
+      }
+    }
+
+    > .side-bar__menu,
+      .side-bar__options,
+      .side-bar__close,
+      .create-quiz__actions,
+      .create-quiz__menu
+      {
+      display: none;
+    }
+
+    .side-bar__hamb {
+      display: inline-block;
+    }
+
+    ~.content {
+      margin: 83px 8% 0 0 !important;
+    }
+
+    ~#configure {
+      margin-right: 0 !important;
+    }
+  }
+}

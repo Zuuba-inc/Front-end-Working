@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="42" height="42" viewBox="0 0 42 42">
+  <defs>
+    <filter id="Rectangle_2166" x="0" y="0" width="42" height="42" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_2190" data-name="Group 2190" transform="translate(-1121 -250)">
+    <g id="Group_2187" data-name="Group 2187" transform="translate(1130 257)">
+      <g transform="matrix(1, 0, 0, 1, -9, -7)" filter="url(#Rectangle_2166)">
+        <rect id="Rectangle_2166-2" data-name="Rectangle 2166" width="24" height="24" rx="4" transform="translate(9 7)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="crop-tool-button" transform="translate(1135.654 262.528)">
+      <g id="crop">
+        <path id="Path_1697" data-name="Path 1697" d="M9.322,8.157h1.165V3.5A1.169,1.169,0,0,0,9.322,2.331H4.661V3.5H9.322ZM3.5,9.322V0H2.331V2.331H0V3.5H2.331V9.322A1.169,1.169,0,0,0,3.5,10.488H9.322v2.331h1.165V10.488h2.331V9.322Z" fill="#959595"/>
+      </g>
+    </g>
+  </g>
+</svg>

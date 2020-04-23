@@ -1,0 +1,13 @@
+<div class="dropdown" id="thenRuleForDiv">
+  <ng-select 
+        [(ngModel)]="selectedRule"
+        [items]="dropdownData"
+        placeholder="add"
+        bindLabel="{{bindLabel}}"
+        autofocus
+        bindValue="id"
+        [addTag]="onAddThenDataTagRef"
+        addTagText={{placeHoldertext}}
+        (change)="onThenDataChange()">
+  </ng-select>
+</div>

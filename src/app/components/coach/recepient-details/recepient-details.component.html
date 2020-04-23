@@ -1,0 +1,509 @@
+<main>
+  <!-- <aside class="side-bar">
+      <header class="side-bar__logo-area">
+        <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+      </header>
+    </aside> -->
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+
+  <div class="page-wrapper">
+    <div class="mainContainer">
+      <div class="userDetails" style="width: 80%;">
+        <a [routerLink]="['/crm/contacts']">
+          < Back to contacts</a>
+            <div style="padding-bottom: 5%;">
+              <table style="background: none; border: none;margin-bottom: 15px;">
+                <tbody>
+                  <tr style="border: none;">
+                    <td style="padding: 0;"> 
+                      <div style="width: 63px;height: 47px;border: 1px solid #0B8B8C;">
+                          <div style="font-size: 10px;color: #FFFFFF;background-color: #0B8B8C;text-align: center;">
+                            Lead Score
+                          </div>
+                          <div style="font-size: 24px; color: #0B8B8C;text-align: center;font-weight: bold;">
+                            75
+                          </div>
+                      </div>
+                    </td>
+                    <td style="width: 50%;">
+                      <h6 style="display: inline;color: black;">Tarek Younes</h6>
+                      <span style="display: block;font-size: 12px;
+                      color: black;">t.younes@astoundcommerce.com</span>
+                    </td>
+                    <td>
+                      <p style="margin-bottom: 0;">Lifetime value</p>
+                      <span style="font-weight: bold;color: black;">$100.00</span>
+                    </td>
+                    <td>
+                      <p style="margin-bottom: 0;">Orders</p>
+                      <span style="font-weight: bold;color: black;">0</span>
+                    </td>
+                    <td>
+                      <p style="margin-bottom: 0;">Email preference</p>
+                      <span style="font-weight: bold;color: black;">Subscribed</span>
+                    </td>
+                    <td style="text-align: right;padding: 0;">
+                      <select style="width: 100px;border: 1px solid;color: black;">
+                        <option>Actions</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="height: auto;background: #F7F7F7;border: 1px solid #E1E1E1;">
+                <div id="hideShowIcon" style="text-align: right;font-size: 12px;
+                      font-weight: bold;float: right;" (click)="changeShowInfo()">
+                      <img *ngIf="showInfo == false" style="margin: 10px;width: 10px;" src="assets/icons/arrow-down.svg">
+                      <img *ngIf="showInfo == true" style="margin: 10px;width: 10px;" src="assets/icons/arrow-top.svg">
+                </div>
+                <div style="font-weight: bold;text-align: center;width: 70%;margin: 5px auto; font-size: 12px;">
+                      <span *ngIf="showInfo == false"> Show info, tags & notes</span>
+                      <span *ngIf="showInfo == true"> Hide info, tags & notes</span>
+                </div>
+                <div id="showInfoTags" style="display: none;">
+                  <div class="userInfoRow" style="background-color: #E1E1E1;">
+                    <div class="userInfocolumn profileInfo" style="background-color: #EFEFEF;
+                    width: 60%;">
+                      <div>
+                        <h6 style="font-size: 14px;padding: 9px;margin: 0;">Profile Info</h6>
+                        <table class="userInfoTable">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">First name</span>
+                                <input type="text" class="crmInputType" placeholder="Tarek" style="width: 220px;margin-right: 15px;">
+                              </td>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Value</span>
+                                <input type="text" class="crmInputType" placeholder="Younes" style="width: 220px;margin-right: 15px;">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Email address</span>
+                                <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="width: 220px;margin-right: 15px;">
+                              </td>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Value</span>
+                                <input type="text" class="crmInputType" placeholder="Younes" style="width: 220px;margin-right: 15px;">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Address 1</span>
+                                <input type="text" class="crmInputType" placeholder="Montreal" style="width: 220px;margin-right: 15px;">
+                              </td>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Address 2</span>
+                                <input type="text" class="crmInputType" placeholder="Canada" style="width: 220px;margin-right: 15px;">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">City</span>
+                                <input type="text" class="crmInputType" placeholder="Montreal" style="width: 220px;margin-right: 15px;">
+                              </td>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">State</span>
+                                <input type="text" class="crmInputType" placeholder="Montreal" style="width: 220px;margin-right: 15px;">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Country</span>
+                                <select style="display: block; background-color: white;">
+                                  <option>Canada</option>
+                                </select>
+                              </td>
+                              <td>
+                                <span style="font-size: 12px;font-weight: bold;">Time zone</span>
+                                <select style="display: block; background-color: white;">
+                                  <option>Not set</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #E1E1E1;">
+                              <td colspan="2">
+                                <div style="display: inline-block;">
+                                  <span style="font-size: 12px;color: #707070;">Lead Source</span>
+                                  <span style="font-size: 14px;display: block;font-weight: bold;">Subscribed via web</span>
+                                </div>
+                                <div style="display: inline-block;margin-left: 10%;">
+                                  <span style="font-size: 12px;color: #707070;">EU consent</span>
+                                  <span style="font-size: 14px;display: block;font-weight: bold;">Unknown</span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div style="padding: 9px;border-bottom: 1px solid #E1E1E1;">
+                        <h6 style="font-size: 14px;padding: 9px 0px;;margin: 0;">Tags</h6>
+                        <div style="display: inline; margin-right: 10px;">
+                          <span style="background: #0B8B8C;color: white;padding: 4px; font-size: 12px;">New Client</span>
+                          <span class="dropdown" style="background: #075858;padding: 0px 5px 3px;color:white;">
+                            &times;
+                          </span>
+                        </div>
+                        <div style="display: inline; margin-right: 10px;">
+                          <span style="background: #0B8B8C;color: white;padding: 4px; font-size: 12px;">Maths</span>
+                          <span class="dropdown" style="background: #075858;padding: 0px 5px 3px;color:white;">
+                            &times;
+                          </span>
+                        </div>
+                        <img src="assets/icons/add.svg" style="width: 15px;">
+                      </div>
+                      <div  *ngIf="customeField.length == 0" style="text-align: center;padding: 10px;font-size: 14px;cursor: pointer;" (click)="addCustomeField()">
+                        <img src="assets/icons/add.svg" style="width: 13px;margin-left: 10px;vertical-align: unset;"> 
+                        Add custom field 
+                      </div>
+                      <div  *ngIf="customeField.length > 0" style="padding: 10px;font-size: 14px;cursor: pointer;" (click)="addCustomeField()">
+                        <table style="background: transparent;border: none;">
+                          <tbody  class="userInfoTable">
+                            <tr *ngFor="let custFeild of customeField; let i = index">
+                              <td>
+                              <span style="font-size: 12px;font-weight: bold;display: block;">Identifier</span>
+                              <select style="background-color: white;">
+                                <option>Identifier</option>
+                              </select>
+                              </td>
+                              <td>
+                              <span style="font-size: 12px;font-weight: bold;display: block;">Value</span>
+                              <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="display: inline-block;
+                              width: 220px;margin-right: 15px;">
+                                <span class="dropdown" style="background: transparent;color:#707070;font-size: 20px;" (click)="removeCustomeField(i)">
+                                    &times;
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        
+                        <img src="assets/icons/add.svg" style="width: 13px;margin-left: 10px;vertical-align: unset;"> 
+                        Add custom field 
+                      </div>
+                      
+                      <div>
+                      </div>
+                    </div>
+                    <div class="userInfocolumn notes" style="background-color: #E1E1E1;
+                    width: 40%;">
+                      <h6 style="font-size: 14px;padding: 9px;margin: 0;">Profile Info</h6>
+                      <p>Add a note to this person’s record</p>
+                      <div style="background: white;text-align: right;margin: 10px;">
+                        <textarea style="width: 100%;border: none;height: 70px;font-size: 14px;"> 
+                          Write a message  
+                        </textarea>
+                        <div style="background: #F6F6F6; padding: 10px;">
+                          <button style="width: 90px;height: 30px;">Add</button>
+                        </div>
+                      </div>
+                      <div style="background: #FFFFFF;box-shadow: 0px 3px 6px #00000029;border-radius: 5px;margin: 10px;
+                      padding: 15px;">
+                        <p style="font-weight: bold;display: inline;">Adams wrote on June 25, 2018</p>
+                        <select style="width: 70px;float: right;border: none;
+                        color: #0B8B8C;">
+                          <option>Actions</option>
+                        </select>
+                        <p style="margin-top: 15px;"> 
+                          I’m not sure about adressing the specific problem, but I might recommend unzipping through different software. I highly recommend trying Zipeg I’m not sure about adressing the specific problem, but I might recommend unzipping through different software. I highly recommend trying Zipeg
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="hideInfoTags" style="display: block;">
+                <div style="margin-top: 20px;">
+                  <canvas id="lineChart">{{linechart}}</canvas>
+                </div>
+                <div class="userInfoRow">
+                  <div class="userInfocolumn" style="width: 25%;">
+                    <div class="sideMenu" [ngClass]="{'activeSideMenu':activeSideBar === 'Order'}" (click)="changeSideBarOption('Order')">Order</div>
+                    <div class="sideMenu" [ngClass]="{'activeSideMenu':activeSideBar === 'Website Sessions'}" (click)="changeSideBarOption('Website Sessions')">Website Sessions</div>
+                    <div class="sideMenu" [ngClass]="{'activeSideMenu':activeSideBar === 'Emails'}" (click)="changeSideBarOption('Emails')">Emails</div>
+                    <div class="sideMenu" [ngClass]="{'activeSideMenu':activeSideBar === 'Workflows & Campaigns'}" (click)="changeSideBarOption('Workflows & Campaigns')">Workflows & Campaigns</div>
+                    <div class="sideMenu" [ngClass]="{'activeSideMenu':activeSideBar === 'All activity'}" (click)="changeSideBarOption('All activity')">All activity</div>
+                  </div>
+                  <div *ngIf="activeSideBar === 'Order'" class="userInfocolumn" style="width: 75%;">
+                  <table style="border: none;" *ngIf="orders.length > 0; else noOrders">
+                    <tbody>
+                      <tr *ngFor="let order of orders; let i = index">
+                        <td style="width: 80%;">
+                          <h6 style="font-size: 14px;color: black;margin-top: 0;">{{order.name}}</h6>
+                          <p>{{order.date}}</p>
+                          <div id=productDetailTable{{i}} style="display: none;">
+                            
+                            <table  style="border: none;width: 60%;">
+                              <tr style="border: none;">
+                                <td colspan="3">
+                                  <h6 style="font-size: 14px;color: black;">Product Ordered</h6>
+                                </td>
+                              </tr>
+                              <tr style="border: none;">
+                                  <td>
+                                    <div style="width: 40px;
+                                    height: 40px;background: #EFEFEF"></div>
+                                  </td>
+                                  <td style="font-size: 12px;">Product number one</td>
+                                  <td style="font-size: 12px;">$10.00</td>
+                              </tr>
+                              <tr style="border: none;">
+                                <td>
+                                  <div style="width: 40px;
+                                    height: 40px;background: #EFEFEF"></div>
+                                </td>
+                                <td style="font-size: 12px;">Product number two</td>
+                                <td style="font-size: 12px;">$5.00</td>
+                              </tr>
+                              <tr style="border: none;">
+                                <td style="font-size: 12px;" colspan="2">Total</td>
+                                <td style="font-size: 12px;">$15.00</td>
+                            </tr>
+                            </table>
+                          </div>
+                        </td>
+                        <td style="vertical-align: top;">
+                          <div style="width: 109px;height: 36px;border: 1px solid #52C189;
+                          border-radius: 4px;display: inline-block;padding: 8px;">
+                              <span style="color: #52C189;font-size: 12px;">Revenue {{order.revenu}}</span>
+                             
+                          </div>
+                          <img id=image{{i}} (click)="producDetails('productDetailTable'+i,'image'+i)" style="margin: 5px;width: 10px;" src="assets/icons/arrow-down.svg">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <ng-template #noOrders>
+                    <div class="noData">
+                        <img src="assets/icons/crm/ic_emptyorder.svg">
+                        <p>We do not know of any orders.</p>
+                    </div>
+                  </ng-template>
+                  </div>
+                  <div *ngIf="activeSideBar === 'Website Sessions'" class="userInfocolumn" style="width: 75%;">
+                    <table style="border: none;" *ngIf="websiteSession.length > 0; else noWebsiteSession">
+                      <tbody>
+                        <tr *ngFor="let session of websiteSession; let i = index">
+                          <td style="width: 80%;">
+                            <h6 style="font-size: 14px;color: black;margin-top: 0;">{{session.name}}</h6>
+                            <p>{{session.date}}</p>
+                            <div id=webSessionDetailTable{{i}} style="display: none;">
+                              
+                              <table  style="border: none;width: 60%;">
+                                <tr style="border: none;">
+                                  <td colspan="3">
+                                    <h6 style="font-size: 14px;color: black;">Product Ordered</h6>
+                                  </td>
+                                </tr>
+                                <tr style="border: none;">
+                                    <td>
+                                      <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                    </td>
+                                    <td style="font-size: 12px;">Product number one</td>
+                                    <td style="font-size: 12px;">$10.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td>
+                                    <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                  </td>
+                                  <td style="font-size: 12px;">Product number two</td>
+                                  <td style="font-size: 12px;">$5.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td style="font-size: 12px;" colspan="2">Total</td>
+                                  <td style="font-size: 12px;">$15.00</td>
+                              </tr>
+                              </table>
+                            </div>
+                          </td>
+                          <td style="vertical-align: top;text-align: right;">
+                            <img id=webSessImage{{i}} (click)="producDetails('webSessionDetailTable'+i,'webSessImage'+i)" style="margin: 5px;width: 10px;" src="assets/icons/arrow-down.svg">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ng-template #noWebsiteSession>
+                      <div class="noData">
+                        <img src="assets/icons/crm/ic_emptyweb.svg">
+                        <p>They have not visited your website yet.</p>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <div *ngIf="activeSideBar === 'Emails'" class="userInfocolumn" style="width: 75%;">
+                    <table style="border: none;" *ngIf="emails.length > 0;else noEmails">
+                      <tbody>
+                        <tr *ngFor="let email of emails; let i = index">
+                          <td style="width: 80%;">
+                            <h6 style="font-size: 14px;color: black;margin-top: 0;">{{email.name}}</h6>
+                            <p>{{email.date}}</p>
+                            <div id=emailDetailTable{{i}} style="display: none;">
+                              <p style="margin-bottom: 0px;">This email belongs to the “New Campaign by Vaishali” </p>
+                              <p style="color: black;font-weight: bold;">campaign Opened less than a minute later, a total of 1 time</p>
+                              <p style="font-size: 12px;margin-bottom: 0px;">From: <b style="color: black;">tarikyounes@zuuba.com</b> </p>
+                              <p style="font-size: 12px;">Subject: <b style="color: black;">Email Broadcast</b> </p>
+                            </div>
+                          </td>
+                          <td style="vertical-align: top;">
+                            <div class="emailStatusButton" [ngClass]="{'openedEmailStatus':email.status === 'Opened',
+                                                                      'clickedEmailStatus':email.status === 'Clicked',
+                                                                      'bouncedEmailStatus':email.status === 'Soft Bounced'}">
+                                <span style="font-size: 12px;">{{email.status}}</span>
+                               
+                            </div>
+                            <img id=emailImage{{i}} (click)="producDetails('emailDetailTable'+i,'emailImage'+i)" style="margin: 10px;width: 10px;" src="assets/icons/arrow-down.svg">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ng-template #noEmails>
+                      <div class="noData">
+                        <img src="assets/icons/crm/ic_emptyweb.svg">
+                        <p>They have not received any emails yet.</p>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <div *ngIf="activeSideBar === 'Workflows & Campaigns'" class="userInfocolumn" style="width: 75%;">
+                    <table style="border: none;" *ngIf="workFlows.length > 0;else noWorkflows">
+                      <tbody>
+                        <tr *ngFor="let order of orders; let i = index">
+                          <td style="width: 80%;">
+                            <h6 style="font-size: 14px;color: black;margin-top: 0;">{{order.name}}</h6>
+                            <p>{{order.date}}</p>
+                            <div id=productDetailTable{{i}} style="display: none;">
+                              
+                              <table  style="border: none;width: 60%;">
+                                <tr style="border: none;">
+                                  <td colspan="3">
+                                    <h6 style="font-size: 14px;color: black;">Product Ordered</h6>
+                                  </td>
+                                </tr>
+                                <tr style="border: none;">
+                                    <td>
+                                      <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                    </td>
+                                    <td style="font-size: 12px;">Product number one</td>
+                                    <td style="font-size: 12px;">$10.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td>
+                                    <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                  </td>
+                                  <td style="font-size: 12px;">Product number two</td>
+                                  <td style="font-size: 12px;">$5.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td style="font-size: 12px;" colspan="2">Total</td>
+                                  <td style="font-size: 12px;">$15.00</td>
+                              </tr>
+                              </table>
+                            </div>
+                          </td>
+                          <td style="vertical-align: top;">
+                            <div style="width: 109px;height: 36px;border: 1px solid #52C189;
+                            border-radius: 4px;display: inline-block;padding: 8px;">
+                                <span style="color: #52C189;font-size: 12px;">Revenue {{order.revenu}}</span>
+                               
+                            </div>
+                            <img id=image{{i}} (click)="producDetails(i)" style="margin: 5px;width: 10px;" src="assets/icons/arrow-down.svg">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ng-template #noWorkflows>
+                      <div class="noData">
+                        <img src="assets/icons/crm/ic_emptyworkflow.svg">
+                        <p>No workflow or campaign activity to show</p>
+                      </div>
+                    </ng-template>
+                  </div>
+                  <div *ngIf="activeSideBar === 'All activity'" class="userInfocolumn" style="width: 75%;">
+                    <table style="border: none;" *ngIf="allActivity.length > 0;else noActivity">
+                      <tbody>
+                        <tr *ngFor="let activity of allActivity; let i = index">
+                          <td style="width: 1%;padding: 0;text-align: center;vertical-align: middle;">
+                            <img src={{activity.icon}} style="width: 20px;height: 16px;">
+                          </td>
+                          <td style="width: 80%;">
+                            <h6 style="font-size: 14px;color: black;margin-top: 0;">{{activity.name}}</h6>
+                            <p style="margin-bottom: 0;">{{activity.date}}</p>
+                            <div id=activityDetailTable{{i}} style="display: none;">
+                              
+                              <table  style="border: none;width: 60%;">
+                                <tr style="border: none;">
+                                  <td colspan="3">
+                                    <h6 style="font-size: 14px;color: black;">Product Ordered</h6>
+                                  </td>
+                                </tr>
+                                <tr style="border: none;">
+                                    <td>
+                                      <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                    </td>
+                                    <td style="font-size: 12px;">Product number one</td>
+                                    <td style="font-size: 12px;">$10.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td>
+                                    <div style="width: 40px;
+                                      height: 40px;background: #EFEFEF"></div>
+                                  </td>
+                                  <td style="font-size: 12px;">Product number two</td>
+                                  <td style="font-size: 12px;">$5.00</td>
+                                </tr>
+                                <tr style="border: none;">
+                                  <td style="font-size: 12px;" colspan="2">Total</td>
+                                  <td style="font-size: 12px;">$15.00</td>
+                              </tr>
+                              </table>
+                            </div>
+                          </td>
+                          <td style="vertical-align: top;text-align: right;">
+                            <img id=activityImage{{i}} (click)="producDetails('activityDetailTable'+i,'activityImage'+i)" style="margin: 5px;width: 10px;" src="assets/icons/arrow-down.svg">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <ng-template #noActivity>
+                      <div class="noData">
+                        <img src="assets/icons/crm/ic_noactivity.svg">
+                        <p>No events have been recorded.</p>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="exportCSV" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 style="color: black;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 0;">Export started</h2>
+          <span class="close">&times;</span>
+
+        </div>
+        <div class="modal-body">
+          <p>We are working on exporting your data. You will receive an email with a link to where you can retrieve your
+            export shortly.</p>
+          <button style="width: 20%;float:right;" (click)="changeStatus('exportCsvFile')">OK</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>

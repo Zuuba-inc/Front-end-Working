@@ -1,0 +1,110 @@
+<div class="filters">
+  <div *ngFor="let filter of filters" style="text-align: left;padding-top: 10px;padding-bottom: 10px;">
+    <div  style="display: inline;">
+        <select name="Filter" style="background-color: white;" [(ngModel)]="filter.selectedSegment" 
+        (change)="selectSegmentEvent2($event, filter)">
+            <optgroup  *ngFor="let segment of segmentationData" label={{segment.title}}>
+                <option *ngFor="let segmentEvent of segment.segmentationEvent" value={{segmentEvent.value}}>
+                    {{segmentEvent.text}}
+                </option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="segmentationDiv" *ngIf="filter.parentSegmentation.id" style="padding: 0 10px 0 10px; display: inline;">
+        <span style="font-size: 12px;background: #F6F6F6;padding: 5px;
+        border: 1px solid #e4e1e1;">
+            {{filter.segmentationMatch.matchTag}}
+        </span>
+        <select *ngIf="filter.segmentationMatch.segmentationMatch.length > 0 " name="Filter" style="background-color: white;width: 20%;" [(ngModel)]="filter.matchTag">
+            <option *ngFor="let segmentMatch of filter.segmentationMatch.segmentationMatch"  value={{segmentMatch.id}}>
+                    {{segmentMatch.matchString}}
+            </option>
+        </select>
+        <select *ngIf="filter.segmentationMatch.segmentationMatchExtension.length > 0" name="Filter" style="background-color: white;width: 20%" [(ngModel)]="filter.matchExtension"
+            (change)="selectedUnsubscribeFromAllMailings(filter,filter.segmentationMatch.segmentationMatchExtension)">
+            <option *ngFor="let segmentExt of filter.segmentationMatch.segmentationMatchExtension" value={{segmentExt.id}}>
+                {{segmentExt.text}}
+            </option>
+        </select>
+    </div>
+    <div class="segmentationDiv" *ngIf="filter.parentSegmentation.id == 1" >
+        <div *ngIf="filter.segmentationMatch.value == 'broadcast_emails'">
+            <select name="Filter" style="background-color: white;" [(ngModel)]="filter.broadcastOrEmailId">
+                <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                <option *ngFor="let camp of filter.campaign" value={{camp.id}}>
+                    {{camp.emailTitle}}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="filter.segmentationMatch.value == 'campaigns'">
+            <select name="Filter" style="background-color: white;" [(ngModel)]="filter.campaignId">
+                <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                <option *ngFor="let camp of filter.campaign" value={{camp.id}}>
+                    {{camp.emailCapaignTitle}}
+                </option>
+            </select>
+        </div>
+        <div *ngIf="filter.segmentationMatch.value == 'campaign_emails'">
+            <select name="Filter" style="background-color: white;" [(ngModel)]="filter.broadcastOrEmailId">
+                <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                <optgroup  *ngFor="let camp of filter.campaign" label={{camp.emailCapaignTitle}}>
+                    <option *ngFor="let campEmail of camp.emailCampaignDtl" value={{campEmail.id}}>
+                        {{campEmail.emailSubject}}
+                    </option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="filter.segmentationMatch.value == 'email_address'" class="segmentationDiv">
+        <input type="text" class="form-control cst-control" style="font-size: 12px;width: 20%;"
+    placeholder="me@example.com" [(ngModel)]="filter.email" />
+    </div>
+    <div *ngIf="filter.matchExtensionValue == 'count'" class="segmentationDiv">
+        <select name="Filter" style="background-color: white;width: 10%;background-position: 89% 10px;" [(ngModel)]="filter.timesCount">
+            <option *ngFor="let times of matchExtensionCount" value={{times}}>
+                {{times}}
+            </option>
+        </select><span style="font-size: 12px;background: #F6F6F6;padding: 5px;border: 1px solid #e4e1e1;">
+            times</span>
+    </div>
+    <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'date' || filter.matchExtensionValue == 'before' || filter.matchExtensionValue == 'on_or_after' || filter.selectedSegment == 'person_timezone'">
+        <input type="date" class="form-control cst-control"  *ngIf="filter.selectedSegment != 'person_timezone'"
+        placeholder="Choose a date.." style="font-size: 12px;vertical-align: middle;width: 15%;"  [(ngModel)]="filter.date" />
+        <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'before' || filter.matchExtensionValue == 'on_or_after' || filter.selectedSegment == 'person_timezone'">
+            <select name="Filter"  style="background-color: white;width: 25%;" [(ngModel)]="filter.timezone">
+                <option value="client">recipient's timezone</option>
+                <option value="America/New_York">Eastern timezone</option>
+                <option value="UTC">UTC timezone</option>
+            </select>
+        </div>
+    </div>
+    <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'days' || filter.matchExtensionValue == 'in_the_last'">
+        <input type="text" class="form-control" style="width: 5%;display: inline-block;height: 30px;vertical-align: middle;font-size: 12px;
+        font-weight: bold;" [(ngModel)]="filter.days"/>
+          <div  *ngIf="filter.matchExtensionValue == 'in_the_last'" style="display: inline;">
+            <select name="Filter" style="background-color: white;
+            width: 10%;vertical-align: middle;"  [(ngModel)]="filter.units">
+                <option value="minutes">minutes</option>
+                <option value="hours">hours</option>
+                <option value="days">days</option>
+            </select>
+        </div>
+        <span style="border: 1px solid #ced4da;padding: 5px;" *ngIf="filter.matchExtensionValue == 'days'">days</span>
+    </div>
+    <div class="segmentationDiv" *ngIf="filter.selectedSegment == 'tags'">
+        <select name="Filter" style="background-color: white;width: 20%">
+            <option>Tag1</option>
+            <option>Tag2</option>
+            <option>Tag3</option>
+        </select>
+    </div>
+    <img *ngIf="filters.length > 1" src="./assets/icons/ic_close.svg" style="float: right;" (click)="deleteBroadCastFilter(filter)">
+  </div>
+  <!-- <button class="condation" (click)="addMoreFilters();">
+    Add Condition
+  </button> -->
+  <span class="addMore" style="padding: 5px 10px;" (click)="addMoreFilters()">
+    and
+  </span>
+  <span class="addMore" (click)="addMoreFilters()">+</span>
+</div>

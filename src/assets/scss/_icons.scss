@@ -1,0 +1,198 @@
+.zu-image {  font-size: 58px; }
+.zu-share-fb {font-size: 30px; }
+.zu-share-tw {font-size: 30px; }
+.zu-coaching { font-size: 21px; }
+.zu-searching-magnifying-glass { font-size: 20px; }
+.zu-home { font-size: 19px; }
+.zu-analysis {  font-size: 18px; }
+.zu-contact {  font-size: 18px; }
+.zu-facebook {  font-size: 18px; }
+.zu-google {  font-size: 18px; }
+.zu-marketing {  font-size: 18px; }
+.zu-website { font-size: 18px; }
+.zu-setting {font-size: 15px; }
+.zu-add {font-size: 15px; }
+.zu-preview { font-size: 14px; }
+.zu-move { font-size: 13px; }
+.zu-public { font-size: 13px; }
+.zu-branch { font-size: 13px; }
+.zu-map {font-size: 13px; }
+.zu-correct { font-size: 16px; }
+.zu-info { font-size: 11px; }
+.zu-private {  font-size: 11px; }
+.zu-arrow-down { font-size: 10px }
+.zu-trash {  font-size: 13px; &:hover:before {color: $action;} }
+.zu-close { font-size: 8px; cursor: pointer;}
+.zu-arrow-right { font-size: 10px;}
+
+[class^="zu-"], [class*=" zu-"] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon:before {
+  color: inherit !important;
+}
+
+.zu-test {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  position: relative;
+  vertical-align: bottom;
+  margin-right: 10px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    border-left: 4px solid #fff;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+}
+
+.zu-info {
+  color: $action;
+  border: 1px solid $action;
+  font-size: 12px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  line-height: 13px;
+  text-align: center;
+}
+.zu-hamburger {
+  background-color: $primary-dark;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  position: absolute;
+  top: 13px;
+  left: 18px;
+  text-align: center;
+  cursor: pointer;
+
+  &.hamb-close {
+    background: transparent;
+    left: auto;
+    right: 18px;
+    
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 11px;
+      width: 0;
+      height: 0;
+      border-right: 5px solid  $primary-dark; 
+      border-top: 5px solid transparent; 
+      border-bottom: 5px solid transparent;
+    }
+
+    &:before {
+      border-right: 5px solid #fff; 
+      left: 0;
+      z-index: 55;
+    }
+
+    span, span:after, span:before {
+      background-color:  $primary-dark;
+    }
+  }
+
+  span {
+    background-color: $primary-dark;
+    width: 15px;
+    height: 2px;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    top: -1px;
+
+    &:after, &:before {
+      content: '';
+      position: absolute;
+      background-color: $primary-dark;
+      width: 15px;
+      height: 2px;
+      border-radius: 5px;
+      display: inline-block;
+      left: 0;
+    }
+    &:after {
+      margin-top: 6px;
+    }
+    &:before {
+      margin-top: -6px;
+    }
+  }
+}
+
+
+.zu-notify {
+  @include text(10px, 400, center);
+  background-color: $notify;
+  color: #fff;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 18px;
+  border: 2px solid #fff;
+  line-height: 1.3;
+}
+
+.svg-icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  &.zu-dash {
+    background-image: url('../assets/icons/dash.svg');
+  }
+
+  &.zu-orders {
+    background-image: url('../assets/icons/orders.svg');
+  }
+
+  &.zu-products {
+    background-image: url('../assets/icons/products.svg');
+  }
+
+  &.zu-two-persons {
+    background-image: url('../assets/icons/two-persons.svg');
+  }
+
+  &.zu-marketing {
+    background-image: url('../assets/icons/marketing.svg');
+  }
+
+  &.zu-crm {
+    background-image: url('../assets/icons/crm.svg');
+  }
+
+  &.zu-robot {
+    background-image: url('../assets/icons/robot.svg');
+  }
+
+  &.zu-analytics {
+    background-image: url('../assets/icons/analytics.svg');
+  }
+
+  &.zu-apps {
+    background-image: url('../assets/icons/apps.svg');
+  }
+
+  &.zu-settings {
+    background-image: url('../assets/icons/setting.svg');
+  }
+
+  &.zu-three-envlope {
+    background-image: url('../assets/icons/three-envlope.svg');
+  }
+}

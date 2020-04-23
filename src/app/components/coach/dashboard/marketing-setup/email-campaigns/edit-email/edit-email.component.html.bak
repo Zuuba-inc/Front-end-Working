@@ -1,0 +1,1541 @@
+<!--   -->
+<div class="page-wrapper" *ngIf="editEmailView">
+    <!-- start section header -->
+    <section class="header" *ngIf="!asSubmodule" style="z-index: 1;position: fixed;width: 100vw;">
+        <div class="row">
+            <div id="back" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light rounded-0" [routerLink]="['/emailList']"
+                    style="cursor: pointer;">
+                    <img src="assets/icons/ic_back.svg">
+                    Back
+                </button>
+            </div>
+            <div id="build" class="d-inline col-lg-10 p-0 border-0 text-center">
+                <div style="padding-top:10px;">
+                    <span tooltip="Click to rename email name" id="emailTitle"
+                        (mouseover)="editingEmailTitleBorder('Show')" (mouseleave)="editingEmailTitleBorder('Hide')"
+                        style="display: inline-block;width: 30%;border-bottom: none;text-align: left;">
+                        <h2 (click)="editingEmailTitle();" (keyup)="countEmailTitleCharacters($event)" class="d-inline"
+                            id="templateTitleText" (blur)="saveEmailTempelateTitle('Title')" contenteditable="true">
+                            {{emailTemplate.emailTitle}}</h2>
+
+                        <button id="emailTitleEditButton" class="pencil"
+                            style="background: none;border: none;margin: 0;padding: 0;width: 30px;float:right;display: none; ">
+                            <img id="editTitleImage" style="max-width: 16px !important;
+                        max-height: 16px !important;" src="assets/icons/pencil-edit-button (1).svg">
+
+                        </button>
+                    </span>
+                    <div *ngIf="emailTitle.length == 30" style="z-index: 9999;position: relative;">
+                        <span style="color: red; font-size: 12px;width: 50%;background: #f3f2f2;">*You cannot enter nore
+                            that 80 character for the title</span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!asSubmodule" (click)="onNavigation('changeEmailTemplate')"
+                style="position: absolute;right: 11%;top: 13px;">
+                Change Email Template
+            </div>
+            <div id="preview" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light" (click)="preview()"
+                    style="cursor: pointer;">Preview</button>
+            </div>
+        </div>
+    </section>
+    <!-- end section header -->
+
+    <!-- start section content -->
+    <section class="content" [ngClass]="{'asnm': !asSubmodule, 'asm': asSubmodule}">
+        <div class="row " id="main">
+            <!-- start  sidepar -->
+            <div class="col-lg-3 sidepar" style="position: fixed;left: 0 !important;z-index: 1;">
+                <div class="row">
+                    <div class=" col-lg-4 d-inline" (click)="setActiveSB(null)" style="cursor: pointer;">
+                        <img id="addTabImage" alt="" src="assets/icons/ic_addelements_on.svg">
+                        <h3>Add</h3>
+                    </div>
+                    <div class=" col-lg-4 d-inline" (click)="setActiveSB('themes')" style="cursor: pointer;">
+                        <img id="themesTabImage" alt="" src="assets/icons/ic_themes_off.svg">
+                        <h3>Themes</h3>
+                    </div>
+                    <!-- [routerLink]="['/AddBackground']"  -->
+
+                    <div (click)="setActiveSB('background')" style="cursor: pointer;"
+                        class=" col-lg-4 d-inline border border-0">
+                        <img id="backgroundTabImage" alt="" src="assets/icons/ic_background_off.svg">
+                        <h3>Background</h3>
+                    </div>
+                </div>
+
+                <div class="list" *ngIf="!activeSB">
+                    <h2>ADD ELEMENTS</h2>
+                    <ul>
+                        <!-- [routerLink]="['/AddText']" -->
+                        <li (click)="setActiveSB('AddText')">
+                            <img class="d-inline" src="assets/icons/ic_elements_text.svg">
+                            <h5 class="d-inline">Text</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddLogo']" -->
+                        <li (click)="setActiveSB('AddLogo')" [ngClass]="{ 'disableLogoOption':hasLogo == true }">
+                            <img class="d-inline" src="assets/icons/ic_elements_logo.svg">
+                            <h5 class="d-inline">Logo</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddImage']" -->
+                        <li (click)="openSelectFileModel('Image')">
+                            <img class="d-inline" src="assets/icons/ic_elements_image.svg">
+                            <h5 class="d-inline">Image</h5>
+                        </li>
+                        <!-- (click)="setActiveSB('AddButton')" [routerLink]="['/AddButton']"  -->
+                        <li (click)="setActiveSB('AddButton')">
+                            <img class="d-inline" src="assets/icons/ic_element_button.svg">
+                            <h5 class="d-inline">Button</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddColumn']" -->
+                        <li (click)="setActiveSB('AddColumn')">
+                            <img class="d-inline" src="assets/icons/ic_element_column.svg">
+                            <h5 class="d-inline">Column</h5>
+                        </li>
+                        <!-- [routerLink]="['/AddSpacer']" -->
+                        <li (click)="setActiveSB('AddSpacer')">
+                            <img class="d-inline" src="assets/icons/ic_element_spacer.svg">
+                            <h5 class="d-inline">Spacer</h5>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- The Select Image Modal -->
+                <div id="cropperModal" class="imageSelectModal">
+
+                    <!-- Modal content -->
+                    <div class="imageSelectModal-content">
+                        <!-- <p *ngIf="!sizeInLimit" class="validationError" id="outcomeImageSizeWarning">
+                                <span *ngIf="imageAllowed">*Image should be of max {{allowedImageSize}}MB</span>
+                                <span *ngIf="videoAllowed">*Video should be of max 5MB</span>
+                                
+                            </p> -->
+
+                        <div class="cropArea" style="width: 500px; height:400px;">
+
+                            <!-- [imageChangedEvent]="imageChangedEvent" -->
+
+                            <image-cropper [imageBase64]="imageBase64" [maintainAspectRatio]="true"
+                                [aspectRatio]="4 / 3" [resizeToWidth]="800" [cropperMinWidth]="128"
+                                [onlyScaleDown]="true" [roundCropper]="false" (imageCropped)="imageCropped($event)"
+                                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                                (loadImageFailed)="loadImageFailed()" style="width: inherit; height: inherit;">
+                            </image-cropper>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6"><button class="border-btn  live-preview__quiz--btn"
+                                    (click)="closeModel('Close')">Cancel</button></div>
+                            <div class="col-sm-6" [ngStyle]="{'display': displaySet}">
+                                <button class="live-preview__quiz--btn" (click)="closeModel('OK')">Select</button>
+                                <!-- [ngClass]="{'display': displaySet, 'disableModalSelect' : !sizeInLimit, 'live-preview__quiz--btn': sizeInLimit}" -->
+                                <!-- [disabled]="!sizeInLimit" -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- The Select Image Modal -->
+                <div id="selectImageModal" class="imageSelectModal">
+
+                    <!-- Modal content -->
+                    <div class="imageSelectModal-content">
+                        <div class="imageModal-header">
+                            <span class="imageModelclose" (click)="openSelectFileModel(fileType)">&times;</span>
+                            <h4>Please select a image</h4>
+                        </div>
+                        <div class="imageModal-body">
+                            <!-- section for image upload -->
+                            <div class="setting__image pad-quiz-e" id="selectFile" (click)="onImageUploadClick()">
+                                <div id="drop_zone">
+                                    <h5>Upload IMAGE</h5>
+                                    <app-upload-file [module]=fileType (file)="onFileUpload($event)">
+                                    </app-upload-file>
+                                </div>
+                            </div>
+                            <div class="setting__image pad-quiz-e" id="changeFile" style="display: none;">
+                                <div id="drop_zone">
+                                    <h5>Selected File</h5>
+                                    <!-- <pdf-viewer [src]="pdfSrc"
+                                            [page]="1"
+                                            [original-size]="false"
+                                            [fit-to-page]="true"
+                                            [show-all]="false"
+                                            [stick-to-page]="true"
+                                            ></pdf-viewer>  -->
+                                    <img id="fileTypeImage" src="assets/icons/ic_doc.svg"
+                                        style="width: 40% !important;height: 30% !important;">
+                                    <span style="display: block;">{{pdfSrc}}</span>
+                                    <span (click)="changeFile()">Change File</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="imageModal-footer" style="position: absolute;bottom: -85%;width: 100%;">
+                            <button (click)="openSelectFileModel(fileType)">Close</button>
+                            <button *ngIf="pdfSrc != null" (click)="changeButtonText(null,'URL')">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- The Select Image Modal ends -->
+                <!-- text editor options -->
+                <div *ngIf="activeSB == 'AddText'" class="list2 list5 add-element-text scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2">ADD ELEMENTS</h3>
+                    <h2>TEXT SETTINGS</h2>
+                    <div class="text-style">
+                        <h2>
+                            Text style
+                        </h2>
+                        <label>
+                            <select>
+                                <option selected> Heading 1 </option>
+                                <option>Heading 2</option>
+                                <option>Heading 3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="fonts">
+                        <h2>
+                            Fonts
+                        </h2>
+                        <label>
+                            <select [(ngModel)]="selectedFont" (ngModelChange)="updateFont($event,'Font Style')">
+                                <option *ngFor="let font of fontList" value={{font}}
+                                    [ngStyle]="{'font-family': font}">{{font}} </option>
+
+                            </select>
+                        </label>
+                    </div>
+                    <div class="font-size">
+                        <h2>
+                            Font size
+                        </h2>
+                        <ng5-slider [(value)]="fontSize" [options]="options"
+                            (mouseup)="updateFont(null,'Font Size')"></ng5-slider>
+                        <input id="fontSize" [(ngModel)]="fontSize"
+                            style="width: 40px;height: auto;margin-top: auto !important;" />
+                    </div>
+                    <!-- <div class="font-weight">
+                            <h2>
+                                Font weight
+                            </h2>
+                            <label>
+                                <select (change)="updateFont($event,'Font Weigth')">
+                                    <option>Bold</option>
+                                    <option>Bolder</option>
+                                    <option>inherite</option>
+                                    <option>Lighter</option>
+                                </select>
+                            </label>
+                        </div> -->
+                    <div class="capitalization">
+                        <h2>
+                            Capitalization
+                        </h2>
+                        <label>
+                            <select (change)="updateFont($event,'Capitalization')">
+                                <option selected>lowercase </option>
+                                <option>UPPERCASE</option>
+                                <option>Capitalize</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div *ngIf="linkToWindow == true">
+                        <p>Link To:</p>
+                        <input type="text" [(ngModel)]="linkTo" autofocus />
+                        <div class="footer" style="position: absolute;bottom: -85%;width: 100%;">
+                            <button type="submit" (click)="openLinkToWindow()" class="btn cancel">Cancel</button>
+                            <button type="submit" class="btn apply"
+                                (click)="updateFont('Link','Link')">Apply</button>
+                        </div>
+
+                    </div>
+                    <div class="text-tool" *ngIf="alignmentWindow == true">
+                        <div *ngFor="let align of alignmentMenu" (click)="openAlignmentMenu(align)">
+                            <img src={{align.image}}> {{align.value}}
+                        </div>
+                    </div>
+                    <div class="text-tool">
+                        <img tooltip="Bold" id="textBold" (click)="updateFont('textBold','Bold')"
+                            src="assets/icons/text tool/ic_txtbold.svg">
+                        <img tooltip="Underline" id="textUnderline"
+                            (click)="updateFont('textUnderline','Underline')"
+                            src="assets/icons/text tool/ic_txtunderline.svg">
+                        <img tooltip="Italic" id="textItalic" (click)="updateFont('textItalic','Italic')"
+                            src="assets/icons/text tool/ic_txtitalic.svg">
+                        <img src="assets/icons/text tool/ic_txtcolor.svg" [(colorPicker)]="fontColor"
+                            (cpSliderDragEnd)="updateFont('cpSliderDragEnd', 'Color')">
+                        <img tooltip="Hilights" src="assets/icons/text tool/ic_txtbackgroundcolor.svg"
+                            [(colorPicker)]="backgroundColor"
+                            (cpSliderDragEnd)="updateFont('cpSliderDragEnd',  'BackgroundColor')">
+                        <img tooltip="link" (click)="openLinkToWindow()"
+                            src="assets/icons/text tool/ic_txtlink.svg">
+                        <img tooltip="unlink" (click)="updateFont('Link','UnLink')"
+                            src="assets/icons/text tool/ic_txtunlink.svg">
+                    </div>
+                    <div class="other-tool">
+
+                        <div class="dropdown">
+                            <!-- openAlignmentMenu(null); -->
+                            <img tooltip="Alignment" (click)="alignMenu()" id="alignIcon" class="dropbtn"
+                                src="assets/icons/text tool/txt_leftalign.svg">
+                            <div id="alignmentMenu" class="dropdown-alignment">
+                                <a class="dropdown-item" href="#">
+                                    <img tooltip="Left" src="assets/icons/text tool/txt_rightalign.svg">
+                                    Left</a>
+                                <a class="dropdown-item" href="#"> <img tooltip="Left"
+                                        src="assets/icons/text tool/txt_rightalign.svg">Right</a>
+                                <a class="dropdown-item" href="#"> <img tooltip="Left"
+                                        src="assets/icons/text tool/txt_centeralign.svg">Center</a>
+                                <a class="dropdown-item" href="#"> <img tooltip="Left"
+                                        src="assets/icons/text tool/ic_txtcenteralignlong.svg">Justify</a>
+
+                            </div>
+                        </div>
+                        <!-- <img tooltip="Alignment" (click)="openAlignmentMenu(null)" id="alignIcon" src="assets/icons/text tool/txt_leftalign.svg"> -->
+                        <img tooltip="Bullets" (click)="updateFont('OrderedList','Bullets')"
+                            src="assets/icons/text tool/ic_txtbullet.svg">
+                        <img tooltip="Numbering" (click)="updateFont('UnOrderedList','Number')"
+                            src="assets/icons/text tool/ic_txtnumber.svg">
+                        <img tooltip="Decrease Indent" (click)="updateFont('Indent','Decrease Indent')"
+                            src="assets/icons/text tool/ic_txtparout.svg">
+                        <img tooltip="Increase Indent" (click)="updateFont('Indent','Increase Indent')"
+                            src="assets/icons/text tool/ic_txtparin.svg">
+                        <img tooltip="Strikethrough" (click)="updateFont('Strike','Strikethrough')"
+                            src="assets/icons/text tool/ic_txtstripe.svg">
+                        <img tooltip="Remove Formatting" (click)="updateFont('UnFormat','UnFormat')"
+                            src="assets/icons/text tool/ic_txtunformat.svg">
+                    </div>
+                    <!-- <span id="fontColorLight" class="dot"
+                            >hfg </span> -->
+                    <div class="font-size">
+                        <h2>
+                            Character spacing
+                        </h2>
+                        <ng5-slider [(value)]="charSpacing" [options]="charSpacingOptions"
+                            (mouseup)="updateFont(null,'CharSpacing')"></ng5-slider>
+                        <p id="fontSize">{{charSpacing}}</p>
+                        <!-- <div class="progress">
+                                <div class="progress-bar" style="width:25%"> 
+                                </div>
+                            </div>
+                            <div class="scope">
+                                <button class="btn-1"></button>
+                                <button class="btn">0.05</button>
+                            </div> -->
+                    </div>
+                    <div class="font-size">
+                        <h2>
+                            Line spacing
+                        </h2>
+                        <ng5-slider [(value)]="lineSpacing" [options]="lineSpacingOptions"
+                            (mouseup)="updateFont(null,'LineSpacing')"></ng5-slider>
+                        <p id="fontSize">{{lineSpacing}}</p>
+                        <!-- <div class="progress">
+                                <div class="progress-bar" style="width:25%"> 
+                                </div>
+                            </div>
+                            <div class="scope">
+                                <button class="btn-1"></button>
+                                <button class="btn">auto</button>
+                            </div> -->
+                    </div>
+                    <div class="tag">
+                        <h2>
+                            Change heading tag
+                        </h2>
+                        <label>
+                            <select>
+                                <option selected>H1 </option>
+                                <option>H2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <!-- logo editor options -->
+                <div *ngIf="activeSB == 'AddLogo'" class="list2 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2">ADD ELEMENTS</h3>
+                    <h2>EDIT LOGO</h2>
+
+                    <!-- section for image upload -->
+
+                    <div class="setting__image pad-quiz-e" (click)="onImageUploadClick()">
+
+                        <div id="drop_zone">
+
+                            <h3>Upload IMAGE</h3>
+
+                            <app-upload-file [module]="configure" (file)="onFileUpload($event)"></app-upload-file>
+                        </div>
+                    </div>
+                    <div class="onoffswitch">
+                        <h3>Logo Link</h3>
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+                            (change)="onOfLink($event)">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                    <div class="url" *ngIf="addLinkToImage == true">
+                        <input id="url" placeholder="Enter the URL link" name="logoLinkTo"
+                            [(ngModel)]="tagBeingEdited.linkUrl">
+                        <button type="submit" *ngIf="linkAdded == false" class="btn apply"
+                            (click)="changeImage('Link',null)">Create Link</button>
+                        <button type="submit" *ngIf="linkAdded == true" class="btn apply"
+                            (click)="changeImage('Remove Link',null)">Remove Link</button>
+                    </div>
+
+                    <div class="url">
+                        <h3>Alt Text</h3>
+                        <input id="url" placeholder="Add alt text" name="logoAltText"
+                            [(ngModel)]="tagBeingEdited.altText" (change)="changeImage('AltText',$event)">
+
+                    </div>
+
+                    <div class="img-alig">
+                        <h3>Image Alignment</h3>
+                        <label class="alig-label activeImageAlign" for="alig-label"
+                            (click)="changeImageAlignment($event,'Left')">
+                            <label class="alig"></label>
+                        </label>
+                        <label class="alig-label" for="alig-label" style="text-align: center;"
+                            (click)="changeImageAlignment($event,'Center')">
+                            <label class="alig"></label>
+                        </label>
+                        <label class="alig-label" for="alig-label" style="text-align: right; padding-right: 2%;"
+                            (click)="changeImageAlignment($event,'Right')">
+                            <label class="alig"></label>
+                        </label>
+                    </div>
+
+                    <div class="bar">
+                        <h3>Vertical Spacing</h3>
+                        <form>
+                            <div>
+                                <ng5-slider [(value)]="verticalSpacing" [options]="verticalSpacingOptions"
+                                    (mouseup)="changeImage('VerticalSpacing',null)"></ng5-slider>
+                                <input name="logoSpacing" [(ngModel)]="verticalSpacing"
+                                    style="width: 40px;height: auto;margin-top: auto !important;"
+                                    (ngModelChange)="changeImage('VerticalSpacing',null)" />
+                                <!-- <h4 class="px-2">{{verticalSpacing}}</h4>px -->
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div class="bar">
+                        <h3>Image Size</h3>
+                        <form>
+                            <div>
+                                <ng5-slider [(value)]="imageWidth" [options]="imageWidthOptions"
+                                    (mouseup)="changeImage('ImageWidth',null)"></ng5-slider>
+                                <input name="logoWidth" [(ngModel)]="imageWidth"
+                                    style="width: 40px;height: auto;margin-top: auto !important;"
+                                    (ngModelChange)="changeImage('ImageWidth',null)" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- imaged editor options -->
+                <div *ngIf="activeSB == 'AddImage'" class="list2 list-3 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2">ADD ELEMENTS</h3>‏
+                    <h2>EDIT IMAGE</h2>
+
+                    <!-- <div class="logo" (click)="onImageUploadClick()">
+                            <h3>Upload IMAGE</h3>
+                            <div class="img">
+                                <img src="assets/icons/ic_placeholder_image.svg">
+                                <p>Drag Image to Upload or Click Here<a>Click Here</a></p>
+                            </div>
+                        </div> -->
+                    <!-- section for image upload -->
+
+                    <div class="setting__image pad-quiz-e" (click)="onImageUploadClick()">
+
+                        <div id="drop_zone">
+
+                            <h3>Upload IMAGE</h3>
+
+                            <app-upload-file [module]="configure" (file)="onFileUpload($event)"></app-upload-file>
+                        </div>
+                    </div>
+
+                    <div class="onoffswitch">
+                        <h3>IMAGE Link</h3>
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+                            (change)="onOfLink($event)">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+
+                    <div class="url" *ngIf="addLinkToImage == true">
+                        <input id="url" placeholder="Enter the URL link" name="ImageLinkTo"
+                            [(ngModel)]="tagBeingEdited.linkUrl">
+                        <button type="submit" *ngIf="linkAdded == false" class="btn apply"
+                            (click)="changeImage('Link',null)">Create Link</button>
+                        <button type="submit" *ngIf="linkAdded == true" class="btn apply"
+                            (click)="changeImage('Remove Link',null)">Remove Link</button>
+                    </div>
+                    <div class="url">
+                        <h3>Alt Text</h3>
+                        <input id="url" placeholder="Add alt text" name="ImageAtlText"
+                            [(ngModel)]="tagBeingEdited.altText" (change)="changeImage('AltText',$event)">
+
+                    </div>
+                    <div class="img-alig">
+                        <h3>Image Alignment</h3>
+                        <label class="alig-label activeImageAlign" for="alig-label"
+                            (click)="changeImageAlignment($event,'Left')">
+                            <label class="alig"></label>
+                        </label>
+                        <label class="alig-label" for="alig-label" style="text-align: center;"
+                            (click)="changeImageAlignment($event,'Center')">
+                            <label class="alig"></label>
+                        </label>
+                        <label class="alig-label" for="alig-label" style="text-align: right; padding-right: 2%;"
+                            (click)="changeImageAlignment($event,'Right')">
+                            <label class="alig"></label>
+                        </label>
+                    </div>
+
+                    <div class="bar">
+                        <h3>Vertical Spacing</h3>
+                        <form>
+                            <div>
+                                <ng5-slider [(value)]="verticalSpacing" [options]="verticalSpacingOptions"
+                                    (mouseup)="changeImage('VerticalSpacing',null)"></ng5-slider>
+                                <input name="imageSpacing" [(ngModel)]="verticalSpacing"
+                                    style="width: 40px;height: auto;margin-top: auto !important;"
+                                    (ngModelChange)="changeImage('VerticalSpacing',null)" />
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="bar">
+                        <h3>Image Size</h3>
+                        <form>
+                            <div>
+                                <ng5-slider [(value)]="imageWidth" [options]="imageWidthOptions"
+                                    (mouseup)="changeImage('ImageWidth',null)"></ng5-slider>
+                                <input name="imageWidth" [(ngModel)]="imageWidth"
+                                    style="width: 40px;height: auto;margin-top: auto !important;"
+                                    (ngModelChange)="changeImage('ImageWidth',null)" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- column editor options -->
+                <div *ngIf="activeSB == 'AddColumn'" class="list2 list4 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2">ADD ELEMENTS</h3>‏
+
+                    <h2>COLUMN</h2>
+                    <div class="alboum">
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==1}"
+                            (click)="setActiveColumn(1);setActiveSB(1)">
+                            <img src="./assets/icons/ic_columnvar1.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==2}"
+                            (click)="setActiveColumn(2);setActiveSB(2)">
+                            <img src="./assets/icons/ic_columnvar2.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==3}"
+                            (click)="setActiveColumn(3);setActiveSB(3)">
+                            <img src="./assets/icons/ic_columnvar3.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==4}"
+                            (click)="setActiveColumn(4);setActiveSB(4);">
+                            <img src="./assets/icons/ic_columnvar4.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==5}"
+                            (click)="setActiveColumn(5);setActiveSB(5);">
+                            <img src="./assets/icons/ic_columnvar5.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==6}"
+                            (click)="setActiveColumn(6);setActiveSB(6)">
+                            <img src="./assets/icons/ic_columnvar6.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                        <label class="img text-center" [ngClass]="{ 'active':activeColumn==7}"
+                            (click)="setActiveColumn(7);setActiveSB(7)">
+                            <img src="./assets/icons/ic_columnvar7.svg">
+                            <img src="./assets/icons/ic_checkmark_on.svg" class="h">
+                        </label>
+
+                    </div>
+                </div>
+                <div *ngIf="activeSB == 'AddButton'" class="list5 add-element-text list14 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg"
+                        style="cursor: pointer; max-width: 6px !important; max-height: 9px !important;"
+                        (click)="toggleToSBList()">
+                    <h3 style="font-size: 12px; display: inline; padding-left: 5px;" class="add-2">ADD ELEMENTS</h3>
+                    <!-- <h2>EDIT BUTTON</h2> -->
+                    <div id="swapp">
+                        <ul class="nav nav-pills">
+                            <li id="content">
+                                <a href="javascript:void(0)" [ngClass]="{ 'active':activeTab==='1a'}"
+                                    (click)="content('1a')" data-toggle="tab" class="active">Content</a>
+                            </li>
+                            <li id="design">
+                                <a href="javascript:void(0)" [ngClass]="{ 'active':activeTab==='2a'}"
+                                    (click)="design('2a')" data-toggle="tab">Design</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="1a" [ngClass]="{ 'active':activeTab==='1a'}">
+                                <div id="content-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Button label</label>
+                                            <input type="text" maxlength="10" class="form-control"
+                                                id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                placeholder="Enter email" name="buttonLable"
+                                                [(ngModel)]="tagBeingEdited.text">
+
+                                        </div>
+                                    </form>
+
+                                    <label>Button link</label>
+                                    <form class="radio">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a href="#1b" data-toggle="tab" class="active"
+                                                    [ngClass]="{ 'active':activeTab==='1b'}"
+                                                    (click)="activeradiobtn('1b')">
+                                                    <label class="radio-inline ">
+                                                        <input type="radio" name="optradio" class="regular-checkbox"
+                                                            id="radio-1b" checked>Website URL
+                                                    </label>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#2b" data-toggle="tab"
+                                                    [ngClass]="{ 'active':activeTab==='2b'}"
+                                                    (click)="activeradiobtn('2b')">
+                                                    <label class="radio-inline ">
+                                                        <input type="radio" name="optradio" class="regular-checkbox"
+                                                            id="radio-2b">Files
+                                                    </label>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content " id="file">
+                                            <div class="tab-pane active" id="2b"
+                                                [ngClass]="{ 'active':activeradio==='2b'}">
+                                                <button class="btn file" (click)="openSelectFileModel('File')"> Add
+                                                    File</button>
+                                            </div>
+
+                                            <div class="tab-pane" id="1b" id="url"
+                                                [ngClass]="{ 'active':activeradio==='1b'}">
+                                                <input type="text" class="url" placeholder="Enter the URL link"
+                                                    name="buttonFile" [(ngModel)]="tagBeingEdited.buttonUrl"
+                                                    (keyup)="changeButtonText($event,'URL')">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="2a" [ngClass]="{ 'active':activeTab==='2a'}">
+                                <div id="content-body">
+                                    <div class="fonts">
+                                        <h2 style="margin-top: 6px;">Fonts</h2>
+                                        <label>
+                                            <select (change)="updateButtonStyle($event,'Font Style')">
+                                                <option *ngFor="let font of fontList" value={{font}}
+                                                    [ngStyle]="{'font-family': font}">{{font}} </option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="color5" style="margin-bottom: 0px;">
+                                        <h3>Text Color</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle"
+                                                [style.background]="buttonTextColor"
+                                                [(colorPicker)]="buttonTextColor"
+                                                (cpInputChange)="changeButtonColor('cpInputChange','TextColor')"
+                                                (cpSliderDragEnd)="changeButtonColor('cpSliderDragEnd','TextColor')">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="color5" style="margin-bottom: 0px;">
+                                        <h3>Fill Color</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle" [style.background]="buttonColor"
+                                                [(colorPicker)]="buttonColor"
+                                                (cpInputChange)="changeButtonColor('cpInputChange','ButtonColor')"
+                                                (cpSliderDragEnd)="changeButtonColor('cpSliderDragEnd','ButtonColor')">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="fonts">
+                                        <h2>Border Width</h2>
+                                        <label>
+                                            <ng5-slider [(value)]="borderWidth" [options]="buttonBorderOptions"
+                                                (mouseup)="changeButtonColor(null,'BorderWidth')"></ng5-slider>
+                                            <p id="fontSize">{{borderWidth}}px</p>
+                                        </label>
+                                    </div>
+                                    <div class="color5" style="margin-bottom: 0px;">
+                                        <h3>Border Color</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle" [style.background]="borderColor"
+                                                [(colorPicker)]="borderColor"
+                                                (cpInputChange)="changeButtonColor('cpInputChange','BorderColor')"
+                                                (cpSliderDragEnd)="changeButtonColor('cpSliderDragEnd','BorderColor')">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="color5">
+                                        <h3>Image Alignment</h3>
+                                        <label class="button-alig-label " for="alig-label"
+                                            (click)="updateButtonStyle($event,'Align Left')">
+                                            <label class="button-alig"></label>
+                                        </label>
+                                        <label class="button-alig-label activeImageAlign" for="alig-label"
+                                            style="text-align: center;"
+                                            (click)="updateButtonStyle($event,'Align Center')">
+                                            <label class="button-alig"></label>
+                                        </label>
+                                        <label class="button-alig-label" for="alig-label"
+                                            style="text-align: right; padding-right: 2%;"
+                                            (click)="updateButtonStyle($event,'Align Right')">
+                                            <label class="button-alig"></label>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div *ngIf="activeSB == 'AddSpacer'" class="list2 list5 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2">ADD ELEMENTS</h3>‏
+                    <h2>EDIT SPACER</h2>
+
+                    <div class="bar">
+                        <h3>Height</h3>
+                        <!-- <form >
+                                            <div>
+                                                <input oninput="amount.value=rangeInput.value" class="slider slider-2"  type="range" min="0" max="100" name="rangeInput" value="0"/>
+                                                
+                                                <input class="box box-2"  type="text" value="0" name="amount" for="rangeInput"  oninput="rangeInput.value=amount.value" />
+                                                <h4 class="px-2">px</h4>
+                                            </div> 
+                                        </form> -->
+                        <ng5-slider [(value)]="sHeight" [options]="sOptions" (mouseup)="updateSpacer('height')">
+                        </ng5-slider>
+                        <input id="sHeight" [(ngModel)]="sHeight" maxlength="3"
+                            style="width: 40px;height: auto;margin-top: auto !important;"
+                            (ngModelChange)="validateSliderValue('sHeight',sOptions);updateSpacer('height');" />
+                    </div>
+
+                    <div class="onoffswitch">
+                        <h3>Display Line</h3>
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
+                            checked (change)="updateSpacer('display', $event);">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+
+                    <div class="bar">
+                        <h3>Width</h3>
+                        <!-- <form >
+                                            <div>
+                                                <input oninput="amount.value=rangeInput.value" class="slider slider-2"  type="range" min="0" max="100" name="rangeInput" value="0"/>
+                                                
+                                                <input class="box box-2"  type="text" value="0" name="amount" for="rangeInput"  oninput="rangeInput.value=amount.value" />
+                                                <h4 class="px-2">px</h4>
+                                            </div> 
+                                        </form> -->
+                        <ng5-slider [(value)]="sWidth" [options]="sOptions" (mouseup)="updateSpacer('width');">
+                        </ng5-slider>
+                        <input id="sWidth" [(ngModel)]="sWidth"
+                            style="width: 40px;height: auto;margin-top: auto !important;"
+                            (ngModelChange)="validateSliderValue('sWidth',sOptions);updateSpacer('width');" />
+                    </div>
+
+                    <div class="bar">
+                        <h3>Stroke</h3>
+                        <!-- <form >
+                                            <div>
+                                                <input oninput="amount.value=rangeInput.value" class="slider slider-2"  type="range" min="0" max="100" name="rangeInput" value="0"/>
+                                                
+                                                <input class="box box-2"  type="text" value="0" name="amount" for="rangeInput"  oninput="rangeInput.value=amount.value" />
+                                                <h4 class="px-2">px</h4>
+                                            </div> 
+                                        </form> -->
+                        <ng5-slider [(value)]="sStroke" [options]="sStrOptions" (mouseup)="updateSpacer('stroke');">
+                        </ng5-slider>
+                        <input id="sStroke" [(ngModel)]="sStroke"
+                            style="width: 40px;height: auto;margin-top: auto !important;"
+                            (ngModelChange)="validateSliderValue('sStroke',sStrOptions);updateSpacer('stroke');" />
+                    </div>
+
+                    <div class="bar">
+
+                        <div>
+                            <span>Style</span>
+
+                            <select [(ngModel)]="sbStyle" (ngModelChange)="updateSpacer()">
+                                <option value="solid" [selected]="true">solid</option>
+                                <option value="dashed">dashed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="color5">
+                        <h3>Color</h3>
+                        <span class="swatch colorPicker dot" [style.background]="color" [(colorPicker)]="color"
+                            (colorPickerOpen)="onEventLog('colorPickerOpen', color)"
+                            (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', color)">
+                        </span>
+                    </div>
+                </div>
+
+                <div *ngIf="activeSB == 'AddFooter'" class="list2 scroll sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;" (click)="toggleToSBList()">
+                    <h3 class="add-2 footer-settings">Footer Settings</h3>
+                    <h2>EDIT FOOTER</h2>
+                    <div>
+
+                        <div class="onoffswitch">
+                            <h3>Show Address</h3>
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                id="myonoffswitch" checked (change)="footerOnOffButton($event,'Address')">
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+
+                        <div class="url" *ngIf="showAddress == true">
+                            <input placeholder="Enter address here" name="footerAddress"
+                                [(ngModel)]="footerTag.address">
+                        </div>
+                        <div class="onoffswitch">
+                            <h3>Show Phone Number</h3>
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                id="myonoffswitch2" checked>
+                            <label class="onoffswitch-label" for="myonoffswitch2">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+
+                        <div class="url" *ngIf="showPhoneNumber == true">
+                            <input placeholder="Enter your phone number" name="footerPhoneNumber"
+                                [(ngModel)]="footerTag.phoneNumber">
+                        </div>
+                        <div class="onoffswitch onoffswitch2">
+                            <h3>Share Via</h3>
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                id="myonoffswitch3" checked (change)="footerOnOffButton($event,'Share')">
+                            <label class="onoffswitch-label" for="myonoffswitch3">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                            <div *ngIf="showShareVia == true">
+                                <label class="container">
+                                    <img src="assets/icons/pinterest.svg">
+                                    <span class="text">Pinterest</span>
+                                    <input type="checkbox" checked (change)="footerOnOffButton($event,'Pinterest')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    <img src="assets/icons/share-fb.svg">
+                                    <span class="text">Facebook</span>
+                                    <input type="checkbox" checked (change)="footerOnOffButton($event,'Facebook')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container container-end">
+                                    <img src="assets/icons/share-tw.svg">
+                                    <span class="text">Twitter</span>
+                                    <input type="checkbox" checked (change)="footerOnOffButton($event,'Twitter')">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="onoffswitch">
+                            <h3>Add a Link to Your Site</h3>
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                id="myonoffswitch4" checked (change)="footerOnOffButton($event,'AddUrl')">
+                            <label class="onoffswitch-label" for="myonoffswitch4">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+
+                        <div class="url" *ngIf="showAddUrl == true">
+                            <input placeholder="Enter link title" name="footerlinkTitle"
+                                [(ngModel)]="footerTag.linkTitle">
+                            <input placeholder="Enter link URL" name="footerlinkUrl"
+                                [(ngModel)]="footerTag.linkUrl">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="activeSB == 'background'" class="list2 list4 list5 list12 sp">
+                    <!-- style="height: 75vh !important;overflow-y: scroll !important;" -->
+                    <img src="assets/icons/ic_back.svg" style="cursor: pointer;"
+                        (click)="toggleToSBList();saveBackgrounds();">
+                    <h2>EDIT BACKGROUND</h2>
+                    <div id="editBackground" style="display: none;">
+                        <img src="assets/icons/ic_back.svg" style="cursor: pointer;"
+                            (click)="editBackgroundImage()">
+                        <h2 style="display: inline-block;margin-left: 2px;">Background</h2>
+                        <div class="bar">
+                            <div class="color5">
+                                <h3>Color Scheme</h3>
+                                <div class="stroke">
+                                    <button type="button" class="btn cicle"
+                                        [style.background]="backgroundImageColor"
+                                        [(colorPicker)]="backgroundImageColor"
+                                        (cpInputChange)="changeBackGroundColor('emailTemplateWindow','BackGround Image')"
+                                        (cpSliderDragEnd)="changeBackGroundColor('emailTemplateWindow','BackGround Image')"
+                                        [cpOKButton]="true" [cpCancelButton]="true">
+                                    </button>
+                                    <button type="button" class="btn text">Email Background</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="swapp" *ngIf="activeSB == 'background'">
+                    <ul class="nav nav-tabs">
+                        <li id="main_background" class="active">
+                            <a href="#1a" data-toggle="tab" [ngClass]="{ 'active':activeTab==='1a'}"
+                                (click)="mainbackground('1a')">Main Background</a>
+                        </li>
+                        <li id="inner_background">
+                            <a href="#2a" data-toggle="tab" [ngClass]="{ 'active':activeTab==='2a'}"
+                                (click)="innerbackground('2a')">Inner Background</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content clearfix scroll">
+                        <div class="tab-pane active" id="1a" [ngClass]="{ 'active':activeTab==='1a'}">
+                            <div id="content-body">
+                                <div class="list2 list4 list5 list12 ">
+                                    <div class="color5">
+                                        <h3>{{emailBackgroundColor}}Color Scheme</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle"
+                                                [style.background]="emailBackgroundColor"
+                                                [(colorPicker)]="emailBackgroundColor"
+                                                (cpInputChange)="changeBackGroundColor('emailTemplateWindow','BackGround')"
+                                                (cpSliderDragEnd)="changeBackGroundColor('emailTemplateWindow','BackGround', 'SLIDER ENDED')"
+                                                (cpPresetColorsChange)="changeBackGroundColor('emailTemplateWindow','BackGround')"
+                                                (colorPickerClose)="changeBackGroundColor('emailTemplateWindow','CloseWindow')">
+                                            </button>
+                                            <button type="button" class="btn text">Email Background</button>
+                                        </div>
+                                        <h3>Pattern & Image</h3>
+                                        <button type="button" class="btn pattern"
+                                            (click)="openSelectFileModel('Image', 'BackGround Pattern')">Upload New
+                                            Pattern</button>
+                                        <hr>
+                                        <span>OR</span>
+                                        <hr>
+
+                                    </div>
+                                    <div class="alboum alboum12">
+                                        <label *ngFor="let patt of backgroundPattern"
+                                            class="img text-center bckroundImg" id=backgroundImage{{patt.id}}
+                                            (click)="changeBackGroundImage(patt)">
+                                            <img src={{patt.imagePath}}>
+                                            <img src="assets/icons/ic_checkmark_on.svg" class="h">
+                                            <button class="H" (click)="editBackgroundImage()">Edit
+                                                background</button>
+                                        </label>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="2a" [ngClass]="{ 'active':activeTab==='2a'}">
+                            <div id="content-body">
+                                <div class="list2 list4 list5 list12 ">
+                                    <div class="onoffswitch">
+                                        <h3>Show Background Color</h3>
+                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                            id="myonoffswitch" checked
+                                            (change)="changeBackGroundColor('emailTemplateInnerWindow',$event)">
+                                        <label class="onoffswitch-label" for="myonoffswitch">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
+                                    <div class="color5">
+                                        <h3>Color Scheme</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle"
+                                                [style.background]="innerEmailBackgroundColor"
+                                                [(colorPicker)]="innerEmailBackgroundColor"
+                                                (cpInputChange)="changeBackGroundColor('emailTemplateInnerWindow','BackGround')"
+                                                (cpSliderDragEnd)="changeBackGroundColor('emailTemplateInnerWindow','BackGround')"
+                                                (colorPickerClose)="changeBackGroundColor('emailTemplateInnerWindow','CloseWindow')">
+
+                                            </button>
+                                            <button type="button" class="btn text">Email Background</button>
+                                        </div>
+                                    </div>
+                                    <div class="bar">
+                                        <h3>Border Width</h3>
+                                        <form>
+                                            <div>
+                                                <ng5-slider [(value)]="innerEmailBorderSize"
+                                                    [options]="innerEmailBorderSizeOptions"
+                                                    (mouseup)="changeBackGroundColor('emailTemplateInnerWindow','BorderWidth')"
+                                                    (blur)="changeBackGroundColor('emailTemplateInnerWindow','CloseWindow')">
+                                                </ng5-slider>
+                                                <input [(ngModel)]="innerEmailBorderSize" name="emailBorderSize"
+                                                    maxlength="3"
+                                                    style="width: 40px;height: auto;margin-top: auto !important;"
+                                                    (ngModelChange)="validateSliderValue('innerEmailBorderSize',innerEmailBorderSizeOptions);changeBackGroundColor('emailTemplateInnerWindow','BorderWidth');"
+                                                    (blur)="changeBackGroundColor('emailTemplateInnerWindow','CloseWindow')" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="color5">
+                                        <h3>Color</h3>
+                                        <div class="stroke">
+                                            <button type="button" class="btn cicle"
+                                                [style.background]="innerEmailBorderColor"
+                                                [(colorPicker)]="innerEmailBorderColor"
+                                                (cpInputChange)="changeBackGroundColor('emailTemplateInnerWindow','Border')"
+                                                (cpSliderDragEnd)="changeBackGroundColor('emailTemplateInnerWindow','Border')"
+                                                (colorPickerClose)="changeBackGroundColor('emailTemplateInnerWindow','CloseWindow')">
+                                            </button>
+                                            <button type="button" class="btn text">Border color</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="activeSB == 'themes'" class="list2 list5 list11">
+                    <h2>SELECT THEME</h2>
+                </div>
+                <ul *ngIf="activeSB == 'themes'" class="list2 list5 list11 scroll nav nav-tabs sp"
+                    style="height: 75vh !important;overflow-y: scroll !important;">
+                    <li class="classic  " (click)="activelable('classic')">
+
+                        <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                        {{theme.themeName}}
+
+                    </li>
+                    <!-- <li class="minimal "  (click)="activelable('minimal')">
+
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    MINIMAL
+
+                            </li>
+                            <li class="rose " (click)="activelable('rose')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    Rosé
+                            </li>
+                            <li class="write "  (click)="activelable('write')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    WRITE
+                            </li>
+                            <li class="funny " (click)="activelable('funny')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    Funny
+                            </li>
+                            <li class="paper " (click)="activelable('paper')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    Paper
+                            </li>
+                            <li class="purple " (click)="activelable('purple')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    PURPLE
+                            </li>
+                            <li class="nature" (click)="activelable('nature')">
+                                <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                Nature
+                            </li>
+                            <li class="forest " (click)="activelable('forest')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    Forest
+                            </li>
+                            <li class="classic2 " (click)="activelable('classic2')">
+                                    <img src="./assets/icons/ic_checkmark_on.svg" class="h ">
+                                    Classic
+                            </li> -->
+                </ul>
+
+
+                <div *ngIf="activeSB" class="footer" style="height: 100px;width: 100%;margin-top: -48px;">
+                    <button type="submit" class="btn cancel">Cancel</button>
+                    <button type="submit" class="btn apply" *ngIf="activeSB!='background'  && tagBeingEdited.id"
+                        (click)="savePreviouslyFocusedElement('Apply')">Apply</button>
+                    <button type="submit" class="btn apply" *ngIf="activeSB=='AddColumn' && !tagBeingEdited.id"
+                        (click)="savePreviouslyFocusedElement('AddingNewElement', true)">Apply</button>
+                    <button type="submit" class="btn apply" *ngIf="activeSB=='background'"
+                        (click)="saveBackgrounds()">Apply</button>
+                </div>
+            </div>
+            <!-- end  sidepar -->
+
+            <!-- start  main-content -->
+
+            <!-- <div class="col-lg-9 main-content  main-content2" id="emailTemplateWindow" style="position: relative;left: 25.5%;"> -->
+            <div class="col-lg-9 main-content main-content2" id="emailTemplateWindow" style="position: relative;left: 25.5%; overflow: scroll;
+                        max-height: 95vh;">
+                <div style="width: 100%; text-align: center; margin-top: 30px;">
+                    <div style="width: 58.02%;display: inline-block;margin-left: 6%;background-color: white;
+                        text-align: justify;box-shadow: 0px 3px 6px #00000029 !important;">
+                        <div style="padding: 10px;">
+                            <span id="preHeaderSubject"><b> {{subject}} </b></span>
+                            <span style="display: none;" id="preHeaderEmailFrom">email From &nbsp;&nbsp;&nbsp;
+                                <b>{{emailCampaignData.fromName}} &lt; {{emailCampaignData.fromEmail}} &gt; </b></span>
+                            <img id="openPreheaderDiv" (click)="openPreheaderDiv();"
+                                style="float: right;width: 9px; color: #707070;" src="./assets/icons/arrow-down.svg"
+                                alt="">
+                        </div>
+                        <div id="subjectPreheaderDiv" style="display: none;">
+                            <table style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <th>Email Subject</th>
+                                        <td><input class="preHeaderInput" type="text"
+                                                [(ngModel)]="emailTemplate.emailSubject"
+                                                (blur)="saveEmailTempelateTitle('Email Subject')"
+                                                placeholder="Add a subject here"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email pre header</th>
+                                        <td><input class="preHeaderInput" type="text"
+                                                [(ngModel)]="emailTemplate.emailPreHeader"
+                                                (blur)="saveEmailTempelateTitle('Email Header')"
+                                                placeholder="Add pre header here"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <div style="padding: 10px;">
+                                <span><b>Email Subject</b></span> 
+                                
+                            </div> 
+                            <div style="padding: 10px;">
+                                    <span><b>Email pre header</b></span> 
+                                    
+                            </div>  -->
+                    </div>
+                </div>
+                <div class="content text-center" style="margin-top: 30px;" id="emailTemplateInnerWindow">
+                    <!-- Logo -->
+                    <div (click)="onEditorItemClick(logoTag);onInputText(logoTag);" id={{logoTag.tagId}}>
+                        <ng-container *ngIf="logoTag.tag=='logo'">
+                            <div (mouseover)="showHoverBorder(logoTag)" (mouseleave)="removeHoverBorder()"
+                                [ngClass]="{'activeImageBorder': tagBeingEdited.tag=='logo' || showBorder == logoTag.tagId}"
+                                style="border: 1px solid transparent;">
+                                <!-- *ngIf="tagBeingEdited.tag=='logo' || showBorder == logoTag.tagId" -->
+                                <div class="groub2" style="margin-top: -3%;display: inline-block;float:right;"
+                                    [ngClass]="{'hidden': tagBeingEdited.tag!='logo' && showBorder != logoTag.tagId, 'visible': tagBeingEdited.tag=='logo' || showBorder == logoTag.tagId}">
+                                    <img src="assets/icons/ic_delete.svg" (click)="deleteEditorItem(logoTag)"
+                                        style="float: right; height: 50px;">
+                                </div>
+                                <div id="image{{logoTag.tagId}}" class="main-img" style="height: 50%;margin-left: 12%;">
+
+                                    <img alt={{logoTag.altText}} src={{logoTag.src}}
+                                        style="margin: 2% 0px; width: 50%;">
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <!-- Header/Title   -->
+                    <div contenteditable="true" (click)="onEditorItemClick(headerTag);onInputText(headerTag);"
+                        id={{headerTag.tagId}} style="border: 1px solid transparent;">
+                        <ng-container *ngIf="headerTag.tag=='title'">
+                            <div (mouseover)="showHoverBorder(headerTag)" (mouseleave)="removeHoverBorder()"
+                                [ngClass]="{'activeImageBorder': tagBeingEdited.tagId === headerTag.tagId || showBorder == headerTag.tagId}"
+                                style="border: 1px solid transparent;">
+
+                                <div class="groub2" style="margin-top: -3%;display: inline-block;float: right;"
+                                    *ngIf="tagBeingEdited.tagId === headerTag.tagId || showBorder == headerTag.tagId">
+                                    <button class="pencil" style="margin-top: 7px;float: right;">
+                                        <img src="assets/icons/pencil-edit-button (1).svg"
+                                            style="margin-right: -3px; height: 50px;">
+                                    </button>
+                                </div>
+                                <div class="first" id=textDiv{{headerTag.tagId}} style="padding-bottom: 25px;">
+                                    <h1 style="padding-bottom: 15px;" id=text{{headerTag.tagId}}
+                                        [innerHtml]="headerTag.text | safeInnerHtml"></h1>
+                                    <div class="spacer-item-title"></div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <!-- Email Body -->
+                    <ngx-sortable [items]="tags" [name]="" (listSorted)="listSorted($event)" [listStyle]="listStyle">
+                        <ng-template let-item>
+                            <div class="sortable-list-item" style="padding-top: 15px;"
+                                (click)="onEditorItemClick(item);onInputText(item);" id={{item.tagId}}>
+
+                                <ng-container *ngIf="item.tag=='text'">
+                                    <div contenteditable="true" (mouseover)="showHoverBorder(item)"
+                                        (mouseleave)="removeHoverBorder()"
+                                        [ngClass]="{'activeBorder': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId }"
+                                        style="border: 1px solid transparent;">
+                                        <div class="groub2" style="margin-top: -3%;display: inline-block;float: right;"
+                                            *ngIf="tagBeingEdited.tagId === item.tagId || showBorder == item.tagId">
+                                            <img src="assets/icons/ic_duplicate.svg" (click)="duplicateItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <img src="assets/icons/ic_delete.svg" (click)="deleteEditorItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <button class="pencil" style="margin-top: 7px;float: right;">
+                                                <img src="assets/icons/pencil-edit-button (1).svg"
+                                                    style="margin-right: -3px; height: 50px;">
+                                            </button>
+                                        </div>
+                                        <div class="join" id=textDiv{{item.tagId}}>
+                                            <p id=text{{item.tagId}} [innerHtml]="item.text | safeInnerHtml">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="item && item.tag=='divider'">
+                                    <div (mouseover)="showHoverBorder(item)" (mouseleave)="removeHoverBorder()"
+                                        [ngClass]="{'activeBorder': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId }"
+                                        style="border: 1px solid transparent;">
+                                        <div class="groub2" style="margin-top: -3%;display: inline-block;float: right;"
+                                            *ngIf="tagBeingEdited.tagId === item.tagId || showBorder == item.tagId">
+                                            <img src="assets/icons/ic_duplicate.svg" (click)="duplicateItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <img src="assets/icons/ic_delete.svg" (click)="deleteEditorItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <button class="pencil" style="margin-top: 7px;float: right;">
+                                                <img src="assets/icons/pencil-edit-button (1).svg"
+                                                    style="margin-right: -3px; height: 50px;">
+                                            </button>
+                                        </div>
+                                        <div class="spacer-item" id=divider{{item.tagId}}>
+                                            <!-- contenteditable="true" -->
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+                                <ng-container *ngIf="item && item.tag=='image'">
+                                    <div (mouseover)="showHoverBorder(item)" (mouseleave)="removeHoverBorder()"
+                                        [ngClass]="{'activeImageBorder': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId }"
+                                        style="border: 1px solid transparent;">
+
+                                        <!-- *ngIf="tagBeingEdited.tagId === item.tagId || showBorder == item.tagId" -->
+                                        <div class="groub2" style="margin-top: -3%;display: inline-block;float: right;"
+                                            [ngClass]="{'hidden': tagBeingEdited.tagId !== item.tagId && showBorder !== item.tagId, 'visible': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId}">
+                                            <img src="assets/icons/ic_imagecrop.svg" *ngIf="item.default === 'updated'"
+                                                (click)="showImgCropper(item)">
+                                            <img src="assets/icons/ic_duplicate.svg" (click)="duplicateItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <img src="assets/icons/ic_delete.svg" (click)="deleteEditorItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <button class="pencil" style="margin-top: 7px;float: right;">
+                                                <img src="assets/icons/pencil-edit-button (1).svg"
+                                                    style="margin-right: -3px; height: 50px;">
+                                            </button>
+                                        </div>
+                                        <div id=image{{item.tagId}} class="main-img"
+                                            style="height: inherit !important;">
+                                            <img alt={{item.altText}} src={{item.src}}>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="item.tag=='button'">
+                                    <div (mouseover)="showHoverBorder(item)" (mouseleave)="removeHoverBorder()"
+                                        [ngClass]="{'activeImageBorder': tagBeingEdited.tag=='button' || showBorder == item.tagId}"
+                                        style="border: 1px solid transparent;">
+                                        <!-- *ngIf="tagBeingEdited.tagId === item.tagId || showBorder == item.tagId" -->
+                                        <div class="groub2" style="margin-top: -3%;display: inline-block;float: right;"
+                                            [ngClass]="{'hidden': tagBeingEdited.tagId !== item.tagId && showBorder !== item.tagId, 'visible': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId}">
+                                            <img src="assets/icons/ic_duplicate.svg" (click)="duplicateItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <img src="assets/icons/ic_delete.svg" (click)="deleteEditorItem(item)"
+                                                style="float: right; height: 50px;">
+                                            <button class="pencil" style="margin-top: 7px;float: right;">
+                                                <img src="assets/icons/pencil-edit-button (1).svg"
+                                                    style="margin-right: -3px; height: 50px;">
+                                            </button>
+                                        </div>
+                                        <div id=buttonDiv{{item.tagId}} style="margin-left: 18%;">
+                                            <button type="button" class="btn btn-warning"
+                                                id="ActionButton{{item.tagId}}">
+                                                <h5 class="" id="button{{item.tagId}}">
+                                                    {{item && item.text ? item.text: ""}}</h5>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="item.tag=='column'">
+                                    <div class="tab-pane active" id="column{{item.tagId + item.id}}" style="height: auto;">
+                                        <div id="content-body">
+                                            <!-- width: 90%;margin:5%; -->
+                                            <div class="content text-center"
+                                                style="width: 100%;margin: 0px 6px 0px 0px;">
+                                                <div class="secand secand2" (mouseover)="showHoverBorder(item)"
+                                                    (mouseleave)="removeHoverBorder()"
+                                                    [ngClass]="{'activeImageBorder': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId }"
+                                                    style="border: 1px solid transparent;padding: 0;">
+
+                                                    <div class="join join2" id="column{{item.tagId}}"
+                                                        style="margin: 0; border: none;"
+                                                        [ngStyle]="{'background':tagBeingEdited.tagId === item.tagId || showBorder == item.tagId ? '#1E637733' : 'none' }">
+                                                        <!-- style="margin-top: -11%"  -->
+                                                        <div class="groub2"
+                                                            [ngClass]="{'hidden': tagBeingEdited.tagId !== item.tagId && showBorder !== item.tagId, 'show': tagBeingEdited.tagId === item.tagId || showBorder == item.tagId}">
+                                                            <!-- *ngIf="tagBeingEdited.tagId === item.tagId || showBorder == item.tagId" -->
+                                                            <img class="editor-opts"
+                                                                src="assets/icons/ic_columnlayout.svg"
+                                                                style="height: 50px;">
+                                                            <img class="editor-opts" src="assets/icons/ic_duplicate.svg"
+                                                                (click)="duplicateItem(item)" style="height: 50px;">
+                                                            <img class="editor-opts" src="assets/icons/ic_delete.svg"
+                                                                (click)="deleteEditorItem(item)" style="height: 50px;">
+                                                        </div>
+                                                        <div class="row">
+                                                            <ng-container *ngFor="let subTag of item.subTags">
+                                                                <div *ngIf="subTag.tag == 'image'"
+                                                                    class="col-lg-6 d-inline m-0 p-0 img"
+                                                                    id="image{{subTag.tagId}}"
+                                                                    (click)="onColumnInputText($event, subTag)"
+                                                                    style="border: 1px solid transparent;padding: 2px !important;"
+                                                                    [ngClass]="{'activeImageBorder': tagBeingEdited.tag=='image'}">
+                                                                    <span (mouseover)="onColumnItemHover($e, subTag)"
+                                                                        (mouseout)="onColumnItemHover($e, '')">
+                                                                        <div class="groub"
+                                                                            style="position: absolute;right: 20px;top: -10px;"
+                                                                            [ngClass]="{'hidden':  hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'visible': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}">
+                                                                            <!-- [ngClass]="{'hidden': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'show': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}" -->
+                                                                            <img src="assets/icons/ic_edit.svg"
+                                                                                style="left: 13px;">
+                                                                            <!-- "{'hidden': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'show': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}" -->
+                                                                            <img src="assets/icons/ic_imagecrop.svg"
+                                                                                *ngIf="subTag.default === 'updated'"
+                                                                                (click)="showImgCropper(subTag)"
+                                                                                style="right: 20px;top: 1px;">
+                                                                            <!-- [ngClass]="{'hidden': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'show': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}" -->
+                                                                        </div>
+                                                                        <!-- assets/icons/avatar-01.jpg -->
+                                                                        <div id="column{{subTag.tagId}}"
+                                                                            [ngClass]="{'': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'col-ele': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}">
+                                                                            <img src="{{subTag.src}}"
+                                                                                style="height: 100% !important;margin-top: 0px !important;">
+                                                                            <div class="cimg-overlay">
+                                                                            </div>
+                                                                        </div>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-lg-6 d-inline m-0 p-0 text"
+                                                                    (click)="onColumnInputText($event, subTag)"
+                                                                    style="padding: 0 !important;"
+                                                                    style="border: 1px solid transparent;"
+                                                                    [ngClass]="{'activeBorder': tagBeingEdited.tagId === subTag.tagId, 'hidden': subTag.tag == 'image', 'show': subTag.tag != 'image' }">
+                                                                    <!-- *ngIf="subTag.tag != 'image'" id="{{subTag.tagId}}" -->
+                                                                    <span contenteditable="true"
+                                                                        (mouseover)="onColumnItemHover($e, subTag)"
+                                                                        (mouseout)="onColumnItemHover($e, '')">
+                                                                        <h6 *ngIf="subTag.tag == 'text'"
+                                                                            [ngClass]="{'bgt': tagBeingEdited.tagId === subTag.tagId, '': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'col-ele': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}">
+                                                                            <button class="pencil"
+                                                                                [ngClass]="{'hidden': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'show': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}"
+                                                                                style="bottom: 28px;float: left;"
+                                                                                (click)="editFocus($event, subTag)">
+                                                                                <img
+                                                                                    src="assets/icons/pencil-edit-button (1).svg">
+                                                                            </button>
+                                                                            <p id="column{{subTag.tagId}}"
+                                                                                style="width: auto;padding: 2%;margin: 0; border-top: 0px solid;"
+                                                                                [innerHtml]="subTag.text">
+                                                                            </p>
+                                                                        </h6>
+                                                                    </span>
+                                                                    <span contenteditable="true"
+                                                                        (mouseover)="onColumnItemHover($e, subTag)"
+                                                                        (mouseout)="onColumnItemHover($e, '')">
+                                                                        <button class="pencil pencil2"
+                                                                            *ngIf="subTag.tag == 'button'"
+                                                                            [ngClass]="{'hidden': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'show pencil-show': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}"
+                                                                            style="position: relative;top: -15px !important;left: 45px !important;float: left;">
+                                                                            <img
+                                                                                src="assets/icons/pencil-edit-button (1).svg">
+                                                                        </button>
+                                                                        <div id="column{{item.tagId+item.id}}"
+                                                                            [ngClass]="{'bgt': tagBeingEdited.tagId === subTag.tagId, '': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId != hoveredColumnItem.tagId, 'col-ele': hoveredColumnItem && hoveredColumnItem.tagId && subTag.tagId == hoveredColumnItem.tagId}">
+                                                                            <button *ngIf="subTag.tag == 'button'"
+                                                                                type="button" class="btn btn-warning"
+                                                                                id="ActionButton{{subTag.tagId}}"
+                                                                                (click)="onColumnInputText($event, subTag)">
+                                                                                <h5 id="column{{subTag.tagId}}">
+                                                                                    {{subTag.text}}</h5>
+                                                                            </button>
+                                                                        </div>
+                                                                    </span>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-template>
+                    </ngx-sortable>
+                    <!-- Footer -->
+                    <div (click)="onEditorItemClick(footerTag);onInputText(footerTag);" id={{footerTag.tagId}}>
+                        <ng-container *ngIf="footerTag.tag=='footer'">
+                            <div (mouseover)="showHoverBorder(footerTag)" (mouseleave)="removeHoverBorder()"
+                                [ngClass]="{'activeImageBorder': tagBeingEdited.tag=='footer' || showBorder == footerTag.tagId}"
+                                style="border: 1px solid transparent;">
+                                <div class="groub2" style="margin-top: -11%;display: inline-block;float: right;"
+                                    *ngIf="tagBeingEdited.tag=='footer' || showBorder == footerTag.tagId">
+                                    <button class="pencil" style="margin-top: 7px;float: right;">
+                                        <img src="assets/icons/pencil-edit-button (1).svg"
+                                            style="margin-right: -3px; height: 50px;">
+                                    </button>
+                                </div>
+                                <div class="last" id=footer{{footerTag.tagId}}>
+                                    <div class="row">
+                                        <div class="col-lg-6 d-inline m-0 p-0 " style="width: 33% !important"
+                                            *ngIf="showAddress == true || showPhoneNumber == true">
+                                            <span *ngIf="showAddress == true"
+                                                id="footerAddress">{{footerTag.address}}</span>
+                                            <span *ngIf="showPhoneNumber == true"
+                                                id="footerPhoneNumber">{{footerTag.phoneNumber}}</span>
+
+                                        </div>
+                                        <div class="col-lg-6 d-inline m-0 p-0" style="width: 33%;"
+                                            *ngIf="showAddUrl == true">
+                                            <span><a id="footerWebsideUrl"
+                                                    href={{footerTag.linkUrl}}>{{footerTag.linkTitle}}</a></span>
+                                        </div>
+                                        <div class="col-lg-6 d-inline m-0 p-0" style="width: auto;"
+                                            *ngIf="showShareVia == true">
+                                            <span class="share">Share</span>
+                                            <img *ngIf="showPinterest == true"
+                                                src="https://s3.amazonaws.com/coachforceprod/Default_Images/pinterest.svg">
+                                            <img *ngIf="showFacebook == true"
+                                                src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-fb.svg">
+                                            <img *ngIf="showTwitter == true"
+                                                src="https://s3.amazonaws.com/coachforceprod/Default_Images/share-tw.svg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+                    </div>
+                    <!-- <div *ngIf="asSubmodule" style="position: fixed; bottom: 0px; background: white; width: 100vw">
+                            <button (click)="onNavigate('emailBack')">Back</button>
+                            <button (click)="onNavigate('emailNext')">Next</button>
+                        </div> -->
+                </div>
+            </div>
+            <!-- end  main-content -->
+        </div>
+        <!-- end section content -->
+    </section>
+</div>
+
+<div class="page-wrapper" *ngIf="!editEmailView">
+    <!-- start section header -->
+    <section class="header" style="z-index: 1;position: fixed;width: 100vw;">
+        <div class="row">
+            <div id="back" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light rounded-0" [routerLink]="['/emailList']"
+                    style="cursor: pointer;">
+                    <img src="assets/icons/ic_back.svg">
+                    Back
+                </button>
+            </div>
+            <div id="build" class="d-inline col-lg-10 p-0 border-0 text-center">
+                <div style="padding-top:10px;">
+                    <span tooltip="Click to rename email name" id="emailTitle"
+                        (mouseover)="editingEmailTitleBorder('Show')" (mouseleave)="editingEmailTitleBorder('Hide')"
+                        style="display: inline-block;width: 30%;border-bottom: none;text-align: left;">
+                        <h2 (click)="editingEmailTitle();" (keyup)="countEmailTitleCharacters($event)" class="d-inline"
+                            id="templateTitleText" (blur)="saveEmailTempelateTitle('Title')" contenteditable="true">
+                            {{emailTemplate.emailTitle}}</h2>
+
+                        <button id="emailTitleEditButton" class="pencil"
+                            style="background: none;border: none;margin: 0;padding: 0;width: 30px;float:right;display: none; ">
+                            <img id="editTitleImage" style="max-width: 16px !important;
+                            max-height: 16px !important;" src="assets/icons/pencil-edit-button (1).svg">
+
+                        </button>
+                    </span>
+                    <div *ngIf="emailTitle.length == 30" style="z-index: 9999;position: relative;">
+                        <span style="color: red; font-size: 12px;width: 50%;background: #f3f2f2;">*You cannot enter nore
+                            that 80 character for the title</span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div *ngIf="!asSubmodule" (click)="onNavigation('changeEmailTemplate')"
+                style="position: absolute;right: 11%;top: 13px;">
+                Change Email Template
+            </div>
+            <div id="preview" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light" (click)="preview()"
+                    style="cursor: pointer;">Preview</button>
+            </div> -->
+        </div>
+    </section>
+    <section class="content" style="position: fixed;z-index: 1;width: 100%;top: 50px;">
+        <div class="row" id="main">
+            <!-- start  main-content -->
+            <div class="main-sequence3 broadcast">
+                <div class="tab-content scrollsection clearfix">
+                    <div class="tab-pane tab-panesection" id="2a" style="height: 100vh;display: block !important;">
+                        <app-common-email-tempates (templateEv)="onEditEmail($event)">
+                        </app-common-email-tempates>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<ngx-ui-loader></ngx-ui-loader>

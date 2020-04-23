@@ -1,0 +1,255 @@
+<main>
+  <!-- <aside class="side-bar">
+    <header class="side-bar__logo-area">
+      <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+    </header>
+  </aside> -->
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+
+  <div class="page-wrapper" style="overflow: auto;"
+    [ngStyle]="{'background-color': background == 'white' ? 'white' : '#F7F7F7'}">
+    <div *ngIf="uploadFileStatus == 'Upload'" class="uploadlist">
+      <a [routerLink]="['/crm/contacts']">
+        < Back to contacts</a>
+          <h6>Upload a list of people</h6>
+          <p>Choose a .csv document using column headers to identify which fields you’d like your people to include. We
+            require that you include at least an email column. You can use these fields to create segments, personalize
+            emails, and more. To learn more about importing a CSV,
+            <a>click here.</a></p>
+          <label class="uploadFileBox">
+            <input type="file" id="file" (change)="handleFileInput($event)" style="display: none">
+            <br />
+            <!-- <p class="validationError" id="ImageOnlyWarning">
+        <span *ngIf="showImageMessage">*Only Images are allowed</span>
+        <span *ngIf="showPdfMessage">*Only Pdfs are allowed</span>
+        <span *ngIf="videoAllowed">*Video should be of max {{allowedVideoSize}}MB</span>
+        <span *ngIf="showFileErrorMessage">You can only select docs and zip file</span>
+      </p> -->
+            <span>
+
+              <!-- class="setting__image--upload" -->
+
+              <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)"
+                (onFileLeave)="fileLeave($event)">
+
+                <span class="heading">
+
+                  <span class="icon cf-image"></span>
+                  <div class="upload-text"
+                    style="color: #707070;text-align: center;font-size: 12px; font-weight: bold;">
+                    Drag CSV file here to Upload
+                    <br>
+                    or <a>Click Here</a>
+                  </div>
+                </span>
+              </file-drop>
+            </span>
+          </label>
+    </div>
+    <div *ngIf="uploadFileStatus == 'Uploading'" class="uploadlist" style="text-align: center;">
+      <!-- <div> -->
+      <img src="assets/images/loaderImage/CRM_progress.gif">
+      <h5 style="font-weight: bold;
+        margin-top: 10px;">Uploading your CSV file…</h5>
+      <!-- </div> -->
+    </div>
+    <div *ngIf="uploadFileStatus == 'error'" class="uploadlist" style="text-align: center;">
+      <!-- <div> -->
+      <img src="assets/icons/crm/ic_problemupload.svg">
+      <h5 style="font-weight: bold;
+        margin-top: 10px;">There’s a problem with your list.</h5>
+      <p>CSV Parsing Error; Unquoted fields do not allow line <“\r”> in line 3</p>
+      <button class="btn" (click)="tryAgain();">Try again</button>
+      <!-- </div> -->
+    </div>
+    <div *ngIf="uploadFileStatus == 'Uploaded'" class="uploadlist">
+      <a [routerLink]="['/crm/contacts']">
+        < Back to contacts</a>
+          <h6>Here’s a Preview of Your Contacts</h6>
+          <p>Your CSV contains 109 records. You can modify or ignore columns in the table. Click here to learn more
+            about making the most of your CSV data.</p>
+          <div class="onoffswitch">
+            <h3 style="font-size: 12px; font-weight: bold;">Treat the first row in your file as headers</h3>
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+            <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+          <div class="container" style="padding-top: 10px;">
+            <span class="text" style="margin-left: 10px;display: inline-block;
+      vertical-align: middle;">Add a tag to these people</span>
+            <input class="dateTimeBox" type="text" placeholder="2020-03-12 at 21:11:13 GMT+7" style="width: 30%;
+      height: 25px;
+      opacity: 1;
+      border-radius: 15px;
+      border: 1px solid #E2E2E2;
+      margin-left: 10px;padding: 10px;">
+            <input type="checkbox" checked>
+            <span class="checkmark" style="top: 13px;"></span>
+          </div>
+          <div style="margin-top: 40px;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="padding-left: 15px;">
+                    <select>
+                      <option>Email</option>
+                      <option>First Name</option>
+                      <option>Last name</option>
+                      <option>Company</option>
+                      <option>Company</option>
+                    </select>
+                  </th>
+                  <th><select>
+                      <option>Email</option>
+                      <option>First Name</option>
+                      <option>Last name</option>
+                      <option>Company</option>
+                      <option>Company</option>
+                    </select></th>
+                  <th><select>
+                      <option>Email</option>
+                      <option>First Name</option>
+                      <option>Last name</option>
+                      <option>Company</option>
+                      <option>Company</option>
+                    </select></th>
+                  <th><select>
+                      <option>Email</option>
+                      <option>First Name</option>
+                      <option>Last name</option>
+                      <option>Company</option>
+                      <option>Company</option>
+                    </select></th>
+                  <th><select>
+                      <option>Email</option>
+                      <option>First Name</option>
+                      <option>Last name</option>
+                      <option>Company</option>
+                      <option>Company</option>
+                    </select></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let contact of segmentContacts; let i = index">
+                  <td>{{contact.name}}</td>
+                  <td>{{contact.email}}</td>
+                  <td>{{contact.phnNumber}}</td>
+                  <td>{{contact.location}}</td>
+                  <td>{{contact.date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn" style="width: 10%;margin-top: 20px;border-radius: 0;"
+            (click)="nextPage('addAutomationRule')">Next</button>
+          <div>
+            <span class="dot"></span>
+          </div>
+
+    </div>
+    <div *ngIf="uploadFileStatus == 'addAutomationRule'" class="uploadlist" style="margin-left: 25%;">
+      <h6 style="font-size: 18px;">Automation Actions</h6>
+      <p style="font-weight: bold;color: black;">
+        Perform automation actions on the people you’ve selected.
+      </p>
+      <div style="width: 690px;
+          height: 60px;
+          background: #EFEFEF 0% 0% no-repeat padding-box;
+          border: 1px solid #E1E1E1;
+          padding: 15px;">
+        <select style="width: 150px;">
+          <option>Zuuba</option>
+          <option>Zuuba</option>
+        </select>
+        <select style="width: 302px;">
+          <option hidden value="" disabled selected>Choose an action </option>
+          <option>Zuuba</option>
+          <option>Zuuba</option>
+        </select>
+      </div>
+      <div style="margin-top: 20px;">
+        <span class="addMore" style="padding: 5px 10px;">
+          and
+        </span>
+        <span class="addMore">+</span>
+      </div>
+
+      <button class="btn backbtn" (click)="nextPage('Uploaded')">Back</button>
+      <button class="btn" (click)="nextPage('readyToGo')">Next</button>
+      <div>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+    <div *ngIf="uploadFileStatus == 'readyToGo'" class="uploadlist" style="margin-left: 25%;">
+      <div style=" width: 45%;margin: 0 auto;">  
+        <h5 style="font-weight: bold">Ready to go?</h5>
+        <img src="assets/images/loaderImage/CRM_upload_loading.gif" style="width: 75px;
+      height: 105px;">
+        <p style="font-size: 16px;">
+          We’ll add <b>10 contact</b> to your account. When would you like to perform this operation?
+        </p>
+        <div style="margin: 20px 0px;">
+          <select style="width: 446px;">
+            <option>At a specific Time</option>
+          </select>
+        </div>
+        <div style="margin: 20px 0px;">
+          <span style="font-size: 12px;
+          font-weight: bold;">Timezone</span>
+          <select style="width: 446px;">
+            <option>UTC/GMT -6</option>
+            <option>UTC/GMT -6</option>
+          </select>
+        </div>
+        <div style="margin: 20px 0px;">
+          <span style="font-size: 12px;
+          font-weight: bold;">Date & Time</span>
+          <div>
+            <input type="date" value="August 25, 2018" style="font-size: 14px;
+            letter-spacing: 0px;
+            color: #000000;
+            opacity: 1;
+            margin-right: 8%;
+            width: 204px;
+            border: 1px solid #E1E1E1;
+            padding: 2px 8px;">
+            <input type="time" value="09:00 PM" style="font-size: 14px;
+            letter-spacing: 0px;
+            color: #000000;
+            opacity: 1;
+            padding-left: 10px;
+            width: 204px;">
+          </div>
+          
+        </div>
+
+        <button class="btn" style="width: auto;" (click)="nextPage('performingAutomationRule')">Schedule Operation</button>
+        <div>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="uploadFileStatus == 'performingAutomationRule'" class="uploadlist" style=" margin-top: 12%;
+    text-align: center;">
+      <div style=" width: 45%;margin: 0 auto;">  
+        <h5 style="font-weight: bold">Great, we’re on it!</h5>
+        <img src="assets/images/loaderImage/CRM_upload_loading.gif" style="width: 75px;
+      height: 105px;">
+        <p style="font-size: 16px;">
+          We’re adding <a style="font-size: 16px;">109 new people</a> 
+          to your account and performing 1 automation action.
+        </p>
+        <button class="btn" style="width: auto;">Done</button>
+        <button class="btn backbtn" style="width: auto;" (click)="nextPage('readyToGo')">Cancel this Operation</button>
+
+      </div>
+    </div>
+  </div>
+</main>

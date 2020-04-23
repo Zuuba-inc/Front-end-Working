@@ -1,0 +1,148 @@
+#outcomes {
+  @extend #configure;
+
+  .setting {
+    position: relative;
+    overflow-x: hidden;
+    min-height: calc(100vh - 76px);
+
+    &__info {
+      @include text(12px, 400, left);
+      color: $text-light;
+      margin-top: 15px;
+      display: inline-block;
+    }
+
+    &__created-outcomes {
+      @include text(12px, 400, left);
+      color: $text-light;
+      border-bottom: $border;
+      margin-bottom: 15px;
+      padding-bottom: 20px;
+
+      &--outcome {
+        background-color: $bg2;
+        color: $text-neu;
+        padding: 12px 15px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-weight: 600;
+        border-radius: 2px;
+
+        strong {
+          color: $text-dark;
+          font-size: 13px;
+        }
+
+        .zu-trash {
+          float: right;
+          cursor: pointer;
+          margin-top: -5px;
+
+          &:hover:before {
+            color: $action;
+          }
+        }
+      }
+
+      &--new {
+        @include text(14px, 600, left);
+        color: $text-dark;
+        cursor: pointer;
+        margin-top: 20px;
+
+        span {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .new-outcome {
+      @include component_add-element;
+      margin-bottom: 30px;
+
+      .actions {
+        margin-top: -11px;
+      }
+    }
+
+    &__image {
+      border-bottom: $border;
+      margin-bottom: 20px;
+
+      &--upload {
+        margin-bottom: 30px;
+      }
+    }
+
+    &__offer {
+
+      &--headline {
+        padding: 10px 0;
+
+        input {
+          width: 100%;
+          @include input-box;
+        }
+      }
+
+      &--desc {
+        padding: 10px 0;
+
+        textarea {
+          width: 100%;
+          @include input-box;
+          resize: none;
+        }
+      }
+
+      &--action-label,
+      &--sendto {
+        @extend .setting__offer--headline;
+        label {
+          color: $text-dark;
+          font-weight: 600;
+        }
+      }
+
+    }
+
+    &__save {
+      margin-top: 20px;
+      height: 30px;
+      width: 120px;
+      font-weight: 400;
+    }
+    
+    &__back {
+      @include secondary-btn;
+      margin-top: 20px;
+      margin-right: 15px;
+      float: right;
+      font-weight: 400;
+    }
+  }
+
+  .live-preview {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.16);
+    background-color: $bg2;
+
+    &__headers {
+      @include component_live-preview-headers;
+    }
+
+    &__quiz {
+      @include component_live-preview-outcome;
+    }
+
+    &__offer {
+      @include component_live-preview-offer;
+      margin: -5px auto 0 auto;
+
+      h5, p {
+        color: #fff;
+        text-align: center;
+      }
+    }
+  }
+}

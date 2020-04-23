@@ -1,0 +1,495 @@
+.webinar-header {
+	width: 100%;
+	padding: 14px 30px;
+	background-color: #fff;
+	position: fixed;
+	z-index: 5556454646;
+
+	.user {
+		display: flex;
+		&__img {
+			width: 40px;
+			margin-right: 5px;
+		}
+		&__info {
+			h5 {
+				@include text(16px, 700, left);
+				color: $primary-dark;
+				margin-bottom: 0;
+			}
+			span {
+				@include text(12px, 600, left);
+				color: $text-neu;
+			}
+		}
+	}
+	.timer {
+		font-weight: 700;
+		text-align: center;
+		&--recording, &--idle {
+			width: 10px;
+			height: 10px;
+			display: inline-block;
+			margin-right: 5px;
+			border-radius: 100%;
+		}
+		&--recording {
+			background-color: $alert;
+		}
+		&--idle {
+			background-color: $bg1;
+		}
+	}
+	
+	.actions {
+		@include reset-ul;
+		display: flex;
+		flex-wrap: wrap;
+
+		&__item {
+			@include text(10px, 400, center);
+			cursor: pointer;
+			text-transform: uppercase;
+			width: 90px;
+			align-self: center;
+			color: $text-light;
+			position: relative;
+				
+			&:not(:last-child) {
+				border-right: $border;
+				padding-right: 10px;
+				margin-right: 10px;
+			}
+			.zu-arrow-right.down {
+				transform: rotateZ(-90deg);
+				position: absolute;
+				right: 15px;
+				top: 5px;
+				font-size: 12px;
+			}
+
+			.icon {
+				font-size: 23px;
+				display: block;
+				margin: auto;
+				margin-bottom: 5px;
+			}
+			.zu-arrow-down {
+				position: absolute;
+				right: 15px;
+				top: 5px;
+				font-size: 8px;
+			}
+			.icon, .icon:before {
+				color: $text-light;
+			}
+
+			&.active {
+				color: $action;
+				.icon, .icon:before {
+					color: $action;
+				}
+				.zu-arrow-down {
+					transform: rotateZ(180deg);
+				}
+			}
+
+
+			.presentation-drop-down:hover + .dropdown-menu {
+				display: block !important;
+			}
+
+			.dropdown-menu {
+				border-radius: 0;
+				z-index: 5555;
+				@include text(12px, 600, left);
+				width: 180px;
+				padding: 10px;
+				box-shadow: $shadow;
+				border: none;
+
+				li {
+					margin-bottom: 10px;
+					text-transform: capitalize;
+				}
+				.read_only {
+					color: $text-light;
+					cursor: initial;
+					&:not(:first-child) {
+						padding-top: 10px;
+						border-top: $border;
+					}
+				}
+				.dropdown-link {
+					font-size: 14px;
+					color: $text-dark;
+					@include transition;
+					cursor: pointer;
+
+
+					&:hover {
+						color: $action;
+					}
+				}
+			}
+		}
+		&__end-btn {
+			@include secondary-btn;
+			border-color: $primary-dark;
+			color: $primary-dark;
+			width: auto;
+			font-weight: 400;
+			align-self: center;
+		}
+		
+	}
+	
+}
+
+#webinar-live {
+	margin: 0;
+	margin-left: 0;
+	margin-top: 72px;
+	padding: 0;
+
+	.setting {
+		margin-left: 5px;
+	}
+
+	.side-panel {
+		@include transition;
+		position: absolute;
+		right: 0;
+	}
+
+	.side-togglers {
+		background-color: #fff;
+		box-shadow: $shadow;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		position: absolute;
+		left: -30px;
+		top: 10px;
+		border: 0;
+
+		.icon {
+			&::before {
+				color: $text-neu;
+			}
+		}
+	}
+
+	.live-preview {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		position: relative;
+		padding: 30px 0;
+		height: calc(100vh - 72px) !important;
+    margin: 0;
+
+		.zu-arrow-right, .zu-arrow-left {
+			position: absolute;
+			right: 30px;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			background-color: #fff;
+			box-shadow: $shadow;
+			width: 50px;
+			height: 50px;
+			border-radius: 100%;
+			font-size: 15px;
+			line-height: 50px;
+			cursor: pointer;
+			@include transition;
+			z-index: 55;
+			&::before {
+				color: $text-light;
+			}
+			&:hover {
+				transform: translateX(15px);
+			}
+		}
+		.zu-arrow-left {
+			left: 30px;
+			right: unset;
+			&:hover {
+				transform: translateX(-15px);
+			}
+
+			&.left {
+				left: unset;
+				right: 30px;
+				transform: rotateZ(180deg);
+				box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.16);
+				&:hover {
+					transform: rotateZ(180deg) translateX(-15px);
+				}
+			}
+		}
+
+		&__slides {
+			background-color: #F0C22A;
+			height: 100%;
+		}
+
+		&__action {
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: 30px 0; 
+			position: absolute;
+			bottom: 30px;
+			width: 100%;
+		}
+		&__stop-share {
+			@include btn;
+			background-color: #fff;
+			color: $primary-dark;
+			position: relative;
+
+			&::before {
+				content: "";
+				position: absolute;
+				left: 20px;
+				top: 15px;
+				width: 10px;
+				height: 10px;
+				background-color: $primary-dark;
+			}
+		}
+	}
+
+	.tabs {
+		height: calc(100vh - 72px);
+		background-color: #fff;
+		&__togglers {
+			display: flex;
+			position: relative;
+		}
+
+		&__tab {
+			@include text(12px, 400, center);
+			color: $text-light;
+			width: 50%;
+			border-right: $border;
+			cursor: pointer;
+			padding: 15px 0;
+			@include transition;
+
+			&:hover {
+				color: $action;
+			}
+				
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 1px;
+				background-color: #e1e1e1;
+			}
+			&.active {
+				color: $text-dark;
+				position: relative;
+				font-weight: 600;
+				
+				&::after {
+					background-color: $action;
+					bottom: 0px;
+					height: 2px !important;
+					z-index: 5555;
+				}
+			}
+			&--chat {
+				&::after {
+					left: 0;
+				}
+			}
+			&--attds {
+				&::after {
+					right: 0;
+					left: unset;
+				}
+			}
+			
+		}
+
+		&__tab-body {
+			height: 100%;
+		}
+
+		.message {
+			padding: 12px 15px;
+			display: flex;
+			&__img {
+				width: 20px;
+				height: 20px;
+				margin-right: 10px;
+			}
+
+			&__info {
+				flex: 1;
+				margin-top: 7px;
+				h6 {
+					@include text(12px, 600, left);
+					color: $text-dark;
+				}
+				p {
+					@include text(12px, 400, left);
+					color: $text-neu;
+				}
+			}
+
+			&__interact {
+				@include text(10px, 600, left);
+				color: $text-dark;
+
+				button {
+					background-color: transparent;
+					border: none;
+					@include transition;
+					.zu-thumbs-up {
+						@include transition;
+					}
+					
+					&:hover {
+						color: $action;
+						.zu-thumbs-up {
+							font-size: 13px;
+						}
+					}
+				}
+			}
+		}
+
+		.chat-box {
+			border-top: $border;
+			position: fixed;
+			bottom: 0;
+			width: 25%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			background-color: #fff;
+
+			&__input {
+				border: none;
+				height: 100px;
+				font-size: 12px;
+				width: 100%;
+				padding: 10px 0 0 10px;
+				resize: none;
+
+				&:focus {
+					outline: none;
+				}
+			}
+			&__send {
+				@include sm-btn;
+				margin-right: 10px;
+				margin-bottom: 10px;
+			}
+		}
+	}
+	.setting {
+		margin-left: 0;
+	}
+
+	.counting {
+		width: 375px;
+		background-color: #fff;
+		box-shadow: $shadow;
+		color: $primary-dark;
+		text-align: center;
+		padding: 30px 0;
+		margin: 100px auto;
+		position: relative;
+		overflow: hidden;
+
+		h5 {
+			font-weight: 700;
+		}
+		.counter {
+			font-size: 18px;
+			font-weight: 400;
+			margin: 0 5px;
+			display: inline-block;
+			color: $text-neu;
+
+			&.active {
+				font-weight: 700;
+				font-size: 20px;
+				color: $action;
+			}
+		}
+
+		button {
+			@include secondary-btn;
+			width: 100px;
+			color: $primary-dark;
+			border-color: $primary-dark;
+			margin-top: 15px;
+		}
+
+		.zu-clock {
+			position: absolute;
+			font-size: 150px;
+			right: -17%;
+			bottom: -25%;
+			color: $primary-dark;
+			opacity: 0.4;
+		}
+	}
+
+	.client-view {
+		background-color: $text-light;
+		height: 100%;
+	}
+
+	.invite {
+		padding: 35px 15px;
+		text-align: center;
+		background-color: #fff;
+		border-bottom: $border;
+
+		&__title {
+			@include text(18px, 700, center);
+			color: $primary-dark;
+			margin-bottom: 30px;
+		}
+		&__desc {
+			@include text(12px, 400, center);
+			color: $text-light;
+			margin-bottom: 20px;
+		}
+		&__btn {
+			@include mid-btn;
+		}
+	}
+
+	.tabs__togglers.read-only {
+		.tabs__tab {
+			border-right: none;
+			font-weight: 600;
+			color: $primary-dark;
+			cursor: unset;
+		}
+	}
+
+	&.side-closed {
+		.side-panel {
+			right: -25%;
+			position: absolute;
+		}
+		.main-content {
+			max-width: 100%;
+			flex-basis: 100%;
+		}
+		.zu-arrow-right {
+			transform: rotateZ(180deg);
+		}
+	}
+}

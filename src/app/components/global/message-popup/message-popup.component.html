@@ -1,0 +1,12 @@
+<!-- The actual snackbar -->
+<div id="errorMessage" class="snackbar">
+   
+        {{responseMessage.message}}</div>
+
+<div id="messageAlert" class="snackbar">
+        <i *ngIf="responseMessage.type == 'ERROR'; else success" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+       <ng-template #success>
+            <i class="icon zu-correct-g"></i>
+       </ng-template>
+       
+        {{responseMessage.message}}</div>

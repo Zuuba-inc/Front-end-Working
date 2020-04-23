@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic_txtbullet_hover" transform="translate(1943 2723)">
+    <rect id="Rectangle_2790" data-name="Rectangle 2790" width="24" height="24" rx="4" transform="translate(-1943 -2723)" fill="#e3e3e3"/>
+    <g id="Group_2083" data-name="Group 2083" transform="translate(-73)">
+      <rect id="Rectangle_2766" data-name="Rectangle 2766" width="11" height="2" transform="translate(-1862 -2718)" fill="#363636"/>
+      <rect id="Rectangle_2765" data-name="Rectangle 2765" width="11" height="2" transform="translate(-1862 -2712)" fill="#363636"/>
+      <rect id="Rectangle_2764" data-name="Rectangle 2764" width="11" height="2" transform="translate(-1862 -2706)" fill="#363636"/>
+      <circle id="Ellipse_244" data-name="Ellipse 244" cx="1" cy="1" r="1" transform="translate(-1865 -2718)" fill="#363636"/>
+      <circle id="Ellipse_245" data-name="Ellipse 245" cx="1" cy="1" r="1" transform="translate(-1865 -2712)" fill="#363636"/>
+      <circle id="Ellipse_246" data-name="Ellipse 246" cx="1" cy="1" r="1" transform="translate(-1865 -2706)" fill="#363636"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,120 @@
+<div id="content-body">
+  <!-- start  main-content -->
+  <div class="main-sequence2 main-sequence22 p-0">
+    <div class="content content1  text-center w-75">
+      <!-- start  secand -->
+      <div class="secand">
+        <h1>Email Broadcast Templates</h1>
+        <div class="row col-lg-12 p-0 m-0 ">
+          <div class="col-lg-9 p-0" style="max-width: 70.7%;text-align: left;">
+            <p>Promote a collection, announce a special offer, send a newsletter and more. </p>
+          </div>
+          <div class="col-lg-4 p-0" style="text-align: right;max-width: 29.3% !important;border-right: none;">
+            <button (click)="editEmail(null)">Start from scratch</button>
+          </div>
+        </div>
+        <div class="row col-lg-12 p-0 m-0 mt-5">
+          <!-- <div class="img ml-0 active">
+
+            <img src="./assets/icons/avatar-01.jpg" class="i">
+            <ul class="sequence nav nav-tabs">
+              <li class="img text-center active">
+                <a href="#aa" data-toggle="tab">
+                  <button>Use Template</button>
+                </a>
+              </li>
+            </ul>
+
+            <h3>Template One</h3>
+          </div> -->
+
+
+          <!-- <div class="img">
+            <img src="./assets/icons/avatar-01.jpg" class="i">
+            <ul class="sequence nav nav-tabs">
+              <li class="img text-center active">
+                <a href="#aa" data-toggle="tab">
+                  <button>Use Template</button>
+                </a>
+              </li>
+            </ul>
+            <h3>Template One</h3>
+          </div> -->
+          <!-- <div class="img">
+            <img src="./assets/icons/avatar-01.jpg" class="i">
+            <ul class="sequence nav nav-tabs">
+              <li class="img text-center active">
+                <a href="#aa" data-toggle="tab">
+                  <button>Use Template</button>
+                </a>
+              </li>
+            </ul>
+            <h3>Template One</h3>
+          </div> -->
+          <div class="img" *ngFor="let template of allEmailTemplate">
+            <img src={{template.imagePath}} class="i" >
+            <h3 (click)="editEmail(template)" >{{template.templateName}}</h3>
+          </div>
+          <!-- <div class="img mr-0 ">
+            <img src="./assets/icons/avatar-01.jpg" class="i">
+            <ul class="sequence nav nav-tabs">
+              <li class="img text-center active">
+                <a href="#aa" data-toggle="tab">
+                  <button>Use Template</button>
+                </a>
+              </li>
+            </ul>
+            <h3>Template One</h3>
+          </div> -->
+        </div>
+      </div>
+      <!-- end secand -->
+      <!-- start  last -->
+      <div class="last">
+        <h1>Recently Edited Emails</h1>
+        <div class="row col-lg-12 p-0 m-0 mt-4">
+          <div class="col-lg-6 col-sm-6 p-0">
+            <div class="alboum shadow rounded">
+              <img src="./assets/icons/avatar-01.jpg">
+              <div class="d-inline-block">
+                <h3>Email Broadcast Two</h3>
+                <h5>Aug 6, 2018 2:55 PM</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6 p-0">
+            <div class="alboum float-right shadow rounded">
+              <img src="./assets/icons/avatar-01.jpg">
+              <div class="d-inline-block">
+                <h3>Email Broadcast Two</h3>
+                <h5>Aug 6, 2018 2:55 PM</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-lg-12 p-0 m-0 mt-4">
+          <div class="col-lg-6 col-sm-6 p-0">
+            <div class="alboum shadow rounded">
+              <img src="./assets/icons/avatar-01.jpg">
+              <div class="d-inline-block">
+                <h3>Email Broadcast Two</h3>
+                <h5>Aug 6, 2018 2:55 PM</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6 p-0">
+            <div class="alboum float-right shadow rounded">
+              <img src="./assets/icons/avatar-01.jpg">
+              <div class="d-inline-block">
+                <h3>Email Broadcast Two</h3>
+                <h5>Aug 6, 2018 2:55 PM</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end last -->
+    </div>
+  </div>
+  <!-- end  main-content -->
+</div>

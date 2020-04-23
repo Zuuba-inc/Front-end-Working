@@ -1,0 +1,277 @@
+<section id="test" class="content">
+
+    <header class="playQuizHeader" *ngIf="show">
+        <button type="button" class="back-btn" (click)="backToQuiz();"><span class="icon cf-arrow-right"></span>
+            Back</button>
+            <!-- <span class="icon cf-arrow-right"></span> Back -->
+            <span  style="text-align: center;font-size: 12px;padding-top: 3px;color: white;"
+            *ngIf="quizConfiguration != undefined && quizConfiguration.status != 'Active' && userRole == 3">
+            <span>*</span>This quiz is still in draft mode and not yet visible to the public</span>
+        <button class="preview-btn" (click)="restartQuiz();">Reset Preview</button>
+    </header>
+
+    <div class="row no-gutters">
+        <div class="col-md-12">
+
+            <div class="live-preview">
+
+                <!-- <header class="live-preview__header">
+        <h4>
+          <span class="icon cf-preview"></span>
+          Live preview
+        </h4>
+      </header> -->
+
+                
+                <div *ngIf="message != null || message != ''" [innerHTML]="message" class="validationError"
+                    style="text-align:center"></div>
+                <div class="live-preview__quiz testQ" id="testQuizConfig">
+                    <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+                    <hr class="hr-class">
+                    <div class="card-body welcomePageBackground">
+                        <span class="welcomePageClass" style="color: #363636;">Share Quiz</span><br>
+                        <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/{{quizConfiguration.id}}  "
+                            target="_blank">
+                            <img src="assets/QuizAssets/ic_fb.png" class="fb-image" alt="Cinque Terre">
+                        </a><br>
+                        <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/{{quizConfiguration.id}}"
+                            target="_blank">
+                            <img src="assets/QuizAssets/ic_twitter.png" class="fb-image" alt="Cinque Terre">
+                        </a>
+                        <div class="text-center">
+
+                            <!-- *ngIf="croppedImage" -->
+                            <!-- <div [ngClass]="{'show': croppedImage, 'hide': !croppedImage}">
+                                <img class="c-m" [src]="croppedImage" />
+                            </div> -->
+
+                            <!-- *ngIf="!croppedImage" -->
+
+                            <!-- <div [ngClass]="{'show': !croppedImage, 'hide': croppedImage}">
+                                
+                                <video id="quizVideoPreview" [ngClass]="{'show configure-vid c-m': fileType == 'video', 
+                                               'hide': fileType == 'image'}" width="320" height="240"
+                                    #configureVideoPreview> -->
+                                    <!-- <source [src]="quizConfiguration.quizMediaAttached" type="video/mp4">
+                                        Your browser does not support the video tag. -->
+                                <!-- </video>
+
+                                <img [ngClass]="{'hide': fileType == 'video', 
+                                                'show c-m': fileType == 'image'}"
+                                    src="assets/images/undraw_posting_photo.svg"
+                                    class="img-fluid img-thumbnail center-image" alt="Cinque Terre"
+                                    id="quizImagePreview">
+                            </div> -->
+
+                            <img    *ngIf="!quizConfiguration.quizMediaAttached; else elseBlock"
+                                    src="assets/images/undraw_posting_photo.svg"
+                                    class="img-fluid img-thumbnail center-image" alt="Cinque Terre"
+                                    id="quizImagePreview">
+                            <ng-template #elseBlock>
+                                <video *ngIf="isVideo; else elseImgBlock">
+                                    <source [src]="quizConfiguration.quizMediaAttached" type="video/mp4">
+                                </video>
+
+                                <ng-template #elseImgBlock>
+
+                                    <img [src]="quizConfiguration.quizMediaAttached"
+                                        class="img-fluid img-thumbnail center-image" 
+                                        alt="Cinque Terre"
+                                        id="quizImagePreview">
+                                </ng-template>
+                            </ng-template>
+
+                            <h5 class="live-preview__quiz--heading heading-quiz welcomePageClass" id="testQuizHeadline">enter title
+                            </h5>
+                            <p class="welcomePageClass" id="testQuizDesc">enter description</p>
+                            <button type="submit" class="btn btn-primary btn-more" id="quiz-callToAction-preview" (click)="startQuizTest()">
+                                Take quiz now</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+               
+                <div class="live-preview quizQuestion testQ" style="display: none">
+                    <header class="live-preview__headers">
+                        <div class="live-preview__headers--name img-hdr-prvw">
+                            <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+                        </div>
+                        <!-- <div class="live-preview__headers--name">
+                            <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                        </div> -->
+                        <div class="live-preview__headers--title questionTitle" style="background-color: #e1e1e1f7 ;padding: 10px 25px;text-align: center;">
+                            <h4> {{quizConfiguration.quizTitle}}</h4>
+                        </div>
+                    </header>
+                    <div class="live-preview__quiz content-mapping quizDesign" 
+                    id="testQuizQuestion" style="display:none;width: 100%; height: 70%;position: relative">
+                        <div style="width: 50%; padding:40px; margin: 0px auto">
+                            <h5 class="live-preview__quiz--heading">You have not added any question, Please add a Question
+                            </h5>
+                        </div>
+    
+                        <footer class="footer">Powered by Coachforce</footer>
+                    </div>
+                <div *ngFor="let question of questionArray; let index = index "
+                    class="live-preview__quiz content-mapping quizDesign" id="testQuizQuestion{{index}}"
+                    style="display:none; width: 100%; height: 70%;position: relative"
+                    [ngStyle]="{'background-color' : questionBackgroundColor,'font-family':quizConfiguration.fontName}">
+                    <div style="width: 50%; padding:40px; margin: 0px auto">
+                    <header>
+                        <span style="color:questionFontColor">Question {{question.questionNo}} of
+                            {{totalNumberOfQuestions}}</span>
+                        <div class="progress-bar">
+                            <div class="completed" id="testProgressBar"></div>
+                        </div>
+                    </header>
+
+                    <div>
+                        <h5 class="live-preview__quiz--heading" [ngStyle]="{'color':questionFontColor}">
+                            {{question.questionDescription}}</h5>
+
+                        <div class="live-preview__quiz--answers" *ngIf="question.answerTypeId == 1">
+                            <!-- Pass a class "isSelected" to the selected label -->
+                            <label class="answerColor previewAnswerTable" *ngFor="let answer of question.quizAnswers"
+                                (click)="nextQuestion1(question, answer)" id="answer{{answer.id}}"
+                                [ngStyle]="{'background-color':answerBackgroundColor, 'color':answerFontColor,'font-family':quizConfiguration.fontName}">
+                                <input type="radio" name="answers-radio">
+                                <span class="icon cf-correct"></span>
+                                {{answer.answerDescription}}
+                            </label>
+                        </div>
+                        <div class="live-preview__quiz--answers images" *ngIf="question.answerTypeId == 2">
+                            <label class="answerColor previewAnswerTable" *ngFor="let answer of question.quizAnswers"
+                                (click)="nextQuestion1(question, answer)"  id="answer{{answer.id}}">
+                                <input type="radio" name="answers-radio">
+                                <figure>
+                                    <img src={{answer.answerMediaAttached}} alt="">
+
+                                    <figcaption>{{answer.answerDescription}}</figcaption>
+                                </figure>
+                            </label>
+                        </div>
+                    </div>
+                    </div>
+                    <footer class="footer">Powered by Coachforce</footer>
+
+                </div>
+                </div>
+                <div class="leadTest testQ login" id="lead" style="margin-left:0; display:none">
+                    <header class="live-preview__headers">
+                        <div class="live-preview__headers--name img-hdr-prvw">
+                            <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+                        </div>
+                        <!-- <div class="live-preview__headers--name">
+                            <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                        </div> -->
+                        <div class="live-preview__headers--title questionTitle" style="background-color: #e1e1e1f7 ;padding: 10px 25px;text-align: center;">
+                            <h4>{{quizConfiguration.quizTitle}}</h4>
+                        </div>
+                    </header>
+                    <div class="login__body" style="padding-top: 20px;">
+                        <h5 class="leadColor"  id="testLeadHadline">Sign up For FREE to see your results</h5>
+                        <p class="leadColor" id="testLeadDesc">Please setup your Client sessions and Prospect meeting at left navigation
+                            for start using this calender.
+                        </p>
+
+                        <div class="login__body--register">
+                            <button class="register-fb" (click)="signInWithFB()">
+                                <span class="icon cf-facebook">
+                                    <span class="path1"></span><span class="path2"></span><span
+                                        class="path3"></span><span class="path4"></span>
+                                </span>
+                                Continue with Facebook
+                            </button>
+
+                            <button class="register-gl" (click)="signInWithGoogle()">
+                                <span class="icon cf-google">
+                                    <span class="path1"></span><span class="path2"></span><span
+                                        class="path3"></span><span class="path4"></span>
+                                </span>
+                                Continue with Google
+                            </button>
+                            <span class="or">OR</span>
+
+                            <fieldset class="email-input">
+                                <label for="email">Email address</label>
+                                <input type="email" name="email" id="email" [(ngModel)]="email">
+                            </fieldset>
+
+                            <button type="button" id="testLeadButton" class="signup"
+                                (click)="checkFOrRegistration()">Sign up to see your result</button>
+                            <!--<span class="signup skip" ng-click="openOutcome()">skip<i class="cf-arrow-down"></i></span>-->
+
+
+                        </div>
+                        <small style="float: left;">Privacy Policy</small>
+                        <small style="float: right;">Powered by <strong>Coachforce</strong></small><br>
+                        <a [routerLink]="['#']" class="skipText" (click)="openOutcome()" *ngIf="show">Skip</a>
+                    </div>
+                </div>
+
+                <div class="outcomeTest testQ fontStyle" id="outcomes" style="margin-left:0; display:none">
+                    <header class="live-preview__headers">
+                        <div class="live-preview__headers--name img-hdr-prvw" style="padding: 0">
+                            <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+                        </div>
+                        <!-- <div class="live-preview__headers--name">
+                            <h4>{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+                        </div> -->
+                        <div class="live-preview__headers--title questionTitle" style="background-color: #e1e1e1f7 ;padding: 10px 25px;text-align: center;">
+                            <h4>{{quizConfiguration.quizTitle}}</h4>
+                        </div>
+                    </header>
+
+                    <div class="live-preview__quiz styleOutcome" style="margin-bottom: 5px">
+
+                        <div class="live-preview__quiz--share styleOutcomeShare OutcomeDesign"
+                            ng-if="quizConfiguration.allowSocialSharing == true">
+                            Share Quiz
+                            <br />
+                            <a *ngIf="quizConfiguration != undefined"
+                                href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/{{quizConfiguration.id}}"
+                                target="_blank"><span class="icon cf-share-fb"><span class="path1"></span><span
+                                        class="path2"></span></span></a>
+                            <br />
+                            <a *ngIf="quizConfiguration != undefined"
+                                href="https://twitter.com/home?status=https://localhost:9000/quiz_play/{{quizConfiguration.id}}"
+                                target="_blank"><span class="icon cf-share-tw"><span class="path1"></span><span
+                                        class="path2"></span></span></a>
+                        </div>
+
+                        <div class="live-preview__quiz--img">
+                            <img id="testOutcomeImage" src="/assets/images/pexels-photo-175718.jpg"
+                                alt="quiz-thumbnail">
+                            <video class="video" autoplay poster="/assets/images/loaderImage/videoLoader.gif"
+                                id="testVideoPreview" style="display:none"></video>
+                        </div>
+
+                        <h5 id="testOutcomeHeadline" class="live-preview__quiz--heading styleOutcomeHeadline OutcomeDesign">Outcome
+                            Number 1</h5>
+
+                        <p id="testOutcomeDesc" class="live-preview__quiz--desc styleOutcomeDesc OutcomeDesign">Lorem ipsum dolor sit
+                            amet consectetur adipisicing elit. Vero, sequi itaque aliquam, deleniti similique ipsum
+                            facere esse rerum dolorem</p>
+
+                    </div>
+
+                    <div class="live-preview__offer">
+                        <h5 class="outcomeOfferDesign" id="testOutcomeOfferHeadline">Dummy Offer Healine</h5>
+                        <p class="outcomeOfferDesign" id="testOutcomeOfferDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+                            excepturi iusto odio enim consectetur minima.</p>
+
+                        <button id="testOutcomeOfferButton" class="live-preview__offer--btn" (click)="storeCount();">Get
+                            Offer</button>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

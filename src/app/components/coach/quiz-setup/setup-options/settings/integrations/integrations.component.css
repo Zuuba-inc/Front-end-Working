@@ -1,0 +1,155 @@
+.integration-item {
+    height: 110px;
+    background: white;
+    margin: 0 0 5% 0;
+    padding: 2.4% 3% 0 5%;
+}
+
+.i-label {
+    margin-left: 5%;
+}
+
+.i-link-c {
+    display: block;
+}
+
+.i-link {
+    text-decoration: underline !important;
+    color: #0a8b8c;
+}
+
+.c-btn {
+    border: 1px solid black;
+    background: black;
+    width: 14%;
+    height: 46%;
+    cursor: pointer;
+    float: right;
+    text-align: center;
+    position: relative;
+    top: 12px;
+}
+
+.c-label {
+    color: white;
+    position: relative;
+    top: 4px;
+}
+
+.i-desc {
+    position: relative;
+    left: 10%;
+}
+
+/* The Modal (background) */
+
+.edit-ft-modal {
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+
+.edit-ft-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 38%;
+}
+
+/* The Close Button */
+
+.edit-ft-modal-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.edit-ft-modal-close:hover, .edit-ft-modal-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.label-text {
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid;
+}
+
+.c-p-desc {
+    color: grey;
+    margin-top: 5%;
+}
+
+.fb-px-link, .fb-px-link:hover {
+    color: rgb(0, 128, 0);
+    text-decoration: underline;
+}
+
+.px-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5%;
+}
+
+.actions-c {
+    text-align: right;
+}
+
+.cancel-btn-fb-px {
+    margin-right: 4%;
+}
+
+.fb-px-act-btn {
+    padding: 2% 4% 2% 4%;
+    color: rgb(0, 128, 0);
+    border: 1px solid rgb(0, 128, 0);
+    cursor: pointer;
+}
+
+.save-btn-fb-px {
+    color: white;
+    background: rgb(0, 128, 0);
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none !important;
+}
+
+#c-p-n-i, #c-p-c-i {
+    display: block;
+    margin-top: 3%;
+}
+
+.gs-e {
+    margin-left: 3%;
+}
+
+.setting__sharing {
+    display: inline;
+    position: relative;
+    left: 70%;
+}

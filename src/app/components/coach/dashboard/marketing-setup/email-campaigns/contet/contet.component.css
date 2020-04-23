@@ -1,0 +1,227 @@
+@import '../../../../../../../assets/vendor/bootstrap-4.1/bootstrap.min.css';
+@import '../../../../../../../assets/css/theme.css';
+
+#main .main-content .content .last .shareIcons{
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 11px;
+  background-color: black;
+  margin-right: 6px;
+  margin-top: 6px;
+}
+#main .main-content .content .last .shareIcons img{
+  height: 12px !important;
+  margin: 0px auto 6px;
+}
+
+#main .theme1{
+    background-color: white;
+}
+
+#main .theme1 .content h1{
+    color: #D08000;
+}
+
+#main .theme1 .content .join .col-lg-6 img{
+    height: 180px !important;
+}
+.col-lg-6{
+    max-width: 32%;
+}
+#main .theme1 .content .main-img{
+  height: 87%;
+}
+#main .theme1 .content .last span{
+    font-family: 'Open-Sans-Bold'
+}
+
+#main .theme1 .content .spacer-item{
+    margin-bottom: 25px;
+    border-top: 1px solid #E1E1E1;;
+    margin: 12px auto 0px;
+    padding: 0px 0px 12px;
+    width: 90%;
+}    
+
+#main .theme2{
+  background-image: url(https://coachforceprod.s3.amazonaws.com/Default_Images/template+2+background.png)
+}
+
+#main .theme2 .content{
+  background: transparent;
+}
+
+#main .theme2 .content h1{
+  color: #6c8d8b;
+    font-family: 'Open-Sans-Bold'
+}
+
+#main .theme2 .main-img img{
+  width: auto;
+  height: auto !important;
+}
+#main .theme2 .main-img{
+  height: auto;
+}
+#main .theme2 .content button{
+  background: #ffffff;
+  padding-left: 30px;
+  color: #6c8d8b;
+  border-color: #6c8d8b;
+}
+#main .theme2 .content button h5{
+  color: #6c8d8b;
+  font-family: 'Open-Sans-Bold'
+}
+
+#main .theme2 .content .last span , #main .theme2 .content .last span a{
+  font-family: 'Open-Sans-Regular';
+  color: white !important;
+  
+}
+
+#main .theme2 .content p{ 
+  color: white;
+  font-family: 'Open-Sans-Regular'
+}
+#main .theme2 .content .spacer-item{
+  margin-bottom: 25px;
+  border-top: 1px solid white;
+  margin: 12px auto 0px;
+  padding: 0px 0px 12px;
+  width: 90%;
+}
+#main .theme3{
+    background-color: #ffffff;
+}
+#main .theme3 .content h1{
+    color: #000000;
+    font-family: 'Open-Sans-Bold'
+}
+#main .theme3 .content .spacer-item-title{
+    background-image: url(https://coachforceprod.s3.amazonaws.com/themebackground/space_yellow.png);
+    height: 15px;
+    background-repeat: no-repeat;
+    margin: 0px auto 20px !important;
+    width: 14% !important;
+    border-top: none;
+  }
+  #main .theme3 .content .main-img{
+    height: 87%;
+  }
+  #main .theme3 .content button{
+    background: #ffffff;
+    padding-left: 30px;
+    border-radius: 0;
+    color: #D08000;
+  }
+  #main .theme3 .content button h5{
+    color: #D08000;
+    font-family: 'Open-Sans-Bold'
+  }
+
+  #main .theme3 .content .last span{
+    font-family: 'Open-Sans-Regular'
+  }
+  #main .theme3 .content p{
+    font-family: 'Open-Sans-Bold'
+  }
+
+  #main .theme3 .content .join .col-lg-6 p{
+    width: fit-content;
+    margin-left: 2%;
+  }
+  #main .theme3 .content .spacer-item{
+    margin-bottom: 25px;
+    border-top: 1px solid #E1E1E1;;
+    margin: 12px auto 0px;
+    padding: 0px 0px 12px;
+    width: 90%;
+}
+
+  #main .theme4 .content{
+    background: #293f60;
+  }
+
+  #main .theme4 .content h1{
+    color: white;
+    font-family: 'Open-Sans-Bold';
+  }
+
+  #main .theme4 .content p{
+    color: white;
+    font-family: 'Open-Sans-Regular'
+  }
+  #main .theme4 .content .main-img{
+    height: 87%;
+  }
+
+  #main .theme4 .content button{
+    background: #ffffff;
+    padding-left: 30px;
+    border-radius: 0;
+    border-color: #293f60;;
+  }
+  #main .theme4 .content button h5{
+    color: #293f60;
+    font-family: 'Open-Sans-Bold'
+  }
+
+  #main .theme4 .content .last span, #main .theme4 .content .last span a{
+      color: white !important;
+    font-family: 'Open-Sans-Regular'
+  }
+
+  #main .theme4 .content .spacer-item{
+    margin-bottom: 25px;
+    border-top: 1px solid #6f6c6c;
+    margin: 12px auto 0px;
+    padding: 0px 0px 12px;
+    width: 90%;
+}
+
+#main .theme5 , #main .theme5 .content{
+    background-color: #484b50;
+}
+
+#main .theme5 .content h1{
+    font-family: 'Open-Sans-Bold';
+    color: #dab13d;
+  }
+
+#main .theme5 .content .first{
+    width: 55%;
+    margin: 0px auto;
+}  
+
+#main .theme5 .content button{
+    background-color: #484b50;
+    border-color:#dab13d;
+  }
+#main .theme5 .content button h5{
+    color: #dab13d;
+    font-family: 'Open-Sans-Bold'
+}
+#main .theme5 .content p{
+    color: white;
+    font-family: 'Open-Sans-Regular'
+}
+#main .theme5 .content .join .col-lg-6 p{
+    width: fit-content;
+    margin-left: 2%;
+    color: white;
+}
+
+#main .theme5 .content .spacer-item{
+    margin-bottom: 25px;
+    border-top: 1px solid #999595;
+    margin: 12px auto 0px;
+    padding: 0px 0px 12px;
+    width: 90%;
+}
+#main .theme5 .content .last span, #main .theme5 .content .last span a{
+    color: white !important;
+  font-family: 'Open-Sans-Regular'
+}
+ 

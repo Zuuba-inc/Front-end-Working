@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <filter id="Rectangle_2166" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_2180" data-name="Group 2180" transform="translate(-857 -479)">
+    <g transform="matrix(1, 0, 0, 1, 857, 479)" filter="url(#Rectangle_2166)">
+      <rect id="Rectangle_2166-2" data-name="Rectangle 2166" width="30" height="30" rx="4" transform="translate(9 7)" fill="#fff"/>
+    </g>
+    <g id="rubbish-bin-delete-button_1_" data-name="rubbish-bin-delete-button (1)" transform="translate(825 495)">
+      <g id="delete" transform="translate(51)">
+        <path id="Path_45" data-name="Path 45" d="M51.714,11.429a1.433,1.433,0,0,0,1.429,1.429h5.714a1.433,1.433,0,0,0,1.429-1.429V2.857H51.714ZM61,.714H58.5L57.786,0H54.214L53.5.714H51V2.143H61Z" transform="translate(-51)" fill="#cb0000"/>
+      </g>
+    </g>
+  </g>
+</svg>

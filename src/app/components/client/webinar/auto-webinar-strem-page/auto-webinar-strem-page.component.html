@@ -1,0 +1,214 @@
+<div class="two-scrollers">
+	<header class="webinar-header">
+
+		<div class="row justify-content-between align-items-center">
+
+			<div class="col-3">
+				<!-- User Controls -->
+				<div class="user">
+					<div class="user__img ">
+						<!-- User Image -->
+						<!-- <img class="img-fluid" alt="Profile picture" src="assets/images/user@2x.jpg"> -->
+						<!-- </span> -->
+						<div class="profile__img">
+							<!-- <img class="img-fluid" src={{msg.picture}}> -->
+							<p>{{webinarInfo.mainUser && webinarInfo.mainUser.userName && webinarInfo.mainUser.userName[0]}}</p>
+						</div>
+					</div>
+					<div class="user__info">
+						<h5>{{webinarInfo && webinarInfo.webinarTitle}}</h5>
+						<span>By {{webinarInfo && webinarInfo.mainUser.userName}}</span>
+					</div>
+				</div>
+				<!-- /User Controls -->
+			</div>
+
+			<div class="col-2">
+				<!-- webinar timer -->
+				<!-- <div class="timer">
+					<span class="timer--recording"> -->
+				<!-- add class  timer--idle  for not recording state -->
+				<!-- </span>
+					<span class="timer__hours">01</span>:
+					<span class="timer__mins">45</span>:
+					<span class="timer__secs">32</span>
+				</div> -->
+				<!-- /webinar timer -->
+				<div class="recordTime">
+					<span id="time"></span>
+				</div>
+			</div>
+
+			<div class="col-auto">
+				<!-- Webinar actions -->
+				<ul class="actions">
+					<li *ngIf="replay == false" class="actions__item">
+						<span class="icon cf-speaker" (click)="mueUnMuteVideo();"></span>
+						 <span id="muteUnmute">UnMute</span>
+
+					</li>
+					<li class="actions__item" *ngIf="user.uRole.role == 'MAIN_USER'">
+						<span class="icon cf-setting"></span>
+						SETTINGS
+
+
+					</li>
+					<li class="actions__item" *ngIf="!fullScreen">
+						<span class="icon cf-fullscreen" (click)="goFullscreen()"></span>
+						FULLSCREEN
+					</li>
+					<li class="actions__item active" *ngIf="fullScreen">
+						<span class="icon cf-fullscreen-exit" (click)="closeFullscreen()"></span>
+						EXIT FULLSCREEN
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</header>
+
+	<!-- Main Content -->
+	<section id="webinar-live" 
+	class="content" 
+	[ngClass]="{'side-closed': !sidePanelOpened}">
+
+		<div class="row no-gutters position-relative">
+			<div class="col-9 transition" [ngClass]="{'col-lg-12': !sidePanelOpened}">
+
+
+				<div class="live-preview" id="count-down">
+					<!-- counter container -->
+					<div class="counting">
+						<h5>Starting Soon</h5>
+
+						<div id="webinarTimer" class="countdown">
+							<div class='countdown-container days'>
+								<span class='countdown-heading days-top'>Days</span>
+								<span class='countdown-value days-bottom' id="daysLeft">{{day}}</span>
+							</div>
+							<div class='countdown-container hours'>
+								<span class='countdown-heading hours-top'>Hours</span>
+								<span class='countdown-value hours-bottom' id="hoursLeft">{{hrs}}</span>
+							</div>
+							<div class='countdown-container minutes'>
+								<span class='countdown-heading minutes-top'>Minutes</span>
+								<span class='countdown-value minutes-bottom' id="minLeft">{{min}}</span>
+							</div>
+							<div class='countdown-container seconds'>
+								<span class='countdown-heading seconds-top'>Seconds</span>
+								<span class='countdown-value seconds-bottom' id="secLeft">{{sec}}</span>
+							</div>
+						</div>
+
+						<span class="icon cf-clock"></span>
+					</div>
+				</div>
+				
+				<!-- <video id="replayVideo" controls>
+
+				</video> -->
+				<div class="live-preview"  id="player" width="100%" height="100%">
+				</div>
+				<!--iframe  [src]="current_url" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+
+
+
+			</div>
+			<div class="col-3 side-panel">
+				<button id="side-togglers" class="side-togglers" (click)="sidePanelOpened = !sidePanelOpened" style="z-index: 999;">
+					<span  
+					class="icon"
+					[ngClass]="sidePanelOpened ? 'zu-arrow-right': 'zu-arrow-left'"></span>
+				</button>
+
+				
+				
+
+				<div id="tabs" class="tabs">
+					
+						<div class="invite" id="offerDive" style="display: none; margin-top: 0px;box-shadow: 0 0px 0px rgba(0, 0, 0, 0.16);">
+								<h4 class="invite__title">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.title}}</h4>
+								<p class="invite__desc">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.description}}</p>
+			
+								<button class="invite__btn" id="offerButton" (click)="countActionUser()">{{webinarInfo.webinarOffer && webinarInfo.webinarOffer.callToActionLabel}}</button>
+							</div>
+			
+
+					<div class="tabs__togglers">
+						<div class="tabs__tab tabs__tab--chat active" (click)="showChatBox()">Webinar Chat</div>
+						<div *ngIf="replay == false" class="tabs__tab tabs__tab--attds" (click)="showJoineList()">{{joiniArray.length}}
+							Attendees</div>
+					</div>
+
+					<!-- chat -->
+					<div class="tabs__tab-body" id="webinarChatBox">
+						<!-- message body -->
+						<div class="messages">
+							<div class="message" *ngFor="let msg of messageHistory">
+								<div class="message__img" *ngIf="msg.picture != null;else noImage">
+									<img class="img-fluid" src={{msg.picture}}>
+								</div>
+								<ng-template #noImage>
+									<div class="message__img">
+										<!-- <img class="img-fluid" src={{msg.picture}}> -->
+										<p>{{msg.initials}}</p>
+									</div>
+								</ng-template>
+								<div class="message__info">
+									<h6>{{msg.user}}</h6>
+	
+									<p>{{msg.message}}</p>
+									<!-- {{msg.likeCount}}<span class="icon cf-thumbs-up" (click)="likeMessage(msg.messageId)" -->
+										<!-- style="float: right"></span> -->
+									<!-- <span (click)="reply(msg)" style="float: right">Reply</span> -->
+	
+									<div class="message__interact">
+										<button (click)="likeMessage(msg.messageId)">
+											<span class="icon zu-thumbs-up"></span>
+											<span class="likes">{{msg.likeCount}}</span>
+											 like
+										</button>
+										
+										<button *ngIf="replay == false" (click)="reply(msg)">reply</button>
+									</div>
+								</div>
+							</div>
+							<!-- /message body -->
+						</div>
+
+						<form *ngIf="replay == false" class="chat-box" (ngSubmit)="sendMessage()">
+							<textarea class="chat-box__input" placeholder="Write your message. . ." name="message"
+								[(ngModel)]="message"></textarea>
+							<button [disabled]="disableMessageSendButton == false" class="chat-box__send" type="submit">Send</button>
+						</form>
+
+					</div>
+					<!-- /chat -->
+
+					<!-- attendees -->
+					<div class="tabs__tab-body" id="webinarJoineList">
+						<div class="message" *ngFor="let list of joiniArray">
+							<div class="message__img" *ngIf="list.photo != null;else noImage">
+								<img class="img-fluid" src={{list.photo}}>
+							</div>
+							<ng-template #noImage>
+								<div class="message__img">
+									<!-- <img class="img-fluid" src={{msg.picture}}> -->
+									<p>{{list.initial}}</p>
+								</div>
+							</ng-template>
+							<div class="message__info">
+								<h6>{{list.userName}}</h6>
+							</div>
+						</div>
+					</div>
+					<!-- /attendees -->
+
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+</div>
+<ngx-ui-loader></ngx-ui-loader>

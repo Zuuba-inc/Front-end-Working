@@ -1,0 +1,137 @@
+<section id="lead" class="content displayNone">
+  <header class="inner-header">
+    <h2 class="leadSetupForm">quiz info</h2>
+    <button style="display:none" type="button" class="resetPreviewBtn backButton"
+      (click)="backPreview('leadSetupForm','lead','previewSetupLead');"><span class="icon cf-arrow-right"></span>
+      Back</button>
+    <!-- <button class="preview-btn leadSetupForm"
+      (click)="preview('leadSetupForm','lead','previewSetupLead')">Preview</button> -->
+  </header>
+
+  <div class="row no-gutters">
+    <div class="col-md-4 leadSetupForm">
+
+      <form class="setting" name="quizPage4" novalidate>
+
+        <div class="setting__title">
+          <label>Headline</label>
+          <span id="leadHeadlineCharCount" class="chars-count">0/100</span>
+          <br />
+          <fieldset>
+            <textarea placeholder="Type here" required maxlength="100"
+              [(ngModel)]="quizConfiguration.quizLeadCaptureInfo.headline"
+              (ngModelChange)="keyupFunction('leadHeadlineCharCount',quizConfiguration.quizLeadCaptureInfo.headline,'leadHeadlinePreview', {headline: headline ,headlineDesc: headlineDesc, callActionLabel: callActionLabel})"
+              name="leadHeadline" rows="3" #headline="ngModel"></textarea>
+
+              <div *ngIf="headline.invalid && (headline.dirty || headline.touched)"
+                  class="validationError">
+
+                <div *ngIf="headline.errors.required">
+                  *Headline is required.
+                </div>
+              </div>
+          </fieldset>
+
+        </div>
+
+        <div class="setting__desc">
+          <label>Headline description</label>
+          <span id="leadDescriptionCharCount" class="chars-count">0/100</span>
+          <br />
+          <fieldset>
+            <textarea placeholder="Type here" required name="leadDesc" rows="3" maxlength="100"
+              [(ngModel)]="quizConfiguration.quizLeadCaptureInfo.headlineDesc"
+              (ngModelChange)="keyupFunction('leadDescriptionCharCount',quizConfiguration.quizLeadCaptureInfo.headlineDesc,'leadDescPreview', {headline: headline ,headlineDesc: headlineDesc, callActionLabel: callActionLabel})"
+              #headlineDesc="ngModel"></textarea>
+              <div *ngIf="headlineDesc.invalid && (headlineDesc.dirty || headlineDesc.touched)"
+                  class="validationError">
+
+                <div *ngIf="headlineDesc.errors.required">
+                  *Description is required.
+                </div>
+              </div>
+          </fieldset>
+        </div>
+
+        <div class="setting__action">
+          <label for="action">Call action label</label>
+          <span id="leadButtonCharCount" class="chars-count">0/10</span>
+          <br />
+          <fieldset>
+            <textarea type="text" id="action" name="leadAction" maxlength="10" required
+              [(ngModel)]="quizConfiguration.quizLeadCaptureInfo.callActionLabel"
+              (ngModelChange)="keyupFunction('leadButtonCharCount',quizConfiguration.quizLeadCaptureInfo.callActionLabel,'leadActionBtnPreview', {headline: headline ,headlineDesc: headlineDesc, callActionLabel: callActionLabel})"
+              style="height: 45px;color:#828282;"
+              #callActionLabel="ngModel"></textarea>
+            <div *ngIf="callActionLabel.invalid && (callActionLabel.dirty || callActionLabel.touched)"
+                  class="validationError">
+
+                <div *ngIf="callActionLabel.errors.required">
+                  *Call To action button is required.
+                </div>
+              </div>
+          </fieldset>
+        </div>
+
+        <button type="button" class="setting__save next" (click)="saveLead()">Save &amp; Next</button>
+        <button type="button" class="setting__back previous" (click)="this.router.navigate(['/quizSetup/Questions/']);">Back</button>
+
+      </form>
+
+    </div>
+    <div class="col-md-8" id="previewSetupLead">
+
+      <div class="live-preview">
+
+        <header class="live-preview__headers">
+          <div class="live-preview__headers--name img-hdr-prvw">
+            <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+          </div>
+          <!-- <div class="live-preview__headers--name">
+            <h4 >{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+          </div> -->
+          <div class="live-preview__headers--title fontStyle questionTitle">
+            <h4 class="QuizTitleHeadline">{{quizConfiguration.quizTitle}}e</h4>
+          </div>
+        </header>
+
+        <div class="login">
+
+          <div class="login__body" style="padding-top: 20px">
+            <h5 class="leadColor" id="leadHeadlinePreview">Sign up For FREE to see your results</h5>
+            <p class="leadColor" id="leadDescPreview">Please setup your Client sessions and Prospect meeting at left navigation for start
+              using this
+              calender.</p>
+
+            <div class="login__body--register">
+              <button class="register-fb">
+                <span class="icon cf-facebook"></span>
+                Continue with Facebook
+              </button>
+
+              <button class="register-gl">
+                <span class="icon cf-google">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span
+                    class="path4"></span>
+                </span>
+                Continue with Google
+              </button>
+              <!--<div class="g-signin2" data-width="315" data-onsuccess="onSignIn" data-text="text" id="googleDiv"></div>-->
+              <span class="or">OR</span>
+
+              <fieldset class="email-input">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email">
+              </fieldset>
+
+              <button type="submit" class="signup" id="leadActionBtnPreview">Sign up to see your result</button>
+            </div>
+            <small style="float: left;">Privacy Policy</small>
+            <small style="float: right;">Powered by <strong>Coachforce</strong></small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+
+<section id="test" class="content">
+
+  <header class="inner-header">
+      Webinar List
+  </header>
+
+
+<form class="setting" name="webinarListPage2" #webinarListPage2="ngForm" novalidate>
+
+      <button type="button" class="setting__save next" (click)="newWebinar();">Create New Webinar</button>
+      <table mat-table [dataSource]="webinarList" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="WebinarTitle">
+                <th mat-header-cell *matHeaderCellDef> Webinar Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.webinarTitle}} {{element.id}}</td>
+                <th mat-header-cell *matHeaderCellDef> Webinar Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.webinarType}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Actions">
+                      <th mat-header-cell *matHeaderCellDef> Actions </th>
+                      <td mat-cell *matCellDef="let element">  
+                              <!-- <span class="skipText" (click)="playQuiz(element.id)" >Play Webinar</span> -->
+                              <!-- &nbsp;|&nbsp; -->
+                                      <span class="skipText" (click)="editWebinar(element.id)" >Edit Webinar</span>
+          </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+              <tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
+      </table>
+      
+</form>
+
+</section>
+<ngx-ui-loader></ngx-ui-loader>
+<!-- <span>Webinar Title</span>
+<br>
+<div class="webinar-list-item" *ngFor="let element of webinarList">
+  <span>{{element.webinarTitle ? element.webinarTitle : "N/A"}} {{element.id}}</span>
+  <span (click)="editWebinar(element.id)">edit</span>
+</div> -->

@@ -1,0 +1,146 @@
+<div class="tab-content">
+  <div class="integration-item">
+    <img src="../../../../../../../assets/images/ic_googlesheet.png">
+
+    <span *ngIf="!gsId" class="c-btn" id='gs-c-btn' (click)='onGoogleSheetsConnect()'>
+      <span class="c-label">Connect</span>
+    </span>
+
+    <div class="setting__sharing " [ngClass]="{'show':gsId, 'hide':!gsId}">
+      <label>
+        Off
+        <button type="button" id="socialSharingBtn" (click)="toggleGSConnection($event)"
+          class="toggle-on-off on"></button>
+        On
+      </label>
+    </div>
+
+    <span *ngIf="gsId" class="c-btn" (click)="onRemoveIntegration('googleSheetUrl')">
+      <span class="c-label">Remove</span>
+    </span>
+
+    <span class="i-labels-container">
+      <span class="i-label">Google Sheets</span>
+      <br>
+      <span class="i-desc" contentEditable="true">Send your data straight to Google Sheets. Automatically syncs as results come in. Oh
+        Sheet!</span>
+        <!-- <div id="auth-status" style="display: inline; padding-left: 25px"></div> -->
+        <span class="i-link-c" *ngIf="googleSheetUrl">
+          <a [href]="googleSheetUrl" target="_blank" class="i-link">View your Google Sheet here</a>
+        </span>
+    </span>
+    
+  </div>
+  <div class="integration-item">
+    <img src="../../../../../../../assets/images/ic_googleanalytic.png">
+    <span *ngIf="!gaId" class="c-btn" (click)="onGAConnet()">
+      <span class="c-label">Connect</span>
+    </span>
+    <span *ngIf="gaId" class="c-btn" (click)="onRemoveIntegration('googleTrackingId')">
+      <span class="c-label">Remove</span>
+    </span>
+    <span class="i-labels-container">
+      <span class="i-label">Google Analytics</span>
+      <br>
+      <span class="i-desc">Discover how people find and interact with you typeform. Get the data you need to measure
+        campaigns, improve conversions, and more</span>
+    </span>
+  </div>
+  <div class="integration-item">
+    <img src="../../../../../../../assets/images/icon_facebookpixel.png">
+    <span *ngIf="!fbPxId" class="c-btn" (click)="onFBPixelConnet()">
+      <span class="c-label">Connect</span>
+    </span>
+    <span *ngIf="fbPxId" class="c-btn" (click)="onRemoveIntegration('facebookPixelId')">
+      <span class="c-label">Remove</span>
+    </span>
+    <span class="i-labels-container">
+      <span class="i-label">Facebook Pixels</span>
+      <br>
+      <span class="i-desc">Send your data straight to Google Sheets. Automatically syncs as results come in. Oh
+        Sheet!</span>
+    </span>
+  </div>
+  <div class="integration-item">
+    <img src="../../../../../../../assets/images/icon_tagmanager.png">
+    <span *ngIf="!gtmId" class="c-btn">
+      <span class="c-label" (click)="onGTMConnet()">Connect</span>
+    </span>
+    <span *ngIf="gtmId" class="c-btn" (click)="onRemoveIntegration('googleTagMngrId')">
+      <span class="c-label">Remove</span>
+    </span>
+    <span class="i-labels-container">
+      <span class="i-label">Google Tag Manager</span>
+      <br>
+      <span class="i-desc">Send your data straight to Google Sheets. Automatically syncs as results come in. Oh
+        Sheet!</span>
+    </span>
+  </div>
+</div>
+
+<div class="row justify-content-center edit-ft-modal" id="edit-ft-modal" [ngClass]="{'show': showModal, 'hide': !showModal}" >
+  <div class="edit-ft-modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="label-text" id="c-p-text">{{integrationText}}</div>
+    <div class="c-p-desc" id="c-p-desc">{{integrationDesc}}</div>
+    <span class="link-c">
+      <a class="fb-px-link" id="c-p-link" href="">{{integrationHelpLink}}</a>
+    </span>
+    <div class="px-label" id='c-p-n-i'>
+      ID
+    </div>
+    <span class="inp-c" id='c-p-n-i'>
+      <input class="px-val" type="text" [(ngModel)]="integrationId" placeholder="{{integrationPlaceholder}}" />
+    </span>
+    <div class="actions-c" id='c-p-n-i'>
+      <span class="fb-px-act-btn cancel-btn-fb-px" (click)="closeModal()">
+        cancel
+      </span>
+      <span class="fb-px-act-btn save-btn-fb-px" (click)="OnSaveID(integrationType)">
+        save
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center edit-ft-modal" id="edit-ft-modal" [ngClass]="{'show': showGSModal, 'hide': !showGSModal}" >
+  <div class="edit-ft-modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="label-text" id="c-p-text">Google Sheets Integration</div>
+    <div class="c-p-desc" id="c-p-desc">Create new or use existing google sheet</div>
+    <span class="link-c">
+      <a class="fb-px-link" id="c-p-link" href="">help?</a>
+    </span>
+  
+    <span class="inp-c" id='c-p-n-i'>
+
+        <!-- (ngModelChange)="" -->
+      <select [(ngModel)]="GSEmail" (ngModelChange)="onGSAddAccount()" >
+        <option *ngFor="let account of connectedGAccounts" value="{{account.userEmail}}">{{account.userEmail}}</option>
+        <option value="">Add new account</option>
+      </select>
+    </span>
+
+    <div id='c-p-c-i'>
+      <button class="gs-n" (click)="createNewSheet()">Create New</button>
+      <button class="gs-e" (click)="useExistingSheet()">Use Existing</button>
+    </div>
+
+    <input *ngIf="showNSInp" [(ngModel)]="sheetName" id='c-p-c-i' type="text" placeholder="enter sheet name" />
+
+    <input *ngIf="showESInp" [(ngModel)]="sheetUrl" id='c-p-c-i' type="text" placeholder="enter existing google sheet" />
+
+    <div class="actions-c" id='c-p-n-i'>
+
+      <span class="fb-px-act-btn cancel-btn-fb-px" (click)="closeModal()">
+        cancel
+      </span>
+      <span class="fb-px-act-btn save-btn-fb-px" (click)="OnSaveGSData()">
+        save
+      </span>
+    </div>
+  </div>
+</div>
+
+<app-message-popup *ngIf="showPopUpMessage" [popUpMessage]="message">
+</app-message-popup>

@@ -1,0 +1,57 @@
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .left {
+    left: 0;
+    width: 30%;
+    background-color: #F7F7F7;
+  }
+  
+  .right {
+    right: 0;
+    width: 70%;
+    background-color: #FFFFFF;
+  }
+.right p{
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+.right h2{
+  font-weight: bold;
+}
+.right h6{
+    margin-bottom: 20px;
+}
+.right a{
+    color:  #0B8B8C !important;
+    font-weight: bold;
+}
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+  }
+  
+  .centered img {
+    width: 150px;
+  }
+  .right .manageSubscribeBtn{
+    margin-top: 15px;
+    background: black;
+    border-radius: 2px;
+    border: none;
+    font: 12px Open Sans ;
+    color: #FFFFFF;
+    width: auto;
+    height: 30px;
+    margin-right: 10px;
+}
+ 

@@ -1,0 +1,54 @@
+<!-- zu-content -->
+<main>
+  <!-- Side Bar -->
+
+  <aside class="side-bar">
+
+    <!-- Logo -->
+    <header class="side-bar__logo-area">
+      <span class="dot"></span><span style="font-size: 24px;
+      font-weight: bold;display: inline-flex;">zuuba.</span>
+    </header>
+      <!-- /Logo -->
+
+
+    <!-- Menu -->
+    <ul class="side-bar__menu">
+      <li class="side-bar__menu--item active">
+        <!-- <span class="icon zu-arrow-right"></span>
+
+        <span class="svg-icon zu-marketing"></span>
+        marketing -->
+
+        <ul class="submenu submenu--opened">
+          <li class="submenu__back">
+            <button [routerLink]="['/dashboard']">
+              <!-- <span class="icon zu-arrow-left"></span> -->
+              <img src="./assets/icons/ic_back.svg" style="padding-right: 2px;padding-bottom: 2px;">
+              Main Menu
+            </button>
+          </li>
+          <li class="submenu__main-title">
+            CRM
+          </li>
+          <li class="submenu__item" id="active" (click)="navigateTo($event)">Active</li>
+          <li class="submenu__item" id="inActive" (click)="navigateTo($event)">InActive</li>
+          <li class="submenu__item" id="segments"  (click)="navigateTo($event)">Segments</li>
+          <li class="submenu__item" id="tags" (click)="navigateTo($event)">Tags</li>
+          <li class="submenu__item" id="fields" (click)="navigateTo($event)">Fields</li>
+          <li class="submenu__item" id="bulkOperations" (click)="navigateTo($event)">Bulk Operations</li>
+          <li class="submenu__item" id="pruningOperations" (click)="navigateTo($event)">Pruning Operations</li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+ 
+  <!-- Add this router outlet for quiz-setup-options (activate)="onActivate($event)" -->
+  <!-- (activate)="onSetNavValidation($event)" -->
+  <router-outlet ></router-outlet>
+
+</main>

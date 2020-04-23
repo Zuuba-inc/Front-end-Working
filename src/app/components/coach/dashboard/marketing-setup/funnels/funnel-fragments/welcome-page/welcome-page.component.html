@@ -1,0 +1,129 @@
+<div class="row funnel-step" id="{{data.stepDetailTitle}}" style="margin-top: 70px !important">
+  <div class="col-12 d-flex card-head">
+    <p class="funnel-step__side-info">{{data.stepNo}}</p>
+    <h6 class="funnel-step__title">{{data.stepDetailTitle}}</h6>
+    <div class="menu">
+      <button class="menu-btn" (mouseover)="clazz='showOptions'" (mouseout)="clazz='hideOptions'">
+        <span class="zu-dotted-menu"></span>
+      </button>
+
+      <ul class="dropdown-menu" (mouseover)="clazz='showOptions'" (mouseout)="clazz='hideOptions'" [ngClass]="clazz">
+        <li class="item">Edit</li>
+        <!-- <li class="item"> Change Template </li>
+                    <li class="item">Reorder</li> -->
+        <li class="item"> Delete</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card-img">
+      <img src="assets/images/joel-filipe-196000-unsplash.jpg" alt="img" class="img-fluid" />
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card-content">
+      <p>Actions</p>
+
+      <span class="icon zu-tag-action">
+        <span class="path1"></span><span class="path2"></span><span class="path3"></span>
+      </span>
+
+      <span class="icon zu-mail-action">
+        <span class="path1"></span><span class="path2"></span>
+      </span>
+
+      <button class="add" (click)="openModel()">+</button>
+
+      <div class="views">
+        <span class="num">5</span>
+        Views
+      </div>
+    </div>
+  </div>
+  <div class="seperatorLine"></div>
+</div>
+<!-- The Modal -->
+<div id="autoMationRules" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <p style="font-size: larger;">New Automation</p>
+    </div>
+    <div class="modal-body">
+
+      <div>
+        <div class="form-group">
+          <label class="label-text">When</label>
+          <div class="dropdown">
+            <input  [disabled]="whenRule != null" (focus)="showWhenDropDown()" (blur)="showWhenDropDown()" class="form-control dropbtn" type="text" name="whenRule" [(ngModel)]="whenRule" >
+            <div  id="whenDropDown1" style="display: none" class="dropdown-content" >
+              <dl *ngFor="let when of whenRules">
+                <dt >{{when.whenTitle}}</dt>
+                <dd *ngFor="let aDWDesc of when.autoDtlDesc">  {{aDWDesc.description}}</dd>
+              </dl>
+          </div>
+          <br />
+          <div class="dropdown">
+            <input  class="form-control dropbtn" type="text" name="whenRuleFor">
+            <div class="dropdown-content" style="display: none" >
+
+              <span> Google</span>
+              <span>Facebook</span>
+              <span>YouTube</span>
+
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label-text">Then</label>
+          <div class="dropdown">
+            <input [disabled]="thenRule != undefined" (focus)="showThenDropDown()" (blur)="showThenDropDown()"  class="form-control dropbtn" 
+             type="text" name="thenRule" [(ngModel)]="thenRule" >
+            <div id="thenDropDown" class="dropdown-content" style="display: none" >
+              <dl *ngFor="let then of thenRules">
+                <dt >{{then.whenTitle}}</dt>
+                <dd *ngFor="let aDWDesc of then.autoDtlDesc">  {{aDWDesc.description}}</dd>
+              </dl>
+
+            </div>
+          </div>
+          <br />
+          <div class="dropdown">
+            <input class="form-control dropbtn" type="text" name="whenRule1" value="Form is submitted">
+            <div class="dropdown-content" style="display: none" >
+
+              <span> Google</span>
+              <span>Facebook</span>
+              <span>YouTube</span>
+
+            </div>
+          </div>
+          
+          <ng-select [items]="people$"
+                    bindLabel="name"
+                    autofocus
+                    bindValue="id"
+                    [(ngModel)]="selectedPersonId">
+          </ng-select>
+          
+          <br/>Selected: {{selectedPersonId}}
+        </div>
+        <div class="form-group">
+
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modelButton" align="middle" type="button" (click)="savePrivatePublic()">
+        Save
+      </button>
+      <!-- <button  class="modelButton" align="right" type="button" (click) = "openModel(funnel)">
+            Cancel
+          </button> -->
+    </div>
+  </div>
+
+</div>
+<!-- The Modal -->

@@ -1,0 +1,170 @@
+main {
+  
+  header.main-header {
+    background-color: #fff;   
+    padding: 0px 30px;
+    height: 60px;
+    align-items: center;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    box-shadow: 0 3px 8px rgba($color: #000000, $alpha: 0.08);
+    position: fixed;
+    right: 0;
+    width: calc(100% - 225px);
+    box-sizing: border-box;
+    z-index: 990;
+    max-height: 60px;
+
+    .main-nav {
+
+      &__nav-item {
+        display: inline-block;
+        padding: 0 10px;
+        @include text(13px, 600, left);
+        color: $blk;
+        @include transition();
+        position: relative;
+
+        &.main {
+          padding-right: 20px;
+        }
+
+        &.inner {
+          color: $primary-dark;
+          padding: 0;
+          margin: 0 10px;
+          &:not(.active):hover {
+            opacity: 0.5;
+          }
+        }
+
+        &.active:after {
+          content: '';
+          position: absolute;
+          bottom: -19px;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: $action;
+        }
+        
+        &.main {
+          @include text(16px, 700, left);
+          text-transform: uppercase;
+          border-right: $border;
+          padding-left: 0;                                          
+        }
+      }
+
+    }
+
+    .search {
+      margin-left: 14px;
+      flex: 1;
+      @include text(12px, 400, left);
+      position: relative;
+
+      #bar {
+        width: 0;
+        float: right;
+        visibility: hidden;
+        @include search-field;
+        padding: 11px 14px;
+        background-color: #1e63771a;
+      }
+
+      &__icon {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+    }
+
+    .user-control {
+      margin-left: 17px;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &__link { 
+        text-transform: capitalize;
+        @include text(12px, 600, left);
+        color: $primary-dark;
+        margin-right: 20px;
+        position: relative;
+        @include transition;
+
+        &:hover {
+          color: $action;
+          .icon {
+            color: $action;
+          }
+        }
+
+        .zu-notify {
+          margin-left: 10px;
+          position: absolute;
+          top: -8px;
+          left: 12px;
+          margin: 0;
+        }
+        .icon {
+          font-size: 17px;
+          margin-right: 5px;
+          color: $text-light;
+          @include transition;
+        }
+      }
+
+      &__drop {
+        display: flex;
+        margin-left: 14px;
+        @include text(14px, 600, left);
+        color: $text-neu;
+        cursor: pointer;
+        vertical-align: middle;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          right: -15px;
+          top: 15px;
+          border-top: 5px solid $text-neu;
+          border-right: 5px solid transparent;
+          border-left: 5px solid transparent;
+        }
+
+        &--img {
+          width: 30px;
+          height: 30px;
+          background-color: $bg2;
+          border-radius: 50%;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 10px;
+
+          img {
+            max-width: 100%;
+            overflow: hidden;
+          }
+        }
+      }
+
+      &__name {
+        @include text(13px, 600, left);
+        color: $primary-dark;
+        line-height: 16px;
+      }
+
+      &__note {
+        @include text(10px, 400, left);
+        color: $text-neu;
+      }
+    }
+  }
+}

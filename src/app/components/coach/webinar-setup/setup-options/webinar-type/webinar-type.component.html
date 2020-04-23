@@ -1,0 +1,768 @@
+<section id="webinar-sec" class="content">
+  <form id="webinar-nav" name="webinar-config" class="form signup_form" #webinarForm="ngForm">
+    <div class="container-fluid px-md-5 px-3">
+      <!-- <div> webinar-type works</div> -->
+      <div class="xdWebinarType" data-parent="#pageAccordion">
+        <!-- AHMED - Add the new header -->
+        <header class="inner-header">
+          <h2 class="configureSetupForm">Webinar type</h2>
+          <button style="display:none" type="button" class="resetPreviewBtn backButton"
+            ng-click="backPreview('configureSetupForm','configure','configurePreview');"><span
+              class="icon cf-arrow-right"></span> Back</button>
+        </header>
+        <div class="row" style="padding-top: 3% !important; padding-left: 7% !important;">
+          <!-- row start-->
+          <!-- page content start-->
+          <div class="col-xl-12 cstm-input scrollOverflow" style="margin-top: 4%;">
+            <!-- col-xl-4 start-->
+
+            <div id="webinarTypeAcc">
+              <!--- webinarTypeAcc start ----->
+
+              <!-- Ahmed remove text -->
+              <!-- <div class="text-left">
+                <div class="normal-title">WEBINAR TYPE</div>
+              </div> 
+      
+              <br>-->
+
+              <!-- AHMED add div class="webinar-type-wrapper row"-->
+              <div class="webinar-type-wrapper row">
+                <!-- AHMED add class text-heading  -->
+                <div class="col-sm-4">
+                  <span class="text-heading fs-12">Select webinar type</span>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="webinarTypes">
+                    <a href="javascript://" class="box-webinar active" data-toggle="collapse"
+                      (click)="setWebinarType('live','auto');" id="live">
+                      <div class="icon">
+                        <div class="btn btn-danger">Live</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                          id="Capa_1" x="0px" y="0px" width="115.383px" height="115.383px" viewBox="0 0 115.383 115.383"
+                          style="enable-background:new 0 0 115.383 115.383;" xml:space="preserve">
+                          <g>
+                            <path
+                              d="M11.025,87.78h93.333c1.931,0,3.5-1.57,3.5-3.5v-60c0-1.93-1.569-3.5-3.5-3.5H11.025c-1.93,0-3.5,1.57-3.5,3.5v60   C7.525,86.21,9.096,87.78,11.025,87.78z M10.525,24.28c0-0.276,0.224-0.5,0.5-0.5h93.333c0.276,0,0.5,0.224,0.5,0.5v60   c0,0.276-0.224,0.5-0.5,0.5H11.025c-0.276,0-0.5-0.224-0.5-0.5V24.28z M115.383,90.458v2.801c0,0.742-0.602,1.344-1.344,1.344   H1.344C0.602,94.603,0,94.001,0,93.259v-2.801h47.387c0.234,0.781,0.95,1.354,1.807,1.354h16.996c0.856,0,1.572-0.572,1.807-1.354   H115.383z" />
+                          </g>
+                        </svg>
+                      </div>
+                      <span class="text">Live Webinar</span>
+                    </a>
+
+                    <a href="javascript://" class="box-webinar" data-toggle="collapse"
+                      (click)="setWebinarType('auto','live');" id="auto">
+                      <div class="icon">
+                        <div class="btn btn-success">AUTOMATED</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                          id="Capa_1" x="0px" y="0px" width="115.383px" height="115.383px" viewBox="0 0 115.383 115.383"
+                          style="enable-background:new 0 0 115.383 115.383;" xml:space="preserve">
+                          <g>
+                            <path
+                              d="M11.025,87.78h93.333c1.931,0,3.5-1.57,3.5-3.5v-60c0-1.93-1.569-3.5-3.5-3.5H11.025c-1.93,0-3.5,1.57-3.5,3.5v60   C7.525,86.21,9.096,87.78,11.025,87.78z M10.525,24.28c0-0.276,0.224-0.5,0.5-0.5h93.333c0.276,0,0.5,0.224,0.5,0.5v60   c0,0.276-0.224,0.5-0.5,0.5H11.025c-0.276,0-0.5-0.224-0.5-0.5V24.28z M115.383,90.458v2.801c0,0.742-0.602,1.344-1.344,1.344   H1.344C0.602,94.603,0,94.001,0,93.259v-2.801h47.387c0.234,0.781,0.95,1.354,1.807,1.354h16.996c0.856,0,1.572-0.572,1.807-1.354   H115.383z" />
+                          </g>
+                        </svg>
+                      </div>
+                      <span class="text">Automated Webinar</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+              <div class="collapse show" id="liveWebinar" data-parent="#webinarTypeAcc">
+
+                <!-- Ahmed remove text -->
+                <!-- <span class="text-heading fs-14">Live Webinar</span> -->
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <label class="text-heading label-text">Timezone</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <!-- ng-model="webinarMst.webinarLiveDtl[0].liveTimezone" -->
+                    <select class="custom-select" name="live_time_zone_select" id="webinarTimeZone"
+                      [(ngModel)]="webinarMst.webinarLiveDtl.liveTimezone" required #webinarTimeZone="ngModel">
+                      <!-- <option value="">---SELECT---</option> -->
+                      <!-- [selected]="tz.value == userTimeZone" -->
+                      <option *ngFor="let tz of timeZoneList | keyvalue" [ngValue]="tz.key">
+                        {{tz.value}}
+                      </option>
+                    </select>
+
+                    <div *ngIf="webinarTimeZone.invalid && (webinarTimeZone.dirty || webinarTimeZone.touched)"
+                      class="validationError">
+
+                      <div *ngIf="webinarTimeZone.errors.required">
+                        *Webinar Live Timezone is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <hr />
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-14">Event frequency</p>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="input-addon right">
+                      <!--<input type="text" class="form-control" value="August 25, 2018">-->
+                      <!-- ng-model="webinarMst.webinarLiveDtl[0].webinarLiveDate" -->
+                      <!-- min="{{minDate | date:'yyyy-MM-dd'}}" -->
+                      <!-- <input type="date" class="form-control cst-control" format="yyyy-MM-dd" name="webinarDate"
+                        [(ngModel)]="webinarMst.webinarLiveDtl.webinarLiveDate" #webinarLiveDate="ngModel" required /> -->
+                        <input id="datepicker2" type="text" class="form-control cst-control" format="yyyy-MM-dd" name="webinarDate"
+                        [(ngModel)]="webinarMst.webinarLiveDtl.webinarLiveDate" #webinarLiveDate="ngModel" required />
+                      <span class="addon-item">
+                        <i class="material-icons" style="color: #707070">
+                          date_range
+                        </i>
+                      </span>
+                    </div>
+                    <div *ngIf="webinarLiveDate.invalid && (webinarLiveDate.dirty || webinarLiveDate.touched)"
+                      class="validationError">
+
+                      <div *ngIf="webinarLiveDate.errors.required">
+                        *Webinar Live Date is required.
+                      </div>
+                    </div>
+
+                    <br />
+
+                    <div class="input-addon right">
+                      <!--<input type="text" class="form-control" value="09:00 PM - 11:00 PM">-->
+                      <!-- ng-model="webinarMst.webinarLiveDtl[0].webinarLiveTime"   -->
+                      <!-- {{webinarMst.webinarLiveDtl[0].webinarLiveTime | date:'HH:mm'}}" id="webinarLiveTimeInput -->
+                      <input type="time" class="form-control" name="webinarTime" format="hh:mm" value=""
+                        [(ngModel)]="webinarMst.webinarLiveDtl.webinarLiveTime" #webinarLiveTimeM="ngModel" required>
+                      <span class="addon-item"><span (click)="openCalendar();"><i
+                            class="material-icons">schedule</i></span></span>
+
+                    </div>
+                    <div *ngIf="webinarLiveTimeM.invalid && (webinarLiveTimeM.dirty || webinarLiveTimeM.touched)"
+                      class="validationError">
+
+                      <div *ngIf="webinarLiveTimeM.errors.required">
+                        *Webinar Live Time is required.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <hr />
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Enable replay</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="onoff mb-2">
+                      <span class="text ml-0">No</span>
+                      <label class="switch">
+                        <!-- ng-model="webinarMst.webinarLiveDtl[0].enableReplay" 
+                          <input type="checkbox" checked onclick="showHideReplayExpiration(this);" ng-true-value="true" ng-false-value="false">-->
+                        <input type="checkbox" (ngModelChange)="showHideReplayExpiration();" name="enableReplayNm"
+                          [(ngModel)]="webinarMst.webinarLiveDtl.enableReplay">
+                        <span class="slider round"></span>
+                      </label>
+                      <span class="text">Yes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div id="replay_expiration" [ngClass]="{'show': webinarMst.webinarLiveDtl.enableReplay, 'hide': !webinarMst.webinarLiveDtl.enableReplay}">
+                  <div class="webinar-type-wrapper row">
+                    <div class="col-sm-4">
+                      <p class="text-heading fs-12">Replay expiration settings</p>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="custom-control custom-radio">
+                        <!-- ng-model="webinarMst.webinarLiveDtl[0].replayExpirationType" -->
+                        <input type="radio" class="custom-control-input" name="replayExpDays" id="radoiOPt1"
+                          (change)="showHideReplayDiv('days')" [value]="true" [(ngModel)]="webinarReplayMode">
+                        <label class="custom-control-label fs-12" for="radoiOPt1" id="radoiOPt1-lbl">Number of days
+                          before replay expires</label>
+                      </div>
+
+                      <div class="form-group pl-4">
+                        <div class="form-inline">
+                          <!-- ng-model="webinarMst.webinarLiveDtl[0].replayExpDays" -->
+                          <input type="text" class="form-control col-3 mr-2" id="replayExpDay"
+                            name="replayExpDay" [(ngModel)]="webinarMst.webinarLiveDtl.replayExpDays" required
+                            #replayExpDaysLive="ngModel">
+                          <label class="label-text" id="radoiOPt1-lbl-2">days</label>
+                        </div>
+                        <div *ngIf="replayExpDaysLive.invalid && (replayExpDaysLive.dirty || replayExpDaysLive.touched)"
+                          class="validationError">
+
+                          <div *ngIf="replayExpDaysLive.errors.required">
+                            *Webinar Replay Expiration Days is required.
+                          </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="custom-control custom-radio">
+                        <!-- ng-model="webinarMst.webinarLiveDtl[0].replayExpirationType" -->
+                        <input type="radio" class="custom-control-input" name="replayExpDays" id="radoiOPt2"
+                          (change)="showHideReplayDiv('date')" [value]="false" [(ngModel)]="webinarReplayMode">
+                        <label class="custom-control-label fs-12" for="radoiOPt2" id="radoiOPt2-lbl">Replay expires on
+                          specific date </label>
+                      </div>
+
+                      <div class="form-group pl-4">
+                        <div class="input-addon right">
+                          <!-- ng-model="webinarMst.webinarLiveDtl[0].replayExpDate" -->
+                          <!-- min="{{webinarMst.webinarLiveDtl[0].webinarLiveDate | date:'yyyy-MM-dd'}}"  -->
+                          <!-- [disabled]="true" -->
+                          <!-- <input type="date" class="form-control cst-control" name="replayExpDate" id="replayExpDate"
+                            [(ngModel)]="webinarMst.webinarLiveDtl.replayExpDate" />
+                          <span class="addon-item"></span> -->
+                          <!-- #webinarLiveDate="ngModel" required -->
+                          <input id="replayExpDate" type="text" class="form-control cst-control" [disabled]="true" format="yyyy-MM-dd" name="replayExpDate"
+                        [(ngModel)]="webinarMst.webinarLiveDtl.replayExpDate" />
+                      <span class="addon-item">
+                        <i class="material-icons" style="color: #707070">
+                          date_range
+                        </i>
+                      </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AHMED remove host part -->
+                <!-- <div class="form-group">
+                  <label class="label-text">Host by</label>
+                  <input type="text" class="form-control" value="@coach.firstName @coach.lastName">
+                </div> -->
+
+                <br>
+
+                <!--p class="normal-title">Add Co-Host <a href="javascript://" class="text-success ml-3" ng-click="toggle()"  ><i class="material-icons fs-14 ">add_circle_outline</i></a></p>
+      
+                <div  id="myToggleDiv" style="display:none">
+                  <div class="form-group">
+                    <small class="fs-10">Name</small>
+                    <input type="text" ng- class="form-control" name="coHostName">
+                  </div>
+                   <div class="form-group">
+                    <small class="fs-10">Email</small>
+                    <input type="Email" class="form-control" name="coHostEmail">
+                  </div>
+      
+                  <div class="form-group">
+                    <a href="javascript://" class="btn btn-success btn-sm" ng-click="inviteHost();">Invite</a>
+                  </div>
+                </div>
+      
+                <div class="flex-center justify-content-between" style="display:none" id="hostEntry">
+                  <div class="divCircleWithTextUser">
+                    <div class="circle_new">
+                        Oj
+                    </div>
+                    <div class="text-left lh-1-5" id="myToggleDivInfo">
+                      <a href="javascript://" ng-click="editHostEntry();"><p class="fs-14 mb-0 "></p></a>
+                      <p class="fs-12 text-muted mb-0">Presenter</p>
+                      <a href="javascript://" class="link text-success fs-12">View Join Link</a>
+                    </div>
+                </div>
+                    <a href="javascript://" class="text-muted" ng-click="deleteCoHost();"><i class="material-icons">delete</i></a>
+                </div>-->
+
+              </div>
+
+              <div class="collapse" id="autoWebinar" data-parent="#webinarTypeAcc">
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-14 mb-0">Automated Webinar</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <p class="fs-12 text-muted">Please inset URL link of video</p>
+
+                    <div class="form-group">
+                      <!-- ng-model="webinarMst.webinarUrl" -->
+                      <input type="text" name="autoURL" id="autoURL" (change)="createVideo();"
+                        [(ngModel)]="webinarMst.webinarUrl" class="form-control"
+                        placeholder="http://youtube.com/jdhfas8dj" required #webinarURL="ngModel">
+                      <div *ngIf="webinarURL.invalid && (webinarURL.dirty || webinarURL.touched)"
+                        class="validationError">
+
+                        <div *ngIf="webinarURL.errors.required">
+                          *Webinar URL is required.
+                        </div>
+                      </div>
+                      <!-- AHMED add classes mt-1 fw-400 -->
+                      <p class="text-heading mt-1 fw-400 fs-12">Video time duration
+                        <a href="javascript://" class="text-success">
+                          <!-- AHMED icon size -->
+                          <i class="material-icons" style="font-size: 15px">error_outline</i>
+                        </a>
+                      </p>
+                      <!-- Ahmed add width -->
+                      <div class="form-row" style="width: 60%;">
+                        <div class="col">
+                          <!-- ng-model="webinarMst.webinarDurationHrs" -->
+                          <!-- {{webinarMst.webinarDurationHrs}} -->
+                          <input type="text" class="form-control" name="hour" id="webinarHour"
+                            [(ngModel)]="webinarMst.webinarDurationHrs">
+                          <span class="fs-10 text-muted uppr">Hour</span>
+                        </div>
+                        <div class="col-1">:</div>
+                        <div class="col">
+                          <!-- ng-model="webinarMst.webinarDurationMins" -->
+                          <input type="text" class="form-control" name="minute" id="webinarMin"
+                            [(ngModel)]="webinarMst.webinarDurationMins">
+                          <span class="fs-10 text-muted uppr">Minute</span>
+                        </div>
+                        <div class="col-1">:</div>
+                        <div class="col">
+                          <!-- ng-model="webinarMst.webinarDurationSecs" -->
+                          <input type="text" class="form-control" name="second" id="webinarSecs"
+                            [(ngModel)]="webinarMst.webinarDurationSecs">
+                          <span class="fs-10 text-muted uppr">Second</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Event frequency</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <!-- ng-model="webinarMst.webinarAutoDtl[0].eventFrequency"  -->
+                      <select class="custom-select" (change)="showhideDaysDiv();" name="eventFreq"
+                        [(ngModel)]="webinarMst.webinarAutoDtl.eventFrequency" required
+                        #webinarEventFrequency="ngModel">
+                        <option value="">---SELECT---</option>
+                        <option value="Week">Every Week</option>
+                        <option value="Day">Every Day</option>
+                        <option value="Month">Every Month</option>
+                      </select>
+                    </div>
+                    <div
+                      *ngIf="webinarEventFrequency.invalid && (webinarEventFrequency.dirty || webinarEventFrequency.touched)"
+                      class="validationError">
+
+                      <div *ngIf="webinarEventFrequency.errors.required">
+                        *Webinar Event Frequency is required.
+                      </div>
+                    </div>
+
+                    <div class="mb-3" id="showWeekDays" *ngIf="webinarMst.webinarAutoDtl.eventFrequency == 'Week'">
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].sunEve" -->
+                        <input type="checkbox" id="Su" class="custom-control-input" name="Su"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.sunEve" required #sundayEve="ngModel">
+                        <label class="custom-control-label" for="Su">Su</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].monEve"  -->
+                        <input type="checkbox" id="Mo" name="Mo" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.monEve" required #mondayEve="ngModel">
+                        <label class="custom-control-label" for="Mo">Mo</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].tueEve" -->
+                        <input type="checkbox" id="Tu" name="Tu" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.tueEve" required #tuesdayEve="ngModel">
+                        <label class="custom-control-label" for="Tu">Tu</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].wedEve"  -->
+                        <input type="checkbox" id="We" name="We" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.wedEve" required #weddayEve="ngModel">
+                        <label class="custom-control-label" for="We">We</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].thurEve"  -->
+                        <input type="checkbox" id="Th" name="Th" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.thuEve" required #thursdayEve="ngModel">
+                        <label class="custom-control-label" for="Th">Th</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].friEve"  -->
+                        <input type="checkbox" id="Fr" name="Fr" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.friEve" required #fridayEve="ngModel">
+                        <label class="custom-control-label" for="Fr">Fr</label>
+                      </div>
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].satEve"  -->
+                        <input type="checkbox" id="Sa" name="Sa" class="custom-control-input"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.satEve" required #satdayEve="ngModel">
+                        <label class="custom-control-label" for="Sa">Sa</label>
+                      </div>
+                      <div
+                        *ngIf="sundayEve.invalid && mondayEve.invalid && tuesdayEve.invalid && weddayEve.invalid && thursdayEve.invalid && fridayEve.invalid && satdayEve.invalid"
+                        class="validationError">
+
+                        <div>
+                          *Please check days for webinar event frequency
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Event start date</p>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group ">
+                      <div class="input-addon right">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].eventStartDate" -->
+                        <!-- {{webinarMst.webinarAutoDtl[0].eventStartDate | date:'dd-mm-yyyy'}} -->
+                        <input id="datepicker" type="text" class="form-control cst-control"
+                          name="eventStartDate" [(ngModel)]="webinarMst.webinarAutoDtl.eventStartDate" required
+                          #eventStartDateAuto="ngModel" />
+                        <span class="addon-item">
+                          <i class="material-icons" style="color: #707070">
+                            date_range
+                          </i>
+                        </span>
+                      </div>
+                      <small class="form-text text-muted">Note : Before this date, registration will not be
+                        available</small>
+
+                      <div
+                        *ngIf="eventStartDateAuto.invalid && (eventStartDateAuto.dirty || eventStartDateAuto.touched)"
+                        class="validationError">
+
+                        <div *ngIf="eventStartDateAuto.errors.required">
+                          *Event Starts Date is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Start times</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <!--<div class="form-row align-items-center mb-3" ng-repeat="webinarAutoTime in webinarMst.webinarAutoDtl[0].webinarAutoDtlTimeList">
+                  <div class="col">
+                    <input type="text" class="form-control" value="02:00 PM">
+                    <input type="time" class="form-control" name="eventTime" ng-model="webinarAutoTime.eventTime"  format="hh:mm" value="{{webinarAutoTime.eventTime | date:'HH:mm'}}" id="eventTimeInput">
+                    <span class="addon-item"><a href="#"  ng-click="openCalendar();"><i class="material-icons">schedule</i></a></span>
+                  </div>
+                  <div class="col-2">
+                    <a href="javascript://" class="text-success">
+                      <i class="material-icons">add_circle_outline</i>
+                    </a>
+                  </div>
+                </div>-->
+
+
+                    <div class="form-row align-items-center mb-3"
+                      *ngFor="let webinarAutoTime of webinarMst.webinarAutoDtl.webinarAutoDtlTimeList; let i = index">
+                      <div class="col">
+                        <!-- ng-model="webinarAutoTime.eventTime" -->
+                        <!-- {{webinarAutoTime.eventTime | date:'HH:mm'}} -->
+                        <input type="time" class="form-control" name="eventTime{{i}}" format="HH:mm" value=""
+                          id="eventTimeInput{{i}}" [(ngModel)]="webinarAutoTime.eventTime" (ngModelChange)="checkInterval()" required
+                          #eventStartTimeAuto="ngModel">
+                      </div>
+                      <div class="col-2">
+
+                        <a href="javascript://" class="text-danger" *ngIf="i > 0">
+                          <i class="material-icons"
+                            (click)="deleteWebinarEventTime(webinarAutoTime,i);">remove_circle_outline</i>
+                        </a>
+                      </div>
+                      <div
+                        *ngIf="eventStartTimeAuto.invalid && (eventStartTimeAuto.dirty || eventStartTimeAuto.touched)"
+                        class="validationError">
+
+                        <div *ngIf="eventStartTimeAuto.errors.required">
+                          *Event Starts Time is required. Please delete extra time entries.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="validationError">
+                      {{this.startTimesErrMsg}}
+                    </div>
+
+                    <button type="button" class="text-success" id="add-more-icon" style="border: none; background: inherit; color: #28a745" (click)="addNewEventTime();">
+                      <i class="material-icons">add_circle_outline</i>
+                      <span class="fs-12" style="color:#707070">Add more times</span>
+                    </button>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Number of schedules to display</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <!-- ng-model="webinarMst.webinarAutoDtl[0].numberOfSchedulesToDisplay" -->
+                      <select class="custom-select" name="noOfSched"
+                        [(ngModel)]="webinarMst.webinarAutoDtl.numberOfSchedulesToDisplay" required
+                        #noOfSched="ngModel">
+                        <option value="" selected>---SELECT---</option>
+                        <option *ngFor="let n of autoEventTimeList" [value]="n.value">{{n.text}}</option>
+
+                      </select>
+                    </div>
+                    <div *ngIf="noOfSched.invalid && (noOfSched.dirty || noOfSched.touched)" class="validationError">
+
+                      <div *ngIf="noOfSched.errors.required">
+                        *No of Scheduled to display is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Enable in time registration</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="onoff mb-2">
+                      <span class="text ml-0">No</span>
+                      <label class="switch">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].enableIntimeReg" -->
+                        <input type="checkbox" checked name="enableRegNmAuto"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.enableIntimeReg">
+                        <span class="slider round"></span>
+                      </label>
+                      <span class="text">Yes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">In time registration interval</p>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <!-- ng-model="webinarMst.webinarAutoDtl[0].intimeRegInterval" -->
+                      <select class="custom-select" name="regInterval"
+                        [disabled]="!webinarMst.webinarAutoDtl.enableIntimeReg"
+                        [(ngModel)]="webinarMst.webinarAutoDtl.intimeRegInterval">
+                        <option value="Select">---SELECT---</option>
+                        <option value="15">15 Minutes</option>
+                        <option value="30">30 Minutes</option>
+                        <option value="60">1 Hours</option>
+                        <!-- Removed this loop because these values will be static so no need of this loop -->
+                        <!-- <option *ngFor="let n of intervalList" [ngValue]="n.value">{{n.text}}</option> -->
+                      </select>
+
+
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12">Enable replay</p>
+                  </div>
+                  <div class="onoff mb-2">
+                    <span class="text ml-0">No</span>
+                    <label class="switch">
+                      <input type="checkbox" checked name="enableReplayNmAuto"
+                        [(ngModel)]="webinarMst.webinarAutoDtl.enableReplay">
+                      <span class="slider round"></span>
+                    </label>
+                    <span class="text">Yes</span>
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="webinar-type-wrapper row">
+                  <div class="col-sm-4">
+                    <p class="text-heading fs-12 mb-0">Replay expiration settings</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="fs-12 text-muted">Number of days before replay expires</p>
+                    <div class="form-group">
+                      <div class="form-inline">
+                        <!-- ng-model="webinarMst.webinarAutoDtl[0].replayExpDays"  -->
+                        <input type="text" class="form-control col-3 mr-2" id="replayExpDay"
+                          [disabled]="!webinarMst.webinarAutoDtl.enableReplay" name="replayExpDay"
+                          [(ngModel)]="webinarMst.webinarAutoDtl.replayExpDays">
+                        <!-- AHmed add   text-lowercase-->
+                        <label class="label-text text-lowercase">days</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <!--- webinarTypeAcc Close ----->
+
+            <br>
+
+            <div class="clearfix"></div>
+
+          </div><!-- col-xl-4 start-->
+          <!-- page content close-->
+
+          <!-- col-xl-8 start-->
+          <!-- AHMED remove live preview for webinar type -->
+          <div class="col-xl-8" style="display: none;">
+            <div class="livePreviewbox">
+              <!-- livePreviewbox start-->
+              <a href="javascript://" class="btn-block btn btn-dark-blue mt-0 btn-livepreview"><i
+                  class="material-icons fs-14 mr-2">remove_red_eye</i> Live preview</a>
+              <div class="live-box">
+                <!-- live-box start --->
+                <div class="liveHtmlFullPage">
+                  <!-- liveHtmlFullPage start --->
+                  <div class="section-padding white-bx-shadow">
+                    <div class="container">
+                      <div class="live-box-header mb-3">
+                        <div class="px-6 py-2">
+                          <div class="live-box-avtar">
+                            <div class="avtar mr-2">
+                              <img src="/assets/images/sample_img.jpg" class="img-fluid">
+                            </div>
+                            <div class="content">
+                              <!-- {{webinarMst.webinarTitle}} -->
+                              <p class="normal-title mb-0"></p>
+                              <p class="label-text mb-0">By @coach.firstName @coach.lastName</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row" style="height: 700px;">
+                        <div class="col-md-8">
+                          <div id="player"> </div>
+                          <div class="youtubeVideo">
+                            <!-- <iframe class="youtube-player" type="text/html" width="640" height="385" ng-src="{{trustSrc(webinarMst.webinarUrl)}}" id="webinarVideoIframe" allowfullscreen frameborder="0">
+                </iframe> -->
+
+
+                          </div>
+
+
+
+
+
+                        </div>
+                        <div class="col-md-4">
+                          <div class="messageArea webinarChat">
+                            <div class="p-3 border-y flex-center justify-content-between">
+                              <span class="fs-14 bold">Webinar Chat</span>
+                              <span class="fs-14 bold">20 Attendees</span>
+                            </div>
+
+                            <div class="msgViewBody">
+                              <div class="msgStrip you">
+                                <div class="avatar35 mr-2">
+                                  <img src="/assets/images/avatar-2.jpg" class="img-fluid">
+                                </div>
+                                <div class="msgContent text-small lh-1-5">
+                                  <div class="uppr name">Brian Tei</div>
+                                  <p class="typetextMsg">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div class="msgStrip you">
+                                <div class="avatar35 mr-2">
+                                  <img src="/assets/images/avatar-2.jpg" class="img-fluid">
+                                </div>
+                                <div class="msgContent text-small lh-1-5">
+                                  <div class="uppr name">Susan Carolyn</div>
+                                  <p class="typetextMsg">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div class="msgStrip you">
+                                <div class="avatar35 mr-2">
+                                  <img src="/assets/images/avatar-2.jpg" class="img-fluid">
+                                </div>
+                                <div class="msgContent text-small lh-1-5">
+                                  <div class="uppr name">Brian Tei</div>
+                                  <p class="typetextMsg">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                                  </p>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <hr>
+
+                            <div class="p-3">
+                              <div class="d-flex">
+                                <div class="avatar35 mr-2">
+                                  <img src="/assets/images/avatar-2.jpg" class="img-fluid">
+                                </div>
+                                <div class="fs-10 fw-600">Tarek Younes</div>
+                              </div>
+                              <br>
+                              <div class="w-100 mb-3">
+                                <textarea class="form-control" cols="3" placeholder="Write your message..."></textarea>
+                              </div>
+                              <a href="javascript://" class="btn btn-success float-right mb-0">Send</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- liveHtmlFullPage close --->
+              </div><!-- live-box close --->
+            </div>
+          </div>
+          <!-- col-xl-8 close-->
+        </div> <!-- row close-->
+      </div>
+    </div>
+  </form>
+  <div class="save-actions">
+    <a href="javascript" data-toggle="collapse" class="webinar_previous btn btn-sm btn-outline-success" (click)="goBack();">Back</a>
+    <a href="javascript" data-toggle="collapse" class="btn btn-sm btn-success" (click)="saveWebinarType();">Save &
+      Next</a>
+  </div>
+</section>

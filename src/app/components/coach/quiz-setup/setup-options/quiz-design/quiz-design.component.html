@@ -1,0 +1,273 @@
+<section id="configure" class="content">
+
+  <nav class="navbar navbar-expand navbar-light bg-white topbar static-top" style="border-bottom: 2px solid #f7f7f7">
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="col-md-6">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h5 class="heading-welcome">Quiz Design</h5>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="row no-gutters">
+    <!-- col-md-5 -->
+    <div class="col-xl-4 col-lg-5 configureSetupForm" style="background-color: #FDF9FD;">
+      <div class="tab">
+        <button class="tablinks active" (click)="openTab($event,'welcomePage');">Welcome Page</button>
+        <button class="tablinks" (click)="openTab($event,'quiz');">Quiz</button>
+        <button class="tablinks" (click)="openTab($event,'leadCapture');">Lead Capture</button>
+        <button class="tablinks" (click)="openTab($event,'outcomePage');">Outcome Page</button>
+      </div>
+      <div class="tabcontent">
+        <table>
+          <tbody>
+            <tr *ngFor="let area of tabData; let i = index">
+              <td> <span *ngIf="i == 0" style="font-weight: bold;">Color Scheme </span></td>
+              <td> <span id="fontColorLight" class="dot" [style.background]="area.defaultColor" 
+                [(colorPicker)]="area.defaultColor" (colorPickerOpen)="onEventLog('colorPickerOpen', area)" 
+                (colorPickerClose)="onEventLog('colorPickerClose', area)" 
+                (cpInputChange)="onEventLog('cpInputChange', area)" 
+                (cpSliderDragStart)="onEventLog('cpSliderDragStart', area)" 
+                (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', area)"></span></td>
+              <td>
+                {{area.areaName}}
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <hr />
+        <table>
+          <tbody>
+            <tr>
+              <td style="font-weight: bold;">Typograph</td>
+              <td colspan="2">
+                <select [(ngModel)]="quizConfiguration.fontName" (ngModelChange)="updateQuizFont()">
+                  <option *ngFor="let font of fontList" value={{font}}>{{font}}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td> <span id="fontColorLight" class="dot" [style.background]="lightFontColor" 
+                [(colorPicker)]="lightFontColor" (colorPickerOpen)="onEventLog('light', $event)" 
+                (colorPickerClose)="onEventLog('light', $event)" 
+                (cpInputChange)="onEventLog('light', $event)" 
+                (cpSliderDragStart)="onEventLog('light', $event)" 
+                (cpSliderDragEnd)="onEventLog('light', $event)"></span></td>
+              <td>
+                Font Light
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td> <span id="fontColorDark" class="dot" [style.background]="darkFontColor" 
+                [(colorPicker)]="darkFontColor" (colorPickerOpen)="onEventLog('dark', $event)" 
+                (colorPickerClose)="onEventLog('dark', $event)" 
+                (cpInputChange)="onEventLog('dark', $event)" 
+                (cpSliderDragStart)="onEventLog('dark', $event)" 
+                (cpSliderDragEnd)="onEventLog('dark', $event)"></span></td>
+              <td>
+                Font Dark
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="live-preview__offer--btn" (click)="saveColors();">Save</button>
+        &nbsp;&nbsp;<button class="live-preview__offer--btn" (click)="resetColors();">Reset Color</button>
+      </div>
+    </div>
+
+    <!-- col-md-7  -->
+    <div class="col-xl-8 col-lg-7 QuizfontStyle">
+      <div id="welcomePage" class="tabPreviewContent" style="display: none">
+        <div class="card Brand mb-4 ">
+          <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+          <hr class="hr-class">
+          <div class="card-body welcomePageBackground" >
+            <span class="welcomePageClass" style="color: #363636;">Share Quiz</span><br>
+            <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/" target="_blank">
+              <img src="assets/QuizAssets/ic_fb.png" class="fb-image" alt="Cinque Terre">
+            </a><br>
+            <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/" target="_blank">
+              <img src="assets/QuizAssets/ic_twitter.png" class="fb-image" alt="Cinque Terre">
+            </a>
+            <div class="text-center">
+              <div>
+                <img src="assets/images/undraw_posting_photo.svg" class="img-fluid img-thumbnail center-image"
+                  alt="Cinque Terre" id="quizImagePreview">
+              </div>
+
+              <h5 class="live-preview__quiz--heading heading-quiz welcomePageClass" id="quiz-title-preview">Quiz Template Number One</h5>
+              <p class="welcomePageClass" id="quiz-decs-preview">enter description</p>
+              <button type="submit" class="live-preview__offer--btn" id="quiz-callToAction-preview">See More</button>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div id="quiz" class="tabPreviewContent" style="display: none">
+        <div class="live-preview" style="padding: 84px;">
+          <header class="live-preview__headers">
+            <div class="quizHeaderLogo">
+              <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+            </div>
+            <div class="questionTitle" style="background-color:#f6f6f6; padding: 10px 25px">
+              <h4>Quiz Title Number One</h4>
+            </div>
+          </header>
+
+          <div class="live-preview__quiz quizDesign" style="width: 100%; max-width: none;">
+
+            <header style="font-size: 12px;font-weight: 400;text-align: left;">
+              <span>Question 1 of
+                1</span>
+
+              <div class="progress-bar">
+                <div class="completed" id="previewBar"></div>
+              </div>
+            </header>
+
+            <h5 class="live-preview__quiz--heading" id="questionDescPreview"></h5>
+
+            <div class="live-preview__quiz--answers" id="textAnswerPreview">
+              <!-- Pass a class "isSelected" to the selected label -->
+              <table>
+                <tbody>
+                  <tr class="previewAnswerTable">
+                    <td><span class="icon cf-correct"></span></td>
+                    <td><span class="textareaS" id="textAnswer0"></span> To learn something new</td>
+                  </tr>
+                  <tr class="previewAnswerTableSpace"></tr>
+                  <tr class="previewAnswerTable">
+                    <td><span class="icon cf-correct"></span></td>
+                    <td><span id="textAnswer1"></span> To learn something new</td>
+                  </tr>
+                  <tr class="previewAnswerTableSpace"></tr>
+                  <tr class="previewAnswerTable">
+                    <td><span class="icon cf-correct"></span></td>
+                    <td><span id="textAnswer2"></span> To learn something new</td>
+                  </tr>
+                  <tr class="previewAnswerTableSpace"></tr>
+
+
+                </tbody>
+              </table>
+            </div>
+            <footer class="footer">Powered by Coachforce</footer>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="leadCapture" class="tabPreviewContent" style="display: none">
+        <div class="live-preview">
+
+          <header class="live-preview__headers">
+            <div class="quizHeaderLogo">
+              <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+            </div>
+            <div class="questionTitle" style="background-color: #e1e1e100 !important; padding: 10px 25px">
+              <h4>Quiz Title Number One</h4>
+            </div>
+          </header>
+
+          <div class="login" style="padding-bottom: 40px; background-color: white">
+
+            <div class="login__body">
+              <h5 class="leadColor">Sign up For FREE to see your results</h5>
+              <p class="leadColor">Please setup your Client sessions and Prospect meeting at left navigation for
+                start
+                using this
+                calender.</p>
+
+              <div class="login__body--register">
+                <button class="register-fb">
+                  <span class="icon cf-facebook"></span>
+                  Continue with Facebook
+                </button>
+
+                <button class="register-gl">
+                  <span class="icon cf-google">
+                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span
+                      class="path4"></span>
+                  </span>
+                  Continue with Google
+                </button>
+                <!--<div class="g-signin2" data-width="315" data-onsuccess="onSignIn" data-text="text" id="googleDiv"></div>-->
+                <span class="or">OR</span>
+
+                <fieldset class="email-input">
+                  <label for="email">Email address</label>
+                  <input type="email" name="email" id="email">
+                </fieldset>
+
+                <button type="submit" class="signup" id="leadActionBtnPreview">Sign up to see your result</button>
+              </div>
+              <small style="float: left;">Privacy Policy</small>
+              <small style="float: right;">Powered by <strong>Coachforce</strong></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="outcomePage" class="tabPreviewContent" style="display: none">
+
+        <div class="live-preview fontStyle">
+
+          <header class="live-preview__headers">
+            <div class="quizHeaderLogo">
+              <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+            </div>
+           
+            <div  class="questionTitle" style="background-color: #e1e1e100 !important; padding: 10px 25px">
+              <h4>Quiz Title Number One</h4>
+            </div>
+          </header>
+
+          <div class="live-preview__quiz styleOutcome">
+
+            <div class="live-preview__quiz--share OutcomeDesign">
+              Share Quiz
+              <br />
+              <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/1" target="_blank"><span
+                  class="icon cf-share-fb"><span class="path1"></span><span class="path2"></span></span></a>
+              <br />
+              <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/1" target="_blank"><span
+                  class="icon cf-share-tw"><span class="path1"></span><span class="path2"></span></span></a>
+            </div>
+
+            <div class="live-preview__quiz--img">
+
+              <div>
+                <img style="max-width: 100%;" class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg" alt="quiz-thumbnail"
+                  id="quizImagePreview">
+              </div>
+            </div>
+
+            <h5 class="live-preview__quiz--heading OutcomeDesign" id="outcome-title-preview">Outcome Number 1
+            </h5>
+
+            <p class="live-preview__quiz--desc OutcomeDesign" id="outcome-desc-preview">Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Vero,
+              sequi itaque aliquam, deleniti similique ipsum facere esse rerum dolorem</p>
+
+          </div>
+
+          <div class="live-preview__offer">
+            <h5 class="outcomeOfferDesign">Dummy Offer Healine</h5>
+            <p class="outcomeOfferDesign">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+              excepturi iusto odio enim
+              consectetur minima.</p>
+
+            <button class="live-preview__offer--btn" id="outcomeOfferButtonPreview">Get Offer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-message-popup *ngIf="showPopUpMessage" [popUpMessage]="message">
+  </app-message-popup>
+</section>

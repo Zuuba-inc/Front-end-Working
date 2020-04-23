@@ -1,0 +1,245 @@
+#questions {
+  @extend #outcomes;
+
+  span {
+    display: inline-block;
+  }
+
+  .q-num {
+    @include text(12px, 600, left);
+    color: $text-dark;
+    opacity: 0.5;
+  }
+
+  .asked-q {
+    @include text(13px, 600, left);
+    color: $text-dark;
+  }
+      
+  .actions {
+    margin-top: -14px;
+    float: right;
+    .icon {
+      background-color: #fff;
+      text-align: center;
+      padding: 6px;
+      margin-right: 5px;
+      border-radius: 2px;
+      &:hover {
+        background-color: $action !important;
+        &:before { color: #fff !important; }
+      }
+      &.zu-trash { 
+        padding: 0;
+        &:before { color: #fff; }
+        &:hover {
+          background-color: transparent !important;
+          &:before {
+            color: $action !important;
+          }
+        }
+      }
+      &:before {
+        color: $text-light;
+        font-size: 16px;
+      }
+    }
+    
+    .zu-trash {
+      float: none;
+      background-color: transparent !important;
+      width: auto;
+      margin: 0;
+    }
+  }
+
+  .setting {
+
+    .new-question {
+      
+      @include component_add-element;
+
+      textarea { height: 60px; }
+
+      .setting {
+
+        &__answer--new {
+          color: $text-neu;
+          padding: 0;
+          border: none;
+          display: inline-block;
+          color: $text-neu;
+          .zu-plus {
+            border: 2px solid #fff;
+            border-radius: 50%;
+          }
+        }
+
+        &__save {
+          float: right;
+        }
+      }
+    }
+
+    &__created-questions {
+
+      &.question-group {
+        border-top: $border;
+        padding-top: 10px;
+      }
+
+      &--question {
+        background-color: $boxes;
+        border-radius: 2px;
+        padding: 13px 15px;
+        margin-bottom: 10px;
+        position: relative;
+        cursor: pointer;    
+        line-height: 18px;
+
+        &.build-btn {
+          color: $action;
+          font-size: 14px;
+          text-align: center;
+          text-decoration: underline;
+          position: relative;
+          padding: 23px 15px;
+          span {
+            color: $text-light;
+            font-size: 12px;
+            position: absolute;
+            left: 15px;
+            top: 10px;
+          }
+        }
+
+        .zu-trash::before {
+          color: $text-light !important;
+        }
+      }
+    }
+
+    &__answer {
+
+      &--select {
+        @include input-box;
+        width: 100%;
+        margin-bottom: 20px;
+        color: $text-dark;
+
+        option {
+          background-color: #fff;
+        }
+      }
+
+      &--preview {
+        .created-answer {
+          background-color: $boxes;
+          padding: 10px;
+        }
+
+        #answer {
+          @include input-box;
+          width: 90%;
+        }
+
+        .zu-trash {
+          float: right;
+          margin-top: 15px;
+          cursor: pointer;
+
+          &:hover {
+            background-position: -10px -299px;
+          }
+        }
+      }
+
+      &--new {
+        margin-top: 20px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-top: $border;
+        border-bottom: $border;
+        padding: 15px 0;
+        @extend .setting__created-outcomes--new;
+      }
+    }
+
+    &__image {
+      padding: 0;
+      margin: 0;
+      border-bottom: none;
+      &--upload {
+        border: none;
+        margin-top: 0;
+      }
+      .zu-image {
+        display: block;
+      }
+    }
+
+    &__save {
+      font-weight: 400;
+      float: right;
+    }
+  }
+
+  .live-preview {
+
+    &__header {
+      width: calc(100% - 150px - 40%);
+    }
+    &__quiz {
+      margin-top: 10vh;
+      margin-bottom: 30px;
+      box-shadow: $shadow;
+      width: 85%;
+      max-width: 550px;
+      @include component_live-preview-question;
+
+      &--answers {
+        &.images {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          label {
+            background-color: transparent;
+            padding: 0;
+            flex-basis: 32%;
+            @include media-breakpoint-down(lg) {
+              flex-basis: 48%;
+            }
+            @include media-breakpoint-down(sm) {
+              flex-basis: 100%;
+            }
+          }
+          figure {
+            margin: 0;
+
+            img {
+              width: 100%;
+              border-radius: 2px;
+              border: 2px solid #fff;
+            }
+
+            figcaption {
+              text-transform: capitalize;
+              @include text(12px, 600, center);
+              color: $text-dark;
+              margin-top: 10px;
+            }
+          }
+
+          input:checked ~ figure {
+            figcaption {
+              color: $action;
+            }
+            img {
+              border-color: $action;
+            }
+          }
+        }
+      }
+    }
+  }
+}

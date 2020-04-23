@@ -1,0 +1,680 @@
+@mixin transition($time: 0.4s) {
+  -webkit-transition: all $time cubic-bezier(0.4, 0, 1, 1);
+  -moz-transition: all $time cubic-bezier(0.4, 0, 1, 1);
+  -o-transition: all $time cubic-bezier(0.4, 0, 1, 1);
+  transition: all $time cubic-bezier(0.4, 0, 1, 1);
+}
+
+@mixin reset-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin btn {
+  background-color: $action;
+  color: #fff;
+  @include text(12px, 700, center);
+  border: none;
+  width: 180px;
+  height: 40px;
+  border-radius: 4px;
+  @include transition;
+
+  &:hover {
+    box-shadow: $shadow;
+  }
+
+  &:focus {
+    outline-color: $action;
+  }
+}
+
+@mixin mid-btn {
+  @include btn;
+  width: 130px;
+  height: 30px;
+}
+
+@mixin sm-btn {
+  @include mid-btn;
+  width: 70px;
+}
+@mixin btn-rev {
+  background: transparent;
+  width: 70px;
+  border: 0;
+  float: left;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 14px;
+  margin-left: 20px;
+  color: $action;
+  border: 1px solid $action;
+  border-radius: 5px;
+  text-transform: capitalize;
+  @include transition;
+
+  &:hover {
+    box-shadow: $shadow;
+  }
+}
+@mixin secondary-btn {
+  background-color: transparent;
+  color: $action;
+  @include text(12px, 700, center);
+  min-width: 70px;
+  min-height: 30px;
+  border: 1px solid $action;
+  border-radius: 4px;
+  @include transition;
+
+  &:hover {
+    box-shadow: $shadow;
+  }
+
+  &:focus {
+    outline-color: $action;
+  }
+}
+
+@mixin abs-cnr {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+@mixin text($size, $weight, $align) {
+  font-size: $size;
+  font-weight: $weight;
+  text-align: $align;
+}
+
+@mixin search-field {
+  box-sizing: border-box;
+  background-color: $bg2;
+  border: $border;
+  border-radius: 2px;
+  @include transition;
+
+  &:focus {
+    outline: none;
+    border-color: $action;
+    color: $action;
+    font-weight: 600;
+  }
+}
+
+@mixin input-box {
+  padding: 6px 10px;
+  @include text(14px, 400, left);
+  line-height: 30px;
+  border: $border;
+  border-radius: 2px;
+  @include transition;
+
+  &:focus {
+    outline-color: $action;
+  }
+}
+
+@mixin component_inner-header {
+  height: 50px;
+  background-color: #fff;
+  border-bottom: $border;
+  z-index: 65;
+  position: relative;
+
+  h2 {
+    @include text(16px, 700, left);
+    text-transform: uppercase;
+    line-height: 50px;
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  .preview-btn {
+    float: right;
+    margin-top: 12px;
+    margin-right: 20px;
+    @include btn;
+    width: 70px;
+    height: 25px;
+  }
+}
+
+@mixin component_live-preview-headers {
+  &--name {
+    padding: 15px 25px;
+    h4 {
+      text-align: left !important;
+    }
+  }
+
+  &--name,
+  &--title {
+    background-color: #fff;
+    width: 100%;
+
+    h4 {
+      @include text(16px, 700, center);
+      margin: 0;
+      text-transform: uppercase;
+      color: $text-dark;
+    }
+  }
+
+  &--title {
+    background-color: #e1e1e1;
+    padding: 10px 25px;
+
+    h4 {
+      text-transform: capitalize;
+    }
+  }
+}
+
+@mixin component_live-preview-outcome {
+  margin: 0 auto;
+  padding: 30px 40px;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
+  position: relative;
+
+  &--share {
+    position: absolute;
+    left: 15px;
+    top: 30px;
+    @include text(12px, 600, left);
+    color: $text-dark;
+
+    span {
+      margin: 5px 0;
+    }
+  }
+
+  &--img {
+    margin: 0 auto;
+    max-width: 50%;
+    height: 40%;
+    box-shadow: none;
+    border-radius: 0;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &--heading {
+    text-transform: uppercase;
+    @include text(16px, 700, center);
+    color: $text-dark;
+    margin: 15px 0;
+  }
+
+  &--desc {
+    max-width: 500px;
+    margin: 0 auto;
+    @include text(15px, 400, center);
+    color: $text-light;
+    line-height: 25px;
+  }
+}
+
+@mixin component_live-preview-offer {
+  background: linear-gradient(85deg, #4BAAD5, #2EB28D);
+  padding: 30px 0;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+
+  h5 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  p {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    @include text(15px, 400, center);
+    line-height: 25px;
+  }
+
+  &--btn {
+    @include btn;
+    width: 100px;
+    height: 30px;
+    background-color: #841AFF;
+  }
+}
+
+
+@mixin component_live-preview-question {
+  padding: 30px 40px;
+  color: $primary-dark;
+  border-radius: 5px;
+
+  header {
+    @include text(12px, 400, left);
+
+    .progress-bar {
+      background-color: $boxes;
+      width: 100%;
+      height: 12px;
+      border-radius: 2px;
+      margin-top: 10px;
+      position: relative;
+
+      .completed {
+        @extend .progress-bar;
+        background-color: $action;
+        width: 25%;
+        z-index: 55;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin-top: 0;
+      }
+    }
+  }
+
+  &--heading {
+    @include text(15px, 700, left);
+    margin: 30px 0 20px;
+    text-transform: none;
+  }
+
+  &--answers {
+    @include text(14px, 400, left);
+    position: relative;
+
+    label {
+      color: $text-dark;
+      padding: 6px 10px;
+      margin-bottom: 5px;
+      background-color: $boxes;
+      border-radius: 2px;
+      width: 100%;
+      position: relative;
+      cursor: pointer;
+      @include transition;
+
+      &:hover {
+        background-color: #E9F5F2
+      }
+
+      &.isSelected {
+        background-color: #E9F5F2;
+      }
+
+      .zu-correct {
+        float: left;
+
+        &:before {
+          font-size: 22px;
+          margin-left: 5px;
+          color: #e1e1e1;
+        }
+      }
+
+      input {
+        visibility: hidden;
+
+        &:checked~.zu-correct::before {
+          color: $action !important;
+        }
+      }
+    }
+
+  }
+
+  footer {
+    margin-top: 25px;
+    @include text(10px, 400, center);
+  }
+}
+
+@mixin component_login {
+
+  &__body {
+    color: $text-dark;
+    margin: 0 auto;
+    margin-top: 30px;
+
+    h5 {
+      @include text(20px, 600, center);
+    }
+
+    p {
+      @include text(15px, 400, center);
+      margin-top: 20px;
+      color: $text-neu;
+    }
+
+    &--register {
+      box-shadow: 0 6px 20px rgba($color: #000000, $alpha: 0.16);
+      margin: 20px 0;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 5px;
+
+      button {
+        display: block;
+        width: 100% !important;
+        @include btn;
+        box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.16);
+
+        .icon {
+          float: left;
+          margin-left: 10px;
+        }
+
+        &.register-fb {
+          background-color: #5071BA;
+          color: #fff;
+          margin-bottom: 20px;
+        }
+
+        &.register-gl {
+          background-color: #fff;
+          color: $text-dark;
+          border: 1px solid $text-dark;
+        }
+      }
+
+      .or {
+        @include text(12px, 600, center);
+        color: $text-neu;
+        background-color: #fff;
+        position: relative;
+        display: block;
+        margin: 20px auto 0;
+        width: 50px;
+      }
+
+
+      fieldset {
+        border: none;
+        padding: 0;
+
+        &.email-input {
+          border-top: $border;
+          padding-top: 20px;
+          margin-top: -8px;
+        }
+
+        label {
+          @include text(12px, 600, left);
+          color: $text-neu;
+          display: block;
+        }
+
+        input {
+          @include input-box;
+          height: 30px;
+          width: 100%;
+        }
+      }
+
+      .signup {
+        margin: 20px auto 0;
+        width: 80% !important;
+      }
+    }
+
+    small {
+      font-size: 12px;
+    }
+  }
+}
+
+@mixin component_add-element {
+  border: 1px solid $bg4;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  margin-top: 15px;
+  padding: 10px;
+  line-height: 18px;
+  overflow: hidden;
+
+  .chars-count {
+    float: right;
+    @include text(12px, 400, right);
+    color: $text-light;
+  }
+
+  .q-num {
+    @include text(12px, 600, left);
+    color: $text-dark;
+    opacity: 0.5;
+  }
+
+  .asked-q {
+    @include text(13px, 600, left);
+    color: $text-dark;
+  }
+
+  .actions {
+    margin-top: -14px;
+    float: right;
+
+    .icon {
+      background-color: #fff;
+      text-align: center;
+      padding: 6px;
+      margin-right: 5px;
+      border-radius: 2px;
+
+      &:hover,
+      &.active {
+        background-color: $action !important;
+
+        &:before {
+          color: #fff !important;
+        }
+      }
+
+      &.zu-trash {
+        padding: 0;
+
+        &:before {
+          color: #fff;
+        }
+
+        &:hover {
+          background-color: transparent !important;
+
+          &:before {
+            color: $action !important;
+          }
+        }
+      }
+
+      &:before {
+        color: $text-light;
+        font-size: 16px;
+      }
+    }
+
+    .zu-trash {
+      float: none;
+      background-color: transparent !important;
+      width: auto;
+      margin: 0;
+    }
+  }
+
+  .question-header {
+    margin: -10px;
+    margin-bottom: 10px;
+    background-color: $bg4;
+    padding: 10px 15px 13px;
+
+    span {
+      color: #fff;
+    }
+
+    .icon {
+      background-color: $bg1;
+      cursor: pointer;
+
+      &:before {
+        color: $bg4;
+      }
+
+      &.zu-trash::before {
+        color: #fff;
+      }
+    }
+  }
+}
+
+@mixin component_mapping-branching {
+  color: $text-dark;
+  padding: 30px;
+
+  &--heading {
+    @include text(14px, 600, left);
+
+    span {
+      border-right: 1px solid $text-dark;
+      padding-right: 5px;
+    }
+  }
+
+  h6 {
+    @include text(14px, 600, left);
+  }
+
+  .row {
+    margin-top: 30px !important;
+  }
+
+  .answer-mark {
+    position: absolute;
+    left: -20px;
+    color: #fff;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+  }
+
+  .icon {
+    min-width: 20px;
+    min-height: 20px;
+    border: 1px solid $text-neu;
+    border-radius: 50%;
+    padding: 3px;
+  }
+
+  &--answers {
+    margin: 20px 0;
+    z-index: 555;
+    position: relative;
+
+    .answer {
+      padding: 25px 0;
+      border-bottom: $border;
+      @include text(12px, 600, left);
+      position: relative;
+      margin-left: 15px;
+
+      &.connected {
+        .icon::before {
+          content: "\e904";
+          cursor: pointer;
+        }
+      }
+
+      .icon {
+        float: right;
+        background-color: #f7f7f7;
+        z-index: 555;
+
+        &:before {
+          color: $text-neu !important;
+          content: "\e914";
+          font-size: 12px !important;
+          cursor: grab;
+        }
+      }
+    }
+
+    &.images {
+      .answer img {
+        max-height: 60px;
+        border-radius: 2px;
+        margin-right: 8px;
+      }
+
+      .answer {
+        padding: 5px 0;
+        position: relative;
+      }
+
+      .answer-mark,
+      .icon {
+        position: absolute;
+        top: 25px;
+      }
+
+      .icon {
+        right: -10px;
+      }
+    }
+  }
+
+}
+
+@mixin component_drag-drop {
+  &.connected {
+    .icon {
+    background-color: #f7f7f7;
+    border-color: $text-neu;
+      &:before {
+        content: '\e914';
+      }
+    }
+  }
+
+  .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 21px;
+    left: -10px;
+    background-color: #e1e1e1;
+    border-color: #e1e1e1;
+
+  }
+}
+
+@mixin dropdown {
+  background-color: #fff;
+  box-shadow: $shadow;
+  padding: 10px;
+  list-style: none;
+  z-index: 55;
+  border: none;
+  border-radius: 0;
+  .item {
+    font-size: 12px;
+    color: $text-dark;
+    line-height: 30px;
+    cursor: pointer;
+    @include transition;
+    &:hover {
+      color: $action;
+    }
+  }
+}

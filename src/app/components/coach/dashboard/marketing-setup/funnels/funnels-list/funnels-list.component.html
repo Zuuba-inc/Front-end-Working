@@ -1,0 +1,262 @@
+<ngx-ui-loader></ngx-ui-loader>
+<section id="funnels" style="width: 80%;"class="content container">
+
+  <header class="header">
+    <div class="header__top-bar">
+      <h1 class="header__top-bar--heading">Funnels</h1>
+    </div>
+
+    <ul class="nav">
+      <li class="nav__item active" (click)="changeActiveTab($event);">All Funnels</li>
+      <li class="nav__item" (click)="changeActiveTab($event);">Active</li>
+      <li class="nav__item" (click)="changeActiveTab($event);">Draft</li>
+      <li class="nav__item" (click)="changeActiveTab($event);">Archive</li>
+      <li class="ml-auto">
+        <button class="nav__btn" type="button" (click)="router.navigate(['/marketingSetup/funnels/types'])">
+          +
+          New Funnel
+        </button>
+      </li>
+    </ul>
+  </header>
+
+  <!-- funnels -->
+  <div class="funnels">
+
+    <div class="funnel" *ngIf="funnelsList.length == 0">
+      <div class="row no-gutters">
+        Sorry you don't have any {{funnelType}} funnels
+      </div>
+    </div>
+    <div *ngIf="funnelsList.length > 0">
+      <div class="funnel" *ngFor="let funnel of funnelsList; let i = index">
+        <div class="row no-gutters">
+          <div class="col-lg-3">
+            <!-- show webinar img in webinar funnelType
+               show quiz img in quiz+webinar funnelType -->
+            <div *ngIf="funnel.imageToShow; else elseBlock">
+              <div class="funnel__img">
+                <img src="{{funnel.imageToShow}}" alt="funnel Thumbnail" style="height: 72%; width: 72%;">
+              </div>
+            </div>
+            <!-- show default when no uploaded image is available -->
+            <ng-template #elseBlock>
+              <span
+                class="{{funnel.funnelType ? 'card-icon '+ funnel.funnelType.funnelClassName : 'card-icon zu-multimedia'}}"
+                style="display: block;height: 100%;"></span>
+            </ng-template>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="funnel__info">
+              <div class="funnel__info--details">
+                <p class="{{'label ' + tag.class}}" *ngFor="let tag of funnel.funnelTypeTags">{{tag.label}}</p>
+                <!-- <h2>Lorem, ipsum.</h2> -->
+                <h2>{{funnel.funnelName ? funnel.funnelName : "Funnel Name Not Available"}}</h2>
+                <p>Publised date : October 24, 2018</p>
+              </div>
+              <!-- STATS FOR WEBINAR -->
+              <!-- no quiz obj in funnel data means that it is of only webinar funnel type -->
+              <ul class="funnel__info--analytics" *ngIf="!funnel.funnelType.funnelName.toLowerCase().includes('quiz')">
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.webinar.noOfPublicJoinee}}</span>
+                  Participants
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.webinar.noOfWatchedUsers}}</span>
+                  Completed
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.webinar.noOfRegisteredUser}}</span>
+                  Sign Ups
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.webinar.noOfActionUsers}}</span>
+                  Action
+                </li>
+              </ul>
+              <!-- stats for quiz+webinar, 'QUIZ' STATS ARE SHOWN -->
+              <ul class="funnel__info--analytics" 
+                  *ngIf="funnel.funnelType.funnelName.toLowerCase().includes('quiz') &&
+                         funnel.funnelType.funnelName.toLowerCase().includes('webinar')">
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.quiz.noOfParticipants}}</span>
+                  Participants
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.quiz.noOfCompleted}}</span>
+                  Completed
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.quiz.noOfSignUps}}</span>
+                  Sign Ups
+                </li>
+                <li class="funnel__info--analytics item">
+                  <span class="num">{{funnel.quiz.noOfAction}}</span>
+                  Action
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <div class="funnel__status">
+              <ul class="funnel__status--info">
+                <li>
+                  <span
+                    [ngClass]="{'active': funnel.status == 'Active' ,'draft': funnel.status == 'Draft' || funnel.status == 'Archive' }"
+                    class="funnel-status"></span>
+                  {{funnel.status}}
+                </li>
+
+                <li *ngIf="funnel.status != 'Archive'">
+                  <span class="dropdown-btn" (click)="toggleQuickLinks(i)">
+                    <span class="icon zu-attached">
+
+                    </span>
+                    Quick Links
+                     <!-- {{funnel.funnelType.funnelName}} -->
+                  </span>
+                  <ul class="dropdown-menu links-dropdown" [ngClass]="{'showOptions': selectedIndex == i }">
+                    <li class="item">Registration page
+
+                      <span class="icon zu-document" (click)="copyUrl('registerForWebinar',funnel.webinar)"></span>
+
+                      <a [routerLink]="['/registerForWebinar']" [queryParams]="{id: funnel.webinar.id}" target="_blank">
+                        <span class="icon zu-forward"></span>
+                      </a>
+                    </li>
+                    <li class="item">Thank you page
+                      <span class="icon zu-document" (click)="copyUrl('thankyou',funnel.webinar)"></span>
+
+                      <span class="icon zu-forward" (click)="copyUrl('thankyou',funnel.webinar,true)"></span>
+                    </li>
+                    <li class="item">Replay Webinar page
+                      <span class="icon zu-document" (click)="copyUrl('webinarAutoStreamPage',funnel.webinar)"></span>
+                      <span class="icon zu-forward"
+                        (click)="copyUrl('webinarAutoStreamPage',funnel.webinar,true)"></span>
+                    </li>
+                    <li class="item" *ngIf="funnel.funnelType && funnel.funnelType.funnelName && funnel.funnelType.funnelName.toLowerCase().includes('quiz')">Quiz page
+                      
+                      <span class="icon zu-document" (click)="copyUrl('PlayQuiz',funnel.quiz)"></span>
+
+                      <a [routerLink]="['/PlayQuiz']" [queryParams]="{id: funnel.quiz.id}" target="_blank">
+                        <span class="icon zu-forward"></span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+              <div class="funnel__status--btns">
+                <button type="button" *ngIf="funnel.webinar.webinarType == 'live' && funnel.webinar.status != 'STOPPED'; else statButton" (click)="startWebinar(funnel.webinar)">Start Webinar</button>
+                <ng-template #statButton>
+                  <button type="button" >Stats</button>
+                </ng-template>
+                <div (mouseover)="showDropDown($event,i)" (mouseout)="showDropDown($event,i)">
+                  <button type="button">Actions
+                    <span class="icon zu-arrow-down"></span>
+                  </button>
+
+                  <ul id="{{'actionDropDown'+i}}" class="funnel__status--action-dropdown" style="display: none">
+                    <li class="funnel__status--action-dropdown-item" *ngIf="funnel.status != 'Archive'"
+                      (click)="edit(funnel)">Edit</li>
+                    <li class="funnel__status--action-dropdown-item" *ngIf="funnel.status == 'Draft'"
+                      (click)="changeStatus('Active', funnel.id)">Publish</li>
+                    <li class="funnel__status--action-dropdown-item" *ngIf="funnel.status == 'Active'"
+                      (click)="changeStatus('Draft', funnel.id)">Unpublish</li>
+                    <li class="funnel__status--action-dropdown-item" *ngIf="funnel.status != 'Archive'"
+                      (click)="changeStatus('Archive', funnel.id)">Archive</li>
+                    <li class="funnel__status--action-dropdown-item" (click)="duplicateFunnel(funnel.id)">Duplicate</li>
+                    <li class="funnel__status--action-dropdown-item" (click)="deleteFunnel(funnel.id)">Delete</li>
+                    <li class="funnel__status--action-dropdown-item" (click)="openModel(funnel)">Public/Private</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="center">
+        <ul class="pagination">
+          <li [ngClass]="{'disabled': isFirstPage}" (click)="getFunnelData(previousPage)">&laquo;</li>
+          <li *ngFor="let page of totalPages" [ngClass]="{'active': currentPage == page}" (click)="getFunnelData(page)">
+            {{page+1}}</li>
+          <li [ngClass]="{'disabled': isLastPage}" (click)="getFunnelData(nextPage)">&raquo;</li>
+        </ul>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Modal Header</h2>
+          <span class="close" (click) = "openModel(funnel)">&times;</span>
+
+        </div>
+        <div class="modal-body">
+          <div class="btn-group">
+            <a href="javascript://" class="pp-Btn" (click)="setWebinarSecurity('Public','Private');"
+              [ngClass]="{'active': funnel.isPvtPub == 'Public'}" id="Public">
+              <span class="bxIcn">
+                <i class="material-icons">public</i>
+              </span>
+              <span style="position: relative;top: 3px;">Public</span>
+            </a>
+            <a href="javascript://" class="pp-Btn active" (click)="setWebinarSecurity('Private','Public');"
+              [ngClass]="{'active': funnel.isPvtPub == 'Private'}" id="Private">
+              <span class="bxIcn">
+                <i class="material-icons">lock</i>
+              </span>
+              <span style="position: relative;top: 3px;">Private</span>
+            </a>
+
+          </div>
+          <div *ngIf="funnel.isPvtPub == 'Public'">
+          <div class="form-group">
+            <label class="label-text">Category</label>
+
+            <select class="custom-select" required name="webinar_category_select" [(ngModel)]="selectedCategory" id="categoryListIds" (change)='getSubCategoryList();'>
+              <option value="select">Select Category</option>
+              <option *ngFor="let category of categoryList" value={{category.id}}>{{category.displayName}}</option>
+            </select>
+          </div>
+
+            <p>Maximum allowed is 4 Sub-Category</p>
+              <!-- <fieldset>
+                  <div class="chips chips-initial"></div>
+                  <div class="chips">
+                      <input class="custom-class" required name="subCategory" [(ngModel)]="subCategoryChips">
+                  </div>
+              </fieldset> -->
+              <!-- [onlyFromAutocomplete]="true" -->
+               
+                  <tag-input [(ngModel)]="itemsList" 
+                    placeholder="enter sub-category" name="itemsList" [maxItems]='4'>
+                  <tag-input-dropdown
+                    [autocompleteItems]="items"
+                    [showDropdownIfEmpty]="true"
+                    [dynamicUpdate]="false">
+                  </tag-input-dropdown> 
+                </tag-input>
+             
+        </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modelButton" align="right" type="button" (click) = "savePrivatePublic()">
+                Save
+              </button>
+          <button  class="modelButton" align="right" type="button" (click) = "openModel(funnel)">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <!-- The Modal -->
+  </div>
+  <!-- /funnels -->
+
+</section>

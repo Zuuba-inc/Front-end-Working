@@ -1,0 +1,291 @@
+<section id="configure" class="content">
+
+  <!-- <header class="inner-header">
+    <h2 class="configureSetupForm">configure</h2>
+    <button style="display:none" type="button" class="resetPreviewBtn backButton"
+      (click)="backPreview('configureSetupForm','configure','configurePreview');"><span
+        class="icon cf-arrow-right"></span> Back</button>
+    <button class="preview-btn configureSetupForm"
+      (click)="preview('configureSetupForm','configure','configurePreview')">Preview</button>
+  </header> -->
+
+  <nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="col-md-6">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <h5 class="heading-welcome">Welcome Page</h5>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-6">
+      <button type="button" class="inline-block btn btn-sm btn-default btn-pre">
+        <span>Preview</span></button>
+    </div> -->
+  </nav>
+
+  <div class="row no-gutters">
+    <!-- col-md-5 -->
+    <div class="col-xl-4 col-lg-5 configureSetupForm">
+
+      <form id="quizConfigureForm" class="setting" name="quizPage1" #quizPage1="ngForm" novalidate>
+
+        <!-- <div class="setting__marketplace">
+          <h3 class="setting__marketplace--heading">
+            Marketplace
+            <span class="cf-info"
+              title="Select Public mode if you would like to make your quiz available in the Coachforce Marketplace to increase the odds of people taking your quiz by leveraging the Marketplace web traffic. You also have the option to keep it private and your quiz will not appear in the Marketplace.">i</span>
+          </h3>
+        </div>-->
+
+        <!-- <div class="setting__quiz-variation pad-quiz-e">
+          <label for="quiz-variation">Multi-Variation Quiz Path
+            <span class="cf-info"
+              title="Create multiple quiz paths to segment your audience into buckets. (ie. Create 2 quiz paths for Males & Females with  variation questions for each path)">i
+            </span>
+          </label>
+
+          <br />
+        
+          <select class="setting__quiz-variation--select" [(ngModel)]="quizConfiguration.multiVariationNo"
+            name="quiz-variation" id="quiz-variation" (ngModelChange)="updateQuizVarationArray()">
+            <option value="1">One Path(Default)</option>
+            <option *ngFor="let variation of quizVariationList" value="{{variation.number}}">{{variation.words}}
+            </option>
+          </select>
+        </div>  -->
+
+        <div class="setting__title pad-quiz-e">
+          <label for="quiz-title">Quiz Title</label>
+          <span class="chars-count" id="quizTitleCharCount">0/60</span>
+          <br />
+          <input id="quiz-title" required name="quizTitle" maxlength="60" [(ngModel)]="quizConfiguration.quizTitle"
+            type="text" placeholder="Type here"
+            (ngModelChange)="keyupFunction('quizTitleCharCount',quizConfiguration.quizTitle,'quiz-title-preview', {quizTitle: quizTitle, quizDescription: quizDescription, quizCallActionLabel: quizCallActionLabel})"
+            #quizTitle="ngModel">
+
+          <div *ngIf="quizTitle.invalid && (quizTitle.dirty || quizTitle.touched)" class="validationError">
+
+            <div *ngIf="quizTitle.errors.required">
+              *Quiz Title is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="setting__desc pad-quiz-e">
+          <label for="quiz-desc">Quiz description</label>
+          <span class="chars-count" id="quizDescCharCount">0/200</span>
+          <br />
+          <fieldset>
+            <textarea placeholder="Type here" maxlength="200" required name="quizDesc"
+              [(ngModel)]="quizConfiguration.quizDescription" id="quiz-desc" rows="3"
+              (ngModelChange)="keyupFunction('quizDescCharCount',quizConfiguration.quizDescription,'quiz-decs-preview', {quizTitle: quizTitle, quizDescription: quizDescription, quizCallActionLabel: quizCallActionLabel});"
+              #quizDescription="ngModel"></textarea>
+
+            <div *ngIf="quizDescription.invalid && (quizDescription.dirty || quizDescription.touched)"
+              class="validationError">
+
+              <div *ngIf="quizDescription.errors.required">
+                *Quiz Description is required.
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="setting__action-label pad-quiz-e">
+          <label for="action-label">Call to Action Button</label>
+          <span class="chars-count" id="quizActionBtnCharCount">0/10</span>
+          <br />
+          <input id="action-label" required maxlength="10" name="quizCallActionLabel"
+            [(ngModel)]="quizConfiguration.quizCallActionLabel" type="text" placeholder="Type here"
+            (ngModelChange)="keyupFunction('quizActionBtnCharCount',quizConfiguration.quizCallActionLabel,'quiz-callToAction-preview', {quizTitle: quizTitle, quizDescription: quizDescription, quizCallActionLabel: quizCallActionLabel});"
+            #quizCallActionLabel="ngModel">
+
+          <div *ngIf="quizCallActionLabel.invalid && (quizCallActionLabel.dirty || quizCallActionLabel.touched)"
+            class="validationError">
+
+            <div *ngIf="quizCallActionLabel.errors.required">
+              *Quiz Description is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="setting__image pad-quiz-e">
+
+          <div id="drop_zone">Quiz Image
+            <!-- <input type="file"
+                            id="file"
+                            (change)="handleFileInput($event)" style="display: none">
+                      <br />
+
+                      <span class="setting__image--upload">
+                        
+                          <file-drop (onFileDrop)="dropped($event)" 
+                            (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+
+                            <span class="heading">
+
+                              <span class="icon cf-image"></span>
+                                <span class="upload-text">   
+                                  <br />
+                                  Drag Image to Upload
+                                  <br />
+                                  or </span><strong>Click Here</strong>
+                            </span>
+                          </file-drop> 
+                        </span> -->
+            <!-- file is output emitted from child component app-upload-file -->
+            <app-upload-file [module]="configure" (file)="onFileUpload($event)"></app-upload-file>
+            <!-- </label> -->
+          </div>
+          <p>*Image should be of max 2MB</p>
+          <p class="validationError" ng-show="quizPage1.quizImage.$invalid && quizPage1.quizImage.$touched">*Image Is
+            required</p>
+        </div>
+
+        <!-- <div *ngIf="cropImage" id="quizImageModal" class="crop-modal">
+
+                  <!-- Modal content
+                  <div class="modal-content">
+                      <p id="quizImageSizeWarning" style="display:none">*Image should be of max 2MB</p>
+                      <div class="cropArea">
+
+                          <image-cropper
+                              [imageChangedEvent]="imageChangedEvent"
+                              [maintainAspectRatio]="true"
+                              [aspectRatio]="4 / 3"
+                              [resizeToWidth]="800"
+                              [cropperMinWidth]="128"
+                              [onlyScaleDown]="true"
+                              [roundCropper]="false"
+                              (imageCropped)="imageCropped($event)"
+                              (imageLoaded)="imageLoaded()"
+                              (cropperReady)="cropperReady()"
+                              (loadImageFailed)="loadImageFailed()"
+                              style="width: inherit; height: inherit;"
+                          ></image-cropper>
+                
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6"><button class="border-btn  live-preview__quiz--btn" (click)="closeModel('Close')">Cancel</button></div>
+                        <div class="col-sm-6"><button class="live-preview__quiz--btn" (click)="closeModel('OK')">Select</button></div>
+                      </div>
+                  </div>
+              </div> -->
+
+        <div class="setting__sharing ">
+          <label>Social Sharing
+            <br />
+            Off<button type="button" id="socialSharingBtn" (click)="allowSocialSharing($event)"
+              class="toggle-on-off on"></button>On
+          </label>
+        </div>
+
+        <!-- <button type="button" class="setting__save next" (click)="saveConfiguration();">Save &amp; Next</button> -->
+        <div class="btn-svc">
+          <button type="button" class="btn btn-primary btn-liks" (click)="saveConfiguration();">Save & Continue</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- col-md-7  -->
+    <div class="col-xl-8 col-lg-7" id="configurePreview">
+
+      <!-- <div class="live-preview right-nav-opened">
+
+        <div class="live-preview__quiz">
+          <div class="live-preview__quiz--img"> -->
+      <!-- nt:not there when commenting -->
+      <!-- <div *ngIf="files.length != 0; else defaultImg"> 
+                      <div *ngFor="let item of files;let i=index">
+                        <div *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0">
+                          <div class="previewIcon" [ngfBackground]="item" alt="quiz-thumbnail" id="quizImagePreview"></div>
+                        </div>
+                      </div>
+                    </div> -->
+      <!-- eo nt -->
+      <!-- <div *ngIf="croppedImage"><img [src]="croppedImage" /></div>
+
+            <div *ngIf="!croppedImage"><img class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg"
+                alt="quiz-thumbnail" id="quizImagePreview"></div>
+          </div>
+
+          <div class="live-preview__quiz--info">
+            Quiz
+            <span class="shareLink" (click)="openShareWindow()">Share</span>
+          </div> -->
+      <!----------  Social Sharing Model on configure page      ------------------->
+      <!-- <div id="shareQuizModal" class="modal"> -->
+
+      <!-- Modal content -->
+      <!-- <div class="modal-content">
+              <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/{{quizConfiguration.id}}  "
+                target="_blank" class="btn btn-fb btn-sm mr-3"><i class="fab fa-facebook-f mr-2"></i> Share on
+                Facebook</a>
+
+              <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/{{quizConfiguration.id}}"
+                target="_blank" class="btn btn-twitter btn-sm"><i class="fab fa-twitter mr-2"></i> Share on Twitter</a>
+              <span class="close" (click)="openShareWindow()">Close</span>
+            </div>
+
+          </div>
+          <h5 class="live-preview__quiz--heading" id="quiz-title-preview">Lorem, ipsum.</h5>
+
+          <p class="live-preview__quiz--desc" id="quiz-decs-preview">Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Vero, sequi
+            itaque aliquam, deleniti similique ipsum facere esse rerum dolorem</p>
+
+          <button class="live-preview__quiz--btn" id="quiz-callToAction-preview">Take Now</button>
+
+        </div>
+      </div> -->
+
+      <div class="card Brand mb-4 " >
+        <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+        <hr class="hr-class">
+        <div class="card-body welcomePageBackground">
+          <span class="welcomePageClass" style="color: #363636;">Share Quiz</span><br>
+          <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/{{quizConfiguration.id}}  "
+            target="_blank">
+            <img src="assets/QuizAssets/ic_fb.png" class="fb-image" alt="Cinque Terre">
+          </a><br>
+          <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/{{quizConfiguration.id}}"
+            target="_blank">
+            <img src="assets/QuizAssets/ic_twitter.png" class="fb-image" alt="Cinque Terre">
+          </a>
+          <div class="text-center">
+
+            <!-- *ngIf="croppedImage" -->
+            <div [ngClass]="{'show': croppedImage, 'hide': !croppedImage}">
+              <img class="c-m" [src]="croppedImage" />
+            </div>
+
+            <!-- *ngIf="!croppedImage" -->
+
+            <div [ngClass]="{'show': !croppedImage, 'hide': croppedImage}">
+              <!-- <img class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg"
+                alt="quiz-thumbnail" id="quizImagePreview"> -->
+
+              <!--TODO: ADD SUPPORT FOR MORE VID FORMATS -->
+              <video id="quizVideoPreview" [ngClass]="{'show configure-vid c-m': fileType == 'video', 
+                           'hide': fileType == 'image'}" width="320" height="240" #configureVideoPreview>
+                <!-- <source [src]="quizConfiguration.quizMediaAttached" type="video/mp4">
+                    Your browser does not support the video tag. -->
+              </video>
+
+              <img [ngClass]="{'hide': fileType == 'video', 
+                            'show c-m': fileType == 'image'}" src="assets/images/undraw_posting_photo.svg"
+                class="img-fluid img-thumbnail center-image" alt="Cinque Terre" id="quizImagePreview">
+            </div>
+
+            <h5 class="live-preview__quiz--heading heading-quiz welcomePageClass" id="quiz-title-preview">enter title</h5>
+            <p class="welcomePageClass" id="quiz-decs-preview">enter description</p>
+            <button type="submit" style="border-color: none"  class="btn btn-primary btn-more" id="quiz-callToAction-preview">See More</button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

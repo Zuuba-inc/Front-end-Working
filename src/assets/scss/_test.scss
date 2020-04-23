@@ -1,0 +1,50 @@
+#test {
+  margin: 0;
+  padding: 0;
+
+  .back-btn {
+    @include btn-rev;
+    .icon{
+      vertical-align: unset;
+      &:before {
+        color: $action;
+        font-size: 8px;
+      }
+    }
+  }
+  .preview-btn {
+   width: 120px;
+   border-radius: 555px;
+ }
+  .live-preview {
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 50px) !important;
+
+    &__alert {
+      background-color: #FFF3CB;
+      border-radius: 555px;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px 25px;
+      max-width: 500px;
+      display: block;
+      margin: 30px auto;
+      color: $text-dark;
+      span {
+        color: $alert;
+      }
+    }
+    
+    &__header {
+      width: calc(100% - 255px);
+    }
+
+    &__quiz {
+      // margin-bottom: 40px;
+    }
+    &__quiz--btn {
+      margin-top: 0;
+    }
+  }
+}

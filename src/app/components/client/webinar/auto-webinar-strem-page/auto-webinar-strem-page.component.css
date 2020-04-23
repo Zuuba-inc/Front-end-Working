@@ -1,0 +1,137 @@
+.start-screen-btn {
+  background-color: #0B8B8C !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  border: none !important;
+  width: 40% !important;
+  height: 40% !important;
+  border-radius: 4px !important;
+  -webkit-transition: all 0.25s ease-in !important;
+  -moz-transition: all 0.25s ease-in !important;
+  -o-transition: all 0.25s ease-in !important;
+  transition: all 0.25s ease-in !important;
+  /* width: 130px !important;
+  height: 30px !important;
+  width: 70px !important; */
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.hide {
+  display: none !important; 
+}
+
+.show {
+  display: block !important; 
+}
+
+.message__img p{
+  margin-top: 3px;
+  margin-bottom: 1rem;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+
+.countdown {
+  font-size: 8px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.countdown > div { display: inline-block; }
+
+.countdown > div > span {
+  display: block;
+  text-align: center;
+}
+
+.countdown-container { margin: 0 3px; }
+
+/*.countdown-container .countdown-heading {
+  font-size: 8px;
+  margin: 3px;
+  color: #666
+}*/
+.countdown-container .countdown-heading {
+    font-size: 14px;
+    margin: 3px;
+    color: #666;
+    width: 55px;
+}
+.countdown-container .countdown-value {
+  font-size: 30px;
+  padding: 10px;
+  color: #707070;
+  border-radius:5px;
+}
+
+
+.webinar-header {
+  z-index: 9999 !important;
+}
+
+.profile__img {
+  background: #dee6de;
+  /* border-radius: 25%; */
+  text-align: center;
+  }
+  
+.webinar-header {
+  top: 0;
+}
+#webinar-live {
+  overflow: hidden;
+}
+#webinar-live .counting .cf-clock {
+  position: absolute;
+  font-size: 150px;
+  right: -21%;
+  bottom: -25%;
+  color: #000000;
+  opacity: 0.4;
+}
+
+.side-togglers .icon{
+  font-size: 12px;
+}
+.zu-thumbs-up {
+  margin-right: 5px;
+}
+
+.side-panel {
+  height: calc(100vh - 71px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tabs {
+  flex-basis: 100%;
+  height: auto !important;
+}
+.tabs__tab-body {
+  position: relative;
+  height: 90% !important;
+  overflow-y: auto;
+}
+
+.messages {
+  max-height: calc(100vh - 525px) !important;
+  overflow-y: auto;
+}
+
+@media all and (max-width: 768px) {
+  #webinar-live .side-panel {
+    right: 0 !important;
+    min-width: 240px;
+  }
+  #webinar-live.side-closed .side-panel {
+    right: -240px !important;
+  }
+  #webinar-live .tabs .chat-box {
+    width: 240px;
+  }
+}

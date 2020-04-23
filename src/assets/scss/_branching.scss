@@ -1,0 +1,76 @@
+#branching{
+  @extend #mapping;
+
+  .live-preview {
+    background-color: #fff !important;
+    box-shadow: none !important;
+    &__branching {
+      @include component_mapping-branching;
+      padding: 15px;
+
+      &--actions {
+        margin: 31px 0;
+        z-index: 555;
+        position: relative;
+        .action-group {
+          padding: 10px 0;
+          padding-left: 8px;
+          &:not(:last-child) {
+            border-bottom: $border;
+          }
+          .action {
+            @include component_drag-drop;
+            position: relative;
+            padding: 5px 20px;
+            background-color: #e1e1e1;
+            font-size: 13px;
+            margin-bottom: 5px;
+            border-radius: 2px;
+
+            .icon {
+              left: -23px;
+            }
+
+            &.next-question {
+              padding: 0;
+
+              span:not(.icon) {
+                border-right: 4px solid #f7f7f7;
+                font-weight: 600;
+                padding: 22px 10px;
+              }
+            }
+
+            &.specific-question {
+              padding: 0;
+              background-color: #f7f7f7;
+
+              select {
+                padding: 10px 15px;
+                background-color: transparent;
+                border: $border;
+                width: 100%;
+                border-radius: 2px;
+
+                &:focus {
+                  outline-color: $action;
+                }
+
+                option {
+                  background-color: #e1e1e1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.content-mapping {
+  @extend #branching;
+  .live-preview__headers--title {
+    background-color: #fff !important;
+  }
+}

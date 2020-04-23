@@ -1,0 +1,326 @@
+<section id="outcomes" class="content">
+
+    <header class="inner-header">
+        <h2 class="outcomeSetupForm">outcomes</h2>
+        <button style="display:none" type="button" class="resetPreviewBtn backButton" (click)="backPreview('outcomeSetupForm','outcomes','outcomeSetupPreview');"><span class="icon cf-arrow-right"></span> Back</button>
+        <!-- <button class="preview-btn outcomeSetupForm" (click)="preview('outcomeSetupForm','outcomes','outcomeSetupPreview')">Preview</button> -->
+    </header>
+
+
+  
+  
+
+  <div class="row no-gutters">
+    <div class="col-md-4 outcomeSetupForm">
+
+      <form class="setting" style="padding: 10px !important" name="quizPage2" #quizPage2="ngForm" novalidate>
+        <span class="setting__info">{{quizOutcomeArray.length}} outcome has been created</span>
+
+        <!-- <div class="setting__created-outcomes">
+          <div class="setting__created-outcomes--outcome">
+            Outcome
+            <br />
+            <strong>Outcome Title One</strong>
+            <span class="icon cf-trash"></span>
+          </div>
+        </div> -->
+
+        <div class="setting__created-outcomes" style="cursor: pointer" *ngFor="let outcome of quizOutcomeArray; let i = index">
+          <div class="setting__created-outcomes--outcome" id="outcomeTitleList{{i}}">
+              Outcome
+              <br />
+            <strong (click)="viewOutcome(i)" >{{outcome.outcomeTitle}}</strong>
+            <span class="icon cf-trash" (click)="deleteOutcome(i)"></span>
+          </div>
+            <div class="new-outcome" id="editOutcomeId{{i}}" style="display:none">
+
+                <div class="question-header">
+                    <span class="q-num">Outcome {{outcomeNumber}}</span>
+                    <br />
+                    <!--<span class="asked-q">why you need to learn?</span>-->
+                    <div class="actions">
+                        <span class="icon cf-trash" (click)="resetOutcome()"></span>
+                    </div>
+                </div>
+
+                <div class="setting__title">
+                    <label for="quiz-title">Outcomes title</label>
+                    <span class="chars-count" id="quizOutcomeTitleCharCount{{i}}">0/100</span>
+                    <br />
+                    <fieldset>
+                        <textarea placeholder="Type here" required name="outcomeTitle" maxlength="100" rows="3" [(ngModel)]="quizOutcome.outcomeTitle" (ngModelChange)="keyupFunction('quizOutcomeTitleCharCount'+index,quizOutcome.outcomeTitle,'outcome-title-preview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #outcomeTitle="ngModel"></textarea>
+                    </fieldset>
+                    <p class="validationError" *ngIf="outcomeTitle.invalid && (outcomeTitle.dirty || outcomeTitle.touched)">Outcomes Title Is Required.</p>
+                </div>
+
+                <div class="setting__desc">
+                    <label for="quiz-desc">Outcomes description</label>
+                    <span class="chars-count" id="outcomeDescCharCount{{i}}">0/100</span>
+                    <br />
+                    <fieldset>
+                        <textarea placeholder="Type here" required name="outcomeDesc" maxlength="100" rows="3" [(ngModel)]="quizOutcome.outcomeDescription" (ngModelChange)="keyupFunction('outcomeDescCharCount'+index,quizOutcome.outcomeDescription,'outcome-desc-preview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #outcomeDesc ="ngModel"></textarea>
+                    </fieldset>
+                    <p class="validationError" *ngIf="outcomeDesc.invalid && (outcomeDesc.dirty || outcomeDesc.touched)">Outcomes Description Is Required.</p>
+                </div>
+
+                <div class="setting__image">
+
+                    <div id="drop_zone">Outcomes Image or Video
+        
+                         <app-upload-file [module]="outcomes" (file)="onFileUpload($event)"></app-upload-file>
+                        </div>
+                    <p>*Image should be of max 2MB</p>
+                    <p class="validationError" ng-show="quizImage.invalid && (quizImage.dirty || quizImage.touched)">*Image Is required</p>
+                </div>
+                
+                <div class="setting__offer">
+
+                    <div class="setting__offer--headline">
+                        <label for="offer-headling">Offer headline</label>
+                        <span class="chars-count" id="outcomeOffferTitleCharCount{{i}}">0/100</span>
+                        <br />
+                        <input name="offerHeadling" required maxlength="100" type="text" placeholder="Type here" [(ngModel)]="quizOutcome.offerHeadline" (ngModelChange)="keyupFunction('outcomeOffferTitleCharCount'+index,quizOutcome.offerHeadline,'outcomeOfferTitlePreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" 
+                        #offerHeadling="ngModel">
+                        <p class="validationError" *ngIf="offerHeadling.invalid && (offerHeadling.dirty || offerHeadling.touched)">Offer Headline Is Required.</p>
+                    </div>
+
+                    <div class="setting__offer--desc">
+                        <label for="offer-description">Offer description</label>
+                        <span class="chars-count" id="outcomeOffferDescCharCount{{i}}">0/100</span>
+                        <br />
+                        <textarea placeholder="Type here" maxlength="100" required name="offerDescription" rows="3" [(ngModel)]="quizOutcome.offerDescription" (ngModelChange)="keyupFunction('outcomeOffferDescCharCount'+index,quizOutcome.offerDescription,'outcomeOfferDescPreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})"
+                        #offerDescription="ngModel"></textarea>
+                        <p class="validationError" *ngIf="offerDescription.invalid && (offerDescription.dirty || offerDescription.touched)">Offer description Is Required.</p>
+                    </div>
+
+                    <div class="setting__offer--action-label">
+                        <label for="action-label">Call action button</label>
+                        <span class="chars-count" id="outcomeOffferBtnCharCount{{i}}">0/10</span>
+                        <br />
+                        <input  maxlength="10" name="actionLabel" required type="text" placeholder="Type here" [(ngModel)]="quizOutcome.offerCallActionLabel" (ngModelChange)="keyupFunction('outcomeOffferBtnCharCount'+index,quizOutcome.offerCallActionLabel,'outcomeOfferButtonPreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})"
+                        #actionLabel="ngModel">
+                        <p class="validationError" *ngIf="actionLabel.invalid && (actionLabel.dirty || actionLabel.touched)">Offer description Is Required.</p>
+                    </div>
+
+                    <div class="setting__offer--sendto">
+                        <label for="category">Call to action URL*</label>
+
+                        <br />
+                        <input  name="OutcomeCategory" required type="text" placeholder="Type here" [(ngModel)]="quizOutcome.offerSendTo" #OutcomeCategory="ngModel">
+
+                        <!-- <select class="setting__category--select" required name="OutcomeCategory" [(ngModel)]="quizOutcome.offerSendTo" #OutcomeCategory="ngModel">
+                            <option value="webinar">Webinar</option>
+                            <option value="webinar">Webinar</option>
+                            <option value="webinar">Webinar</option>
+                        </select> -->
+                        <p class="validationError" *ngIf="OutcomeCategory.invalid && (OutcomeCategory.dirty || OutcomeCategory.touched)">Action URL Is Required.</p>
+                    </div>
+
+                </div>
+                <!--button class="setting__save" (click)="saveSingleOutcome(quizPage2)">Save</button>-->
+                <button class="setting__save" [disabled]="quizPage2.invalid" (click)="saveSingleOutcome()">Save</button>
+                <button class="setting__back" (click)="resetOutcome()">Cancel</button>
+
+            </div>
+        </div>
+
+
+        <div class="new-outcome" id="newOutcome">
+
+          <div class="question-header">
+              <span class="q-num">Outcome {{quizOutcomeArray.length + 1}}</span>
+              <br />
+              <!--<span class="asked-q">why you need to learn?</span>-->
+              <div class="actions">
+                  <span class="icon cf-trash" (click)="resetOutcome()"></span>
+              </div>
+          </div>
+
+          <div class="setting__title">
+              <label for="quiz-title">Outcomes title</label>
+              <span class="chars-count" id="quizOutcomeTitleCharCount">0/100</span>
+              <br />
+              <fieldset>
+                  <textarea placeholder="Type here" required name="outcomeTitle" maxlength="100" id="outcome-quiz-title" rows="3" [(ngModel)]="quizOutcome.outcomeTitle" (ngModelChange)="keyupFunction('quizOutcomeTitleCharCount',quizOutcome.outcomeTitle,'outcome-title-preview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #outcomeTitle="ngModel"></textarea>
+              </fieldset>
+              <div *ngIf="outcomeTitle.invalid && (outcomeTitle.dirty || outcomeTitle.touched)"
+                      class="validationError">
+
+                    <div *ngIf="outcomeTitle.errors.required">
+                      *Quiz Title is required.
+                    </div>
+                  </div>
+          </div>
+
+          <div class="setting__desc">
+              <label for="quiz-desc">Outcomes description</label>
+              <span class="chars-count" id="outcomeDescCharCount">0/100</span>
+              <br />
+              <fieldset>
+                  <textarea placeholder="Type here" required name="outcomeDesc" maxlength="100" id="outcome-quiz-desc" rows="3" [(ngModel)]="quizOutcome.outcomeDescription" (ngModelChange)="keyupFunction('outcomeDescCharCount',quizOutcome.outcomeDescription,'outcome-desc-preview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #outcomeDesc = "ngModel"></textarea>
+              </fieldset>
+              <p class="validationError" *ngIf="outcomeDesc.invalid && (outcomeDesc.dirty || outcomeDesc.touched)">*Outcomes Description Is Required.</p>
+          </div>
+
+        <div class="setting__image">
+
+            <div>Outcomes Image or Video
+               
+                 <app-upload-file [module]="outcomes" (file)="onFileUpload($event)"></app-upload-file>
+                </div>
+            <p class="validationError" ng-show="quizImage.invalid && (quizImage.dirty || quizImage.touched)">*Image Is required</p>
+        </div>
+
+          <div class="setting__offer">
+
+              <div class="setting__offer--headline">
+                  <label for="offer-headling">Offer headline</label>
+                  <span class="chars-count" id="outcomeOffferTitleCharCount">0/100</span>
+                  <br />
+                  <input id="offer-headling" name="offerHeadling" required maxlength="100" type="text" placeholder="Type here" [(ngModel)]="quizOutcome.offerHeadline" (ngModelChange)="keyupFunction('outcomeOffferTitleCharCount',quizOutcome.offerHeadline,'outcomeOfferTitlePreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #offerHeadling = "ngModel">
+                  <p class="validationError" *ngIf="offerHeadling.invalid && (offerHeadling.dirty || offerHeadling.touched)">Offer Headline Is Required.</p>
+              </div>
+
+              <div class="setting__offer--desc">
+                  <label for="offer-description">Offer description</label>
+                  <span class="chars-count" id="outcomeOffferDescCharCount">0/100</span>
+                  <br />
+                  <textarea placeholder="Type here" maxlength="100" required name="offerDescription" id="offer-description" rows="3" [(ngModel)]="quizOutcome.offerDescription" (ngModelChange)="keyupFunction('outcomeOffferDescCharCount',quizOutcome.offerDescription,'outcomeOfferDescPreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #offerDescription="ngModel"></textarea>
+                  <p class="validationError" *ngIf="offerDescription.invalid && (offerDescription.dirty || offerDescription.touched)">Offer description Is Required.</p>
+              </div>
+
+              <div class="setting__offer--action-label">
+                  <label for="action-label">Call action button</label>
+                  <span class="chars-count" id="outcomeOffferBtnCharCount">0/10</span>
+                  <br />
+                  <input id="outcome-action-label" maxlength="10" name="actionLabel" required type="text" placeholder="Type here" [(ngModel)]="quizOutcome.offerCallActionLabel" (ngModelChange)="keyupFunction('outcomeOffferBtnCharCount',quizOutcome.offerCallActionLabel,'outcomeOfferButtonPreview', {outcomeTitle: outcomeTitle, outcomeDesc: outcomeDesc, offerHeadling: offerHeadling, offerDescription: offerDescription, actionLabel: actionLabel})" #actionLabel="ngModel">
+                  <p class="validationError" *ngIf="actionLabel.invalid && (actionLabel.dirty || actionLabel.touched)">Offer description Is Required.</p>
+              </div>
+
+              <div class="setting__offer--sendto">
+                  <label for="category">Call to action URL*</label>
+
+                  <br />
+                  <input name="OutcomeCategory" required type="text" placeholder="Type here" disabled [(ngModel)]="quizOutcome.offerSendTo" #OutcomeCategory="ngModel">
+
+                  <!-- <select class="setting__category--select" required name="OutcomeCategory" id="outcome-category" [(ngModel)]="quizOutcome.offerSendTo" #OutcomeCategory="ngModel">
+                      <option value="webinar">Webinar</option>
+                      <option value="webinar">Webinar</option>
+                      <option value="webinar">Webinar</option>
+                  </select> -->
+                  <p class="validationError" *ngIf="OutcomeCategory.invalid && (OutcomeCategory.dirty || OutcomeCategory.touched)">Action URL Is Required.</p>
+              </div>
+
+          </div>
+          <!--button class="setting__save" (click)="saveSingleOutcome(quizPage2)">Save</button>-->
+          <button class="setting__save" [disabled]="quizPage2.invalid" (click)="saveSingleOutcome()">Save</button>
+          <button class="setting__back" (click)="resetOutcome()">Cancel</button>
+
+      </div>
+
+      <div *ngIf="cropImage" id="outcomeImageModal" class="crop-modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p *ngIf="!sizeInLimit" class="validationError" id="outcomeImageSizeWarning">*Image should be of max 2MB</p>
+            <div class="cropArea">
+
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 3"
+                    [resizeToWidth]="800"
+                    [cropperMinWidth]="128"
+                    [onlyScaleDown]="true"
+                    [roundCropper]="false"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                    style="width: inherit; height: inherit;"
+                ></image-cropper>
+      
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><button class="border-btn  live-preview__quiz--btn" (click)="closeModel('Close')">Cancel</button></div>
+              <div class="col-sm-6"><button class="live-preview__quiz--btn" [disabled]="!sizeInLimit" [ngClass]="{'disableModalSelect' : !sizeInLimit, 'live-preview__quiz--btn': sizeInLimit}" (click)="closeModel('OK')">Select</button></div>
+            </div>
+        </div>
+    </div>
+      <!--<button class="setting__save" (click)="addNewoutcome()" style="float: left;">Add Outcome</button><br><br>-->
+      <div class="setting__answer--new addNewOutcome" (click)="addNewoutcome()" [hidden]="hideOutcomeButtons">
+          <span class="icon cf-add"></span>
+          Add Outcome
+
+      </div>
+        <button type="button" class="setting__save" [hidden]="hideOutcomeButtons"
+                [disabled]="quizOutcomeArray.length == 0" (click)="saveOutcomes(true);saveOutcomes2();">Save &amp; Next</button>
+        <button type="button" class="setting__back" [hidden]="hideOutcomeButtons"
+                (click)="onOCBack();">Back</button>
+      </form>
+
+    </div>
+    <div class="col-md-8" id="outcomeSetupPreview">
+
+      <div class="live-preview fontStyle">
+
+          <header class="live-preview__headers">
+            <div class="live-preview__headers--name img-hdr-prvw">
+                <img src="assets/images/dummy_logo.png" class="dummy_logo" alt="Cinque Terre">
+            </div>
+            <!-- <div class="live-preview__headers--name">
+                <h4 >{{currentUser.firstName}} {{currentUser.lastName}}</h4>
+            </div> -->
+            <div class="live-preview__headers--title questionTitle">
+                <h4 class="QuizTitleHeadline" >{{quizConfiguration.quizTitle}}</h4>
+            </div>
+          </header>
+
+          <div class="live-preview__quiz styleOutcome">
+
+              <div class="live-preview__quiz--share OutcomeDesign" ng-if="quizConfiguration.allowSocialSharing == true">
+                  Share Quiz
+                  <br />
+                  <a href="https://www.facebook.com/sharer.php?u=https://localhost:9000/quiz_play/1" target="_blank"><span class="icon cf-share-fb"><span class="path1"></span><span class="path2"></span></span></a>
+                  <br />
+                  <a href="https://twitter.com/home?status=https://localhost:9000/quiz_play/1" target="_blank"><span class="icon cf-share-tw"><span class="path1"></span><span class="path2"></span></span></a>
+              </div>
+
+              <div class="live-preview__quiz--img">
+                <div *ngIf="croppedImage && videoToShow"><img [src]="croppedImage" /></div>
+                   
+                <div *ngIf="!croppedImage && videoToShow">
+                    <img class="img-fluid" src="assets/images/joel-filipe-196000-unsplash.jpg" alt="quiz-thumbnail" id="quizImagePreview">
+                </div>
+
+                <div [hidden]="videoToShow">
+                    <video class="video" #outcomeVideoPreview></video>
+                </div>
+                  <!--video #video id="video" class="video" *ngIf="uploadedVideo">
+                    <source src = "{{cameraSrc}}" type="video/mp4">
+                  </video>-->
+
+                  <!--mat-video *ngIf="uploadedVideo" class="video" id="outcomeVideoPreview"></mat-video>-->
+
+              </div>
+
+              <h5 class="live-preview__quiz--heading OutcomeDesign" id="outcome-title-preview">Outcome Number 1</h5>
+
+              <p class="live-preview__quiz--desc OutcomeDesign" id="outcome-desc-preview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero,
+                  sequi itaque aliquam, deleniti similique ipsum facere esse rerum dolorem</p>
+
+          </div>
+
+          <div class="live-preview__offer">
+              <h5 class="outcomeOfferDesign" id="outcomeOfferTitlePreview">Dummy Offer Healine</h5>
+              <p class="outcomeOfferDesign" id="outcomeOfferDescPreview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum excepturi iusto odio enim
+                  consectetur minima.</p>
+
+              <button class="live-preview__offer--btn" id="outcomeOfferButtonPreview">Get Offer</button>
+          </div>
+      </div>
+
+  </div>
+  </div>
+
+</section>

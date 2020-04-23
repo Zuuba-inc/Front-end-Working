@@ -1,0 +1,176 @@
+<form id="webinar-nav" name="webinar-config" method="post" enctype="multipart/form-data" class="form signup_form" accept-charset="UTF-8" ng-submit="submitSalesPage()" >
+  <section id="webinar-sec" class="content" >
+      <div class="container-fluid px-md-5 px-3">
+            <div class="xdWebOffer" data-parent="#pageAccordion">
+        <!-- AHMED - Add the new header -->
+        
+        <header class="inner-header">
+                  <h2 class="configureSetupForm">offer</h2>
+                  <!-- <button style="display:none" type="button" class="resetPreviewBtn backButton" (click)="backPreview('configureSetupForm','configure','configurePreview');"><span class="icon cf-arrow-right"></span> Back</button> -->
+        </header>
+        
+        <div class="row" style="padding-top: 3% !important; padding-left: 7% !important;"><!-- row start-->
+          <!-- page content start-->
+          <!-- AHMED change to 5/7 cloumns -->
+          <div class="col-xl-5 cstm-input scrollOverflow"><!-- col-xl-4 start-->
+            <!-- AHMED remove text -->
+            <!-- <div class="text-left">
+              <div class="normal-title">OFFER</div>
+            </div>
+      
+            <br>-->
+              <div class="onoff mb-2">
+                <span class="text ml-0">Hide</span>
+                <label class="switch">
+                  <input type="checkbox" checked (click)="showhideWebinarOfferdiv(this);" id="webinarOfferRadio">
+                  <span class="slider round"></span>
+                </label>
+                <span class="text">Show</span>
+              </div>
+      
+      <div  id="offerMainDiv">
+            <div class="form-group">
+              <label class="normal-title">Title</label>
+              <span class="chars-count" id="offerTitleCharCount">0/50</span>
+              <input type="text" [(ngModel)]="webinarMst.webinarOffer.title" class="form-control" 
+                      name="webinar_offer_title" id="webinarOfferTitle" 
+                      (ngModelChange)="keyupFunction('offerTitleCharCount', webinarMst.webinarOffer.title, 'offerTitle');" 
+                      #webinarOfferTitle="ngModel" maxlength="50" required>
+                <div *ngIf="webinarOfferTitle.invalid && (webinarOfferTitle.dirty || webinarOfferTitle.touched)"
+                      class="validationError">
+
+                      <div *ngIf="webinarOfferTitle.errors.required">
+                      *Webinar OfferTitle is required.
+                    </div>
+                </div>
+            </div>
+      
+            <div class="form-group">
+              <label class="normal-title">Description</label>
+              <span class="chars-count" id="offerDescriptionCharCount">0/200</span>
+              <textarea [(ngModel)]="webinarMst.webinarOffer.description" class="form-control" rows="4" 
+                        name="webinar_offer_desc" id="webinarOfferDesc" 
+                        (ngModelChange)="keyupFunction('offerDescriptionCharCount', webinarMst.webinarOffer.description, 'offerDes');"
+                        maxlength="200" #webinarOfferDesc="ngModel" required>
+              </textarea>
+              <div *ngIf="webinarOfferDesc.invalid && (webinarOfferDesc.dirty || webinarOfferDesc.touched)"
+                      class="validationError">
+
+                  <div *ngIf="webinarOfferDesc.errors.required">
+                    *Webinar Offer Description is required.
+                  </div>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <label class="normal-title">Call to action button</label>
+              <span class="chars-count" id="offerCallToActionCharCount">0/20</span>
+              <input [(ngModel)]="webinarMst.webinarOffer.callToActionLabel" type="text" class="form-control" 
+                      name="webinar_offer_call_to_action_label" id="webinarOfferCallLabel" 
+                      (ngModelChange)="keyupFunction('offerCallToActionCharCount', webinarMst.webinarOffer.callToActionLabel, 'offerCallLabel');"
+                      maxlength="20" #webinarOfferCallLabel="ngModel" required>
+                <div *ngIf="webinarOfferCallLabel.invalid && (webinarOfferCallLabel.dirty || webinarOfferCallLabel.touched)"
+                  class="validationError">
+
+                  <div *ngIf="webinarOfferCallLabel.errors.required">
+                    *Webinar Offer CallLabel is required.
+                  </div>
+                </div>
+            </div>
+      
+            <p class="fs-14">Call to action color</p>
+            <div class="colorOption">
+              <a href="javascript://" class="color-1" (click)="setButtonColor('#278A6A');"></a>
+              <a href="javascript://" class="color-2" (click)="setButtonColor('#1DCB9A');"></a>
+              <a href="javascript://" class="color-3" (click)="setButtonColor('#104E60');"></a>
+              <a href="javascript://" class="color-4" (click)="setButtonColor('#1E6377');"></a>
+              <a href="javascript://" class="color-5" (click)="setButtonColor('#00A1D0');"></a>
+              <a href="javascript://" class="color-6" (click)="setButtonColor('#6BD1EF');"></a>
+              <a href="javascript://" class="color-7" (click)="setButtonColor('#AA2731');"></a>
+              <a href="javascript://" class="color-8" (click)="setButtonColor('#E3A034');"></a>
+            </div>
+      
+            <br>
+      
+            <div class="form-group">
+              <label class="normal-title">Action</label>
+              <!-- ng-model="webinarMst.webinarOffer[0].callToActionId" -->
+              <!-- <select class="custom-select" name="webinar_offer_action" ng-options="call.id as call.label for call in callActionList" id="callActionListIds">
+              <option value="">--SELECT--</option>
+              </select> -->
+
+              <!-- (ngModelChange)='getSubCategoryList();' -->
+
+              <select class="custom-select"  [(ngModel)]="webinarMst.webinarOffer.callToActionId" required name="webinar_offer_action" id="callActionListIds">
+                  <option value="select">Select Action</option>
+                  <option *ngFor="let call of callActionList" value={{call.id}}>{{call.label}}</option>
+                </select>
+                     
+            </div>
+      
+            <p class="fs-14">Time to show CTA</p>
+      
+            <div class="form-row">
+              <div class="col">
+                <div class="form-inline">
+                  <input [(ngModel)]="webinarMst.webinarOffer.videoHour" type="text" class="form-control w-40 mr-2" value="" id="offerHours" name="webinar_offer_hours">  
+                  <label class="label-text">Hours</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-inline">
+                  <input [(ngModel)]="webinarMst.webinarOffer.videoMins" type="text" class="form-control w-40 mr-2" value="" id="offerMins" name="webinar_offer_min">  
+                  <label class="label-text">Minutes</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-inline">
+                  <input [(ngModel)]="webinarMst.webinarOffer.videoSecs" type="text" class="form-control w-40 mr-2" value="" id="offerSecs" name="webinar_offer_sec">  
+                  <label class="label-text">Seconds</label>
+                </div>
+              </div>
+            </div>
+      </div>
+            <br>
+            
+          </div><!-- col-xl-4 start-->
+          <!-- page content close-->
+      
+          <!-- col-xl-8 start-->
+          <div class="col-xl-7">
+            <div class="livePreviewbox"><!-- livePreviewbox start-->
+              <!-- AHMED remove livepre heading -->
+              <!-- <a href="javascript://" class="btn-block btn btn-dark-blue mt-0 btn-livepreview"><i class="material-icons fs-14 mr-2">remove_red_eye</i> Live preview</a> -->
+      
+              <!-- AHMED editing the live box -->
+              <div class="live-box"><!-- live-box start --->
+                <div  class="liveHtmlFullPage"><!-- liveHtmlFullPage start --->
+                  <!-- AHMED create insturtion -->
+                  <div class="instruction">
+                    <i class="material-icons" style="font-size: 20px">error_outline</i>
+                    *Loren ipsum dolor text test for description the preview card below.
+                  </div>
+      
+                  <div class="text-center stack mb-3" id="offerContent">
+                    <p class="fs-18 bold w-75 mx-auto mb-4 text-capitalize" id="offerTitle"></p>
+                    <!-- {{webinarMst.webinarOffer[0].title}} -->
+                    <p class="fs-14 fw-500 text-muted mb-4 w-75 mx-auto" id="offerDes"></p>
+                    <!-- {{webinarMst.webinarOffer[0].description}} -->
+                    <a href="javascript://" class="btn btn-success text-capitalize mb-0" id="offerCallLabel" ng-style="background-color: webinarMst.webinarOffer.offerBtnColor">{{webinarMst.webinarOffer.callToActionLabel}}</a>
+                  </div>
+                </div><!-- liveHtmlFullPage close --->
+              </div><!-- live-box close --->
+            </div>
+          </div>
+          <!-- col-xl-8 close-->
+        </div> <!-- row close-->
+      </div>
+      </div>
+
+      <!--<a href="javascript://" class="btn btn-success float-right">Save</a>-->
+      <div class="text-left save-btn">
+        <a href="javascript" data-toggle="collapse" data-target=".xdWebOffer"class="btn btn-sm btn-outline-success" (click)="goBack();">Back</a>
+        <a href="javascript" data-toggle="collapse" class="btn btn-sm btn-success" (click)="saveOffer();">Save & Next</a>
+      </div>
+      </section>
+      </form>

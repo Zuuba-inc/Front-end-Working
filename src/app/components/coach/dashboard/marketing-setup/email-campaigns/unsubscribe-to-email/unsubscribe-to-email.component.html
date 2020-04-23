@@ -1,0 +1,49 @@
+<div class="split left">
+  <div class="centered">
+    <img src="assets/icons/ic_unsubcribe.svg" alt="Envolope">
+  </div>
+</div>
+
+<div class="split right">
+  <div class="centered" id="unsubscribeEmail">
+    <h2>Unsubscribe</h2>
+    <h6>We're sad to see you go</h6>
+    <p>Your email addres <b>{{userData.email}}</b></p>
+    <p>You will not receive any more emails from <a href="#">newsletter@zuuba.com</a></p>
+    <p><b>You can :</b></p>
+     
+    <span style="display:block; margin-bottom: 10px;">
+      <input type="radio" name="unsubscribe" (click)="unsubscribefrom('')" id="unsubscribeFromAll"> 
+      Unsubscribe from all mailings
+    </span>
+    <span style="display:block;margin-bottom: 10px;">
+      <input type="radio" name="unsubscribe" (click)="unsubscribefrom('Current')" id="unsubscribeFromCurrent"> 
+      Unsubscribe from the current
+    </span>
+    <div id="unsubscribeOptions" style="display: none;">
+      <label class="container"  *ngFor="let email of emailCampaigns"
+      style="margin-left: 20px;top: 0px; padding-left: 22px;padding-bottom: 2px;">
+        <span class="text" style="color: #363636;">{{email.emailCapaignTitle}}</span>
+        <input type="checkbox" id=email{{email.id}} (change)="selectEmail($event,email.id)">
+        <span class="checkmark"></span>
+      </label>
+      <!-- <label class="container" style="margin-left: 20px;top: 0px; padding-left: 22px;padding-bottom: 2px;">
+        <span class="text" style="color: #363636;">Newsletter</span>
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label> -->
+      <!-- <label class="container" style="margin-left: 20px;top: 0px; padding-left: 22px;padding-bottom: 2px;">
+        <span class="text" style="color: #363636;">Newsletter</span>
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label> -->
+    </div>
+    <div>
+      <button class="unsubscribeBtn" (click)="confirmUnsubscribe()">
+      Unsubscribe</button>
+      <button class="cancel" >
+      Cancel</button>
+    </div>
+  </div>
+</div>
+<ngx-ui-loader></ngx-ui-loader>

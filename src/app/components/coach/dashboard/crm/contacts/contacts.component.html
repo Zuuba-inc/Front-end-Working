@@ -1,0 +1,309 @@
+
+<div style="width: 100%;height: 100vh;overflow: scroll;" class="page-wrapper">
+<div class="contact">
+ <div class="segment">
+   <h6>Showing all active people</h6>
+    <button data-toggle="modal" data-target="#addNewContact"> + New Contact</button>
+    <span style="display: block;font-size: 12px;padding-top: 15px;">Include people matching these filters</span>
+ </div>
+
+ <div class="filters">
+    <div *ngFor="let filter of filters" style="text-align: left;padding-top: 10px;padding-bottom: 10px;">
+      <div  style="display: inline;">
+          <select name="Filter" style="background-color: white;" [(ngModel)]="filter.selectedSegment" 
+          (change)="selectSegmentEvent2($event, filter)">
+              <optgroup  *ngFor="let segment of segmentationData" label={{segment.title}}>
+                  <option *ngFor="let segmentEvent of segment.segmentationEvent" value={{segmentEvent.value}}>
+                      {{segmentEvent.text}}
+                  </option>
+              </optgroup>
+          </select>
+      </div>
+      <div class="segmentationDiv" *ngIf="filter.parentSegmentation.id" style="padding: 0 10px 0 10px; display: inline;">
+          <span style="font-size: 12px;background: white;padding: 5px;
+          border: 1px solid #e4e1e1;">
+              {{filter.segmentationMatch.matchTag}}
+          </span>
+          <select *ngIf="filter.segmentationMatch.segmentationMatch.length > 0 " name="Filter" style="background-color: white;width: 20%;" [(ngModel)]="filter.matchTag">
+              <option *ngFor="let segmentMatch of filter.segmentationMatch.segmentationMatch"  value={{segmentMatch.id}}>
+                      {{segmentMatch.matchString}}
+              </option>
+          </select>
+          <select *ngIf="filter.segmentationMatch.segmentationMatchExtension.length > 0" name="Filter" style="background-color: white;width: 20%" [(ngModel)]="filter.matchExtension"
+              (change)="selectedUnsubscribeFromAllMailings(filter,filter.segmentationMatch.segmentationMatchExtension)">
+              <option *ngFor="let segmentExt of filter.segmentationMatch.segmentationMatchExtension" value={{segmentExt.id}}>
+                  {{segmentExt.text}}
+              </option>
+          </select>
+      </div>
+      <div class="segmentationDiv" *ngIf="filter.parentSegmentation.id == 1" >
+          <div *ngIf="filter.segmentationMatch.value == 'broadcast_emails'">
+              <select name="Filter" style="background-color: white;" [(ngModel)]="filter.broadcastOrEmailId">
+                  <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                  <option *ngFor="let camp of filter.campaign" value={{camp.id}}>
+                      {{camp.emailTitle}}
+                  </option>
+              </select>
+          </div>
+          <div *ngIf="filter.segmentationMatch.value == 'campaigns'">
+              <select name="Filter" style="background-color: white;" [(ngModel)]="filter.campaignId">
+                  <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                  <option *ngFor="let camp of filter.campaign" value={{camp.id}}>
+                      {{camp.emailCapaignTitle}}
+                  </option>
+              </select>
+          </div>
+          <div *ngIf="filter.segmentationMatch.value == 'campaign_emails'">
+              <select name="Filter" style="background-color: white;" [(ngModel)]="filter.broadcastOrEmailId">
+                  <option hidden value="" disabled selected>Select {{filter.segmentationMatch.text}} </option>
+                  <optgroup  *ngFor="let camp of filter.campaign" label={{camp.emailCapaignTitle}}>
+                      <option *ngFor="let campEmail of camp.emailCampaignDtl" value={{campEmail.id}}>
+                          {{campEmail.emailSubject}}
+                      </option>
+                  </optgroup>
+              </select>
+          </div>
+      </div>
+      <div *ngIf="filter.segmentationMatch.value == 'email_address'" class="segmentationDiv">
+          <input type="text" class="form-control cst-control" style="display: inline;font-size: 14px;width: 20%;"
+      placeholder="me@example.com" [(ngModel)]="filter.email" />
+      </div>
+      <div *ngIf="filter.matchExtensionValue == 'count'" class="segmentationDiv">
+          <select name="Filter" style="background-color: white;width: 10%;background-position: 89% 10px;" [(ngModel)]="filter.timesCount">
+              <option *ngFor="let times of matchExtensionCount" value={{times}}>
+                  {{times}}
+              </option>
+          </select><span style="border: 1px solid #ced4da;padding: 5px">times</span>
+      </div>
+      <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'date' || filter.matchExtensionValue == 'before' || filter.matchExtensionValue == 'on_or_after' || filter.selectedSegment == 'person_timezone'">
+          <input type="date" class="form-control cst-control"  *ngIf="filter.selectedSegment != 'person_timezone'"
+          placeholder="Choose a date.." style="font-size: 12px;vertical-align: middle;width: 15%;"  [(ngModel)]="filter.date" />
+          <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'before' || filter.matchExtensionValue == 'on_or_after' || filter.selectedSegment == 'person_timezone'">
+              <select name="Filter"  style="background-color: white;width: 25%;" [(ngModel)]="filter.timezone">
+                  <option value="client">recipient's timezone</option>
+                  <option value="America/New_York">Eastern timezone</option>
+                  <option value="UTC">UTC timezone</option>
+              </select>
+          </div>
+      </div>
+      <div class="segmentationDiv" *ngIf="filter.matchExtensionValue == 'days' || filter.matchExtensionValue == 'in_the_last'">
+          <input type="text" class="form-control" style="width: 5%;display: inline-block;height: 30px;vertical-align: middle;font-size: 12px;
+          font-weight: bold;" [(ngModel)]="filter.days"/>
+            <div  *ngIf="filter.matchExtensionValue == 'in_the_last'" style="display: inline;">
+              <select name="Filter" style="background-color: white;
+              width: 10%;vertical-align: middle;"  [(ngModel)]="filter.units">
+                  <option value="minutes">minutes</option>
+                  <option value="hours">hours</option>
+                  <option value="days">days</option>
+              </select>
+          </div>
+          <span style="border: 1px solid #ced4da;padding: 5px;" *ngIf="filter.matchExtensionValue == 'days'">days</span>
+      </div>
+      <div class="segmentationDiv" *ngIf="filter.selectedSegment == 'tags'">
+          <select name="Filter" style="background-color: white;width: 20%">
+              <option>Tag1</option>
+              <option>Tag2</option>
+              <option>Tag3</option>
+          </select>
+      </div>
+      <img *ngIf="filters.length > 1" src="./assets/icons/ic_close.svg" style="float: right;" (click)="deleteBroadCastFilter(filter)">
+    </div>
+    <!-- <button class="condation" (click)="addMoreFilters();">
+      Add Condition
+    </button> -->
+    <span class="addMore" style="padding: 5px 10px;">
+      and
+    </span>
+    <span class="addMore">+</span>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <div class="column" style="width: 25%;">
+      <h6 style="display: block; margin-bottom: 15px;">Segments</h6>
+      <div>All Contacts</div>
+      <div>Segment One</div>
+      <div>Segment Two</div>
+      <!-- <ul>
+        <li>All Contacts</li>
+        <li>Segment One</li>
+        <li>Segment Two</li>
+      </ul> -->
+    </div>
+    <div class="column" style="width: 75%;">
+      <h6>Showing 8 people</h6>
+      <select>
+        <option>Actions</option>
+        <option>Draft</option>
+      </select>
+      <div style="float: right;padding: 0;
+      margin-right: 10px;
+      width: 35%;">
+        <input class="searchBox" placeholder="Search here" style="border: none;">
+        <!-- <button><img src="./assets/icons/search.svg" style="width: 24px;height: 15px;"></button> -->
+      </div>
+      
+      
+      <table>
+        <thead>
+          <tr style="border-top: 1px solid #E1E1E1;">
+            <th style="padding-left: 15px;">NAME</th>
+            <th>EMAIL</th>
+            <th>PHONE NUMBER</th>
+            <th>COMPANY</th>
+            <th>LAST ACTIVITY</th>
+            <th style="text-align: right;">
+              <span class="dropdown" >
+              <img src="assets/icons/ic_setting.svg" (click)="openViewDropDown('settingDropDown')" >
+              <div class="dropdown-content" id="settingDropDown" style="display: none;background-color: white;
+              text-align: left;">
+              <input type="text">
+                  <ul >
+                    
+                    <li>
+                      <label class="container">
+                        <span class="text" style="color: #363636;padding-left: 5px;">Name</span>
+                        <input type="checkbox" id=settingName>
+                        <span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="container">
+                      <span class="text" style="color: #363636;padding-left: 5px;">Email</span>
+                      <input type="checkbox" id=settingName>
+                      <span class="checkmark"></span>
+                    </label>
+                  </li>
+                    <li>
+                      <label class="container">
+                        <span class="text" style="color: #363636;padding-left: 5px;">Phone Number</span>
+                        <input type="checkbox" id=settingName>
+                        <span class="checkmark"></span>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="container">
+                        <span class="text" style="color: #363636;padding-left: 5px;">Company</span>
+                        <input type="checkbox" id=settingName>
+                        <span class="checkmark"></span>
+                      </label>
+                    </li>
+                  
+                  </ul>
+                  <button>Save</button>
+              </div>
+                
+              
+              </span>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of segmentContacts; let i = index">
+            <td style="padding-left: 15px;text-align: left;font-weight: bold;">
+              <a style="font-size: 14px;color: #0B8B8C;" [routerLink]="['/recepientDetails']" >{{contact.name}}</a></td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.phnNumber}}</td>
+            <td>{{contact.location}}</td>
+            <td>{{contact.date}}</td>
+            <td (mouseleave)="closeEditEmailDropDown(i+'dropdown')" style="text-align: center;">
+
+              <span style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;">View</span>
+              <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;" 
+              (click)="openViewDropDown(i+'dropdown')" >
+                <img src="assets/icons/arrow-down.svg">
+                <ul class="dropdown-content" id="{{i+'dropdown'}}" style="display: none;">
+                  <li>Edit</li>
+                  <li>Delete</li>
+                  <li>View</li>
+                </ul>
+              
+              </span>
+              <!-- <button type="button" style="width: 20%;">View &nbsp;</button>
+              <button type="button"style="width: 25px;"> 
+                <img
+                  src="assets/icons/ic_back.svg">
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade show" id="addNewContact" tabindex="-1" role="dialog" aria-labelledby="addNewContact"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;max-width: fit-content;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+      <div class="text-center">
+        <button id="uploadList" style="margin-right: 8%;width: 40%;background: none;" data-dismiss="modal" aria-label="Close" (click)="addMultipleUsers();" >
+          <div><img src="assets/icons/ic_uploadlist.svg"></div>
+          <div style="padding: 5px;">
+            <h2 style="color: black;">Upload a list of people</h2>
+            <p style="font-size: 14px;color: #707070;">Import a list of people in CSV format</p>
+          </div>
+        </button>
+        <button style="width: 40%;background: none;" id="uploadSingle" data-toggle="modal" data-target="#addingSingleUser" data-dismiss="modal" aria-label="Close" >
+          <div style="padding-top: 8px;"><img src="assets/icons/ic_singleperson.svg"> </div>
+          <div  style="padding: 5px;">
+            <h2 style="color: black;">Add a single person</h2>
+            <p style="font-size: 14px;color: #707070;">Add a single email address with one click</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade show" id="addingSingleUser" tabindex="-1" role="dialog" aria-labelledby="addNewContact"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add a single Persone</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+      <form>
+        <div class="form-group" style="margin-bottom: 0px;">
+            <label style="font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 0px;">First Name</label>
+            <input type="text" class="form-control"  style="margin-bottom: 10px;"
+                name="firstName"
+                placeholder="First name">
+        </div>
+        <div class="form-group" style="margin-bottom: 0px;">
+          <label style="font-size: 12px;
+          font-weight: bold;
+          margin-bottom: 0px;">Last Name</label>
+          <input type="text" class="form-control"  style="margin-bottom: 10px;"
+              name="lastName"
+              placeholder="Last name">
+      </div>
+        <div class="form-group" style="margin-bottom: 0px;">
+            <label style="font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 0px;">Email address</label>
+            <input type="text" class="form-control" placeholder="Email address"
+            name="emailAddress"  style="margin-bottom: 10px;">
+        </div>
+        <div class="form-group">
+            <button type="button" style="height: 30px;
+            width: 20%;float: right; background: #000000;border-radius: 2px;color: white;font-size: 12px;">Add</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<ngx-ui-loader></ngx-ui-loader>

@@ -1,0 +1,29 @@
+<div style="width: 100%;height: 100vh;overflow: scroll;" class="page-wrapper">
+  <div class="segments">
+    <div class="heading">
+      <h6>Showing all tags</h6>
+      <button data-toggle="modal" data-target="#addNewContact" style="float: right;width: 130px"> + New Contact</button>
+    </div>
+    <div style="margin-top: 30px;">
+      <table>
+        <thead>
+          <tr style="background: #F6F6F6;border: 1px solid #E1E1E1;">
+            <th>SEGMENTS</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="segmentDetails();">
+            <td>
+              <div style="font-size: 14px;font-weight: bold;color: black;">Segment One</div>
+              <span>people 1</span>
+            </td>
+            <td style="text-align: right;">
+              <button class="deleteButton">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

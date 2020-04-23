@@ -1,0 +1,380 @@
+<main>
+  <!-- <aside class="side-bar">
+      <header class="side-bar__logo-area">
+        <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+      </header>
+    </aside> -->
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+
+  <div class="page-wrapper">
+    <div class="mainContainer">
+      <div class="uploadlist" style="width: 80%;" *ngIf="segmentDetailStatus == 'ShowDetails'">
+        <a [routerLink]="['/crm/segments']">
+          < Back to segments</a>
+            <div>
+              <div style="margin-top: 30px;">
+                <h6 style="display: inline;">Segment One</h6>
+                <button data-toggle="modal" data-target="#addNewContact" style="float: right;width: 130px">Delete
+                  Segment</button>
+                <span style="display: block;font-size: 12px;
+                      font-weight: bold;margin-top: 10px;">Showing all active people</span>
+              </div>
+              <div style="height: 70px;background: #EFEFEF;border: 1px solid #E1E1E1;">
+                <div style="text-align: right;font-size: 12px;
+                      font-weight: bold;">Show Filter</div>
+                <div style="text-align: center;">
+                  People who have not received the “Test Broadcast” broadcast
+                </div>
+              </div>
+              <div style="margin-top: 15px;">
+
+                <div class="column" style="width: 100%;padding: 0;">
+                  <h6 style="display: inline;">Showing 8 people</h6>
+                  <select (change)="openExportCSV()">
+                    <option>Export to CSV</option>
+                    <option>Perform a Bulk Operation</option>
+                  </select>
+                  <div style="float: right;padding: 0;
+                        margin-right: 10px;
+                        width: 35%;">
+                    <input class="searchBox" placeholder="Search here" style="border: none;">
+                    <!-- <button><img src="./assets/icons/search.svg" style="width: 24px;height: 15px;"></button> -->
+                  </div>
+
+                  <table>
+                    <thead>
+                      <tr style="border-top: 1px solid #E1E1E1;">
+                        <th style="padding-left: 15px;">
+                          NAME
+                        </th>
+                        <th>EMAIL</th>
+                        <th>PHONE NUMBER</th>
+                        <th>COMPANY</th>
+                        <th>LAST ACTIVITY</th>
+                        <th style="text-align: right;">
+                          <span class="dropdown">
+                            <img src="assets/icons/ic_setting.svg" (click)="openViewDropDown('settingDropDown')">
+                            <div class="dropdown-content" id="settingDropDown" style="display: none;background-color: white;
+                                text-align: left;">
+                              <input type="text">
+                              <ul>
+
+                                <li>
+                                  <label class="container">
+                                    <span class="text" style="color: #363636;padding-left: 5px;">Name</span>
+                                    <input type="checkbox" id=settingName>
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </li>
+                                <li>
+                                  <label class="container">
+                                    <span class="text" style="color: #363636;padding-left: 5px;">Email</span>
+                                    <input type="checkbox" id=settingName>
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </li>
+                                <li>
+                                  <label class="container">
+                                    <span class="text" style="color: #363636;padding-left: 5px;">Phone Number</span>
+                                    <input type="checkbox" id=settingName>
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </li>
+                                <li>
+                                  <label class="container">
+                                    <span class="text" style="color: #363636;padding-left: 5px;">Company</span>
+                                    <input type="checkbox" id=settingName>
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </li>
+
+                              </ul>
+                              <button>Save</button>
+                            </div>
+
+
+                          </span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let contact of segmentContacts; let i = index">
+                        <td style="padding-left: 15px;text-align: left;font-weight: bold;">
+                          <a style="font-size: 14px;color: #0B8B8C;">{{contact.name}}</a></td>
+                        <td>{{contact.email}}</td>
+                        <td>{{contact.phnNumber}}</td>
+                        <td>{{contact.location}}</td>
+                        <td>{{contact.date}}</td>
+                        <td (mouseleave)="closeEditEmailDropDown(i+'dropdown')" style="text-align: center;">
+
+                          <span
+                            style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;">View</span>
+                          <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;"
+                            (click)="openViewDropDown(i+'dropdown')">
+                            <img src="assets/icons/arrow-down.svg">
+                            <ul class="dropdown-content" id="{{i+'dropdown'}}" style="display: none;">
+                              <li>Edit</li>
+                              <li>Delete</li>
+                              <li>View</li>
+                            </ul>
+
+                          </span>
+                          <!-- <button type="button" style="width: 20%;">View &nbsp;</button>
+                                <button type="button"style="width: 25px;"> 
+                                  <img
+                                    src="assets/icons/ic_back.svg">
+                                </button> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      <div class="uploadlist" style="width: 40%;" *ngIf="segmentDetailStatus == 'exportCsvFile'">
+        <a [routerLink]="['/crm/contacts']">
+          < Back to Contacts</a>
+            <div>
+              <h6>Merge Contact</h6>
+
+              <span class="dot" style="color: white;background: #0B8B8C;">1</span>
+
+              <div style="width: 20%;height: 2px;background: #E1E1E1;
+                display: inline-block;"></div>
+
+              <span class="dot"
+                [ngStyle]="{'background': mergeContactStep == 'Step1' ? '#E1E1E1' : '#0B8B8C','color': mergeContactStep == 'Step1' ? 'black' : 'white' }">2</span>
+              <div>
+                <span style="font-size: 12px;">Choose contact</span>
+                <span style="font-size: 12px;
+                  margin-left: 20px;">Review merge</span>
+              </div>
+              <div *ngIf="mergeContactStep == 'Step1'">
+                <div>
+                  <h6>Choose a Primary Person</h6>
+                  <p>This is the person you’d like to keep. This person will be the basis for a new, merged person’s data.
+                    You
+                    can manually edit the new person data before merging.</p>
+                  <div style="margin: 20px 0px;">
+                    <span style="font-size: 12px;
+                    font-weight: bold;">Primary contact</span>
+                    <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com">
+                  </div>
+                </div>
+                <div>
+                  <h6>Choose a Secondary Person</h6>
+                  <p>This person’s notes, unique tags and custom fields will be added to the Primary Person. All
+                    Subscriptions
+                    for the Secondary Person will be removed. Conflicting data will be chosen from the Primary Person.</p>
+                  <p style="color: black; font-weight: bold; font-style: italic">
+                    This person will be deleted once the merge is complete.
+                  </p>
+                  <div>
+                    <span style="font-size: 12px;
+                    font-weight: bold;">Secondary contact</span>
+                    <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com">
+                  </div>
+                </div>
+                <button style="width: 90px;margin-top: 20px" (click)="changeMergeContactStep('Step2')">Next</button>
+              </div>
+              <div *ngIf="mergeContactStep == 'Step2'">
+                <div>
+                  <h6>Review Merge</h6>
+                  <p>Ensure that the new person data is correct before merging. No automation actions will be triggered by
+                    the
+                    merge.</p>
+                </div>
+                <div class="tab">
+                  <button class="tablinks active" (click)="openCity($event, 'generalInfo')">General Info</button>
+                  <button class="tablinks" (click)="openCity($event, 'tags')">Tags</button>
+                  <button class="tablinks" (click)="openCity($event, 'customFeilds')">Custom Fields</button>
+                </div>
+
+                <div id="generalInfo" class="tabcontent " style="display: block;">
+                  <div>
+                    <span style="font-size: 12px;font-weight: bold;">Email</span>
+                    <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com">
+                  </div>
+                  <div>
+                    <span style="font-size: 12px;font-weight: bold;">Time zone</span>
+                    <select style="display: block;
+            background-color: white;
+            width: 427px;">
+                      <option>(GMT-11:00) American Samoa</option>
+                      <option>(GMT-11:00) American Samoa</option>
+                      <option>(GMT-11:00) American Samoa</option>
+                    </select>
+                  </div>
+                  <div>
+                    <span style="font-size: 12px;font-weight: bold;">UserId</span>
+                    <input type="text" class="crmInputType" placeholder="(not set)">
+                  </div>
+                </div>
+
+                <div id="tags" class="tabcontent">
+                  <div>
+                    <h6>From Primary Person</h6>
+                    <div style="display: inline; margin-right: 10px;">
+                      <span style="background: #0B8B8C;color: white;padding: 4px; font-size: 12px;">New Client</span>
+                      <span class="dropdown" style="background: #075858;padding: 0px 5px 3px;color:white;">
+                        &times;
+                      </span>
+                    </div>
+                    <div style="display: inline; margin-right: 10px;">
+                      <span style="background: #0B8B8C;color: white;padding: 4px; font-size: 12px;">Math</span>
+                      <span class="dropdown" style="background: #075858;padding: 0px 5px 3px;color:white">
+                        &times;
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h6>From Secondary Person</h6>
+                    <div style="display: inline; margin-right: 10px;">
+                      <span style="background: #0B8B8C;color: white;padding: 4px; font-size: 12px;">Math</span>
+                      <span class="dropdown" style="background: #075858;padding: 0px 5px 3px;color:white;">
+                        &times;
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div id="customFeilds" class="tabcontent">
+                  <div>
+                    <h6>From Primary Person</h6>
+                  <table style="background: transparent;border: none;">
+                    <tbody>
+                      <tr style="border: none;">
+                        <td>
+                          <span style="font-size: 12px;font-weight: bold;">Identifier</span>
+                          <select style="background-color: white;">
+                            <option>Identifier</option>
+                          </select>
+                        </td>
+                        <td>
+                          <span style="font-size: 12px;font-weight: bold;">Value</span>
+                          <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="display: inline-block;
+                          width: 220px;margin-right: 15px;">
+                            <span class="dropdown" style="background: transparent;color:#707070;font-size: 20px;">
+                                &times;
+                            </span>
+                        </td>
+                      </tr>
+                      <tr style="border: none;">
+                        <td>
+                        <span style="font-size: 12px;font-weight: bold;">Identifier</span>
+                        <select style="background-color: white;">
+                          <option>Identifier</option>
+                        </select>
+                        </td>
+                        <td>
+                        <span style="font-size: 12px;font-weight: bold;">Value</span>
+                        <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="display: inline-block;
+                        width: 220px;margin-right: 15px;">
+                          <span class="dropdown" style="background: transparent;color:#707070;font-size: 20px;">
+                              &times;
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                  <div>
+                    <h6>From Secondary Person</h6>
+                    <table style="background: transparent;border: none;">
+                      <tbody>
+                        <tr style="border: none;">
+                          <td>
+                          <span style="font-size: 12px;font-weight: bold;">Identifier</span>
+                          <select style="background-color: white;">
+                            <option>Identifier</option>
+                          </select>
+                          </td>
+                          <td>
+                          <span style="font-size: 12px;font-weight: bold;">Value</span>
+                          <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="display: inline-block;
+                          width: 220px;margin-right: 15px;">
+                            <span class="dropdown" style="background: transparent;color:#707070;font-size: 20px;">
+                                &times;
+                            </span>
+                          </td>
+                        </tr>
+                        <tr style="border: none;">
+                        <td>
+                          <span style="font-size: 12px;font-weight: bold;">Identifier</span>
+                          <select style="background-color: white;">
+                            <option>Identifier</option>
+                          </select>
+                        </td>
+                        <td>
+                          <span style="font-size: 12px;font-weight: bold;">Value</span>
+                          <input type="text" class="crmInputType" placeholder="t.younes@astoundcommerce.com" style="display: inline-block;
+                          width: 220px;margin-right: 15px;">
+                            <span class="dropdown" style="background: transparent;color:#707070;font-size: 20px;">
+                                &times;
+                            </span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 20px;">
+                  <button style="width: 90px; margin-right: 10px;background: white;color: black;"
+                    (click)="changeMergeContactStep('Step1')">Back</button>
+                  <button (click)="changeMergeContactStep('Step1')">Confirm and Merge</button>
+                </div>
+              </div>
+
+            </div>
+      </div>
+    </div>
+    <!-- <div class="uploadlist" style="width: 60%">
+
+        </div> -->
+    <!-- <div class="modal fade show" id="exportCSV" tabindex="-1" role="dialog" aria-labelledby="addNewContact"
+    aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="height: 100%;width: 30%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Export started</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 1rem;padding-bottom: 25px;">
+          <p>We are working on exporting your data. You will receive an email with a link to where you can retrieve your
+            export shortly.
+          </p>
+          <button (click)="changeStatus('exportCsvFile')">OK</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+    <!-- The Modal -->
+    <div id="exportCSV" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 style="color: black;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 0;">Export started</h2>
+          <span class="close">&times;</span>
+
+        </div>
+        <div class="modal-body">
+          <p>We are working on exporting your data. You will receive an email with a link to where you can retrieve your
+            export shortly.</p>
+          <button style="width: 20%;float:right;" (click)="changeStatus('exportCsvFile')">OK</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>

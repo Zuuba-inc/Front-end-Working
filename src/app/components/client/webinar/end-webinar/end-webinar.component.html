@@ -1,0 +1,52 @@
+<main>
+
+	<header class="webinar-header">
+
+		<div class="row justify-content-between align-items-center">
+
+			<div class="col-2">
+				<!-- User Controls -->
+				<div class="logo">
+					
+					<img class="img-fluid" alt="Profile picture" src="assets/images/logo-invert.svg">
+					
+				
+				</div>
+				<!-- /User Controls -->
+			</div>
+		</div>
+
+	</header>
+
+	<!-- Main Content -->
+	<section id="webinar-live" class="content"> 
+		<!--toggle class "side-closed to open/close side panel-->
+
+		<div class="row no-gutters justify-content-center">
+			<div class="col-lg-4">
+
+	  <!-- logo symbol -->
+	  <div class="webinar-end" id="endWebinarDiv"  style="display: none">
+		<div class="img">
+		  <img src="assets/images/logo-sym.svg" alt="">
+		</div>
+
+		<h6 id="message">Thank you for attending.</h6>
+
+		<a class="btn">Go to dashboard</a>
+	  </div>
+    
+    <div class="invite" id="endWebinarOfferDiv">
+      <h4 class="invite__title">{{webinarOffer.title}}</h4>
+      <p class="invite__desc">{{webinarOffer.description}}</p>
+
+      <button class="invite__btn" (click)="countActionUser()">{{webinarOffer.callToActionLabel}}</button>
+    </div>
+			</div>
+		</div>
+
+	</section>
+
+</main>
+<ngx-ui-loader></ngx-ui-loader>
+<!-- end/zu-content -->

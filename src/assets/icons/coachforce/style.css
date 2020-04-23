@@ -1,0 +1,693 @@
+@font-face {
+  font-family: 'coachforce';
+  src:  url('fonts/coachforce.eot?3vmfut');
+  src:  url('fonts/coachforce.eot?3vmfut#iefix') format('embedded-opentype'),
+    url('fonts/coachforce.ttf?3vmfut') format('truetype'),
+    url('fonts/coachforce.woff?3vmfut') format('woff'),
+    url('fonts/coachforce.svg?3vmfut#coachforce') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'coachforce' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cf-action-page .path1:before {
+  content: "\e931";
+  color: rgb(23, 93, 122);
+}
+.cf-action-page .path2:before {
+  content: "\e932";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-page .path3:before {
+  content: "\e933";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-page .path4:before {
+  content: "\e934";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-page .path5:before {
+  content: "\e935";
+  margin-left: -1.111328125em;
+  color: rgb(255, 255, 255);
+}
+.cf-action-page .path6:before {
+  content: "\e936";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-plan .path1:before {
+  content: "\e937";
+  color: rgb(72, 125, 148);
+}
+.cf-action-plan .path2:before {
+  content: "\e938";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-action-plan .path3:before {
+  content: "\e939";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-action-plan .path4:before {
+  content: "\e93a";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-plan .path5:before {
+  content: "\e93b";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-plan .path6:before {
+  content: "\e93c";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-plan .path7:before {
+  content: "\e93d";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-action-plan .path8:before {
+  content: "\e93e";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-action-plan .path9:before {
+  content: "\e93f";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-action-plan .path10:before {
+  content: "\e940";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-action-plan .path11:before {
+  content: "\e941";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-attached:before {
+  content: "\e942";
+  color: #959595;
+}
+.cf-blank-funnel .path1:before {
+  content: "\e943";
+  color: rgb(23, 93, 122);
+}
+.cf-blank-funnel .path2:before {
+  content: "\e944";
+  margin-left: -1.15625em;
+  color: rgb(72, 125, 148);
+}
+.cf-document:before {
+  content: "\e945";
+  color: #1dcb9a;
+}
+.cf-envlope-stack .path1:before {
+  content: "\e946";
+  color: rgb(29, 203, 154);
+}
+.cf-envlope-stack .path2:before {
+  content: "\e947";
+  margin-left: -1.4248046875em;
+  color: rgb(72, 125, 148);
+}
+.cf-envlope-stack .path3:before {
+  content: "\e948";
+  margin-left: -1.4248046875em;
+  color: rgb(23, 93, 122);
+}
+.cf-envlope:before {
+  content: "\e949";
+  color: #487d94;
+}
+.cf-forward:before {
+  content: "\e94a";
+  color: #1dcb9a;
+}
+.cf-mail:before {
+  content: "\e94b";
+  color: #175d7a;
+}
+.cf-mail-action .path1:before {
+  content: "\e94c";
+  color: rgb(29, 203, 154);
+}
+.cf-mail-action .path2:before {
+  content: "\e94d";
+  margin-left: -1.0849609375em;
+  color: rgb(0, 0, 0);
+}
+.cf-multimedia .path1:before {
+  content: "\e94e";
+  color: rgb(23, 93, 122);
+}
+.cf-multimedia .path2:before {
+  content: "\e94f";
+  margin-left: -1.15625em;
+  color: rgb(72, 125, 148);
+}
+.cf-multimedia .path3:before {
+  content: "\e950";
+  margin-left: -1.15625em;
+  color: rgb(29, 203, 154);
+}
+.cf-multiple-plans .path1:before {
+  content: "\e951";
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path2:before {
+  content: "\e952";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path3:before {
+  content: "\e953";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path4:before {
+  content: "\e954";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path5:before {
+  content: "\e955";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path6:before {
+  content: "\e956";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path7:before {
+  content: "\e957";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path8:before {
+  content: "\e958";
+  margin-left: -1.1552734375em;
+  color: rgb(29, 203, 154);
+}
+.cf-multiple-plans .path9:before {
+  content: "\e959";
+  margin-left: -1.1552734375em;
+  color: rgb(255, 255, 255);
+}
+.cf-multiple-plans .path10:before {
+  content: "\e95a";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path11:before {
+  content: "\e95b";
+  margin-left: -1.1552734375em;
+  color: rgb(255, 255, 255);
+}
+.cf-multiple-plans .path12:before {
+  content: "\e95c";
+  margin-left: -1.1552734375em;
+  color: rgb(255, 255, 255);
+}
+.cf-multiple-plans .path13:before {
+  content: "\e95d";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path14:before {
+  content: "\e95e";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path15:before {
+  content: "\e95f";
+  margin-left: -1.1552734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-multiple-plans .path16:before {
+  content: "\e960";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path17:before {
+  content: "\e961";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path18:before {
+  content: "\e962";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path19:before {
+  content: "\e963";
+  margin-left: -1.1552734375em;
+  color: rgb(23, 93, 122);
+}
+.cf-multiple-plans .path20:before {
+  content: "\e964";
+  margin-left: -1.1552734375em;
+  color: none;
+}
+.cf-multiple-plans .path21:before {
+  content: "\e965";
+  margin-left: -1.1552734375em;
+  color: none;
+}
+.cf-multiple-plans .path22:before {
+  content: "\e966";
+  margin-left: -1.1552734375em;
+  color: none;
+}
+.cf-multiple-plans .path23:before {
+  content: "\e967";
+  margin-left: -1.1552734375em;
+  color: none;
+}
+.cf-open-book:before {
+  content: "\e968";
+  color: #175d7a;
+}
+.cf-quiz-page:before {
+  content: "\e969";
+  color: #175d7a;
+}
+.cf-sales-page .path1:before {
+  content: "\e96a";
+  color: rgb(23, 93, 122);
+}
+.cf-sales-page .path2:before {
+  content: "\e96b";
+  margin-left: -1.15625em;
+  color: rgb(72, 125, 148);
+}
+.cf-sales-page .path3:before {
+  content: "\e96c";
+  margin-left: -1.15625em;
+  color: rgb(29, 203, 154);
+}
+.cf-sales-plan .path1:before {
+  content: "\e96d";
+  color: rgb(23, 93, 122);
+}
+.cf-sales-plan .path2:before {
+  content: "\e96e";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-sales-plan .path3:before {
+  content: "\e96f";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-sales-plan .path4:before {
+  content: "\e970";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-sales-plan .path5:before {
+  content: "\e971";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-sales-plan .path6:before {
+  content: "\e972";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-sales-plan .path7:before {
+  content: "\e973";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-sales-plan .path8:before {
+  content: "\e974";
+  margin-left: -1.0546875em;
+  color: rgb(255, 255, 255);
+}
+.cf-sales-plan .path9:before {
+  content: "\e975";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-sales-plan .path10:before {
+  content: "\e976";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-sales-plan .path11:before {
+  content: "\e977";
+  margin-left: -1.0546875em;
+  color: rgb(255, 255, 255);
+}
+.cf-sales-plan .path12:before {
+  content: "\e978";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-sales-plan .path13:before {
+  content: "\e979";
+  margin-left: -1.0546875em;
+  color: rgb(255, 255, 255);
+}
+.cf-sales-plan .path14:before {
+  content: "\e97a";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-sales-plan .path15:before {
+  content: "\e97b";
+  margin-left: -1.0546875em;
+  color: none;
+}
+.cf-tag-action .path1:before {
+  content: "\e97c";
+  color: rgb(29, 203, 154);
+}
+.cf-tag-action .path2:before {
+  content: "\e97d";
+  margin-left: -1.0478515625em;
+  color: rgb(0, 0, 0);
+}
+.cf-tag-action .path3:before {
+  content: "\e97e";
+  margin-left: -1.0478515625em;
+  color: rgb(0, 0, 0);
+}
+.cf-video-page .path1:before {
+  content: "\e97f";
+  color: rgb(23, 93, 122);
+}
+.cf-video-page .path2:before {
+  content: "\e980";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-video-page .path3:before {
+  content: "\e981";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-video-page .path4:before {
+  content: "\e982";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-video-page .path5:before {
+  content: "\e983";
+  margin-left: -1.111328125em;
+  color: rgb(255, 255, 255);
+}
+.cf-video-page .path6:before {
+  content: "\e984";
+  margin-left: -1.111328125em;
+  color: none;
+}
+.cf-video-page .path7:before {
+  content: "\e985";
+  margin-left: -1.111328125em;
+  color: rgb(23, 93, 122);
+}
+.cf-webinar-plan .path1:before {
+  content: "\e986";
+  color: rgb(23, 93, 122);
+}
+.cf-webinar-plan .path2:before {
+  content: "\e987";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-webinar-plan .path3:before {
+  content: "\e988";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-webinar-plan .path4:before {
+  content: "\e989";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-webinar-plan .path5:before {
+  content: "\e98a";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-webinar-plan .path6:before {
+  content: "\e98b";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-webinar-plan .path7:before {
+  content: "\e98c";
+  margin-left: -1.0546875em;
+  color: rgb(23, 93, 122);
+}
+.cf-webinar-plan .path8:before {
+  content: "\e98d";
+  margin-left: -1.0546875em;
+  color: rgb(29, 203, 154);
+}
+.cf-webinar-plan .path9:before {
+  content: "\e98e";
+  margin-left: -1.0546875em;
+  color: rgb(255, 255, 255);
+}
+.cf-webinar-plan .path10:before {
+  content: "\e98f";
+  margin-left: -1.0546875em;
+  color: rgb(72, 125, 148);
+}
+.cf-webpage:before {
+  content: "\e990";
+  color: #175d7a;
+}
+.cf-screens:before {
+  content: "\e920";
+  color: #959595;
+}
+.cf-share-screen .path1:before {
+  content: "\e92b";
+  color: rgb(255, 255, 255);
+}
+.cf-share-screen .path2:before {
+  content: "\e92c";
+  margin-left: -1.2802734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-share-screen .path3:before {
+  content: "\e92d";
+  margin-left: -1.2802734375em;
+  color: rgb(255, 255, 255);
+}
+.cf-share-screen .path4:before {
+  content: "\e92e";
+  margin-left: -1.2802734375em;
+  color: rgb(72, 125, 148);
+}
+.cf-fullscreen-exit:before {
+  content: "\e921";
+  color: #959595;
+}
+.cf-speaker:before {
+  content: "\e926";
+  color: #959595;
+}
+.cf-clock:before {
+  content: "\e922";
+  color: #104e60;
+}
+.cf-fullscreen:before {
+  content: "\e923";
+  color: #959595;
+}
+.cf-hamburger-menu:before {
+  content: "\e924";
+}
+.cf-thumbs-up:before {
+  content: "\e925";
+  color: #959595;
+}
+.cf-gear:before {
+  content: "\e926";
+  color: #959595;
+}
+.cf-cam:before {
+  content: "\e927";
+  color: #1dcb9a;
+}
+.cf-mic:before {
+  content: "\e928";
+  color: #959595;
+}
+.cf-monitor:before {
+  content: "\e929";
+  color: #959595;
+}
+.cf-folder:before {
+  content: "\e92a";
+  color: #1dcb9a;
+}
+.cf-audio:before {
+  content: "\e92f";
+  color: #487d94;
+}
+.cf-speed:before {
+  content: "\e930";
+  color: #487d94;
+}
+.cf-add:before {
+  content: "\e900";
+  color: #1dcb9a;
+}
+.cf-analysis:before {
+  content: "\e901";
+  color: #0c4962;
+}
+.cf-arrow-right:before {
+  content: "\e902";
+  color: #fff;
+}
+.cf-branch:before {
+  content: "\e903";
+}
+.cf-close:before {
+  content: "\e904";
+  color: #707070;
+}
+.cf-coaching:before {
+  content: "\e905";
+  color: #0c4962;
+}
+.cf-contact:before {
+  content: "\e906";
+  color: #0c4962;
+}
+.cf-correct:before {
+  content: "\e907";
+  color: #1dcb9a;
+}
+.cf-facebook:before {
+  content: "\e908";
+  color: #fff;
+}
+.cf-google .path1:before {
+  content: "\e909";
+  color: rgb(251, 187, 0);
+}
+.cf-google .path2:before {
+  content: "\e90a";
+  margin-left: -1em;
+  color: rgb(81, 142, 248);
+}
+.cf-google .path3:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(40, 180, 70);
+}
+.cf-google .path4:before {
+  content: "\e90c";
+  margin-left: -1em;
+  color: rgb(241, 67, 54);
+}
+.cf-home:before {
+  content: "\e90d";
+  color: #0c4962;
+}
+.cf-image:before {
+  content: "\e90e";
+  color: #e1e1e1;
+}
+.cf-info .path1:before {
+  content: "\e90f";
+  color: rgb(255, 255, 255);
+}
+.cf-info .path2:before {
+  content: "\e910";
+  margin-left: -1em;
+  color: none;
+}
+.cf-info .path3:before {
+  content: "\e911";
+  margin-left: -1em;
+  color: rgb(29, 203, 154);
+}
+.cf-map:before {
+  content: "\e912";
+  color: #fff;
+}
+.cf-marketing:before {
+  content: "\e913";
+  color: #fff;
+}
+.cf-move:before {
+  content: "\e914";
+  color: #707070;
+}
+.cf-preview:before {
+  content: "\e915";
+  color: #fff;
+}
+.cf-private:before {
+  content: "\e916";
+  color: #fff;
+}
+.cf-public:before {
+  content: "\e917";
+  color: #959595;
+}
+.cf-search:before {
+  content: "\e918";
+}
+.cf-setting:before {
+  content: "\e919";
+  color: #fff;
+}
+.cf-share-fb .path1:before {
+  content: "\e91a";
+  color: rgb(34, 110, 230);
+}
+.cf-share-fb .path2:before {
+  content: "\e91b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.cf-share-tw .path1:before {
+  content: "\e91c";
+  color: rgb(28, 203, 255);
+}
+.cf-share-tw .path2:before {
+  content: "\e91d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.cf-trash:before {
+  content: "\e91e";
+  color: #e1e1e1;
+}
+.cf-website:before {
+  content: "\e91f";
+  color: #0c4962;
+}

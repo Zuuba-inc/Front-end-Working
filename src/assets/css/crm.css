@@ -1,0 +1,211 @@
+select {
+    -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: url(../icons/arrow-down.svg) no-repeat;
+      background-size: 10px;
+      background-position: 95% 10px;
+      font-size: 12px;
+      width: 220px;
+      border: 1px solid #ced4da;
+      border-radius: 2px;
+      padding: 4px;
+      font-weight: 500;
+  }
+
+  table{
+    width: 100%;
+    background: #fff;
+    margin-top: 15px;
+    border: 1px solid #E1E1E1;
+    
+  }
+  thead{
+    
+    background-color: #F6F6F6;
+    border: 1px solid #E1E1E1;
+  }
+  table tr{
+    font-size: 12px;
+    border-bottom: 1px solid #E1E1E1; 
+  }
+  table td , table th{
+    color: #707070;
+    padding: 9px;
+  }
+  
+  button{
+    border-radius: 2px;
+    height: 35px;
+    background: #000000 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 17px;
+    font-family: 'Open-Sans-SemiBold';
+    border: 1px solid #000000;
+  }
+  
+  .uploadlist .onoffswitch {
+    position: relative;
+    height:20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 55%;
+    height: auto;
+    -webkit-user-select:none;
+     -moz-user-select:none;
+      -ms-user-select: none;
+  }
+  
+  .uploadlist  .onoffswitch h3{
+    position: absolute;
+    color: #363636;
+    font-size: 14px;
+    line-height: 19px;
+  
+  }
+  .uploadlist .onoffswitch-checkbox {
+    display: none;
+  }
+  .uploadlist .onoffswitch-label {
+    float:right;
+    overflow: hidden;
+    cursor: pointer; 
+    border-radius: 20px;
+    width: 45px;
+    height: 20px;
+  }
+  
+  .uploadlist .onoffswitch-inner {
+    display: block;
+    width: 200%; 
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+  }
+  .uploadlist .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 14px;
+    font-size: 10px;
+    color: white;
+    font-family: 'Open-Sans-SemiBold';
+    box-sizing: border-box;
+  }
+  .uploadlist .onoffswitch-inner:before {
+    content: "ON" !important;
+    padding-left: 6px;
+    padding-top:3px;
+    background-color: #0B8B8C;
+    color: #FFFFFF;
+  }
+  .uploadlist .onoffswitch-inner:after {
+    content: "OFF" !important;
+    padding-right: 4px;
+    padding-top:3px;
+    background-color: #bbb9b9;
+    color: white;
+    text-align: right;
+  }
+  .uploadlist .onoffswitch-switch {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    position: absolute;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    border: none;
+  }
+  .uploadlist .onoffswitch-switch:after{
+    background: #0B8B8C;
+  }
+  .uploadlist .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+  }
+  .uploadlist .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    margin-left: 26px;
+  }
+
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+  .column div{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E1E1E1;
+  }
+
+  .column .searchBox{
+    width: 100%;
+    /* box-sizing: border-box;
+    border: 2px solid #ccc; */
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../icons/search.svg');
+    background-position: 95% 7px;
+    background-repeat: no-repeat;
+    padding: 2px;
+    background-size: 6%;
+    padding-left: 10px;
+  }
+
+  .column select{
+    width: 12%;
+    float: right;
+    border: 1px solid;
+    border-radius: 2px;
+    padding-left: 10px;
+    background-position: 90% 13px;
+    font-weight: bold;
+  }
+
+  .dropdown{
+    position: relative;
+  }
+  .dropdown-content{
+      list-style: none;
+      background: white;
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 130px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 8px 10px;
+      z-index: 1;
+      right: 0;
+  }
+  .dropdown-content li{
+    padding-bottom: 10px;
+      font-weight: bold;
+      cursor: pointer;
+  }
+
+  .crmInputType{
+    display: block;
+    width: 427px;
+    height: 30px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    padding: 10px;
+  }
+  .addMore{
+    background: #E9E9E9 0% 0% no-repeat padding-box;
+    border: 1px solid #E2E2E2;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+  }

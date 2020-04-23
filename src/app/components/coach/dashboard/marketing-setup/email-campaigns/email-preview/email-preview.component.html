@@ -1,0 +1,281 @@
+<div class="page-wrapper">
+    <!-- start section header -->
+    <section class="header">
+        <div class="row row-6">
+            <div id="back" class="d-inline col-lg-1 p-0">
+                <button *ngIf="emailCampaignData.status != 'SENT'" type="button" class="btn btn-light rounded-0" (click)="goBack();">
+                    <img src="assets/icons/ic_back.svg">
+                    Back
+                </button>
+            </div>
+            <div id="build" class="d-inline col-lg-10 p-0 border-0 text-center">
+                <div style="padding-top:10px;">
+                    <ul>
+                        <li (click)="changeView('DesktopemailTemplateWindow', $event)" class="previewType active"><img
+                                src="assets/icons/ic_desktop.svg">Desktop</li>
+                        <li (click)="changeView('Tablet', $event)" class="previewType"><img
+                                src="assets/icons/ic_tablet.svg">Tablet</li>
+                        <li (click)="changeView('Phone', $event)" class="previewType"><img
+                                src="assets/icons/ic_phone.svg">Phone</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div id="preview" class="d-inline col-lg-1 p-0">
+                <button type="button" class="btn btn-light preview-6" data-toggle="modal" data-target="#m_modal_1">
+                    Sent Test Email</button>
+
+                <div class="modal fade show" id="m_modal_1" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Send A Test Email</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" *ngIf="sendingEmail == false">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="sendTestEmail">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Send To</label>
+                                        <input type="text" class="form-control" 
+                                            name="sendTo"
+                                            placeholder="Send To"
+                                            [(ngModel)]="sendTo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <input type="text" class="form-control" 
+                                        name="subject"
+                                                placeholder="Subject"
+                                                [(ngModel)]="subject">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>From Name</label>
+                                        <input type="text" class="form-control" placeholder="From Name"
+                                        name="fromName"
+                                            [(ngModel)]="fromName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Replay-to-Email</label>
+                                        <input type="text" class="form-control" placeholder="Replay-to-Email"
+                                        name="replyToEmail"
+                                            [(ngModel)]="replyToEmail">
+                                    </div>
+                                    <div class="form-group text-center footer">
+                                        <button type="button" class="btn Cancel" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn" (click)="sendTestEmail()">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-body" style="text-align: center;display: none;" id="sendingTestEmail">
+                                <div style="font-family: Open-Sans-SemiBold;
+                                font-size: 20px;">Sending your email...</div>
+                               <img src="assets/images/loaderImage/demoVideo.mp4.gif" style="height: 200px;">
+                            </div>
+                            <div class="modal-body" style="text-align: center;display: none;" id="sucessfullySentTestEmail">
+                                <div style="font-family: Open-Sans-SemiBold;
+                                font-size: 20px;">Test Email Was Sent Successfully</div>
+                               <img src="assets/icons/img_emailsent.svg" style="height: 90px;margin-top: 21px;">
+                                <div class="form-group text-center footer">
+                                <button type="button" class="btn" data-dismiss="modal" (click)="closeSendTestEmailBox()">Done</button>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal fade show" id="sendingTestEmail" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Send a Test Email</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background: white;top: 0px;
+                            margin-top: 0px;font-size: 34px;line-height: 0px;">
+                                <span aria-hidden="true" style="line-height: 0px;">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="text-align: center;">
+                            <div style="font-family: Open-Sans-SemiBold;
+                            font-size: 20px;">Sending your email...</div>
+                           <img src="assets/images/loaderImage/demoVideo.mp4.gif" style="height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- end section header -->
+    <!-- start section content -->
+    <section class="content">
+        <div class="row" id="main">
+            <!-- Tab view -->
+            <div id="Tablet" class="tab view" style="display: none;">
+                <div class="form-group text-center ">
+                    <button class="circle"></button>
+                    <button class="rectangle"></button>
+                </div>
+                <!-- start  main-content -->
+                <div class="col-lg-12 main-content main-content-6 main-content-7" id="TabletemailTemplateWindow" 
+                detect-scroll (onScroll)="moveBackgroundImageWithScroll($event)" style="overflow: auto;"
+                [ngStyle]="{'max-height': emailCampaignData.status == 'SENT' ? '450px' : '550px'}">
+                    <div class="content text-center content-6"  id="TabletemailTemplateInnerWindow">
+                        <div *ngFor="let item of emailTempelate">
+                            <ng-container *ngIf="item.tag=='logo'">
+                                <div [innerHtml]="item.htmlText  | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='title'">
+                                <div class="first" [innerHtml]="item.htmlText  | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='text'">
+                                <div class="join" [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='column'">
+                                <div class="tab-pane active" style="height: auto;">
+                                    <div id="content-body">
+                                        <div class="content text-center" style="width: 100%;margin: 0px 6px 0px 0px;">
+                                            <div class="secand secand2" style="border: 1px solid transparent;padding: 0;"
+                                            [innerHtml]="item.htmlText | safeInnerHtml">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <!-- <ng-container *ngIf="item.tag=='column'">
+                                <div class="join" [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container> -->
+                            <ng-container *ngIf="item && item.tag=='image'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='button'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='divider'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='footer'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tab view closed-->
+            <!-- Phone view -->
+            <div id="Phone" class="tab tab-8 view" style="display: none;">
+                <div class="form-group text-center ">
+                    <button class="circle"></button>
+                    <button class="rectangle"></button>
+                </div>
+                <!-- start  main-content -->
+                <div class="col-lg-12 main-content main-content-6 main-content-7 main-content-8" 
+                detect-scroll (onScroll)="moveBackgroundImageWithScroll($event)" id="PhoneemailTemplateWindow"
+                style="overflow: auto;"  [ngStyle]="{'max-height': emailCampaignData.status == 'SENT' ? '450px' : '550px'}">
+                    <div class="content text-center content-6 content-8" id="PhoneemailTemplateInnerWindow">
+                        <div *ngFor="let item of emailTempelate">
+                            <ng-container *ngIf="item.tag=='logo'">
+                                <div [innerHtml]="item.htmlText  | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='column'">
+                                <div class="tab-pane active" style="height: auto;">
+                                    <div id="content-body">
+                                        <div class="content text-center" style="width: 100%;margin: 0px 6px 0px 0px;">
+                                            <div class="secand secand2" style="border: 1px solid transparent;padding: 0;"
+                                            [innerHtml]="item.htmlText | safeInnerHtml">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='title'">
+                                <div class="first" [innerHtml]="item.htmlText  | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item.tag=='text'">
+                                <div class="join" [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='image'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='button'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='divider'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="item && item.tag=='footer'">
+                                <div [innerHtml]="item.htmlText | safeInnerHtml">
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phone view closed -->
+            <!-- Desktop view -->
+            <div class="col-lg-12 main-content main-content-6 view" detect-scroll (onScroll)="moveBackgroundImageWithScroll($event)" id="DesktopemailTemplateWindow" style="overflow: auto;
+            " [ngStyle]="{'height': emailCampaignData.status == 'SENT' ? '75vh' : '95vh'}">
+                <div class="content text-center content-6" id="DesktopemailTemplateInnerWindow">
+                    <div *ngFor="let item of emailTempelate">
+                        <ng-container *ngIf="item.tag=='logo'">
+                            <div [innerHtml]="item.htmlText  | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.tag=='title'">
+                            <div class="first" [innerHtml]="item.htmlText  | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.tag=='text'">
+                            <div class="join" [innerHtml]="item.htmlText | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.tag=='column'">
+                            <div class="tab-pane active" style="height: auto;">
+                                <div id="content-body">
+                                    <div class="content text-center" style="width: 100%;margin: 0px 6px 0px 0px;">
+                                        <div class="secand secand2" style="border: 1px solid transparent;padding: 0;"
+                                        [innerHtml]="item.htmlText | safeInnerHtml">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item && item.tag=='image'">
+                            <div [innerHtml]="item.htmlText | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item && item.tag=='button'">
+                            <div [innerHtml]="item.htmlText | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item && item.tag=='divider'">
+                            <div [innerHtml]="item.htmlText | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item && item.tag=='footer'">
+                            <div [innerHtml]="item.htmlText | safeInnerHtml">
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <!-- Desktop view closed-->
+        </div>
+    </section>
+    <!-- end section content -->
+</div>

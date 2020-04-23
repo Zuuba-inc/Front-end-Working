@@ -1,0 +1,55 @@
+<div class="xdWebinarThankUcustom">
+  <div class="white-bx-shadow">
+      <div class="container-fluid">
+          <div class="row start-bg">
+              <div class="col-sm-3 fs-16 fw-600" style="padding-top: 1%;">
+                  {{firstName}} {{lastName}}
+              </div>
+              <div class="col-sm-6 img0">
+
+                  <img src="../../assets/images/logo.png" class="img-responsive">
+              </div>
+          </div>
+
+          <div class="xdWebinarCountdown" data-parent="#pageAccordion">
+              <div class="section-p">
+                  <div class="row">
+                      <div class="bg-dark-blue box-shadow col-6 m-auto br-5">
+                          <div class="content text-white py-5 px-3">
+                              <div class="text-center mb-3">
+                                  <p class="fs-18 fw-600">@webinarMst.webinarTitle</p>
+                                  <div class="hr-line bg-dark-green"></div>
+                                  <h3 class="fs-30 fw-600">Starting soon</h3>
+                                  <div id="webinarTimer" class="countdown">
+                                      <div class='countdown-container days'>
+                                        <span class='countdown-heading days-top'>Days</span>
+                                        <span class='countdown-value days-bottom' id="daysLeft">0</span>
+                                      </div><div class='countdown-container hours'>
+                                        <span class='countdown-heading hours-top'>Hours</span>
+                                        <span class='countdown-value hours-bottom' id="hoursLeft">0</span>
+                                      </div><div class='countdown-container minutes'>
+                                        <span class='countdown-heading minutes-top'>Minutes</span>
+                                        <span class='countdown-value minutes-bottom' id="minLeft">0</span>
+                                      </div><div class='countdown-container seconds'>
+                                        <span class='countdown-heading seconds-top'>Seconds</span>
+                                        <span class='countdown-value seconds-bottom' id="secLeft">0</span>
+                                      </div> 
+                                    </div>
+                                  <div class="time-to mx-auto"><p id="myTimer"></p></div>
+                                  <div class="hr-line bg-dark-green"></div>
+                                  <p class="fs-14 fw-600 ">Presenters</p>
+                                  <div class="timerUser">
+                                      <div class="timerAvtar mr-3">
+                                          <img src="../../assets/images/avatar-2.jpg" class="img-fluid">
+                                      </div>
+                                      <div class="fs-18 fw-600">{{firstName}} {{lastName}}</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

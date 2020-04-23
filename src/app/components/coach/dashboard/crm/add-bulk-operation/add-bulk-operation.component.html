@@ -1,0 +1,207 @@
+<main>
+  <!-- <aside class="side-bar">
+      <header class="side-bar__logo-area">
+        <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+      </header>
+    </aside> -->
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+
+  <div class="page-wrapper">
+    <div class="mainContainer">
+      <div *ngIf="addBulkOperationStatus == 'addSegmentationRule'" class="addBulkOperation" style="width: 80%;">
+        <a [routerLink]="['/crm/segments']">
+          < Back to segments</a>
+            <div>
+              <div style="margin-top: 30px;">
+                <h6 style="display: inline;">Choose the segment this operation should affect</h6>
+                
+                <span style="display: block;font-size: 12px;
+                      font-weight: bold;margin-top: 10px;">Showing all active people</span>
+              </div>
+              <div style="height: auto;background: #EFEFEF;border: 1px solid #E1E1E1;">
+                <div style="text-align: right;font-size: 12px;
+                      font-weight: bold;float: right;" (click)="changeShowFilter(true)">Show Filter
+                      <img style="margin: 10px;width: 10px;" src="assets/icons/arrow-down.svg">
+                </div>
+                <div *ngIf="showFilter == false"  style="text-align: center;width: 70%;margin: 2% auto;">
+                  People who have not received the “Test Broadcast” broadcast
+                </div>
+                <div *ngIf="showFilter == true">
+                  <app-segmentation-rule></app-segmentation-rule>
+                </div>
+              </div>
+              <div class="column" style="width: 100%;padding: 0;margin-top: 20px;">
+                <h6 style="display: inline;font-size: 14px;">Showing 8 people</h6>
+                <select>
+                  <option>Export to CSV</option>
+                  <option>Perform a Bulk Operation</option>
+                </select>
+                <div style="float: right;padding: 0;
+                      margin-right: 10px;
+                      width: 35%;">
+                  <input class="searchBox" placeholder="Search here" style="border: none;background-size: 4%;">
+                  <!-- <button><img src="./assets/icons/search.svg" style="width: 24px;height: 15px;"></button> -->
+                </div>
+
+                <table>
+                  <thead>
+                    <tr style="border-top: 1px solid #E1E1E1;">
+                      <th style="padding-left: 15px;">
+                        NAME
+                      </th>
+                      <th>EMAIL</th>
+                      <th>PHONE NUMBER</th>
+                      <th>COMPANY</th>
+                      <th>LAST ACTIVITY</th>
+                      <th style="text-align: right;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let contact of segmentContacts; let i = index">
+                      <td style="padding-left: 15px;text-align: left;font-weight: bold;">
+                        <a style="font-size: 14px;color: #0B8B8C;">{{contact.name}}</a></td>
+                      <td>{{contact.email}}</td>
+                      <td>{{contact.phnNumber}}</td>
+                      <td>{{contact.location}}</td>
+                      <td>{{contact.date}}</td>
+                      <td (mouseleave)="closeEditEmailDropDown(i+'dropdown')" style="text-align: center;">
+
+                        <span
+                          style="background: black;color: white;padding: 4px 10px 4px 10px;margin-right: 1px;">View</span>
+                        <span class="dropdown" style="background: black;padding: 4px 8px 4px 8px;"
+                          (click)="openViewDropDown(i+'dropdown')">
+                          <img src="assets/icons/arrow-down.svg">
+                          <ul class="dropdown-content" id="{{i+'dropdown'}}" style="display: none;">
+                            <li>Edit</li>
+                            <li>Delete</li>
+                            <li>View</li>
+                          </ul>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+                <div style="border: none;">
+                  <button class="backButton" style="display: block;" (click)="next('addAutomationRule')">Next</button>
+                  <span class="dot"></span>
+                </div>
+              </div>
+             
+            </div>
+
+      </div>
+      <div *ngIf="addBulkOperationStatus == 'addAutomationRule'" class="addBulkOperation" style="width: 50%;">
+        <h6 style="font-size: 18px;">Automation Actions</h6>
+        <p style="font-weight: bold;color: black;">
+          Perform automation actions on the people you’ve selected.
+        </p>
+        <div style="width: 690px;
+            height: 60px;
+            background: #EFEFEF 0% 0% no-repeat padding-box;
+            border: 1px solid #E1E1E1;
+            padding: 15px;margin-bottom: 10px;">
+          <select style="width: 150px;background-color: white;">
+            <option>Zuuba</option>
+            <option>Zuuba</option>
+          </select>
+          <select style="width: 302px;background-color: white;">
+            <option hidden value="" disabled selected>Choose an action </option>
+            <option>Zuuba</option>
+            <option>Zuuba</option>
+          </select>
+        </div>
+        <div style="width: 690px;
+            height: 60px;
+            background: #EFEFEF 0% 0% no-repeat padding-box;
+            border: 1px solid #E1E1E1;
+            padding: 15px;margin-bottom: 10px;">
+          <select style="width: 150px;background-color: white;">
+            <option>Zuuba</option>
+            <option>Zuuba</option>
+          </select>
+          <select style="width: 302px;background-color: white;">
+            <option hidden value="" disabled selected>Choose an action </option>
+            <option>Zuuba</option>
+            <option>Zuuba</option>
+          </select>
+        </div>
+        <div style="margin-top: 20px;">
+          <span class="addMore" style="padding: 5px 10px;">
+            and
+          </span>
+          <span class="addMore">+</span>
+        </div>
+        <div class="container" style="padding-top: 10px;top: 0;">
+          <span class="text" style="margin-left: 10px;display: inline-block;
+            vertical-align: middle;">Skip automations triggered by these actions</span>
+          <input type="checkbox" checked>
+          <span class="checkmark" style="top: 13px;"></span>
+        </div>
+        <div>
+          <button class="backButton backbtn" style="margin-right: 10px;" (click)="next('addSegmentationRule')">Back</button>
+          <button class="backButton" (click)="next('readyToGo')">Next</button>
+        </div>
+        
+        <div>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      <div *ngIf="addBulkOperationStatus == 'readyToGo'" class="addBulkOperation" style="width: 50%;">
+        <div style=" width: 75%;margin: 5% auto;">  
+          <h5 style="font-weight: bold">Ready to go?</h5>
+          <img src="assets/images/loaderImage/CRM_upload_loading.gif" style="width: 75px;
+        height: 105px;">
+          <p style="font-size: 16px;">
+            We’ll add <b>10 contact</b> to your account. When would you like to perform this operation?
+          </p>
+          <div style="margin: 20px 0px;">
+            <select style="width: 446px;background-color: white;">
+              <option>At a specific Time</option>
+            </select>
+          </div>
+          <div style="margin: 20px 0px;">
+            <span style="font-size: 12px;
+            font-weight: bold;display: block;">Timezone</span>
+            <select style="width: 446px;background-color: white;">
+              <option>UTC/GMT -6</option>
+              <option>UTC/GMT -6</option>
+            </select>
+          </div>
+          <div style="margin: 20px 0px;">
+            <span style="font-size: 12px;
+            font-weight: bold;">Date & Time</span>
+            <div>
+              <input type="date" value="August 25, 2018" style="font-size: 14px;
+              letter-spacing: 0px;
+              color: #000000;
+              opacity: 1;
+              margin-right: 8%;
+              width: 204px;
+              border: 1px solid #E1E1E1;
+              padding: 2px 8px;">
+              <input type="time" value="09:00 PM" style="font-size: 14px;
+              letter-spacing: 0px;
+              color: #000000;
+              opacity: 1;
+              padding-left: 10px;
+              width: 204px;">
+            </div>
+            
+          </div>
+  
+          <button class="backButton" style="width: auto;" (click)="nextPage('performingAutomationRule')">Schedule Operation</button>
+          <div>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main>

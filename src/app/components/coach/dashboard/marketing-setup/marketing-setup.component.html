@@ -1,0 +1,51 @@
+<!-- zu-content -->
+<main>
+  <!-- Side Bar -->
+
+  <aside class="side-bar">
+
+    <!-- Logo -->
+    <header class="side-bar__logo-area">
+        <a href="/" class="side-bar__logo-area--logo">Zuuba</a>
+    </header>
+      <!-- /Logo -->
+
+
+    <!-- Menu -->
+    <ul class="side-bar__menu">
+      <li class="side-bar__menu--item active">
+        <!-- <span class="icon zu-arrow-right"></span>
+
+        <span class="svg-icon zu-marketing"></span>
+        marketing -->
+
+        <ul class="submenu submenu--opened">
+          <li class="submenu__back">
+            <button [routerLink]="['/dashboard']">
+              <!-- <span class="icon zu-arrow-left"></span> -->
+              <img src="./assets/icons/ic_back.svg" style="padding-right: 2px;padding-bottom: 2px;">
+              Main Menu
+            </button>
+          </li>
+          <li class="submenu__main-title">
+            Marketing
+          </li>
+          <li class="submenu__item" id="marketingPlace" (click)="navigateTo($event)">Marketing Marketplace</li>
+          <li class="submenu__item" id="funnels"  (click)="navigateTo($event)">Funnels</li>
+          <li class="submenu__item" id="emailCampaign" (click)="navigateTo($event)">Email Campaigns</li>
+          <li class="submenu__item" id="liveWebinar" (click)="navigateTo($event)">Live Webinars</li>
+          <li class="submenu__item" id="coupons" (click)="navigateTo($event)">Coupons</li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Header -->
+  <app-header></app-header>
+  <!-- Main Header -->
+ 
+  <!-- Add this router outlet for quiz-setup-options (activate)="onActivate($event)" -->
+  <!-- (activate)="onSetNavValidation($event)" -->
+  <router-outlet ></router-outlet>
+
+</main>

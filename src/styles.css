@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+.ngx-file-drop__drop-zone {
+    height: 170px !important;
+    padding: 32px !important;
+    margin: auto !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+.validationError{
+    color: red;
+    font-size: 11px;
+}
+
+  .ng5-slider{
+    width: 80% !important;
+    margin: 11px 0 15px !important;
+  }
+  .ng5-slider .ng5-slider-selection{
+    background: #0B8B8C !important;
+  }
+  .ng5-slider .ng5-slider-pointer{
+    background: #0B8B8C !important;
+  }
+
+  .ng5-slider .ng5-slider-pointer:after{
+    top: 5px !important;
+    left: 5px !important;
+  }
+  .ng5-slider .ng5-slider-pointer{
+    width: 18px !important;
+    height: 18px !important;
+    top: -8px !important;
+  }
+
+  .ng5-slider .ng5-slider-bubble.ng5-slider-limit{
+    display: none;
+  }
+
+ 

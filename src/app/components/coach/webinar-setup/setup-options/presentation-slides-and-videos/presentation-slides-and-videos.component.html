@@ -1,0 +1,196 @@
+<section id="webinar-sec" class="content" >
+<form class="form signup_form" #webinarPresentationForm="ngForm" novalidate name="webinarPresentationForm" id="webinarPIdresentationForm">
+      <div class="container-fluid px-md-5 px-3">
+    <div class="xdWebinarPrsSlide" data-parent="#pageAccordion">
+        <!-- AHMED - Add the new header -->
+        <header class="inner-header">
+                  <h2 class="configureSetupForm">PRESENTATION SLIDES & VIDEOS</h2>
+                  <button style="display:none" type="button" class="resetPreviewBtn backButton" ng-click="backPreview('configureSetupForm','configure','configurePreview');"><span class="icon cf-arrow-right"></span> Back</button>
+        </header>
+        
+        
+        <div class="row" style="padding-top: 3% !important; padding-left: 7% !important;"><!-- row start-->
+          <!-- page content start-->
+          <div class="col-xl-4 cstm-input scrollOverflow presScroll"><!-- col-xl-4 start-->
+      
+            <div id="webinarTypeAcc"><!--- webinarTypeAcc start ----->
+      
+              <!-- <div class="text-left">
+                <div class="normal-title">PRESENTATION SLIDES & VIDEOS</div>
+              </div>
+      
+              <br> -->
+              
+              <p class="normal-title fs-14">File type</p>
+              <div class="form-group">
+                <div class="dropdown">
+                  <!--<a class="btn btn-white text-left dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Type
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="javascript://" data-toggle="collapse" data-target=".xdPrstVideoSl">Video</a>
+                    <a class="dropdown-item" href="javascript://" data-toggle="collapse" data-target=".xdPrstSlideSl">Presentation Slides</a>
+                  </div>-->
+                  
+                  <select class="custom-select" #webinarFileTypeV="ngModel" required  name="webinarFileTypeV" id="webinarFileTypeV" [(ngModel)]="webinarPresFileType">
+                    <option value="0">Select</option>
+                    <option *ngFor="let types of webinarTypeList" [value]="types.id">{{types.value}}</option>
+                  </select>            
+                  <div *ngIf="webinarFileTypeV.invalid && (webinarFileTypeV.dirty || webinarFileTypeV.touched)"
+                  class="validationError">
+
+                    <div *ngIf="webinarFileTypeV.errors.required">
+                      *Webinar File Type is required.
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+      
+              <p class="normal-title fs-14">Name</p>
+              <div class="form-group">
+                <input type="text" class="form-control" #webinarFileName="ngModel" name="presentationV" [(ngModel)]="webinarPresFileName" required>
+                
+              </div>
+              <div *ngIf="webinarFileName.invalid && (webinarFileName.dirty || webinarFileName.touched)"
+              class="validationError">
+
+                <div *ngIf="webinarFileName.errors.required">
+                  *Webinar File Name is required.
+                </div>
+              </div>
+              <div id="wPrstSelectAcc">
+                <div class="collapse show xdPrstVideoSl" id="PrstVideoSl" data-parent="#wPrstSelectAcc">
+                  <!--p class="fs-14 mb-0">Video's URL</p>
+                  <p class="fs-12 text-muted">Please inset URL link of video</p>
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="http://youtube.com/jdhfas8dj" onblur="presentationVideo(this.value,null);presentationVideoVal(this.value);" ng-model="webinarPresFilePath" ng-blur="viemoYoutubeURLForPres();">
+                    <p class="col-sm-offset-3 help-block error" ng-if="webinarPresFilePathValidate">Field is required</p>
+                    <p class="col-sm-offset-3 help-block error" ng-if="presurlValidate">please enter youtube or vimeo url</p>
+                  </div-->
+                   <!-- <div class="uploadBx162 dragUploadBx text-center mb-2">
+                    <span class="text">Drag Image to Upload or <a href="javascript://" id="videoClick" onclick="$('#webinarVideoimg').click();">Click Here</a></span>
+                     <input type="file" class="custom-file-input videoFile" name="webinar_video" id="webinarVideoimg" accept="mp4"  pres-video-model="webinarVideoFile">            
+                    <p class="col-sm-offset-3 help-block error" ng-if="presurlValidate">Field is required</p>
+                  </div> -->
+      
+                </div>
+      
+                <!-- <div class="collapse  xdPrstSlideSl" id="PrstSlideSl" data-parent="#wPrstSelectAcc"> -->
+                  <!-- <div class="uploadBx162 dragUploadBx text-center mb-2">
+                    <!-- AHMED edit drag box
+                    <span class="cf-icon cf-image"></span>
+                    <span class="text">Drag Image to Upload or <br> <a href="javascript://" id="presClick" onclick="$('#webinarSlidesimg').click();">Click Here</a></span>
+                    <input type="file" class="custom-file-input presentFile" name="webinar_slide" id="webinarSlidesimg" accept="pdf" onchange="loadWebinarSlides(event);angular.element(this).scope().onFileChanged(event.target.files[0]);"  pres-file-model="webinarPresentationFile" style="display:none">
+                    <p class="col-sm-offset-3 help-block error" ng-if="webinarPresentationFileValidate">Field is required</p>
+                  </div> -->
+
+                  <app-upload-file [fileType]="webinarPresFileType" [module]="presentation" (file)="onFileUpload($event)"></app-upload-file>
+
+                  
+                <!-- </div> -->
+            <br>
+                <button class="btn btn-success btn-round btn-sm"  [disabled]="webinarPresentationForm.invalid || !changedImage" (click)="addUpdatePresentation();">Add</button>
+                <button class="btn btn-success btn-round btn-sm" (click)="editWebinarPresentationList();"  [disabled]="webinarPresentationForm.invalid" style="display:none;">Edit</button>
+      
+                  <p class="normal-title fs-14">Files</p>
+      
+                  <div class="d-flex justify-content-between fs-14" style="color: #707070" *ngFor="let webinarPres of webinarMst.webinarPresentationDetailList; let i = index">
+                  <a href="javascript://" (click)="editWebinarPresentation(i);">
+                    <div class="flex-center">{{i}} <i class="material-icons mx-2" style="color: #1E6377">insert_drive_file</i> <span> {{webinarPres.fileName}}</span></div>
+                    
+                    <div style="margin-top: -20px;margin-left: 286px;">
+                      <a href="javascript://" class="text-muted" (click)="deleteWebinarPresentation(webinarPres);"><i class="material-icons" style="color: #e1e1e1; font-size: 17px;">delete</i></a>
+                    </div>
+                   </a>
+                  </div>
+      
+                
+              </div>
+      
+              
+      
+            </div><!--- webinarTypeAcc Close ----->
+      
+            <br>
+      
+            <div class="clearfix"></div>
+      
+          </div><!-- col-xl-4 start-->
+          <!-- page content close-->
+      
+          <!-- col-xl-8 start-->
+          <div class="col-xl-7">
+            <div class="livePreviewbox"><!-- livePreviewbox start-->
+              <!-- <a href="javascript://" class="btn-block btn btn-dark-blue mt-0 btn-livepreview"><i class="material-icons fs-14 mr-2">remove_red_eye</i> Live preview</a> -->
+              <div class="live-box"><!-- live-box start --->
+                <div  class="liveHtmlFullPage viewzoom-2"><!-- liveHtmlFullPage start --->
+                  <!-- ahmed remove clss  white-bx-shadow -->
+                  <div class="section-padding">
+                    <!-- AHMED remove container div -->
+                    
+                   <div class="row justify-content-center">
+                     <div class="col-8">
+                       <div class="text-left mb-3" style="color: #363636">
+                         <p class="fs-14 bold">Presentation Materials</p>
+                       </div>
+      
+                          <div class="templateWrapper">
+
+                            <div class="theme active" *ngFor="let webinarPres of webinarMst.webinarPresentationDetailList; let i = index">
+                            
+                              <canvas id="pdf-image{{i}}" class="box-shadow preview" class="themeBx" style="height: 173px;width: 172px;border: solid" #videoCanvas *ngIf="webinarPres.fileType == 'video'">
+                                </canvas>
+
+                                <pdf-viewer [src]="webinarPres.filePath" id="pdfSrc{{i}}" #pdfCanvas
+                                [(page)]="page"
+                                [rotation]="rotation"
+                                [original-size]="originalSize"
+                                [fit-to-page]="fitToPage"
+                                (after-load-complete)="afterLoadComplete($event,i)"
+                                [zoom]="zoom"
+                                [show-all]="showAll"
+                                [stick-to-page]="stickToPage"
+                                [render-text]="renderText"
+                                [external-link-target]="'blank'"
+                                [autoresize]="autoresize"
+                                (error)="onError($event)"
+                                (page-rendered)="pageRendered($event)"
+                                class="box-shadow preview" class="themeBx" *ngIf="webinarPres.fileType == 'pdf'"></pdf-viewer>    
+
+                                <!--img src="img/bg.jpg" class="img-fluid" id="videoImage{{$index}}" ng-if="webinarPres.fileType == 'video'" style="height: 169px; width: 172px; margin-top: 11px;border: solid;"/-->
+                              
+                              <p class="fs-14 fw-600 mb-0"></p>
+                              {{webinarPres.fileName}} 
+                              <p class="fs-12 text-muted fw-600" *ngIf="webinarPres.fileType == 'video'">{{webinarPres.videoDuration}}</p>
+                              
+                              <p class="fs-12 text-muted fw-600" *ngIf="webinarPres.fileType == 'pdf'">{{webinarPres.pdfPages}}&nbsp; Slides</p>
+                              
+                            </div>
+      
+                          <!--div class="theme">
+                            <a href="javascript://" class="themeBx" aria-expanded="false">
+                              <img src="img/bg.jpg" class="img-fluid">
+                            </a>
+                            <p class="fs-14 fw-600 mb-0">Video One</p>
+                            <p class="fs-12 text-muted fw-600">43 min 12 sec</p>
+                          </div-->
+                        </div>
+                     </div>
+                    </div>
+                  </div>
+                </div><!-- liveHtmlFullPage close --->
+              </div><!-- live-box close --->
+            </div>
+          </div>
+          <!-- col-xl-8 close-->
+        </div> <!-- row close-->
+      </div>
+      </div>
+      </form>
+      <div class="save-actions">
+          <a href="javascript://" data-toggle="collapse" data-target=".xdWebinarOffer"class="btn btn-sm btn-outline-success" (click)="goBack();">Back</a>
+          <a href="javascript://"  class="btn btn-sm btn-success" (click)="goBackToFunnel()">Save & Finish</a>
+          <!-- (click)="submitWebinar();" -->
+        </div>
+    </section>

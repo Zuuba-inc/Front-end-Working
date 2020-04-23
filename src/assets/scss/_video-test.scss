@@ -1,0 +1,138 @@
+#video-test {
+  margin: 0;
+  border-radius: 4px;
+  background-color: #fff;
+  .popup {
+    box-shadow: $shadow;
+  }
+
+  .head {
+    padding: 25px 40px;
+    border-bottom: $border;
+    display: flex;
+
+    &__title {
+      @include text(20px, 700, left);
+      color: $text-dark;
+    }
+    &__button {
+      @include mid-btn;
+      margin-left: auto;
+    }
+  }
+
+  .body {
+    padding: 0 30px;
+    padding-bottom: 20px;
+  }
+
+  .test, .footer {
+    margin-top: 30px;
+    
+    &__view {
+      height: 100%;
+      text-align: center;
+      &--cam {
+        background: url('../assets/images/joel-filipe-196000-unsplash.jpg');
+      }
+
+      &--icon {
+        .icon {
+          font-size: 50px;
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &--column {
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+        width: 15px;
+        flex-direction: column;
+      }
+      &--mic {
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+    &__step {
+      width: 15px;
+      height: 10px;
+      border-radius: 2px;
+      &--active {
+        background-color: $action;
+      }
+      &--neutral {
+        background-color: $action;
+        opacity: 0.6;
+      }
+      &--inactive {
+        background-color: $bg2;
+      }
+    }
+    
+    &__heading {
+      @include text(14px, 600, left);
+      color: $text-dark;
+    }
+
+    &__desc {
+      @include text(12px, 400, left);
+      color: $text-light;
+    }
+
+    &__action {
+      @include input-box;
+      width: 100%;
+    }
+    &__try {
+      font-size: 12px;
+      
+      &--audio {
+        color: $action;
+        cursor: pointer;
+      }
+
+      &--speed {
+        font-weight: 600;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .download {
+          display: flex;
+          align-items: center;
+        }
+        .icon {
+          font-size: 15px;
+          margin-right: 5px;
+        }
+        h5, .count {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .count {
+          font-size: 20px;
+          color: $text-neu;
+        }
+      }
+    }
+  }
+
+  .footer {
+    border-top: $border;
+    padding: 30px 0;
+    
+    .row {
+      align-items: center;
+      width: 80%;
+    }
+
+    &__button {
+      @include mid-btn;
+    }
+  }
+
+}

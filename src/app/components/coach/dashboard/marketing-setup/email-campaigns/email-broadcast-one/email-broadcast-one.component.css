@@ -1,0 +1,365 @@
+@import '../../../../../../../assets/vendor/bootstrap-4.1/bootstrap.min.css';
+
+.dropdown-toggle::after{
+    display: none;
+}
+.datepicker {
+    width: 21%;
+}
+.table-condensed{
+    width: 100%;
+}
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.disabled-btn {
+    background: #5a5959 !important;
+}
+ 
+.first .form-group p{
+    font-size: 12px;
+    letter-spacing: 0;
+    color: #707070;
+    padding-bottom:20px ;
+}
+.first .form-group hr{
+    margin-right: 20px;
+    border: 1px dotted #DFDFDF;
+}
+.first {
+    background: #fff;
+margin-bottom: 10px;
+background: #fff;
+}
+.first form{
+    padding: 5px 26px;
+}
+.first h1{
+    font-size: 16px;
+    line-height: 22px;
+    font-family: 'Open-Sans-SemiBold';
+    letter-spacing: 0;
+    color: #000000;
+    padding-left: 26px;
+    padding-top: 20px;
+}
+.first .form-group label{
+    font-size: 12px;
+    line-height: 17px;
+    font-family: 'Open-Sans-SemiBold'; 
+}
+.first .form-group input{
+    font-size: 14px;
+    line-height: 19px;
+    font-family: 'Open-Sans-Regular'; 
+    color: #000000;
+}
+.first button{
+background: #fff !important ;
+color: #000 !important;
+border: none !important;
+border-radius: 2px !important;
+font-size: 14px !important;
+line-height: 19px !important;
+font-family: 'Open-Sans-Regular' !important;
+padding-left: 10px !important;
+}
+.first img{
+float: right;
+width: 10px;
+max-height: 10px !important;
+margin-top: 5px;
+margin-right: 10px;
+}
+/* .tab-content.scrollsection{
+    overflow-x: hidden;
+    height: 500px;
+    overflow-y: scroll;
+    margin-top: 20px;
+
+} */
+.tab-content.scrollsection .tab-panesection{
+    overflow-x: hidden;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.pagination li.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
+  
+  .pagination li:hover:not(.active) {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  .pagination {
+    display: inline-block;
+  }
+  
+  .pagination li {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+  }
+  
+  .pagination li.active {
+    background-color: #0b8b8c;
+    color: white;
+    border: 1px solid #0b8b8c;
+  }
+  
+  .pagination li:hover:not(.active) {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  .center {
+    text-align: center;
+  }
+  .disabled {
+    pointer-events: none;
+  }
+  #content-body .content .first .dropDownIcon, #content-body .content .time .dropDownIcon{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../../../../../../../assets/icons/arrow-down.svg) no-repeat;
+    background-size: 10px;
+    background-position: 98% 15px;
+}
+#content-body .content .time .dropDownIcon{
+  -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../../../../../../../assets/icons/arrow-down.svg) no-repeat;
+    background-size: 10px;
+    background-position: 90% 10px;
+    font-size: 12px;
+    width: 52px;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    padding: 4px;
+    font-weight: 500;
+}
+#content-body .content .dropdown .dropDownIcon{
+  -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../../../../../../../assets/icons/arrow-down.svg) no-repeat;
+    background-size: 10px;
+    background-position: 95% 10px;
+    font-size: 12px;
+    width: 220px;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    padding: 4px;
+    font-weight: 500;
+}
+#content-body .content .segmentationDiv{
+  display: inline;
+}
+
+#content-body .content .first .primaryPurpose{
+  display: block;
+  padding: 8px;
+}
+ 
+#content-body .content .first .primaryPurpose:hover{
+  background: #F7F7F7;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  top: 25%;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 35%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  font-size: 28px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 9px 16px;
+  background-color:white;
+}
+.modal-body{
+  text-align: center;
+}
+.modal-body button{
+  display: block;
+  background: black;
+  color: white;
+  margin: auto;
+  margin-top: 40px;
+}
+
+#main .broadcast #dashboardTab .dashboardTabs{
+  width: 60%;
+  height: auto;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 2%;
+  box-shadow: 0px 3px 6px #00000029;
+}
+
+#main .broadcast #dashboardTab .dashboardTabs ul{
+  padding-left: 30%;
+  border-bottom: 1px solid #f7f7f7;
+  padding-right: 0%;
+  display: flex;
+  list-style: none;
+}
+#main .broadcast #dashboardTab .dashboardTabs .dashboardTabFooter{
+  padding: 3% 4% 3% 4%;
+  border-top: 1px solid #f7f7f7;
+}
+#main .broadcast #dashboardTab .dashboardTabs li.active{
+  border-bottom: 2px solid black;
+}
+
+#main .broadcast #dashboardTab .dashboardTabs li{
+  padding: 16px 0px;
+  text-align: left !important;
+  padding: 16px 0px;
+  text-align: left !important;
+  width: 15%;
+  margin-right: 5%;
+}
+
+#main .broadcast #dashboardTab .dashboardTabs .text-center span{
+  display: block;
+  font-size: 24px;
+  font-family: 'Open-Sans-SemiBold';
+}
+#main .broadcast #dashboardTab .dashboardTabs .text-center a{
+  font-family: 'Open-Sans-SemiBold';
+  color: #707070;
+  text-decoration: none;
+}
+
+/* Removes the clear button from date inputs */
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Removes the spin button */
+input[type="date"]::-webkit-inner-spin-button { 
+  display: none;
+}
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: #2c3e50;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #95a5a6;
+  font-family: "Helvetica", arial, sans-serif;
+  font-size: 18px;
+  border:1px solid #ecf0f1;
+  background:#ecf0f1;
+  padding:5px;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+input[type="date"], focus {
+  color: #95a5a6;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+#main .main-sequence3 .componant table td.dateAddedClass{
+  width: 30%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+i {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  /* -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg); */
+
+    transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+.up {
+  /* -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg); */
+    transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+    -webkit-transition: 300ms -webkit-transform;
+    transition: 300ms -webkit-transform;
+    transition: 300ms transform;
+    transition: 300ms transform, 300ms -webkit-transform;
+}
+#main .main-sequence3 .componant .dropdownCircle{
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 10px 0 10px auto;
+}

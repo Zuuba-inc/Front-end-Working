@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="51" viewBox="0 0 84 51">
+  <g id="Group_2044" data-name="Group 2044" transform="translate(0 11)">
+    <g id="Rectangle_2742" data-name="Rectangle 2742" transform="translate(0 -11)" fill="#fff" stroke="#b0b5c3" stroke-width="2">
+      <rect width="40" height="30" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="38" height="28" rx="1" fill="none"/>
+    </g>
+    <g id="Rectangle_2743" data-name="Rectangle 2743" transform="translate(44 -11)" fill="#fff" stroke="#b0b5c3" stroke-width="2">
+      <rect width="40" height="30" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="38" height="28" rx="1" fill="none"/>
+    </g>
+    <g id="Rectangle_2726" data-name="Rectangle 2726" transform="translate(0 28)" fill="#fff" stroke="#b0b5c3" stroke-width="2">
+      <rect width="40" height="12" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="38" height="10" rx="1" fill="none"/>
+    </g>
+    <g id="Rectangle_2744" data-name="Rectangle 2744" transform="translate(44 28)" fill="#fff" stroke="#b0b5c3" stroke-width="2">
+      <rect width="40" height="12" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="38" height="10" rx="1" fill="none"/>
+    </g>
+    <rect id="Rectangle_2862" data-name="Rectangle 2862" width="40" height="3" rx="1.5" transform="translate(0 22)" fill="#b0b5c3"/>
+    <rect id="Rectangle_2863" data-name="Rectangle 2863" width="40" height="3" rx="1.5" transform="translate(44 22)" fill="#b0b5c3"/>
+  </g>
+</svg>

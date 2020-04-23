@@ -1,0 +1,77 @@
+@import '../../../../../../assets/vendor/bootstrap-4.1/bootstrap.min.css';
+@import '../../../../../../assets/css/crm.css';
+.mainContainer{
+    width: 100%; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 50px;
+    height: 95vh;
+    overflow: scroll;
+}
+
+.page-wrapper .addBulkOperation{
+    width: 80%; 
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.page-wrapper .addBulkOperation a{
+    font-size: 12px;
+    font-weight: bold;
+    color: #0B8B8C;
+}
+.page-wrapper .addBulkOperation h6{
+    font-size: 16px; 
+    font-weight: bold;
+    margin-top: 20px;
+}
+.page-wrapper .addBulkOperation p{
+    font-size: 12px; 
+    color: #707070;
+}
+.filters .addMore {
+    background: #E9E9E9 0% 0% no-repeat padding-box;
+    border: 1px solid #E2E2E2;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+}
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 15px;
+    border: 1px solid #000000;
+    margin-right: 10px;
+  }
+
+  .backButton{
+    height: 30px;
+    width: 90px; 
+
+  }
+
+  .backbtn{
+    background: white;
+    color: black;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+
+  [type="date"] {
+    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  }
+  [type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
