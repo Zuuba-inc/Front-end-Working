@@ -48,7 +48,7 @@
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "mat-video": "^2.6.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.26",
     "ng-gapi": "0.0.73",
     "ng-inline-svg": "8.6.0",
